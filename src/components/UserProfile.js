@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const User_Pro_Details=[
     {
@@ -50,6 +51,7 @@ const User_Pro_Details=[
 ]
 
 const UserProfile = () => {
+    const navigation = useNavigation();
   return (
     <ScrollView style={styles.User_Container}>
         <View style={styles.User_Pro_Header}>
@@ -67,7 +69,7 @@ const UserProfile = () => {
             <View style={styles.User_Pro_Data}>
                 <Text style={styles.User_Pro_Name}>Saicharan Vadlamanu</Text>
                 <Text style={styles.User_Pro_Mail}>Charan.vadlamanu@gmail.com</Text>
-                <TouchableOpacity style={styles.Edit_Button}>
+                <TouchableOpacity style={styles.Edit_Button} onPress={()=>navigation.navigate('EditUserProfile')}>
                     <Text style={styles.Edit_Button_Text}>Edit Profile</Text>
                 </TouchableOpacity>
             </View>
