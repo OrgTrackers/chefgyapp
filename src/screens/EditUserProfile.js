@@ -25,7 +25,7 @@ const EditUserProfile = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.Edit_User_Info}>
-        <Text  style={styles.Edit_User_Info_HeadLine}>Your Infomation</Text>
+        <Text  style={styles.Edit_User_Info_HeadLine}>My Infomation</Text>
         <View style={styles.E_U_Form}>
             <View style={styles.E_U_Form_Content}>
                 <Text style={styles.E_U_Input_Lable}>First Name</Text>

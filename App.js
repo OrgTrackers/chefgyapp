@@ -5,6 +5,9 @@ import Splash from './src/components/Splash';
 import Login from './src/components/Login';
 import UserProfile from './src/components/UserProfile'
 import EditUserProfile from './src/screens/EditUserProfile'
+import Signup from './src/components/Signup'
+import OtpContent from './src/screens/OtpContent'
+
 import appIntroSlider from './src/components/appIntroSlider'
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +21,8 @@ const App = () => {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='UserProfile' component={UserProfile} />
         <Stack.Screen name='EditUserProfile' component={EditUserProfile} />
+        <Stack.Screen name='Signup' component={Signup} />
+        <Stack.Screen name='OtpContent' component={OtpContent} />
         <Stack.Screen name='Splash' component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>

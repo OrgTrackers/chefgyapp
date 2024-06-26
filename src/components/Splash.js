@@ -21,7 +21,7 @@ const Splash = ({navigation}) => {
       zoomIn,
       zoomOut,
     ]).start(() => {
-      navigation.navigate('UserProfile',{
+      navigation.navigate('Home',{
         transition: 'topToBottom',
       });
     });
@@ -30,7 +30,7 @@ const Splash = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Animated.Image source={require('../assets/images/Logo.png')} 
+      <Animated.Image source={require('../assets/images/logo-2.png')} 
       style={[styles.logoImg,{transform:[{scale:scaleAnim}] }] }/>
     </View>
   )
@@ -38,7 +38,7 @@ const Splash = ({navigation}) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: '#F7B52D',
+    backgroundColor: '#FFCD78',
     justifyContent:'center',
     alignItems:'center'
   },

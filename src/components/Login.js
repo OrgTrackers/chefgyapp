@@ -1,9 +1,17 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image,TouchableOpacity } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+  const navigation = useNavigation();
+
   return (
     <ImageBackground style={styles.Login_Container} source={require('../assets/images/login_banner.jpg')}>
+      <View style={styles.Back_To_Home}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
+          <Image source={require('../assets/icon/back.png')} style={styles.Back_To_Home_Icon}/>
+        </TouchableOpacity>
+      </View>
       <View style={styles.Login_Card}>
         <Text style={styles.Welcome_Text}>Welcome back</Text>
         <Text style={styles.Login_Text}>Sign in to continue</Text>
@@ -26,9 +34,10 @@ const Login = () => {
             <Image source={require('../assets/icon/twitter.png')} style={styles.Social_Links_Image}/>
         </View>
         <View style={styles.Or_Signup_Container}>
-            <Text style={styles.Or_Signup_Container_Text}>You don't have account ?  
-                <Text style={styles.Or_Signup_Container_To_Signup}> Sign up</Text>
-            </Text>
+            <Text style={styles.Or_Signup_Container_Text}>You don't have account ?</Text>
+            <TouchableOpacity onPress={()=>navigation.navigate('Signup')}>
+              <Text style={styles.Or_Signup_Container_To_Signup}> Sign up</Text>
+            </TouchableOpacity>  
         </View>
       </View>
     </ImageBackground>
@@ -38,14 +47,20 @@ const Login = () => {
 const styles = StyleSheet.create({
   Login_Container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '100%',
     height: '100%',
+  },
+  Back_To_Home:{
+    padding:20
+  },
+  Back_To_Home_Icon:{
+    width:20,
+    height:20
   },
   Login_Card: {
     backgroundColor: '#ffff',
     width: '90%',
+    marginTop:'30%',
     marginLeft: '5%',
     marginRight: '5%',
     borderRadius: 5,
@@ -114,7 +129,11 @@ const styles = StyleSheet.create({
   },
   Or_Signup_Container:{
     textAlign:'center',
-    margin:30
+    margin:30,
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
   },
   Or_Signup_Container_Text:{
      textAlign:'center'
