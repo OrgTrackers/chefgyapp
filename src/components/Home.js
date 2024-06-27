@@ -33,10 +33,10 @@ const Home = () => {
               <Image source={require('../assets/images/home_categories/breakfast.png')} style={styles.Home_Categories_Card_Img}/>
               <Text style={styles.Home_Categories_Card_Title}>Breakfast</Text>
             </View>
-            <View style={styles.Home_Categories_Card}>
+            <TouchableOpacity style={styles.Home_Categories_Card} onPress={()=>navigation.navigate('LunchMenu')}>
               <Image source={require('../assets/images/home_categories/lunch.png')} style={styles.Home_Categories_Card_Img}/>
               <Text style={styles.Home_Categories_Card_Title}>Lunch</Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.Home_Categories_Card}>
               <Image source={require('../assets/images/home_categories/dinner.png')} style={styles.Home_Categories_Card_Img}/>
               <Text style={styles.Home_Categories_Card_Title}>Dinner</Text>
