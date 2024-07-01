@@ -9,6 +9,7 @@ import Signup from './src/components/Signup'
 import OtpContent from './src/screens/OtpContent'
 import LunchMenu from './src/screens/LunchMenu'
 import VegIngredients from './src/screens/VegIngredients'
+import EventPage from './src/screens/EventPage'
 import appIntroSlider from './src/components/appIntroSlider'
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,7 @@ const App = () => {
         <Stack.Screen name='OtpContent' component={OtpContent} />
         <Stack.Screen name='LunchMenu' component={LunchMenu} />
         <Stack.Screen name='VegIngredients' component={VegIngredients} />
+        <Stack.Screen name='EventPage' component={EventPage} />
         <Stack.Screen name='Splash' component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -6,7 +6,7 @@ const Splash = ({navigation}) => {
 
   useEffect(() => {
     const zoomIn = Animated.timing(scaleAnim, {
-      toValue: 3, // Zoom in to twice the original size
+      toValue: 2, // Zoom in to twice the original size
       duration: 1500, // Duration of the zoom-in animation (1.5 seconds)
       useNativeDriver: true,
     });
@@ -38,7 +38,7 @@ const Splash = ({navigation}) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: '#FFCD78',
+    backgroundColor: '#FFF0C8',
     justifyContent:'center',
     alignItems:'center'
   },

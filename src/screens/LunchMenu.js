@@ -5,9 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 const LunchMenu = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView style={styles.L_M_Container}>
+    <ScrollView style={styles.L_M_Container} showsVerticalScrollIndicator={false}>
       <View style={styles.L_M_Header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('EventPage')}>
           <Image source={require('../assets/icon/back.png')} style={styles.Back_To_Home_Icon} />
         </TouchableOpacity>
         <Text style={styles.L_M_Header_Text}>Menu List</Text>
