@@ -97,10 +97,13 @@ const EventPage = () => {
             <Text style={styles.Event_Food_List_Header_Title}>Recommended</Text>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Event_Food_List_Card_Content}>
-            <View style={styles.Event_Food_List_Card}>
+            <TouchableOpacity style={styles.Event_Food_List_Card} onPress={()=>navigation.navigate('Ingredients')}>
               <View style={styles.Event_Food_List_Card_Body}>
                 <View>
                   <Image source={require('../assets/images/Events/biryani.png')} style={styles.Event_Food_List_Image}/>
+                  <View style={styles.Event_Food_List_Card_Footer}>
+                    <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
+                  </View>
                 </View>
                 <View style={styles.Event_Food_List_Price}>
                   <Text style={styles.Event_Food_List_Price_Title}>Price :</Text>
@@ -112,16 +115,26 @@ const EventPage = () => {
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                   </View>
+                  <View style={styles.Food_Likes_Shares}>
+                    <View style={styles.Food_Likes_Content}>
+                      <Image source={require('../assets/icon/Foodlikes.png')} style={styles.Food_Likes_Icon}/>
+                      <Text style={styles.Food_Likes_Text}>150k</Text>
+                    </View>
+                    <View style={styles.Food_Share_Content}>
+                      <Image source={require('../assets/icon/share.png')} style={styles.Food_Shares_Icon}/>
+                      <Text style={styles.Food_Share_Text}>150k</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
-              <View style={styles.Event_Food_List_Card_Footer}>
-                <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
-              </View>
-            </View>
-            <View style={styles.Event_Food_List_Card}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.Event_Food_List_Card}>
               <View style={styles.Event_Food_List_Card_Body}>
                 <View>
                   <Image source={require('../assets/images/Events/biryani.png')} style={styles.Event_Food_List_Image}/>
+                  <View style={styles.Event_Food_List_Card_Footer}>
+                    <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
+                  </View>
                 </View>
                 <View style={styles.Event_Food_List_Price}>
                   <Text style={styles.Event_Food_List_Price_Title}>Price :</Text>
@@ -133,12 +146,19 @@ const EventPage = () => {
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                   </View>
+                  <View style={styles.Food_Likes_Shares}>
+                    <View style={styles.Food_Likes_Content}>
+                      <Image source={require('../assets/icon/Foodlikes.png')} style={styles.Food_Likes_Icon}/>
+                      <Text style={styles.Food_Likes_Text}>150k</Text>
+                    </View>
+                    <View style={styles.Food_Share_Content}>
+                      <Image source={require('../assets/icon/share.png')} style={styles.Food_Shares_Icon}/>
+                      <Text style={styles.Food_Share_Text}>150k</Text>
+                    </View>
+                  </View>
                 </View>
               </View>
-              <View style={styles.Event_Food_List_Card_Footer}>
-                <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
           </ScrollView>
         </View>
         <View style={styles.Event_To_Location}>
@@ -299,20 +319,20 @@ const styles = StyleSheet.create({
 
   // Recommended content
   Event_Food_List_Container:{
-    margin:20
+    margin:20,
+  },
+  Event_Food_List_Header:{
+    flexDirection:'row',
+    gap:5,
+    alignItems:'center'
   },
   Event_Food_List_Header_Title:{
     fontSize:20,
     fontWeight:'900',
-    marginLeft:20
   },
   Hot_Icon:{
-    position:'absolute',
-    width:40,
-    height:40,
-    left:0,
-    top:-20,
-    transform: [{ rotate: '-20deg' }],
+    width:25,
+    height:25
   },
 
   // Food list card
@@ -336,9 +356,9 @@ const styles = StyleSheet.create({
     gap:10
   },
   Event_Food_List_Image:{
-    width:200,
-    height:150,
-    marginTop:-30,
+    width:120,
+    height:120,
+    marginTop:-20,
   },
   Event_Food_List_Price_Cost:{
     fontSize:20,
@@ -352,8 +372,9 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontWeight:'bold',
     textAlign:'center',
-    width:180,
-    color:'#272727'
+    // width:150,
+    color:'#272727',
+    // marginTop:-10
   },
 
   //ratings
@@ -361,12 +382,45 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     gap:5,
     alignItems:'center',
-    marginTop:20
+    marginTop:15
   },
   Ratings_Icon:{
     width:15,
     height:15
   },
+
+  //likes and shares
+  Food_Likes_Shares:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-around',
+    alignItems:'center',
+    gap:10,
+    marginTop:20
+  },
+  Food_Likes_Content:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    gap:2
+  },
+  Food_Share_Content:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    gap:2
+  },
+  Food_Likes_Icon:{
+    width:20,
+    height:20
+  },
+  Food_Shares_Icon:{
+    width:15,
+    height:15
+  },
+
+
+
 
 
   // Location Content
