@@ -81,7 +81,7 @@ const EventPage = () => {
               <Image source={require('../assets/images/home_categories/breakfast.png')} style={styles.Events_Categories_Image}/>
               <Text style={styles.Events_Categories_Title}>Breakfast</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Events_Categories_Card} onPress={()=>navigation.navigate('LunchMenu')}>
+            <TouchableOpacity style={styles.Events_Categories_Card} onPress={()=>navigation.navigate('CaterMenu')}>
               <Image source={require('../assets/images/home_categories/lunch.png')} style={styles.Events_Categories_Image}/>
               <Text style={styles.Events_Categories_Title}>Lunch</Text>
             </TouchableOpacity>

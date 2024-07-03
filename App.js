@@ -7,7 +7,7 @@ import UserProfile from './src/components/UserProfile'
 import EditUserProfile from './src/screens/EditUserProfile'
 import Signup from './src/components/Signup'
 import OtpContent from './src/screens/OtpContent'
-import LunchMenu from './src/screens/LunchMenu'
+import CaterMenu from './src/screens/CaterMenu'
 import VegIngredients from './src/screens/VegIngredients'
 import EventPage from './src/screens/EventPage'
 import Ingredients from './src/screens/Ingredients'
@@ -26,7 +26,7 @@ const App = () => {
         <Stack.Screen name='EditUserProfile' component={EditUserProfile} />
         <Stack.Screen name='Signup' component={Signup} />
         <Stack.Screen name='OtpContent' component={OtpContent} />
-        <Stack.Screen name='LunchMenu' component={LunchMenu} />
+        <Stack.Screen name='CaterMenu' component={CaterMenu} />
         <Stack.Screen name='VegIngredients' component={VegIngredients} />
         <Stack.Screen name='EventPage' component={EventPage} />
         <Stack.Screen name='Ingredients' component={Ingredients} />

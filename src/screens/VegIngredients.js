@@ -8,7 +8,7 @@ const VegIngredients = () => {
   return (
     <ScrollView style={styles.V_I_Content}>
       <View style={styles.V_I_Header}>
-        <TouchableOpacity onPress={()=>navigation.navigate('LunchMenu')}>
+        <TouchableOpacity onPress={()=>navigation.navigate('CaterMenu')}>
           <Image source={require('../assets/icon/back.png')} style={styles.Back_To_Menu}/>
         </TouchableOpacity>
         <Text style={styles.V_I_Header_Text}>Ingredients</Text>
