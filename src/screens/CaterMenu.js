@@ -33,6 +33,7 @@ const catersCategories = [
   },
 ];
 
+//food list
 const regularFoodList = [
   {
     key:1,
@@ -75,6 +76,97 @@ const regularFoodList = [
     Shares:270
   },
 ];
+const seaFoodList = [
+  {
+    key:1,
+    Icon: require('../assets/icon/cateringMenu/seaFood/plate_1.png'),
+    Label: 'Fish Biryani',
+    Price:200,
+    Ingredients:'1kg Chiken,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:2,
+    Icon: require('../assets/icon/cateringMenu/seaFood/plate_2.png'),
+    Label: 'Prawn Biryani',
+    Price:180,
+    Ingredients:'500 g Paneer (cubed),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:3,
+    Icon: require('../assets/icon/cateringMenu/seaFood/plate_3.png'),
+    Label: 'Fish Fry',
+    Price:370,
+    Ingredients:'1kg Mutton,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:4,
+    Icon: require('../assets/icon/cateringMenu/seaFood/plate_4.png'),
+    Label: 'Prawn Noddles',
+    Price:150,
+    Ingredients:'1 kg Mixed Vegetables (carrots, peas, potatoes, beans),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+];
+const fastFoodList = [
+  {
+    key:1,
+    Icon: require('../assets/icon/cateringMenu/fastFood/plate_1.png'),
+    Label: 'Fired Rice',
+    Price:200,
+    Ingredients:'1kg Chiken,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:2,
+    Icon: require('../assets/icon/cateringMenu/fastFood/plate_2.png'),
+    Label: 'Noddles Biryani',
+    Price:180,
+    Ingredients:'500 g Paneer (cubed),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:3,
+    Icon: require('../assets/icon/cateringMenu/fastFood/plate_3.png'),
+    Label: 'Gobhi Manchuria',
+    Price:370,
+    Ingredients:'1kg Mutton,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:4,
+    Icon: require('../assets/icon/cateringMenu/fastFood/plate_4.png'),
+    Label: 'Chilli Pizza',
+    Price:150,
+    Ingredients:'1 kg Mixed Vegetables (carrots, peas, potatoes, beans),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+];
+const streetFoodList = [
+  {
+    key:1,
+    Icon: require('../assets/icon/cateringMenu/streetFood/plate_1.png'),
+    Label: 'Hot Momos',
+    Price:200,
+    Ingredients:'1kg Chiken,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:2,
+    Icon: require('../assets/icon/cateringMenu/streetFood/plate_2.png'),
+    Label: 'Mirchi Bajji',
+    Price:180,
+    Ingredients:'500 g Paneer (cubed),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:3,
+    Icon: require('../assets/icon/cateringMenu/streetFood/plate_3.png'),
+    Label: 'Pani Puri',
+    Price:370,
+    Ingredients:'1kg Mutton,2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+  {
+    key:4,
+    Icon: require('../assets/icon/cateringMenu/streetFood/plate_4.png'),
+    Label: 'Chat Mixer',
+    Price:150,
+    Ingredients:'1 kg Mixed Vegetables (carrots, peas, potatoes, beans),2 kg Basmati Rice,250 g Yogurt, 3 large Onions (sliced),4 Tomatoes (chopped)',
+  },
+];
+
 
 const CaterMenu = () => {
   const navigation = useNavigation();
@@ -84,61 +176,110 @@ const CaterMenu = () => {
     switch (selectedCategory) {
       case 'regularFood':
         return (
-          <View style={styles.Cat_Regualar_Food_Content}>
-            {regularFoodList.map((regItem,regIndex)=>(
-              <View key={regIndex} style={styles.Cat_Reg_Food_Card}>
-                <View style={styles.Cat_Reg_Food_Card_Body}>
-                  <View style={styles.Cat_Reg_Img_Title}>
-                    <Image source={regItem.Icon} style={styles.Cat_Reg_Food_Image}/>
-                    <Text style={styles.Cat_Reg_Food_Label} >{regItem.Label}</Text>
+          <View style={styles.Cat_Food_Content}>
+            {regularFoodList.map((catItem,catIndex)=>(
+              <TouchableOpacity key={catIndex} style={styles.Cat_Food_Card} onPress={()=>navigation.navigate('Ingredients')}>
+                <View style={styles.Cat_Food_Card_Body}>
+                  <View style={styles.Cat_Img_Title}>
+                    <Image source={catItem.Icon} style={styles.Cat_Food_Image}/>
+                    <Text style={styles.Cat_Food_Label} >{catItem.Label}</Text>
                   </View>
-                  <View style={styles.Cat_Reg_Pricing_Rating}>
-                    <View style={styles.Cat_Reg_Pricing_Content}>
-                      <Text>Price</Text>
-                      <Text style={styles.Cat_Reg_Pricing_Text}>{regItem.Price}</Text>
+                  <View style={styles.Cat_Pricing_Rating}>
+                    <View style={styles.Cat_Pricing_Content}>
+                      <Image source={require('../assets/icon/rupee.png')} style={styles.Cat_Pricing_Icon}/>
+                      <Text style={styles.Cat_Pricing_Text}>{catItem.Price}</Text>
                     </View>
                     <View style={styles.Cat_Ingre_Content}>
-                      <Text style={styles.Cat_Ingre_Text}>{regItem.Ingredients}</Text>
-                    </View>
-                    <View style={styles.Cat_Reg_Rating_Likes_Shares}>
-                      <View style={styles.Cat_Reg_RLS_Content}>
-                        <Image source={require('../assets/icon/cateringMenu/regularFood/Foodlikes.png')} style={styles.Cat_Reg_RLS_Image}/>
-                        <Text style={styles.Cat_Reg_RLS_Text}>{regItem.Likes}</Text>
-                      </View>
-                      <View style={styles.Cat_Reg_RLS_Content}>
-                        <Image source={require('../assets/icon/cateringMenu/regularFood/share.png')} style={styles.Cat_Reg_RLS_Image}/>
-                        <Text style={styles.Cat_Reg_RLS_Text}>{regItem.Shares}</Text>
-                      </View>
-                      <View style={styles.Cat_Reg_RLS_Content}>
-                        <Image source={require('../assets/icon/cateringMenu/regularFood/rating.png')} style={styles.Cat_Reg_RLS_Image}/>
-                        <Text style={styles.Cat_Reg_RLS_Text}>{regItem.Rating}</Text>
-                      </View>
+                      <Text style={styles.Cat_Ingre_Text}>{catItem.Ingredients}</Text>
                     </View>
                     <View style={styles.Offers_Content}>
                       <Text style={styles.Offers_Text}>UPTO 80% OFF</Text>
                     </View>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         );
       case 'seaFood':
         return (
-          <View style={styles.Cat_Sea_Food_Content}>
-            <Text>Sea Food</Text>
+          <View style={styles.Cat_Food_Content}>
+            {seaFoodList.map((catItem,catIndex)=>(
+              <TouchableOpacity key={catIndex} style={styles.Cat_Food_Card} onPress={()=>navigation.navigate('Ingredients')}>
+                <View style={styles.Cat_Food_Card_Body}>
+                  <View style={styles.Cat_Img_Title}>
+                    <Image source={catItem.Icon} style={styles.Cat_Food_Image}/>
+                    <Text style={styles.Cat_Food_Label} >{catItem.Label}</Text>
+                  </View>
+                  <View style={styles.Cat_Pricing_Rating}>
+                    <View style={styles.Cat_Pricing_Content}>
+                      <Image source={require('../assets/icon/rupee.png')} style={styles.Cat_Pricing_Icon}/>
+                      <Text style={styles.Cat_Pricing_Text}>{catItem.Price}</Text>
+                    </View>
+                    <View style={styles.Cat_Ingre_Content}>
+                      <Text style={styles.Cat_Ingre_Text}>{catItem.Ingredients}</Text>
+                    </View>
+                    <View style={styles.Offers_Content}>
+                      <Text style={styles.Offers_Text}>UPTO 80% OFF</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         );
       case 'fastFood':
         return (
-          <View style={styles.Cat_Fast_Food_Content}>
-            <Text>Fast Food</Text>
+          <View style={styles.Cat_Food_Content}>
+            {fastFoodList.map((catItem,catIndex)=>(
+              <TouchableOpacity key={catIndex} style={styles.Cat_Food_Card} onPress={()=>navigation.navigate('Ingredients')}>
+                <View style={styles.Cat_Food_Card_Body}>
+                  <View style={styles.Cat_Img_Title}>
+                    <Image source={catItem.Icon} style={styles.Cat_Food_Image}/>
+                    <Text style={styles.Cat_Food_Label} >{catItem.Label}</Text>
+                  </View>
+                  <View style={styles.Cat_Pricing_Rating}>
+                    <View style={styles.Cat_Pricing_Content}>
+                      <Image source={require('../assets/icon/rupee.png')} style={styles.Cat_Pricing_Icon}/>
+                      <Text style={styles.Cat_Pricing_Text}>{catItem.Price}</Text>
+                    </View>
+                    <View style={styles.Cat_Ingre_Content}>
+                      <Text style={styles.Cat_Ingre_Text}>{catItem.Ingredients}</Text>
+                    </View>
+                    <View style={styles.Offers_Content}>
+                      <Text style={styles.Offers_Text}>UPTO 80% OFF</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         );
       case 'streetFood':
         return (
-          <View style={styles.Cat_Street_Food_Content}>
-            <Text>Street Food</Text>
+          <View style={styles.Cat_Food_Content}>
+            {streetFoodList.map((catItem,catIndex)=>(
+              <TouchableOpacity key={catIndex} style={styles.Cat_Food_Card} onPress={()=>navigation.navigate('Ingredients')}>
+                <View style={styles.Cat_Food_Card_Body}>
+                  <View style={styles.Cat_Img_Title}>
+                    <Image source={catItem.Icon} style={styles.Cat_Food_Image}/>
+                    <Text style={styles.Cat_Food_Label} >{catItem.Label}</Text>
+                  </View>
+                  <View style={styles.Cat_Pricing_Rating}>
+                    <View style={styles.Cat_Pricing_Content}>
+                      <Image source={require('../assets/icon/rupee.png')} style={styles.Cat_Pricing_Icon}/>
+                      <Text style={styles.Cat_Pricing_Text}>{catItem.Price}</Text>
+                    </View>
+                    <View style={styles.Cat_Ingre_Content}>
+                      <Text style={styles.Cat_Ingre_Text}>{catItem.Ingredients}</Text>
+                    </View>
+                    <View style={styles.Offers_Content}>
+                      <Text style={styles.Offers_Text}>UPTO 80% OFF</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         );
       default:
@@ -237,7 +378,7 @@ const styles = StyleSheet.create({
 
   // cater categories
   Cat_Menu_Categories: {
-    margin: 20,
+    margin: 10,
   },
   Caters_Categories_Card: {
     marginRight: 10,
@@ -271,8 +412,10 @@ const styles = StyleSheet.create({
   Cat_Menu_Content: {
     margin:20
   },
+
+
   // Regular food 
-  Cat_Reg_Food_Card: {
+  Cat_Food_Card: {
     backgroundColor: '#F4F6F6',
     marginBottom: 20,
     padding: 10,
@@ -285,25 +428,35 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
-  Cat_Reg_Food_Card_Body:{
+  Cat_Food_Card_Body:{
     display:'flex',
     flexDirection:'row',
     alignItems:'center',
     gap:30,
   },
-  Cat_Reg_Food_Image:{
+  Cat_Food_Image:{
     width:150,
     height:150
   },
-  Cat_Reg_Food_Label:{
+  Cat_Food_Label:{
     fontSize:15,
     fontWeight:'bold',
     color:'#272727'
   },
-  Cat_Reg_Pricing_Text:{
-    fontSize:20,
+  Cat_Pricing_Content:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    gap:2
+  },
+  Cat_Pricing_Text:{
+    fontSize:15,
     fontWeight:'900',
     color:'#272727'
+  },
+  Cat_Pricing_Icon:{
+    width:10,
+    height:10
   },
   Cat_Ingre_Content:{
      width:180
@@ -312,31 +465,6 @@ const styles = StyleSheet.create({
     fontSize:10
   },
 
-  // rating,likes,shares
-  Cat_Reg_Rating_Likes_Shares:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    alignItems:'center',
-    marginTop:20,
-    width:150,
-    gap:25
-  },
-  Cat_Reg_RLS_Content:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5
-  },
-  Cat_Reg_RLS_Image:{
-    width:20,
-    height:20
-  },
-  Cat_Reg_RLS_Text:{
-    // fontSize:10,
-    fontWeight:'900',
-    color:'#272727'
-  },
 
 
   //offers content

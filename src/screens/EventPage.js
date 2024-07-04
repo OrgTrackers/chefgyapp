@@ -106,8 +106,10 @@ const EventPage = () => {
                   </View>
                 </View>
                 <View style={styles.Event_Food_List_Price}>
-                  <Text style={styles.Event_Food_List_Price_Title}>Price :</Text>
-                  <Text style={styles.Event_Food_List_Price_Cost}>150rs</Text>
+                  <View style={styles.Event_Food_List_Price_Cost_Content}>
+                    <Image source={require('../assets/icon/rupee.png')} style={styles.Event_Food_List_Price_Icon}/> 
+                    <Text style={styles.Event_Food_List_Price_Cost}>150</Text>
+                  </View>
                   <View style={styles.Ratings}>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
@@ -128,7 +130,7 @@ const EventPage = () => {
                 </View>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Event_Food_List_Card}>
+            <TouchableOpacity style={styles.Event_Food_List_Card} onPress={()=>navigation.navigate('Ingredients')}>
               <View style={styles.Event_Food_List_Card_Body}>
                 <View>
                   <Image source={require('../assets/images/Events/biryani.png')} style={styles.Event_Food_List_Image}/>
@@ -137,8 +139,10 @@ const EventPage = () => {
                   </View>
                 </View>
                 <View style={styles.Event_Food_List_Price}>
-                  <Text style={styles.Event_Food_List_Price_Title}>Price :</Text>
-                  <Text style={styles.Event_Food_List_Price_Cost}>150rs</Text>
+                  <View style={styles.Event_Food_List_Price_Cost_Content}>
+                    <Image source={require('../assets/icon/rupee.png')} style={styles.Event_Food_List_Price_Icon}/> 
+                    <Text style={styles.Event_Food_List_Price_Cost}>150</Text>
+                  </View>
                   <View style={styles.Ratings}>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
                     <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
@@ -360,10 +364,21 @@ const styles = StyleSheet.create({
     height:120,
     marginTop:-20,
   },
+  Event_Food_List_Price_Cost_Content:{
+    display:'flex',
+    flexDirection:'row',
+    gap:1,
+    alignItems:'center'
+  },
   Event_Food_List_Price_Cost:{
-    fontSize:20,
+    fontSize:18,
     color:'#272727',
     fontWeight:'900'
+  },
+  Event_Food_List_Price_Icon:{
+    width:13,
+    height:13,
+    marginTop:3
   },
   Event_Food_List_Card_Footer:{
     margin:5

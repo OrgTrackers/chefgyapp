@@ -45,7 +45,7 @@ const Home = () => {
             </View>
             <View style={styles.Home_Location_Text_Content}>
               <Text style={styles.Home_Location_Text}>Home</Text>
-              <Text style={styles.Home_Location_Sub_Text}>5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088</Text>
+              <Text style={styles.Home_Location_Sub_Text} numberOfLines={1} ellipsizeMode='tail'>5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088</Text>
             </View>
             <View style={styles.Home_Header_User}>
                 <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
   },
   Home_Header:{
     padding:20,
-    backgroundColor:'#FFF0C8',
+    // backgroundColor:'#FFF0C8',
     height:100
   },
   Home_Header_Address:{
@@ -321,16 +321,17 @@ const styles = StyleSheet.create({
     height:25
   },
   Home_Location_Text_Content:{
-    width:'80%'
+    width:'80%',
   },
   Home_Location_Text:{
     fontSize:15,
     fontWeight:'bold',
-    color:'#272727',
+    color:'#D48B35'
   },
   Home_Location_Sub_Text:{
     fontSize:10,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    width:'80%'
   },
   Home_Header_User_Img:{
     width:40,
