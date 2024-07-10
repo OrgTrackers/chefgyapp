@@ -1,6 +1,8 @@
 import React,{useRef,useState,useEffect} from 'react'
-import { Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Animated } from 'react-native'
+import { Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Animated, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import LinearGradient from 'react-native-linear-gradient'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const {width} = Dimensions.get('window');
 
@@ -40,6 +42,37 @@ const filtersList = [
     Lable:'Popular Regional Dishes',
     icon:''
   },
+]
+
+const Popular_Caters = [
+  {
+    Id:1,
+    Img:require('../assets/images/homeCaters/Img_1.jpg'),
+    Lable:'Bawarchi',
+    Location:'RTC X Roads',
+    Offers:'Flat 25% Off'
+  },
+  {
+    Id:2,
+    Img:require('../assets/images/homeCaters/Img_2.jpg'),
+    Lable:'Paradise',
+    Location:'Charminar',
+    Offers:'Flat 45% Off'
+  },
+  {
+    Id:3,
+    Img:require('../assets/images/homeCaters/Img_3.jpg'),
+    Lable:'Grand Hotel',
+    Location:'Abids',
+    Offers:'Flat 37% Off'
+  },
+  {
+    Id:4,
+    Img:require('../assets/images/homeCaters/Img_4.jpg'),
+    Lable:'Palamuru Grills',
+    Location:'Hitech City',
+    Offers:'Flat 10% Off'
+  }
 ]
 
 const Explore_Items =[
@@ -127,6 +160,7 @@ const Popular_Locations =[
 
 
 
+
 const Home = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -156,9 +190,20 @@ const Home = () => {
     { useNativeDriver: false }
   );
 
+  const handleUserSignIn = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    const userId = await AsyncStorage.getItem('userId');
+    if (token && userId) {
+      navigation.navigate('UserProfile');
+    } else {
+      navigation.navigate('Login');
+    }
+  };
+
   return (
     <View  style={styles.Container}>
       <ScrollView contentContainerStyle={styles.ContainerContent} showsVerticalScrollIndicator={false}>
+
         <View style={styles.Home_Header}>
           <View style={styles.Home_Header_Address}>
             <View style={styles.Home_Location_Icon_Content}>
@@ -169,12 +214,13 @@ const Home = () => {
               <Text style={styles.Home_Location_Sub_Text} numberOfLines={1} ellipsizeMode='tail'>5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088</Text>
             </TouchableOpacity>
             <View style={styles.Home_Header_User}>
-                <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+                <TouchableOpacity onPress={handleUserSignIn}>
                   <Image source={require('../assets/images/user.jpg')} style={styles.Home_Header_User_Img}/>
                 </TouchableOpacity>
             </View>
           </View>
         </View>
+
         <View style={styles.Home_Search}>
           <Image source={require('../assets/images/search_Img.png')} style={styles.Home_Search_Iocn}/>
           <TextInput placeholder='What are you looking for ?' style={styles.Home_Search_Input}></TextInput>
@@ -247,16 +293,31 @@ const Home = () => {
         <View style={styles.Home_Popular_Container}>
           <View style={styles.H_P_Caters_Content}>
             <View style={styles.H_P_C_Header}>
+              <View style={styles.Horizontal_Line}/>  
               <Text style={styles.H_P_C_Header_Title}>Popular Cateres</Text>
             </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Popular_Caters.map((P_Caters) => (
+                <View key={P_Caters.Id} style={{ borderRadius: 10, overflow: 'hidden', margin: 5 }}>
+                  <ImageBackground style={[styles.H_P_C_Card, { borderRadius: 10 }]} imageStyle={{ borderRadius: 10 }} source={P_Caters.Img}>
+                    <LinearGradient colors={['#0000', '#17202A']} style={styles.H_P_C_CardBody}>
+                      <Text style={styles.H_P_C_Offers}>{P_Caters.Offers}</Text>
+                      <Text style={styles.H_P_C_Name}>{P_Caters.Lable}</Text>
+                      <Text style={styles.H_P_C_Location}>{P_Caters.Location}</Text>
+                    </LinearGradient>
+                  </ImageBackground>
+                </View>
+              ))}
+            </ScrollView>
           </View>
           <View style={styles.H_P_Items_Content}>
             <View style={styles.H_P_Items_Header}>
+              <View style={styles.Horizontal_Line}/>
               <Text style={styles.H_P_I_Header_Title}>Popular Items</Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {Popular_Items.map((P_Item) => (
-                <View key={P_Item.Id} style={styles.H_P_I_Card}>
+                <LinearGradient colors={['#FCF3CF', '#ffff']} key={P_Item.Id} style={styles.H_P_I_Card}>
                   <TouchableOpacity style={styles.H_P_I_Add}>
                     <Image source={require('../assets/icon/homeFilters/add.png')} style={styles.H_P_I_Add_Icon} />
                   </TouchableOpacity>
@@ -281,18 +342,38 @@ const Home = () => {
                       </View>
                     </View>
                   </View>
-                </View>
+                </LinearGradient>
               ))}
             </ScrollView>
           </View>
           <View style={styles.H_P_Locations_Content}>
             <View style={styles.H_P_Locations_Header}>
-                <Text style={styles.H_P_L_Header_Title}>Popular Locations</Text>
+              <View style={styles.Horizontal_Line}/>
+              <Text style={styles.H_P_L_Header_Title}>Popular Locations</Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {Popular_Locations.map((P_Location)=>(
                 <View key={P_Location.Id} style={[styles.H_P_L_Card,{backgroundColor:P_Location.bgColor}]}>
                   <Text style={styles.H_P_L_Title}>{P_Location.Lable}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.H_P_Caters_Content}>
+            <View style={styles.H_P_C_Header}>
+              <View style={styles.Horizontal_Line}/>  
+              <Text style={styles.H_P_C_Header_Title}>Popular Home Food</Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Popular_Caters.map((P_Caters) => (
+                <View key={P_Caters.Id} style={{ borderRadius: 10, overflow: 'hidden', margin: 5 }}>
+                  <ImageBackground style={[styles.H_P_C_Card, { borderRadius: 10 }]} imageStyle={{ borderRadius: 10 }} source={P_Caters.Img}>
+                    <LinearGradient colors={['#0000', '#17202A']} style={styles.H_P_C_CardBody}>
+                      <Text style={styles.H_P_C_Offers}>{P_Caters.Offers}</Text>
+                      <Text style={styles.H_P_C_Name}>{P_Caters.Lable}</Text>
+                      <Text style={styles.H_P_C_Location}>{P_Caters.Location}</Text>
+                    </LinearGradient>
+                  </ImageBackground>
                 </View>
               ))}
             </ScrollView>
@@ -515,26 +596,53 @@ const styles = StyleSheet.create({
   Home_Popular_Container:{
     margin:20
   },
-  H_P_I_Header_Title:{
+
+  //Caters
+  H_P_C_Header_Title:{
     fontSize:14,
     textTransform:'capitalize',
     color:'#272727',
     fontWeight:'bold',
+    position:'absolute',
+    top:-12,
+    backgroundColor:'#ffff',
+    paddingRight:5
   },
-  //Caters
-  H_P_C_Header_Title:{
+  H_P_C_Card:{
+    width:250,
+    height:150,
+    marginTop:20,
+    marginLeft:0,
+    marginBottom:30
+  },
+  H_P_C_CardBody:{
+    position:'absolute',
+    bottom:0,
+    width:230,
+    margin:5,
+    padding:10
+  },
+  H_P_C_Offers:{
+    fontSize:20,
     fontWeight:'bold',
-    color:'#272727'
+    color:'#F1C40F',
   },
-
-
+  H_P_C_Name:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:'#ffff',
+  },
+  H_P_C_Location:{
+    fontSize:10,
+    fontWeight:'bold',
+    color:'#ffff',
+  },
 
   //Items
   H_P_I_Card:{
-    // marginLeft:10,
     marginTop:20,
     marginRight:10,
-    marginBottom:10,
+    marginBottom:30,
     padding: 10,
     backgroundColor: '#ffff',
     borderRadius: 10,
@@ -546,16 +654,26 @@ const styles = StyleSheet.create({
     width:200
   },
   H_P_I_Add:{
-    backgroundColor:"#cccc",
+    backgroundColor:"#ffff",
     position:'absolute',
     padding:5,
     right:0,
-    margin:5,
+    margin:3,
     borderRadius:50
   },
+  H_P_I_Header_Title:{
+    fontSize:14,
+    textTransform:'capitalize',
+    color:'#272727',
+    fontWeight:'bold',
+    position:'absolute',
+    top:-12,
+    backgroundColor:'#ffff',
+    paddingRight:5
+  },
   H_P_I_Add_Icon:{
-    width:15,
-    height:15,
+    width:12,
+    height:12,
   },
   H_P_I_CardBody:{
     display:'flex',
@@ -565,9 +683,10 @@ const styles = StyleSheet.create({
     marginTop:10
   },
   H_P_I_Title:{
+    color:'#272727',
     fontWeight:'bold',
-    color:'#272727'
   },
+
   H_P_I_Img:{
     width:120,
     height:120
@@ -626,7 +745,8 @@ const styles = StyleSheet.create({
 
   //Locations
   H_P_Locations_Content:{
-    marginTop:20
+    marginTop:20,
+    marginBottom:30
   },
   H_P_L_Header_Title:{
     fontSize:14,
@@ -651,10 +771,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Centering text
     borderRadius:5,
     margin:20,
-    marginLeft:0
+    marginLeft:0,
   },
   H_P_L_Title:{
-    fontSize:25,
+    fontSize:15,
     fontWeight:'900',
     color:'#ffff'
   }
