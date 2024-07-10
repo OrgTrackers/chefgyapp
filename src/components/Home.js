@@ -1,7 +1,8 @@
 import React,{useRef,useState,useEffect} from 'react'
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Animated, ImageBackground } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const {width} = Dimensions.get('window');
 
@@ -189,9 +190,20 @@ const Home = () => {
     { useNativeDriver: false }
   );
 
+  const handleUserSignIn = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    const userId = await AsyncStorage.getItem('userId');
+    if (token && userId) {
+      navigation.navigate('UserProfile');
+    } else {
+      navigation.navigate('Login');
+    }
+  };
+
   return (
     <View  style={styles.Container}>
       <ScrollView contentContainerStyle={styles.ContainerContent} showsVerticalScrollIndicator={false}>
+
         <View style={styles.Home_Header}>
           <View style={styles.Home_Header_Address}>
             <View style={styles.Home_Location_Icon_Content}>
@@ -202,12 +214,13 @@ const Home = () => {
               <Text style={styles.Home_Location_Sub_Text} numberOfLines={1} ellipsizeMode='tail'>5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088</Text>
             </TouchableOpacity>
             <View style={styles.Home_Header_User}>
-                <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+                <TouchableOpacity onPress={handleUserSignIn}>
                   <Image source={require('../assets/images/user.jpg')} style={styles.Home_Header_User_Img}/>
                 </TouchableOpacity>
             </View>
           </View>
         </View>
+
         <View style={styles.Home_Search}>
           <Image source={require('../assets/images/search_Img.png')} style={styles.Home_Search_Iocn}/>
           <TextInput placeholder='What are you looking for ?' style={styles.Home_Search_Input}></TextInput>
