@@ -4,6 +4,129 @@ import { useNavigation } from '@react-navigation/native'
 
 const {width} = Dimensions.get('window');
 
+const filtersList = [
+  {
+    id:1,
+    Lable:'Filter',
+    icon:require('../assets/icon/homeFilters/filters.png')
+  },
+  {
+    id:2,
+    Lable:'Sort by',
+    icon:require('../assets/icon/homeFilters/sort.png')
+  },
+  {
+    id:3,
+    Lable:'Top Rated',
+    icon:require('../assets/icon/homeFilters/toprated.png')
+  },
+  {
+    id:4,
+    Lable:'Popular Locations',
+    icon:require('../assets/icon/homeFilters/f_location.png')
+  },
+  {
+    id:5,
+    Lable:'Popular Dishes',
+    icon:''
+  },
+  {
+    id:6,
+    Lable:'Popular Deserts',
+    icon:''
+  },
+  {
+    id:7,
+    Lable:'Popular Regional Dishes',
+    icon:''
+  },
+]
+
+const Explore_Items =[
+  {
+    Id:1,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_1.png'),
+    Lable:'Chicken Biryani'
+  },
+  {
+    Id:2,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_2.png'),
+    Lable:'Panner Biryani'
+  },
+  {
+    Id:3,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_3.png'),
+    Lable:'Motton Biryani'
+  },
+  {
+    Id:4,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_4.png'),
+    Lable:'Veg Biryani'
+  },
+]
+
+const Popular_Items = [
+  {
+    Id:1,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_1.png'),
+    Lable:'Chicken Biryani',
+    RatingIcon:require('../assets/icon/homeFilters/rating.png')
+  },
+  {
+    Id:2,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_2.png'),
+    Lable:'Panner Biryani',
+    RatingIcon:require('../assets/icon/homeFilters/rating.png')
+  },
+  {
+    Id:3,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_3.png'),
+    Lable:'Motton Biryani',
+    RatingIcon:require('../assets/icon/homeFilters/rating.png')
+  },
+  {
+    Id:4,
+    Img:require('../assets/icon/homeFilters/regularFood/plate_4.png'),
+    Lable:'Veg Biryani',
+    RatingIcon:require('../assets/icon/homeFilters/rating.png')
+  },
+]
+
+const Popular_Locations =[
+  {
+    Id:1,
+    Lable:'Madhapur',
+    bgColor:'#E74C3C'
+  },
+  {
+    Id:2,
+    Lable:'RTC X Roads',
+     bgColor:'#9B59B6'
+  },
+  {
+    Id:3,
+    Lable:'Gachibowli',
+     bgColor:'#2980B9'
+  },
+  {
+    Id:4,
+    Lable:'Uppal',
+     bgColor:'#1ABC9C'
+  },
+  {
+    Id:5,
+    Lable:'Nagole',
+     bgColor:'#2ECC71'
+  },
+  {
+    Id:6,
+    Lable:'Inorbit Mall',
+    bgColor:'#F39C12'
+  }
+]
+
+
+
 const Home = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -33,20 +156,18 @@ const Home = () => {
     { useNativeDriver: false }
   );
 
-
-
   return (
     <View  style={styles.Container}>
-      <ScrollView contentContainerStyle={styles.ContainerContent}>
+      <ScrollView contentContainerStyle={styles.ContainerContent} showsVerticalScrollIndicator={false}>
         <View style={styles.Home_Header}>
           <View style={styles.Home_Header_Address}>
             <View style={styles.Home_Location_Icon_Content}>
               <Image source={require('../assets/icon/Home_Loca_Icon.png')} style={styles.Home_Header_Loaction_Icon}/>
             </View>
-            <View style={styles.Home_Location_Text_Content}>
+            <TouchableOpacity style={styles.Home_Location_Text_Content} onPress={()=>navigation.navigate('Location')}>
               <Text style={styles.Home_Location_Text}>Home</Text>
               <Text style={styles.Home_Location_Sub_Text} numberOfLines={1} ellipsizeMode='tail'>5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088</Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.Home_Header_User}>
                 <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
                   <Image source={require('../assets/images/user.jpg')} style={styles.Home_Header_User_Img}/>
@@ -85,200 +206,100 @@ const Home = () => {
         </View>
         <View style={styles.Home_Categories}>
           <View style={styles.Home_Categories_Grid}>
-            <View style={styles.Home_Categories_Card}>
-              <Image source={require('../assets/images/home_categories/selectCaterer.png')} style={styles.Home_Categories_Card_Img}/>
-              <Text style={styles.Home_Categories_Card_Title}>Caterers</Text>
-            </View>
             <TouchableOpacity style={styles.Home_Categories_Card} onPress={()=>navigation.navigate('EventPage')}>
               <Image source={require('../assets/images/home_categories/selectchef.png')} style={styles.Home_Categories_Card_Img}/>
-              <Text style={styles.Home_Categories_Card_Title}>Chef</Text>
+              <Text style={styles.Home_Categories_Card_Title}>Events</Text>
             </TouchableOpacity>
-            <View style={styles.Home_Categories_Card}>
-              <Image source={require('../assets/images/home_categories/FoodTruck.png')} style={styles.Home_Categories_Card_Img}/>
-              <Text style={styles.Home_Categories_Card_Title}>Food On Wheels</Text>
-            </View>
-          </View>
-          <View style={styles.Home_Categories_Grid}>
-            <View style={styles.Home_Categories_Card}>
+            <TouchableOpacity style={styles.Home_Categories_Card}>
               <Image source={require('../assets/images/home_categories/HomeFood.png')} style={styles.Home_Categories_Card_Img}/>
               <Text style={styles.Home_Categories_Card_Title}>Home Food</Text>
-            </View>
-            <View style={styles.Home_Categories_Card}>
-              <Image source={require('../assets/images/home_categories/starters.png')} style={styles.Home_Categories_Card_Img}/>
-              <Text style={styles.Home_Categories_Card_Title}>Starters</Text>
-            </View>
-            <View style={styles.Home_Categories_Card}>
-              <Image source={require('../assets/images/home_categories/soup.png')} style={styles.Home_Categories_Card_Img}/>
-              <Text style={styles.Home_Categories_Card_Title}>Soups</Text>
-            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.Home_Categories_Card}>
+              <Image source={require('../assets/images/home_categories/FoodTruck.png')} style={styles.Home_Categories_Card_Img}/>
+              <Text style={styles.Home_Categories_Card_Title}>Food On Wheels</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.Home_Popular}>
-          <View style={styles.Home_Popular_Header}>
-            <Image source={require('../assets/icon/popular.png')} style={styles.Home_Popular_Header_Icon}/>
-            <Text style={styles.Home_Popular_Header_Text}>Popular</Text>
-          </View>
-          <View style={styles.Home_Popular_Content}>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Home_Popular_Chef_Card_Content}>
-              <View style={styles.Home_Chef_Popular_Card}>
-                <Image source={require('../assets/images/chefProfile.jpg')} style={styles.Home_Chef_Popular_Image}/>
-                <Text style={styles.Home_Popular_Chef_Name}>Mc.Danial</Text>
-                <View style={styles.Home_Popular_Chef_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Chef_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Bookings_Text}>Booking : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Chef_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Chef_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Offers}>
-                  <Text style={styles.Home_Popular_Chef_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>      
-              <View style={styles.Home_Chef_Popular_Card}>
-                <Image source={require('../assets/images/chefProfile.jpg')} style={styles.Home_Chef_Popular_Image}/>
-                <Text style={styles.Home_Popular_Chef_Name}>Mc.Danial</Text>
-                <View style={styles.Home_Popular_Chef_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Chef_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Bookings_Text}>Booking : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Chef_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Chef_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Offers}>
-                  <Text style={styles.Home_Popular_Chef_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>  
-              <View style={styles.Home_Chef_Popular_Card}>
-                <Image source={require('../assets/images/chefProfile.jpg')} style={styles.Home_Chef_Popular_Image}/>
-                <Text style={styles.Home_Popular_Chef_Name}>Mc.Danial</Text>
-                <View style={styles.Home_Popular_Chef_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Chef_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Bookings_Text}>Booking : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Chef_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Chef_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Offers}>
-                  <Text style={styles.Home_Popular_Chef_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>
-              <View style={styles.Home_Chef_Popular_Card}>
-                <Image source={require('../assets/images/chefProfile.jpg')} style={styles.Home_Chef_Popular_Image}/>
-                <Text style={styles.Home_Popular_Chef_Name}>Mc.Danial</Text>
-                <View style={styles.Home_Popular_Chef_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Chef_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Bookings_Text}>Booking : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Chef_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Chef_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Chef_Offers}>
-                  <Text style={styles.Home_Popular_Chef_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>    
-            </ScrollView>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Home_Popular_Cater_Card_Content}>
-              <View style={styles.Home_Cater_Popular_Card}>
-                <Image source={require('../assets/images/Home_Cater_Banner.jpg')} style={styles.Home_Cater_Popular_Image}/>
-                <Text style={styles.Home_Popular_Cater_Name}>Hotel Taj</Text>
-                <View style={styles.Home_Popular_Cater_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Cater_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Bookings_Text}>Served : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Cater_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Cater_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Offers}>
-                  <Text style={styles.Home_Popular_Cater_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>
-              <View style={styles.Home_Cater_Popular_Card}>
-                <Image source={require('../assets/images/Home_Cater_Banner.jpg')} style={styles.Home_Cater_Popular_Image}/>
-                <Text style={styles.Home_Popular_Cater_Name}>Hotel Taj</Text>
-                <View style={styles.Home_Popular_Cater_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Cater_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Bookings_Text}>Served : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Cater_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Cater_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Offers}>
-                  <Text style={styles.Home_Popular_Cater_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>
-              <View style={styles.Home_Cater_Popular_Card}>
-                <Image source={require('../assets/images/Home_Cater_Banner.jpg')} style={styles.Home_Cater_Popular_Image}/>
-                <Text style={styles.Home_Popular_Cater_Name}>Hotel Taj</Text>
-                <View style={styles.Home_Popular_Cater_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Cater_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Bookings_Text}>Served : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Cater_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Cater_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Offers}>
-                  <Text style={styles.Home_Popular_Cater_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>
-              <View style={styles.Home_Cater_Popular_Card}>
-                <Image source={require('../assets/images/Home_Cater_Banner.jpg')} style={styles.Home_Cater_Popular_Image}/>
-                <Text style={styles.Home_Popular_Cater_Name}>Hotel Taj</Text>
-                <View style={styles.Home_Popular_Cater_Bookings}>
-                  <Image  source={require('../assets/icon/bookings.png')} style={styles.Home_Popular_Cater_Bookings_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Bookings_Text}>Served : 120k</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Ratings}>
-                  <Image source={require('../assets/icon/rating.png')} style={styles.Home_Popular_Cater_Rating_Icon}/>
-                  <Text style={styles.Home_Popular_Chef_Rating_Text}>4.8/5</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Likes}>
-                  <Image source={require('../assets/icon/like.png')} style={styles.Home_Popular_Cater_Likes_Icon}/>
-                  <Text style={styles.Home_Popular_Cater_Likes_Text}>1.3M</Text>
-                </View>
-                <View style={styles.Home_Popular_Cater_Offers}>
-                  <Text style={styles.Home_Popular_Cater_Offers_Text}>UP TO 70% OFF</Text>
-                </View>
-              </View>
-            </ScrollView>
-          </View>
+        <View style={styles.H_F_Explore_Containter}>
+            <View style={styles.H_F_E_Item}>
+              <View style={styles.Horizontal_Line}/>
+              <Text style={styles.H_F_E_Item_Header}>Explore Competencies</Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {Explore_Items.map((E_I_Item) => (
+                  <View key={E_I_Item.Id} style={styles.H_F_E_Item_Header_List}>
+                    <Image source={E_I_Item.Img} style={styles.H_F_E_Item_Header_Img}/>
+                    <Text style={styles.H_F_E_Item_Header_Title}>{E_I_Item.Lable}</Text>
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
         </View>
+        <View style={styles.Home_Filters_Container}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {filtersList.map((filItem,filIndex)=>(
+              <TouchableOpacity key={filIndex} style={styles.H_F_Card}>
+                  <Text style={styles.H_F_Title}>{filItem.Lable}</Text>
+                  <Image source={filItem.icon} style={styles.H_F_Icon}/>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.Home_Popular_Container}>
+          <View style={styles.H_P_Caters_Content}>
+            <View style={styles.H_P_C_Header}>
+              <Text style={styles.H_P_C_Header_Title}>Popular Cateres</Text>
+            </View>
+          </View>
+          <View style={styles.H_P_Items_Content}>
+            <View style={styles.H_P_Items_Header}>
+              <Text style={styles.H_P_I_Header_Title}>Popular Items</Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Popular_Items.map((P_Item) => (
+                <View key={P_Item.Id} style={styles.H_P_I_Card}>
+                  <TouchableOpacity style={styles.H_P_I_Add}>
+                    <Image source={require('../assets/icon/homeFilters/add.png')} style={styles.H_P_I_Add_Icon} />
+                  </TouchableOpacity>
+                  <View style={styles.H_P_I_CardBody}>
+                    <Text style={styles.H_P_I_Title}>{P_Item.Lable}</Text>
+                    <Image source={P_Item.Img} style={styles.H_P_I_Img} />
+                    <View style={styles.H_P_I_Rating}>
+                      {Array(5).fill().map((_, rateIndex) => (
+                        <Image key={rateIndex} source={P_Item.RatingIcon} style={styles.H_P_I_RatingIcon} />
+                      ))}
+                    </View>
+                  </View>
+                  <View style={styles.H_P_I_Card_Footer_Content}>
+                    <View style={styles.H_P_I_Like_Share_Price}>
+                      <TouchableOpacity style={styles.H_P_I_Like_Share}>
+                        <Image source={require('../assets/icon/homeFilters/fevr.png')} style={styles.H_P_I_Like}/>
+                        <Image source={require('../assets/icon/homeFilters/share.png')} style={styles.H_P_I_Share}/>
+                      </TouchableOpacity>
+                      <View style={styles.H_P_Price_Content}>
+                        <Image source={require('../assets/icon/homeFilters/rupee.png')} style={styles.H_P_Price_Icon}/>
+                        <Text style={styles.H_P_Price_Text}>270</Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.H_P_Locations_Content}>
+            <View style={styles.H_P_Locations_Header}>
+                <Text style={styles.H_P_L_Header_Title}>Popular Locations</Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Popular_Locations.map((P_Location)=>(
+                <View key={P_Location.Id} style={[styles.H_P_L_Card,{backgroundColor:P_Location.bgColor}]}>
+                  <Text style={styles.H_P_L_Title}>{P_Location.Lable}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        </View> 
       </ScrollView> 
-      <View style={styles.Home_App_Footer}>
+      {/* <View style={styles.Home_App_Footer}>
         <View style={styles.Home_App_Footer_Content}>
           <Image source={require('../assets/icon/home.png')} style={styles.Home_App_Footer_Icon}/>
           <Text>Home</Text>
@@ -295,7 +316,7 @@ const Home = () => {
           <Image source={require('../assets/icon/user.png')} style={styles.Home_App_Footer_Icon}/>
           <Text>Account</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -341,6 +362,8 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:'#FFCD78',
   },
+
+  //search 
   Home_Search:{
     marginLeft:15,
     marginRight:15,
@@ -432,254 +455,238 @@ const styles = StyleSheet.create({
     resizeMode:'contain'
   },
 
+  //filters
+  Home_Filters_Container:{
+    margin:15
+  },
+  H_F_Card:{
+    display:'flex',
+    alignItems:'center',
+    gap:5,
+    flexDirection:'row',
+    borderWidth:1,
+    borderRadius:50,
+    borderColor:'#ECECEC',
+    padding:10,
+    margin:5
+  },
+  H_F_Title:{
+    fontSize:15,
+    color:'#272727'
+  },
+  H_F_Icon:{
+    width:15,
+    height:15
+  },
+
+  // Explore content
+  H_F_Explore_Containter:{
+    margin:20
+  },
+  H_F_E_Item_Header:{
+    fontSize:14,
+    textTransform:'capitalize',
+    color:'#272727',
+    fontWeight:'bold',
+    position:'absolute',
+    top:-12,
+    backgroundColor:'#ffff',
+    paddingRight:5
+  },
+  H_F_E_Item_Header_List:{
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+    marginRight:15,
+    marginTop:20
+  },
+  Horizontal_Line:{
+    flex:1,
+    height:1,
+    backgroundColor:"#9f9f9f"
+  },
+  H_F_E_Item_Header_Img:{
+    width:85,
+    height:100
+  },
 
   //popular content
-  Home_Popular:{
-    margin:20,
-    height:750,
+  Home_Popular_Container:{
+    margin:20
   },
-  Home_Popular_Header:{
+  H_P_I_Header_Title:{
+    fontSize:14,
+    textTransform:'capitalize',
+    color:'#272727',
+    fontWeight:'bold',
+  },
+  //Caters
+  H_P_C_Header_Title:{
+    fontWeight:'bold',
+    color:'#272727'
+  },
+
+
+
+  //Items
+  H_P_I_Card:{
+    // marginLeft:10,
+    marginTop:20,
+    marginRight:10,
+    marginBottom:10,
+    padding: 10,
+    backgroundColor: '#ffff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width:200
+  },
+  H_P_I_Add:{
+    backgroundColor:"#cccc",
+    position:'absolute',
+    padding:5,
+    right:0,
+    margin:5,
+    borderRadius:50
+  },
+  H_P_I_Add_Icon:{
+    width:15,
+    height:15,
+  },
+  H_P_I_CardBody:{
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10
+  },
+  H_P_I_Title:{
+    fontWeight:'bold',
+    color:'#272727'
+  },
+  H_P_I_Img:{
+    width:120,
+    height:120
+  },
+  H_P_I_Rating:{
+    flexDirection:'row',
+    gap:3,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  H_P_I_RatingIcon:{
+    width:10,
+    height:10
+  },
+  H_P_I_Card_Footer_Content:{
+    borderTopColor:'#cccc',
+    borderTopWidth:1,
+    marginTop:10
+  },
+  H_P_I_Like_Share_Price:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  H_P_I_Like_Share:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    gap:10,
+    paddingTop:10
+  },
+  H_P_I_Like:{
+    width:15,
+    height:15
+  },
+  H_P_I_Share:{
+    width:15,
+    height:15
+  },
+  H_P_Price_Content:{
     display:'flex',
     flexDirection:'row',
     gap:5,
-    alignItems:'center'
+    alignItems:'center',
   },
-  Home_Popular_Header_Icon:{
-    width:20,
-    height:20
+  H_P_Price_Icon:{
+    width:13,
+    height:13
   },
-  Home_Popular_Header_Text:{
+  H_P_Price_Text:{
+    fontSize:15,
     color:'#272727',
-    fontSize:17,
     fontWeight:'bold'
   },
-  Home_Popular_Content:{
-    borderRightWidth:2,
-    borderRightColor:'#FFF0C8'
-  },
 
-
-  // Popular chef's
-  Home_Popular_Chef_Card_Content:{
-    flexDirection:'row',
-    gap:10
+  //Locations
+  H_P_Locations_Content:{
+    marginTop:20
   },
-  Home_Chef_Popular_Card:{
-    width: 180,
-    height: 300,
-    backgroundColor: '#ffff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // for Android
-    marginRight:10,
-    marginTop:20,
-    marginBottom:10,
-    marginLeft:5
-  },
-  Home_Chef_Popular_Image:{
-    width:180,
-    height:180,
-    objectFit:'fill',
-    borderRadius:10
-  },
-  Home_Popular_Chef_Name:{
-    fontSize:20,
-    fontWeight:'bold',
+  H_P_L_Header_Title:{
+    fontSize:14,
+    textTransform:'capitalize',
     color:'#272727',
-    marginLeft:5
-  },
-
-  Home_Popular_Chef_Bookings:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Chef_Bookings_Icon:{
-    width:20,
-    height:20
-  },
-  Home_Popular_Chef_Bookings_Text:{
-    marginLeft:5,
-    fontWeight:'bold'
-  },
-  Home_Popular_Chef_Ratings:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Chef_Rating_Icon:{
-    width:15,
-    height:15
-  },
-  Home_Popular_Chef_Rating_Text:{
-    marginLeft:10,
-    fontWeight:'bold'
-  },
-  Home_Popular_Chef_Likes:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Chef_Likes_Icon:{
-    width:15,
-    height:15
-  },
-  Home_Popular_Chef_Likes_Text:{
-    marginLeft:10,
-    fontWeight:'bold'
-  },
-  Home_Popular_Chef_Offers:{
-    position:'absolute',
-    bottom:2,
-    right:0,
-    backgroundColor:'#F1C40F',
-    zIndex:1,
-    padding:5,
-    borderTopLeftRadius:10,
-    borderBottomLeftRadius:10
-  },
-  Home_Popular_Chef_Offers_Text:{
-    fontSize:12,
     fontWeight:'bold',
-    color:'#ffff'
-  },
-
-
-
-
-
-  // Popular caters
-  Home_Popular_Cater_Card_Content:{
-    flexDirection:'row',
-    gap:10
-  },
-  Home_Cater_Popular_Card:{
-    width: 180,
-    height: 300,
-    backgroundColor: '#ffff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // for Android
-    marginRight:10,
-    marginTop:20,
-    marginBottom:10,
-    marginLeft:5
-  },
-  Home_Cater_Popular_Image:{
-    width:180,
-    height:180,
-    objectFit:'fill',
-    borderRadius:10
-  },
-  Home_Popular_Cater_Name:{
-    fontSize:20,
-    fontWeight:'bold',
-    color:'#272727',
-  },
-  Home_Popular_Cater_Bookings:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Cater_Bookings_Icon:{
-    width:20,
-    height:20
-  },
-  Home_Popular_Cater_Bookings_Text:{
-    marginLeft:5,
-    fontWeight:'bold'
-  },
-  Home_Popular_Cater_Ratings:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Cater_Rating_Icon:{
-    width:15,
-    height:15
-  },
-  Home_Popular_Cater_Rating_Text:{
-    marginLeft:10,
-    fontWeight:'bold'
-  },
-  Home_Popular_Cater_Likes:{
-    marginTop:10,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginLeft:5
-  },
-  Home_Popular_Cater_Likes_Icon:{
-    width:15,
-    height:15
-  },
-  Home_Popular_Cater_Likes_Text:{
-    marginLeft:10,
-    fontWeight:'bold'
-  },
-  Home_Popular_Cater_Offers:{
     position:'absolute',
-    bottom:2,
-    right:0,
-    backgroundColor:'#F1C40F',
-    zIndex:1,
-    padding:5,
-    borderTopLeftRadius:10,
-    borderBottomLeftRadius:10
-  },
-  Home_Popular_Cater_Offers_Text:{
-    fontSize:12,
-    fontWeight:'bold',
-    color:'#ffff'
-  },
-
-
-
-
-
-
-  Home_App_Footer:{
-    display:'flex',
-    position:'absolute',
-    flexDirection:'row',
+    top:-12,
     backgroundColor:'#ffff',
-    width:420,
-    padding:20,
-    bottom:0,
-    justifyContent:'space-around',
+    paddingRight:5
+  },
+  H_P_L_Card:{
+    height: 100,
+    width: 100, // Added width for better visibility
+    backgroundColor: '#f4f4f4', // Added background color
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5, // for Android
+    justifyContent: 'center', // Centering text
+    alignItems: 'center', // Centering text
+    borderRadius:5,
+    margin:20,
+    marginLeft:0
   },
-  Home_App_Footer_Content:{
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    flexDirection:'column'
-  },
-  Home_App_Footer_Icon:{
-    width:20,
-    height:20,
-    objectFit:'cover',
+  H_P_L_Title:{
+    fontSize:25,
+    fontWeight:'900',
+    color:'#ffff'
   }
+
+
+
+  // Home_App_Footer:{
+  //   display:'flex',
+  //   position:'absolute',
+  //   flexDirection:'row',
+  //   backgroundColor:'#ffff',
+  //   width:420,
+  //   padding:20,
+  //   bottom:0,
+  //   justifyContent:'space-around',
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 3.84,
+  //   elevation: 5, // for Android
+  // },
+  // Home_App_Footer_Content:{
+  //   display:'flex',
+  //   justifyContent:'center',
+  //   alignItems:'center',
+  //   flexDirection:'column'
+  // },
+  // Home_App_Footer_Icon:{
+  //   width:20,
+  //   height:20,
+  //   objectFit:'cover',
+  // }
 })
 
 export default Home

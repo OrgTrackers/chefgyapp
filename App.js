@@ -11,6 +11,7 @@ import CaterMenu from './src/screens/CaterMenu'
 import VegIngredients from './src/screens/VegIngredients'
 import EventPage from './src/screens/EventPage'
 import Ingredients from './src/screens/Ingredients'
+import Location from './src/components/Location'
 import appIntroSlider from './src/components/appIntroSlider'
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ const App = () => {
         <Stack.Screen name='VegIngredients' component={VegIngredients} />
         <Stack.Screen name='EventPage' component={EventPage} />
         <Stack.Screen name='Ingredients' component={Ingredients} />
+        <Stack.Screen name='Location' component={Location} />
         <Stack.Screen name='Splash' component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>

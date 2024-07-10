@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,TextInput } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -51,14 +51,9 @@ const EventPage = () => {
             <Text style={styles.Events_Notifications_Text}>5</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.Events_Chef_Header}>
-          <View style={styles.Events_Chef__Name}>
-            <Text style={styles.Events_Chef__Name_Text}>Mc.Danial</Text>
-            <Text style={styles.Events_Chef__Status}>Your Today's Menu</Text>
-          </View>
-          <View style={styles.Events_Chef_Add}>
-            <Image source={require('../assets/icon/adding.png')} style={styles.Events_Chef_Add_Icon}/>
-          </View>
+        <View style={styles.Home_Search}>
+          <Image source={require('../assets/images/search_Img.png')} style={styles.Home_Search_Iocn}/>
+          <TextInput placeholder='What are you looking for ?' style={styles.Home_Search_Input}></TextInput>
         </View>
         <View style={styles.Calendar_Container}>
           <Text style={styles.Calendar_Content_Text}>05-07 (2 Days) January ,2024</Text>
@@ -91,79 +86,14 @@ const EventPage = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.Event_Food_List_Container}>
-          <View style={styles.Event_Food_List_Header}>
+        <View style={styles.Event_Recommended_Content}>
+          <View style= {styles.E_R_Header}>
             <Image source={require('../assets/icon/hot.png')} style={styles.Hot_Icon}/>
-            <Text style={styles.Event_Food_List_Header_Title}>Recommended</Text>
+            <Text style={styles.E_R_Header_Title}>Recommended</Text>
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Event_Food_List_Card_Content}>
-            <TouchableOpacity style={styles.Event_Food_List_Card} onPress={()=>navigation.navigate('Ingredients')}>
-              <View style={styles.Event_Food_List_Card_Body}>
-                <View>
-                  <Image source={require('../assets/images/Events/biryani.png')} style={styles.Event_Food_List_Image}/>
-                  <View style={styles.Event_Food_List_Card_Footer}>
-                    <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
-                  </View>
-                </View>
-                <View style={styles.Event_Food_List_Price}>
-                  <View style={styles.Event_Food_List_Price_Cost_Content}>
-                    <Image source={require('../assets/icon/rupee.png')} style={styles.Event_Food_List_Price_Icon}/> 
-                    <Text style={styles.Event_Food_List_Price_Cost}>150</Text>
-                  </View>
-                  <View style={styles.Ratings}>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                  </View>
-                  <View style={styles.Food_Likes_Shares}>
-                    <View style={styles.Food_Likes_Content}>
-                      <Image source={require('../assets/icon/Foodlikes.png')} style={styles.Food_Likes_Icon}/>
-                      <Text style={styles.Food_Likes_Text}>150k</Text>
-                    </View>
-                    <View style={styles.Food_Share_Content}>
-                      <Image source={require('../assets/icon/share.png')} style={styles.Food_Shares_Icon}/>
-                      <Text style={styles.Food_Share_Text}>150k</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.Event_Food_List_Card} onPress={()=>navigation.navigate('Ingredients')}>
-              <View style={styles.Event_Food_List_Card_Body}>
-                <View>
-                  <Image source={require('../assets/images/Events/biryani.png')} style={styles.Event_Food_List_Image}/>
-                  <View style={styles.Event_Food_List_Card_Footer}>
-                    <Text style={styles.Events_Item_Name}>Chicken Biryani</Text>
-                  </View>
-                </View>
-                <View style={styles.Event_Food_List_Price}>
-                  <View style={styles.Event_Food_List_Price_Cost_Content}>
-                    <Image source={require('../assets/icon/rupee.png')} style={styles.Event_Food_List_Price_Icon}/> 
-                    <Text style={styles.Event_Food_List_Price_Cost}>150</Text>
-                  </View>
-                  <View style={styles.Ratings}>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                    <Image source={require('../assets/icon/rating.png')} style={styles.Ratings_Icon}/>
-                  </View>
-                  <View style={styles.Food_Likes_Shares}>
-                    <View style={styles.Food_Likes_Content}>
-                      <Image source={require('../assets/icon/Foodlikes.png')} style={styles.Food_Likes_Icon}/>
-                      <Text style={styles.Food_Likes_Text}>150k</Text>
-                    </View>
-                    <View style={styles.Food_Share_Content}>
-                      <Image source={require('../assets/icon/share.png')} style={styles.Food_Shares_Icon}/>
-                      <Text style={styles.Food_Share_Text}>150k</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </ScrollView>
+          <View style={styles.E_R_}>
+
+          </View>
         </View>
         <View style={styles.Event_To_Location}>
             <View style={styles.Delev_Time_Content}>
@@ -224,24 +154,30 @@ const styles = StyleSheet.create({
     borderRadius:50,
   },
 
-
-
-  // chef's Name conatent
-  Events_Chef_Header:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    padding:20
+  //search 
+  Home_Search:{
+    marginLeft:15,
+    marginRight:15,
   },
-  Events_Chef_Add_Icon:{
-    width:30,
-    height:30
+  Home_Search_Input:{
+    paddingLeft:40,
+    backgroundColor:'#ffff',
+    borderRadius:5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // for Android
+    height:40,
+    fontSize:12
   },
-  Events_Chef__Name_Text:{
-    fontSize:20,
-    fontWeight:'900',
-    color:'#272727'
+  Home_Search_Iocn:{
+    width:20,
+    height:20,
+    position:'absolute',
+    left:8,
+    top:10,
+    zIndex:3
   },
 
   //calendar content
@@ -321,16 +257,17 @@ const styles = StyleSheet.create({
     color:'#272727'
   },
 
-  // Recommended content
-  Event_Food_List_Container:{
-    margin:20,
+
+  //Recommended
+  Event_Recommended_Content:{
+    margin:20
   },
-  Event_Food_List_Header:{
+  E_R_Header:{
     flexDirection:'row',
     gap:5,
     alignItems:'center'
   },
-  Event_Food_List_Header_Title:{
+  E_R_Header_Title:{
     fontSize:20,
     fontWeight:'900',
   },
@@ -339,104 +276,7 @@ const styles = StyleSheet.create({
     height:25
   },
 
-  // Food list card
-  Event_Food_List_Card_Content:{
-    marginTop:20
-  },
-  Event_Food_List_Card:{
-    margin:10,
-    padding: 10,
-    backgroundColor: '#F7FAFF',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  Event_Food_List_Card_Body:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:10
-  },
-  Event_Food_List_Image:{
-    width:120,
-    height:120,
-    marginTop:-20,
-  },
-  Event_Food_List_Price_Cost_Content:{
-    display:'flex',
-    flexDirection:'row',
-    gap:1,
-    alignItems:'center'
-  },
-  Event_Food_List_Price_Cost:{
-    fontSize:18,
-    color:'#272727',
-    fontWeight:'900'
-  },
-  Event_Food_List_Price_Icon:{
-    width:13,
-    height:13,
-    marginTop:3
-  },
-  Event_Food_List_Card_Footer:{
-    margin:5
-  },
-  Events_Item_Name:{
-    fontSize:15,
-    fontWeight:'bold',
-    textAlign:'center',
-    // width:150,
-    color:'#272727',
-    // marginTop:-10
-  },
-
-  //ratings
-  Ratings:{
-    flexDirection:'row',
-    gap:5,
-    alignItems:'center',
-    marginTop:15
-  },
-  Ratings_Icon:{
-    width:15,
-    height:15
-  },
-
-  //likes and shares
-  Food_Likes_Shares:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    alignItems:'center',
-    gap:10,
-    marginTop:20
-  },
-  Food_Likes_Content:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    gap:2
-  },
-  Food_Share_Content:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    gap:2
-  },
-  Food_Likes_Icon:{
-    width:20,
-    height:20
-  },
-  Food_Shares_Icon:{
-    width:15,
-    height:15
-  },
-
-
-
-
+  
 
   // Location Content
   Event_To_Location:{
