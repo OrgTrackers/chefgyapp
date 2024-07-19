@@ -1,41 +1,42 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,TextInput,ImageBackground } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View,TextInput,ImageBackground, Button } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
+import Footer from '../components/Footer'
 
 
-const calendar = [
-  { "Day": 'Sun', "Date": 1 },
-  { "Day": 'Mon', "Date": 2 },
-  { "Day": 'Tue', "Date": 3 },
-  { "Day": 'Wed', "Date": 4 },
-  { "Day": 'Thu', "Date": 5 },
-  { "Day": 'Fri', "Date": 6 },
-  { "Day": 'Sat', "Date": 7 },
-  { "Day": 'Sun', "Date": 8 },
-  { "Day": 'Mon', "Date": 9 },
-  { "Day": 'Tue', "Date": 10 },
-  { "Day": 'Wed', "Date": 11 },
-  { "Day": 'Thu', "Date": 12 },
-  { "Day": 'Fri', "Date": 13 },
-  { "Day": 'Sat', "Date": 14 },
-  { "Day": 'Sun', "Date": 15 },
-  { "Day": 'Mon', "Date": 16 },
-  { "Day": 'Tue', "Date": 17 },
-  { "Day": 'Wed', "Date": 18 },
-  { "Day": 'Thu', "Date": 19 },
-  { "Day": 'Fri', "Date": 20 },
-  { "Day": 'Sat', "Date": 21 },
-  { "Day": 'Sun', "Date": 22 },
-  { "Day": 'Mon', "Date": 23 },
-  { "Day": 'Tue', "Date": 24 },
-  { "Day": 'Wed', "Date": 25 },
-  { "Day": 'Thu', "Date": 26 },
-  { "Day": 'Fri', "Date": 27 },
-  { "Day": 'Sat', "Date": 28 },
-  { "Day": 'Sun', "Date": 29 },
-  { "Day": 'Mon', "Date": 30 }
-];
+// const calendar = [
+//   { "Day": 'Sun', "Date": 1 },
+//   { "Day": 'Mon', "Date": 2 },
+//   { "Day": 'Tue', "Date": 3 },
+//   { "Day": 'Wed', "Date": 4 },
+//   { "Day": 'Thu', "Date": 5 },
+//   { "Day": 'Fri', "Date": 6 },
+//   { "Day": 'Sat', "Date": 7 },
+//   { "Day": 'Sun', "Date": 8 },
+//   { "Day": 'Mon', "Date": 9 },
+//   { "Day": 'Tue', "Date": 10 },
+//   { "Day": 'Wed', "Date": 11 },
+//   { "Day": 'Thu', "Date": 12 },
+//   { "Day": 'Fri', "Date": 13 },
+//   { "Day": 'Sat', "Date": 14 },
+//   { "Day": 'Sun', "Date": 15 },
+//   { "Day": 'Mon', "Date": 16 },
+//   { "Day": 'Tue', "Date": 17 },
+//   { "Day": 'Wed', "Date": 18 },
+//   { "Day": 'Thu', "Date": 19 },
+//   { "Day": 'Fri', "Date": 20 },
+//   { "Day": 'Sat', "Date": 21 },
+//   { "Day": 'Sun', "Date": 22 },
+//   { "Day": 'Mon', "Date": 23 },
+//   { "Day": 'Tue', "Date": 24 },
+//   { "Day": 'Wed', "Date": 25 },
+//   { "Day": 'Thu', "Date": 26 },
+//   { "Day": 'Fri', "Date": 27 },
+//   { "Day": 'Sat', "Date": 28 },
+//   { "Day": 'Sun', "Date": 29 },
+//   { "Day": 'Mon', "Date": 30 }
+// ];
 
 const Explore_Items =[
   {
@@ -242,7 +243,7 @@ const EventPage = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.Event_Container}>
-      <ScrollView style={styles.Events_Content}>
+      <ScrollView style={styles.Events_Content} showsVerticalScrollIndicator={false}>
         <View style={styles.Events_Header}>
           <TouchableOpacity  onPress={()=>navigation.navigate('Home')}>
             <Image source={require('../assets/icon/back.png')} style={styles.Back_To_Home_Icon}/>
@@ -257,7 +258,7 @@ const EventPage = () => {
           <Image source={require('../assets/images/search_Img.png')} style={styles.Home_Search_Iocn}/>
           <TextInput placeholder='What are you looking for ?' style={styles.Home_Search_Input}></TextInput>
         </View>
-        <View style={styles.Calendar_Container}>
+        {/* <View style={styles.Calendar_Container}>
           <Text style={styles.Calendar_Content_Text}>05-07 (2 Days) January ,2024</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.Calendar_Content}>
             {calendar.map((Dateitem,index)=>(
@@ -287,7 +288,16 @@ const EventPage = () => {
               <Text style={styles.Events_Categories_Title}>Dinner</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
+        <LinearGradient     
+          colors={['#52c234','#061700']}  
+          start={{ x: 0, y: 0 }} 
+          end={{ x: 1, y: 0 }}   
+          style={styles.BookCater_Btn}>
+          <TouchableOpacity onPress={()=> navigation.navigate("BookCateres")}>
+            <Text style={styles.BookCater_Btn_Text}> BOOK A CATERER </Text> 
+          </TouchableOpacity>
+        </LinearGradient>
         <View style={styles.H_F_Explore_Containter}>
             <View style={styles.H_F_E_Item}>
               <View style={styles.Horizontal_Line}/>
@@ -411,6 +421,7 @@ const EventPage = () => {
             </View>
         </View>
       </ScrollView>
+      <Footer/>
     </View>
   )
 }
@@ -483,82 +494,95 @@ const styles = StyleSheet.create({
     zIndex:3
   },
 
-  //calendar content
-  Calendar_Container:{
-    margin:15
+  //Book cater btn
+  BookCater_Btn:{
+    padding:20,
+    backgroundColor:'#cccc',
+    margin:15,
+    borderRadius:10
   },
-  Calendar_Content_Text:{
-    marginLeft:5,
-    fontWeight:'900',
-    marginBottom:5,
-    color:'#FFC90E'
+  BookCater_Btn_Text:{
+    textAlign:'center',
+    color:'#ffff'
   },
-  Date_Card: {
-    padding: 10,
-    margin: 5,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 5,
-    alignItems: 'center',
-    // Android shadow
-    elevation: 3,
-    // iOS shadow
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    width:60
-  },
-  Date_Card_Day: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  Date_Card_Date: {
-    fontSize: 14,
-    color: '#555',
-  },
+
+  
+  // //calendar content
+  // Calendar_Container:{
+  //   margin:15
+  // },
+  // Calendar_Content_Text:{
+  //   marginLeft:5,
+  //   fontWeight:'900',
+  //   marginBottom:5,
+  //   color:'#FFC90E'
+  // },
+  // Date_Card: {
+  //   padding: 10,
+  //   margin: 5,
+  //   backgroundColor: '#f0f0f0',
+  //   borderRadius: 5,
+  //   alignItems: 'center',
+  //   // Android shadow
+  //   elevation: 3,
+  //   // iOS shadow
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  //   width:60
+  // },
+  // Date_Card_Day: {
+  //   fontSize: 16,
+  //   fontWeight: 'bold',
+  // },
+  // Date_Card_Date: {
+  //   fontSize: 14,
+  //   color: '#555',
+  // },
 
 
 
 
-  //Categories content
-  Events_Categories:{
-    margin:20
-  },
-  Events_Categories_Header_Text:{
-    fontSize:15,
-    fontWeight:'900'
-  },
-  Events_Categories_Header_Icon:{
-    width:20,
-    height:20
-  },
-  Events_Categories_Content:{
-    display:'flex',
-    flexDirection:'row',
-    gap:20
-  },
-  Events_Categories_Card:{
-    padding: 10,
-    marginTop:15,
-    backgroundColor: '#ffff',
-    borderRadius: 5,
-    alignItems: 'center',
-    // Android shadow
-    elevation: 3,
-    // iOS shadow
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    width:110
-  },
-  Events_Categories_Image:{
-    width:70,
-    height:70
-  },
-  Events_Categories_Title:{
-    color:'#272727'
-  },
+  // //Categories content
+  // Events_Categories:{
+  //   margin:20
+  // },
+  // Events_Categories_Header_Text:{
+  //   fontSize:15,
+  //   fontWeight:'900'
+  // },
+  // Events_Categories_Header_Icon:{
+  //   width:20,
+  //   height:20
+  // },
+  // Events_Categories_Content:{
+  //   display:'flex',
+  //   flexDirection:'row',
+  //   gap:20
+  // },
+  // Events_Categories_Card:{
+  //   padding: 10,
+  //   marginTop:15,
+  //   backgroundColor: '#ffff',
+  //   borderRadius: 5,
+  //   alignItems: 'center',
+  //   // Android shadow
+  //   elevation: 3,
+  //   // iOS shadow
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  //   width:110
+  // },
+  // Events_Categories_Image:{
+  //   width:70,
+  //   height:70
+  // },
+  // Events_Categories_Title:{
+  //   color:'#272727'
+  // },
 
 
   //Recommended

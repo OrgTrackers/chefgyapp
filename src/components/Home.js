@@ -3,6 +3,7 @@ import { Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOp
 import { useNavigation } from '@react-navigation/native'
 import LinearGradient from 'react-native-linear-gradient'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Footer from './Footer'
 
 const {width} = Dimensions.get('window');
 
@@ -10,13 +11,13 @@ const App_Cate = [
   {
     Id:1,
     Img:require('../assets/images/home_categories/H_C_Img_1.jpg'),
-    Lable:'Events',
+    Lable:'Caters',
     Offers:'UPTO 20% OFF'
   },
   {
     Id:2,
     Img:require('../assets/images/home_categories/H_C_Img_2.jpg'),
-    Lable:'Cloud Kitchen',
+    Lable:'Chef',
     Offers:'UPTO 20% OFF'
   },
   {
@@ -32,38 +33,7 @@ const App_Cate = [
     Offers:'UPTO 20% OFF'
   }, 
 ]
-const App_Footer=[
-  {
-    Id:1,
-    Icon:require('../assets/icon/appFooter/Footer_Img_1.png'),
-    Lable:'Home',
-  },
-  {
-    Id:2,
-    Icon:require('../assets/icon/appFooter/Footer_Img_2.png'),
-    Lable:'Caters',
-  },
-  {
-    Id:3,
-    Icon:require('../assets/icon/appFooter/Footer_Img_3.png'),
-    Lable:'Chef',
-  },
-  {
-    Id:4,
-    Icon:require('../assets/icon/appFooter/Footer_Img_4.png'),
-    Lable:'Cloud',
-  },
-  {
-    Id:5,
-    Icon:require('../assets/icon/appFooter/Footer_Img_5.png'),
-    Lable:'On Wheels',
-  },
-  {
-    Id:6,
-    Icon:require('../assets/icon/appFooter/Footer_Img_6.png'),
-    Lable:'Profile',
-  },
-]
+
 
 
 
@@ -109,7 +79,7 @@ const Home = () => {
 
   const handleNavigation = (label) =>{
     switch(label){
-      case 'Events':
+      case 'Caters':
         navigation.navigate('EventPage')
       break;
 
@@ -184,14 +154,15 @@ const Home = () => {
           ))}
         </View>
       </ScrollView>
-      <View style={styles.Home_App_Footer}>
+      {/* <View style={styles.Home_App_Footer}>
         {App_Footer.map((Footer_Item)=>(
           <View key={Footer_Item.Id} style={styles.Home_App_Footer_Content}>
             <Image source={Footer_Item.Icon} style={styles.Home_App_Footer_Icon}/>
             <Text style={styles.Home_App_Footer_Text} >{Footer_Item.Lable}</Text>
           </View>
         ))}
-      </View>
+      </View> */}
+      <Footer/>
     </View>
   )
 }
@@ -354,40 +325,6 @@ const styles = StyleSheet.create({
     color:'#ffff'
   },
 
-  //Footer
-  Home_App_Footer:{
-    display:'flex',
-    position:'absolute',
-    flexDirection:'row',
-    backgroundColor:'#ffff',
-    width:'100%',
-    padding:20,
-    bottom:0,
-    justifyContent:'space-around',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // for Android
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30
-  },
-  Home_App_Footer_Content:{
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    flexDirection:'column'
-  },
-  Home_App_Footer_Icon:{
-    width:20,
-    height:20,
-    objectFit:'cover',
-  },
-  Home_App_Footer_Text:{
-    color:'#272727',
-    fontSize:10,
-    fontWeight:'bold'
-  }
 })
 
 export default Home
