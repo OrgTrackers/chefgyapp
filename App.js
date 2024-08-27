@@ -15,6 +15,8 @@ import Location from './src/components/Location'
 import BookCateres from './src/screens/BookCateres';
 import appIntroSlider from './src/components/appIntroSlider'
 
+import FoodSession from './src/components/FoodSessions';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -34,6 +36,10 @@ const App = () => {
         <Stack.Screen name='Ingredients' component={Ingredients} />
         <Stack.Screen name='Location' component={Location} />
         <Stack.Screen name='BookCateres' component={BookCateres} />
+        
+        <Stack.Screen name='FoodSession' component={FoodSession} />
+
+        
         <Stack.Screen name='Splash' component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>

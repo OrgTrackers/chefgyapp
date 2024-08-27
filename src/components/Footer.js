@@ -1,30 +1,47 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 import React from 'react';
+
+import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const App_Footer=[
     {
       Id:1,
-      Icon:require('../assets/icon/appFooter/Footer_Img_1.png'),
+      Icon:'home-outline',
       Lable:'Home',
     },
     {
       Id:2,
-      Icon:require('../assets/icon/appFooter/Footer_Img_2.png'),
+      Icon:'account-multiple',
       Lable:'Caters',
     },
     {
       Id:3,
-      Icon:require('../assets/icon/appFooter/Footer_Img_3.png'),
+      Icon:'account',
       Lable:'Chef',
     },
     {
       Id:4,
-      Icon:require('../assets/icon/appFooter/Footer_Img_4.png'),
-      Lable:'Wish Dish',
+      Icon:'truck-outline',
+      Lable:'On Wheels',
     },
     {
       Id:5,
-      Icon:require('../assets/icon/appFooter/Footer_Img_5.png'),
+      Icon:'home-outline',
+      Lable:'Home',
+    },
+    {
+      Id:6,
+      Icon:'account-multiple',
+      Lable:'Caters',
+    },
+    {
+      Id:7,
+      Icon:'account',
+      Lable:'Chef',
+    },
+    {
+      Id:8,
+      Icon:'truck-outline',
       Lable:'On Wheels',
     },
 ]
@@ -32,14 +49,14 @@ const App_Footer=[
 const Footer = () => {
   return (
     <View style={styles.footer}>
-      <View style={styles.Footer_Container}>
+      <ScrollView  horizontal showsHorizontalScrollIndicator={false} style={styles.Footer_Container}>
         {App_Footer.map((Footer_Item)=>(
-            <View key={Footer_Item.Id} style={styles.Footer_Content}>
-                <Image source={Footer_Item.Icon} style={styles.Footer_Img}/>
+            <TouchableOpacity key={Footer_Item.Id} style={styles.Footer_Content}>
+               <MCIcons name={Footer_Item.Icon} size={24} color='#FF9800'/>
                 <Text style={styles.Footer_Text}>{Footer_Item.Lable}</Text>
-            </View>
+            </TouchableOpacity>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -53,25 +70,22 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 60, // Adjust height as needed
-    backgroundColor: '#f8f8f8', // Adjust background color as needed
+    backgroundColor: '#FFFF', // Adjust background color as needed
     justifyContent: 'center',
     borderTopWidth: 1,
     borderTopColor: '#e7e7e7', // Adjust border color as needed
-  },
-  Footer_Container:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:"center",
-    justifyContent:'space-around'
   },
   Footer_Content:{
     display:'flex',
     flexDirection:'column',
     justifyContent:'center',
     alignItems:'center',
+    marginRight:25,
+    padding:5,
+    marginLeft:15
   },
-  Footer_Img:{
-    width:20,
-    height:20
+  Footer_Text:{
+    fontSize:12,
+    fontWeight:'bold'
   }
 });

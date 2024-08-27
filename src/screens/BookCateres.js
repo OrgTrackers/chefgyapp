@@ -1,189 +1,304 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import Calendar from "react-native-calendar-range-picker";
+import React, {useState, useRef} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import Calendar from 'react-native-calendar-range-picker';
 import Footer from '../components/Footer';
-import LinearGradient from 'react-native-linear-gradient';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Card} from 'react-native-paper';
 
-const Cater_Categories = [
+const Cater_Type = [
   {
     Id: 1,
-    Img: require('../assets/icon/breakfast.png'),
-    Name: 'Breakfast',
+    Icon: 'food-apple',
+    name: 'Breakfast',
   },
   {
     Id: 2,
-    Img: require('../assets/icon/lunch.png'),
-    Name: 'Lunch'
+    Icon: 'food',
+    name: 'Lunch',
   },
   {
-    Id: 4,
-    Img: require('../assets/icon/breakfast.png'),
-    Name: 'Breakfast',
-  },
-  {
-    Id: 5,
-    Img: require('../assets/icon/lunch.png'),
-    Name: 'Lunch'
+    Id: 3,
+    Icon: 'food-turkey',
+    name: 'Dinner',
   },
 ];
 
 const BookCateres = () => {
   const navigation = useNavigation();
-  const [fromDate, setFromDate] = useState("18/07/2024");
-  const [toDate, setToDate] = useState("25/07/2024");
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const scrollViewRef = useRef(null);
 
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  // const handleCheck = () => {
+  //   setChecked(!checked);
+  //   if (!checked) {
+  //     // Scroll to the end when the checkbox is checked
+  //     scrollViewRef.current?.scrollToEnd({ animated: true });
+  //   }
+  // };
+
+  const handleCardPress = id => {
+    if (selectedTypes.includes(id)) {
+      setSelectedTypes(selectedTypes.filter(typeId => typeId !== id));
+    } else {
+      setSelectedTypes([...selectedTypes, id]);
+      scrollViewRef.current?.scrollToEnd({animated: true});
+    }
+  };
+
+  const handleDateChange = dateRange => {
+    if (dateRange && dateRange.startDate && dateRange.endDate) {
+      setStartDate(dateRange.startDate);
+      setEndDate(dateRange.endDate);
+    }
+  };
   return (
-    <View style={styles.BookCateres_Container}>
-      <View style={styles.B_C_Header}>
-        <TouchableOpacity onPress={() => navigation.navigate("EventPage")}>
-          <Image source={require('../assets/icon/back.png')} style={styles.BackToEventPage_Icon} />
-        </TouchableOpacity>
-        <Text style={styles.B_C_Header_Text}>Book Caters</Text>
-        <View></View>
-      </View>
-      <View style={styles.B_C_Selected_Dates}>
-        <View style={styles.B_C_From_Date}>
-          <Text style={styles.B_C_Selected_Header}>From</Text>
-          <Text style={styles.B_C_Selected_Date_Text}>{fromDate}</Text>
+    <View style={styles.BC_Container}>
+      <View style={styles.BC_Header_Container}>
+        <View style={styles.BC_Header_Icons}>
+          <TouchableOpacity onPress={() => navigation.navigate('EventPage')}>
+            <Ionicons name="chevron-back" size={24} color="#ffff" />
+          </TouchableOpacity>
+          <Ionicons
+            name="ellipsis-vertical"
+            size={15}
+            color="#ffff"
+            style={{
+              backgroundColor: '#7DC67F',
+              borderRadius: 100,
+              padding: 5,
+              width: 25,
+            }}
+          />
         </View>
-        <View style={styles.B_C_To_Date}>
-          <Text style={styles.B_C_Selected_Header}>To</Text>
-          <Text style={styles.B_C_Selected_Date_Text}>{toDate}</Text>
-        </View>
+        <Text style={styles.BC_Header_Text}>Book Cateres</Text>
       </View>
-      <View style={styles.B_C_Calendar}>
-        <Calendar
-          startDate="2024-03-05"
-          endDate="2024-03-12"
-          onChange={({ startDate, endDate }) => {
-            setFromDate(startDate);
-            setToDate(endDate);
-          }}
-          // style={{
-          //   container: {},
-          //   monthContainer: {},
-          //   monthOverlayContainer: {},
-          //   weekContainer: {},
-          //   monthNameText: {},
-          //   dayNameText: {},
-          //   dayText: {},
-          //   dayTextColor: '#f7f7f7',
-          //   holidayColor: 'rgba(0,0,0,0.5)',
-          //   todayColor: 'blue',
-          //   disabledTextColor: '#cccccc',
-          //   selectedDayTextColor: '#ffffff',
-          //   selectedDayBackgroundColor: '#52c234',
-          //   selectedBetweenDayTextColor: '#ffffff',
-          //   selectedBetweenDayBackgroundTextColor: '#cccccc',
-          // }}
-        />
-      </View>
-      <View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.B_C_Catergory_Container}>
-          {Cater_Categories.map((C_Cate_Item) => (
-            <TouchableOpacity key={C_Cate_Item.Id} style={styles.B_C_Catergory_Card}>
-              <Image source={C_Cate_Item.Img} style={styles.B_C_Catergory_Card_Img} />
-              <Text style={styles.B_C_Catergory_Card_Title}>{C_Cate_Item.Name}</Text>
+      <View style={styles.BC_Content}>
+        <ScrollView
+          ref={scrollViewRef}
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.BC_Date_Calendar_Container}>
+            <View style={styles.BC_Dates_Content}>
+              <Text style={styles.BC_Date_Header}>Pick Dates</Text>
+              <View style={styles.BC_Date_Inputs}>
+                <TextInput
+                  keyboardType="decimal-pad"
+                  placeholderTextColor="#d9d9d9"
+                  placeholder="From Date"
+                  style={styles.BC_Date_Input}
+                  value={startDate}
+                />
+                <TextInput
+                  keyboardType="decimal-pad"
+                  placeholderTextColor="#d9d9d9"
+                  placeholder="To Date"
+                  style={styles.BC_Date_Input}
+                  value={endDate}
+                />
+              </View>
+            </View>
+            <View style={styles.BC_Calendar_Content}>
+              <View style={styles.BC_Calendar_Container}>
+                <Calendar
+                  startDate="2024-03-05"
+                  endDate="2024-03-12"
+                  onChange={handleDateChange}
+                  style={{
+                    monthNameText: {fontSize: 10, color: '#272727'},
+                    dayNameText: {fontSize: 10},
+                    dayText: {fontSize: 10},
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.BC_Select_Type_Content}>
+            <Text style={styles.BC_Type_Header}>Select Type</Text>
+            <View style={styles.BC_Type_Cards}>
+              {Cater_Type.map(BC_TypeItem => {
+                let iconColor;
+                let iconBgColor;
+                switch (BC_TypeItem.Id) {
+                  case 1:
+                    iconColor = '#e74c3c';
+                    iconBgColor = '#fdedec';
+                    break;
+                  case 2:
+                    iconColor = '#1abc9c';
+                    iconBgColor = '#e8f8f5';
+                    break;
+                  case 3:
+                    iconColor = '#dc7633';
+                    iconBgColor = '#fbeee6';
+                    break;
+                  default:
+                    iconColor = 'black';
+                }
+
+                const isSelected = selectedTypes.includes(BC_TypeItem.Id);
+                const cardBgColor = isSelected ? '#FF9800' : '#ffffff';
+
+                return (
+                  <View>
+                    <Card
+                      key={BC_TypeItem.Id}
+                      onPress={() => handleCardPress(BC_TypeItem.Id)}
+                      style={[
+                        styles.BC_Type_Card,
+                        {backgroundColor: cardBgColor},
+                      ]}>
+                      <View style={styles.CheckBoxContainer}></View>
+                      <MaIcons
+                        name={BC_TypeItem.Icon}
+                        size={15}
+                        color={iconColor}
+                        style={{
+                          backgroundColor: iconBgColor,
+                          width: 35,
+                          padding: 10,
+                          borderRadius: 100,
+                          marginTop: 15,
+                        }}
+                      />
+                      <Text style={styles.BC_Type_Text}>
+                        {BC_TypeItem.name}
+                      </Text>
+                    </Card>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+          {selectedTypes.length > 0 && (
+            <TouchableOpacity
+              style={styles.BC_Next_Btn}
+              onPress={() => navigation.navigate('FoodSession')}>
+              <Text style={styles.BC_Next_Btn_Text}>Next</Text>
             </TouchableOpacity>
-          ))}
+          )}
         </ScrollView>
       </View>
-      <LinearGradient
-        colors={['#52c234', '#061700']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }} style={styles.B_C_Next_Btn}>
-        <TouchableOpacity style={styles.Goto_Card_Btn}>
-          <Text style={styles.B_C_Next_Btn_Text}>Next</Text>
-        </TouchableOpacity>
-      </LinearGradient>
       <Footer />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  BookCateres_Container: {
-    backgroundColor: '#ffff',
+  BC_Container: {
+    backgroundColor: '#5CB35E',
+    width: '100%',
     height: '100%',
-    width: '100%'
   },
-  B_C_Header: {
+
+  //header
+  BC_Header_Container: {
+    padding: 15,
+  },
+  BC_Header_Text: {
+    fontSize: 25,
+    fontWeight: '900',
+    color: '#FFFFFF',
+    marginTop: '5%',
+  },
+  BC_Header_Icons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  //Main content
+  BC_Content: {
+    flex: 1,
+    backgroundColor: '#ffff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    padding: 20,
+    marginBottom: '10%',
+  },
+
+  //Calendar and Dates
+  BC_Date_Header: {
+    color: '#272727',
+    fontWeight: 'bold',
+  },
+  BC_Date_Inputs: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 20
   },
-  BackToEventPage_Icon: {
-    width: 20,
-    height: 20
+  BC_Date_Input: {
+    borderColor: '#fcf3cf',
+    borderWidth: 1.5,
+    borderRadius: 10,
+    width: '48%',
+    marginTop: '2%',
+    marginRight: '2%',
+    paddingLeft: 10,
   },
-  B_C_Calendar: {
-    height: '45%',
-    paddingBottom: 5,
-    borderBottomColor: '#cccc',
-    borderBottomWidth: 1
+
+  //Calendar
+  BC_Calendar_Container: {
+    width: '100%',
+    height: 350,
   },
-  B_C_Header_Text: {
-    color: '#272727'
-  },
-  B_C_Selected_Dates: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: "row",
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccc',
-    paddingBottom: 10,
-    gap: 10
-  },
-  B_C_From_Date: {
-    width: '50%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
-  B_C_To_Date: {
-    width: '50%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
-  B_C_Selected_Date_Text: {
-    fontSize: 20,
+
+  // types selection
+  BC_Type_Header: {
     color: '#272727',
-    fontWeight: '900',
+    fontWeight: 'bold',
+    marginBottom: '2%',
   },
-  B_C_Catergory_Card: {
-    backgroundColor: '#cccc',
-    width: 130,
-    height: 130,
-    borderRadius: 10,
+  BC_Type_Cards: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    margin: '3%',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    margin: 20
   },
-  B_C_Catergory_Card_Img: {
-    width: 80,
-    height: 80,
+  BC_Type_Card: {
+    margin: '1%',
+    padding: 10,
+    width: 100,
+    backgroundColor: '#ffff',
+    borderColor: '#cccc',
+    borderWidth: 0.5,
   },
-  B_C_Next_Btn_Text: {
-    color: '#ffff',
-    textAlign: 'center',
+  BC_Type_Text: {
+    color: '#272727',
     fontSize: 15,
-    fontWeight: 'bold'
   },
-  B_C_Next_Btn: {
-    padding: 20,
-    backgroundColor: '#cccc',
-    margin: 10,
+  CheckBoxContainer: {
+    position: 'absolute',
+    top: -10,
+    right: -5,
+    zIndex: 1,
+  },
+
+  //Next Btn
+  BC_Next_Btn: {
+    backgroundColor: '#fcf3cf',
+    padding: 10,
+    margin: '2%',
     borderRadius: 10,
-  }
-})
+  },
+  BC_Next_Btn_Text: {
+    fontSize: 15,
+    color: '#FF9800',
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+});
 
 export default BookCateres;
