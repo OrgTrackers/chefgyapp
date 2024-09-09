@@ -3,6 +3,9 @@ import React from 'react';
 
 import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
+//styles
+import { globalStyle } from '../assets/styles/GlobalStyles';
+
 const App_Footer=[
     {
       Id:1,
@@ -12,7 +15,7 @@ const App_Footer=[
     {
       Id:2,
       Icon:'account-multiple',
-      Lable:'Caters',
+      Lable:'Caterer',
     },
     {
       Id:3,
@@ -52,7 +55,7 @@ const Footer = () => {
       <ScrollView  horizontal showsHorizontalScrollIndicator={false} style={styles.Footer_Container}>
         {App_Footer.map((Footer_Item)=>(
             <TouchableOpacity key={Footer_Item.Id} style={styles.Footer_Content}>
-               <MCIcons name={Footer_Item.Icon} size={24} color='#FF9800'/>
+               <MCIcons name={Footer_Item.Icon} size={24} color={globalStyle.g_appMainContentIconColors.color}/>
                 <Text style={styles.Footer_Text}>{Footer_Item.Lable}</Text>
             </TouchableOpacity>
         ))}

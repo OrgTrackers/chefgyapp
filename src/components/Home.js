@@ -142,14 +142,9 @@ const Home = () => {
               onPress={() => handleNavigation(item.Lable)}>
               <Image source={item.Img} style={styles.Home_Categories_Card_Image} />
               <Text style={styles.Home_Categories_Card_Label}>{item.Lable}</Text>
-              <LinearGradient 
-                colors={['#52c234','#061700']}  
-                start={{ x: 0, y: 0 }} 
-                end={{ x: 1, y: 0 }} 
-                style={styles.Home_Categories_Card_Offers} 
-              >
+              <View style={styles.Home_Categories_Card_Offers}>
                 <Text style={styles.Home_Categories_Card_Offers_Text}>{item.Offers}</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
           ))}
         </View>
@@ -317,7 +312,8 @@ const styles = StyleSheet.create({
     padding:3,
     left:0,
     borderTopRightRadius:50,
-    borderBottomRightRadius:10
+    borderBottomRightRadius:10,
+    backgroundColor:'#389590'
   },
   Home_Categories_Card_Offers_Text:{
     fontSize:10,

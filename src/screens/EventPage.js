@@ -289,15 +289,11 @@ const EventPage = () => {
             </TouchableOpacity>
           </View>
         </View> */}
-        <LinearGradient     
-          colors={['#52c234','#061700']}  
-          start={{ x: 0, y: 0 }} 
-          end={{ x: 1, y: 0 }}   
-          style={styles.BookCater_Btn}>
+        <View style={styles.BookCater_Btn}>
           <TouchableOpacity onPress={()=> navigation.navigate("BookCateres")}>
             <Text style={styles.BookCater_Btn_Text}> BOOK A CATERER </Text> 
           </TouchableOpacity>
-        </LinearGradient>
+        </View>
         <View style={styles.H_F_Explore_Containter}>
             <View style={styles.H_F_E_Item}>
               <View style={styles.Horizontal_Line}/>
@@ -497,7 +493,7 @@ const styles = StyleSheet.create({
   //Book cater btn
   BookCater_Btn:{
     padding:20,
-    backgroundColor:'#cccc',
+    backgroundColor:'#389590',
     margin:15,
     borderRadius:10
   },
