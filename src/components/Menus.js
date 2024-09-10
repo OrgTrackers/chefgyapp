@@ -20,6 +20,7 @@ import FaIcons from 'react-native-vector-icons/FontAwesome';
 
 import {Card, Title, Switch} from 'react-native-paper';
 import {Image} from 'react-native';
+import {globalStyle} from '../assets/styles/GlobalStyles';
 
 const MenuFilters = [
   {
@@ -48,7 +49,7 @@ const BreakfastMenus = [
   {
     Id: 1,
     Title: 'Tiffins',
-    TagLine:'Cost Per Person',
+    TagLine: 'Cost Per Person',
     Items: [
       {
         Id: 1,
@@ -80,7 +81,7 @@ const BreakfastMenus = [
   {
     Id: 2,
     Title: 'Salads',
-    TagLine:'Cost Per Person',
+    TagLine: 'Cost Per Person',
     Items: [
       {
         Id: 1,
@@ -112,7 +113,7 @@ const BreakfastMenus = [
   {
     Id: 3,
     Title: 'Tea/Coffee',
-    TagLine:'Cost Per Person',
+    TagLine: 'Cost Per Person',
     Items: [
       {
         Id: 1,
@@ -144,7 +145,7 @@ const BreakfastMenus = [
   {
     Id: 4,
     Title: 'Snacks',
-    TagLine:'Cost Per Person',
+    TagLine: 'Cost Per Person',
     Items: [
       {
         Id: 1,
@@ -410,21 +411,19 @@ const Menus = () => {
         style={styles.M_Header_Img}
         source={require('../assets/images/homeCaters/Home_Img_1.png')}>
         <View style={styles.overlay} />
-        <View style={styles.M_Header_Container}>
-          <View style={styles.M_Header_Icons}>
+        <View style={[globalStyle.g_appPageHeaderContainer]}>
+          <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
             <TouchableOpacity onPress={handleBackBtn}>
-              <Ionicons name="chevron-back" size={24} color="#ffff" />
+              <Ionicons
+                name="chevron-back"
+                size={24}
+                color={globalStyle.g_appPageHeaderIconsColors.color}
+              />
             </TouchableOpacity>
             <Ionicons
               name="ellipsis-vertical"
               size={15}
-              color="#ffff"
-              style={{
-                // backgroundColor: '#7DC67F',
-                borderRadius: 100,
-                padding: 5,
-                width: 25,
-              }}
+              color={globalStyle.g_appPageHeaderIconsColors.color}
             />
           </View>
           <Text style={styles.M_Header_Text}>Saicharan Vadlamanu</Text>
@@ -445,12 +444,17 @@ const Menus = () => {
                   key={mIndex}
                   style={[
                     styles.Menu_Filter_Item,
-                    activeFilter === mItem.Name && {
-                      backgroundColor: '#399590',
-                    },
+                    activeFilter === mItem.Name &&
+                      globalStyle.g_appMainContentActiveTabsBg,
                   ]}
                   onPress={() => handleItemPress(mItem)}>
-                  <Text style={styles.Menu_Filter_Text}>{mItem.Name}</Text>
+                  <Text
+                    style={[
+                      styles.Menu_Filter_Text,
+                      globalStyle.g_appMainContentActiveTabsText,
+                    ]}>
+                    {mItem.Name}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -466,9 +470,13 @@ const Menus = () => {
                   <MaIcons
                     name={cateItem.Icons}
                     size={25}
-                    style={styles.selectCategories_Header_Icon}
+                    style={[globalStyle.g_appMainContentIconColors]}
                   />
-                  <Text style={styles.selectCategories_Header_Text}>
+                  <Text
+                    style={[
+                      globalStyle.g_appDefaultTextColor,
+                      styles.selectCategories_Header_Text,
+                    ]}>
                     {cateItem.Title}
                   </Text>
                 </View>
@@ -484,21 +492,27 @@ const Menus = () => {
                         style={[
                           styles.dateItem,
                           selectedDateId === dateItem.Id &&
-                            styles.selectedDateItem,
+                            globalStyle.g_appMainContentActiveBgColors,
                         ]}>
                         <Text
                           style={[
+                            globalStyle.g_appDefaultTextColor,
                             styles.dateText,
                             selectedDateId === dateItem.Id &&
-                              styles.selectedDateText,
+                              styles.selectedDateText, // Conditional style for selected date text
+                            selectedDateId === dateItem.Id &&
+                              globalStyle.g_appMainContentActiveColors, // Conditional global style
                           ]}>
                           {dateItem.Date}
                         </Text>
                         <Text
                           style={[
+                            globalStyle.g_appDefaultTextColor,
                             styles.dayText,
                             selectedDateId === dateItem.Id &&
-                              styles.selectedDayText,
+                              styles.selectedDayText, // Conditional style for selected day text
+                            selectedDateId === dateItem.Id &&
+                              globalStyle.g_appMainContentActiveColors, // Conditional global style
                           ]}>
                           {dateItem.Day}
                         </Text>
@@ -524,7 +538,7 @@ const Menus = () => {
                             alignItems: 'center',
                             gap: 15,
                           }}>
-                          <Text style={styles.Menu_Type_Header_Text}>
+                          <Text style={[globalStyle.g_appDefaultTextColor]}>
                             {mType_Item.Name}
                           </Text>
                           <View
@@ -533,8 +547,12 @@ const Menus = () => {
                               alignItems: 'center',
                               gap: 5,
                             }}>
-                            <FaIcons name="rupee" size={12} color="#399590" />
-                            <Text style={{color: '#399590', fontSize: 12}}>
+                            <FaIcons
+                              name="rupee"
+                              size={12}
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                            <Text style={[globalStyle.g_appDefaultTextColor]}>
                               {mType_Item.TotalCost}
                             </Text>
                           </View>
@@ -560,18 +578,65 @@ const Menus = () => {
                                 <Text style={styles.Menu_List_Header}>
                                   {mBItem.Title}
                                 </Text>
-                                <Text style={styles.Menu_List_Header_Tag}>{mBItem.TagLine}</Text>
+                                <Text style={styles.Menu_List_Header_Tag}>
+                                  {mBItem.TagLine}
+                                </Text>
                                 <ScrollView
                                   horizontal
                                   showsHorizontalScrollIndicator={false}>
                                   {mBItem.Items.map(item => (
-                                    <View key={item.Id}style={styles.Menu_List_Item}>
-                                      <Image source={item.ItemImage} style={{width: 50,height: 50,borderRadius: 10,}}/>
-                                      <Text style={{textAlign: 'center',fontWeight: 'bold', marginTop: '10%',}}>
+                                    <View
+                                      key={item.Id}
+                                      style={styles.Menu_List_Item}>
+                                      <Image
+                                        source={item.ItemImage}
+                                        style={{
+                                          width: 50,
+                                          height: 50,
+                                          borderRadius: 10,
+                                        }}
+                                      />
+                                      <Text
+                                        style={{
+                                          textAlign: 'center',
+                                          fontWeight: 'bold',
+                                          marginTop: '10%',
+                                        }}>
                                         {item.ItemName}
                                       </Text>
+                                      {mType_Item.Name === 'Add-Ons' && (
+                                        <View style={styles.Menu_List_Inputs}>
+                                          <AntIcons
+                                            name="minussquare"
+                                            size={20} // Adjust size to better suit the UI
+                                            color={
+                                              globalStyle.g_appDefaultTextColor
+                                                .color
+                                            }
+                                            onPress={handleDecrease}
+                                          />
+                                          <TextInput
+                                            style={styles.Menu_List_Input}
+                                            value={String(inputValue)}
+                                            keyboardType="numeric"
+                                            editable={false} // Make input non-editable
+                                            placeholderTextColor="#272727"
+                                          />
+                                          <AntIcons
+                                            name="plussquare"
+                                            size={20} // Adjust size to better suit the UI
+                                            color={
+                                              globalStyle.g_appDefaultTextColor
+                                                .color
+                                            }
+                                            onPress={handleIncrease}
+                                          />
+                                        </View>
+                                      )}
                                       <TouchableOpacity style={styles.Add_Btn}>
-                                        <Text style={styles.Add_Btn_Text}>Add</Text>
+                                        <Text style={styles.Add_Btn_Text}>
+                                          Add
+                                        </Text>
                                       </TouchableOpacity>
                                     </View>
                                   ))}
@@ -579,6 +644,9 @@ const Menus = () => {
                               </View>
                             </>
                           ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Add</Text>
+                          </TouchableOpacity>
                         </View>
                       )}
                     </Card>
@@ -612,20 +680,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject, // This makes the overlay fill the entire ImageBackground
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
   },
-  M_Header_Container: {
-    padding: 15,
-  },
   M_Header_Text: {
     fontSize: 25,
     fontWeight: '900',
     color: '#FFFFFF',
     marginTop: '10%',
     textAlign: 'center',
-  },
-  M_Header_Icons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
 
   // Filters
@@ -646,7 +706,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   Menu_Filter_Text: {
-    color: '#ffff',
     fontWeight: 'bold',
     fontSize: 15,
   },
@@ -678,13 +737,9 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: '2%',
   },
-  selectCategories_Header_Icon: {
-    color: '#FF8914',
-  },
   selectCategories_Header_Text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#292929',
   },
   selectCategories_Header_Tag: {
     fontSize: 12,
@@ -706,7 +761,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   dateText: {
-    color: '#399590',
+    // color: '#399590',
     fontSize: 10,
     fontWeight: 'bold',
     padding: 5,
@@ -714,17 +769,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   dayText: {
-    color: '#399590',
+    // color: '#399590',
     fontSize: 20,
     fontWeight: 'bold',
     padding: 5,
     textAlign: 'center',
   },
-  selectedDateItem: {
-    backgroundColor: '#399590', // Background color for selected date
-  },
   selectedDateText: {
-    color: 'white', // Text color for selected date
     borderBottomColor: '#ffff',
     borderBottomWidth: 1,
   },
@@ -751,9 +802,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  Menu_Type_Header_Text: {
-    color: '#399590',
-  },
 
   //Expanded Content
   M_List_Container: {
@@ -770,11 +818,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderRadius: 50,
     fontSize: 20,
-    marginTop:'10%'
+    marginTop: '10%',
   },
-  Menu_List_Header_Tag:{
-    fontSize:12,
-    fontWeight:'bold'
+  Menu_List_Header_Tag: {
+    fontSize: 12,
+    fontWeight: 'bold',
   },
   Menu_List_Item: {
     marginRight: 30,
@@ -782,15 +830,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
-  Add_Btn:{
-    backgroundColor:'#399590',
-    paddingLeft:10,
-    paddingRight:10
+
+  Add_Btn: {
+    backgroundColor: '#399590',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
-  Add_Btn_Text:{
-    color:'#ffff',
-    fontSize:10
-  }
+  Add_Btn_Text: {
+    color: '#ffff',
+    fontSize: 10,
+  },
+
+  Menu_List_Inputs: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    justifyContent: 'center',
+    marginTop: '10%',
+    marginBottom:'5%'
+  },
+  Menu_List_Input: {
+    borderRadius: 5,
+    borderColor: '#cccc',
+    borderWidth: 1,
+    width: 50,
+    height: 20, // Increased height to ensure text is visible
+    fontSize: 10, // Adjusted font size to match the height
+    textAlign: 'center', // Center the text horizontally
+    paddingVertical: 5, // Add some padding to center the text vertically
+    fontWeight: 'bold',
+    color: '#272727',
+  },
 });
 export default Menus;
