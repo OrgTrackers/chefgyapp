@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { color } from "react-native-elements/dist/helpers";
-import { Accordion } from "react-native-paper/lib/typescript/components/List/List";
+import { Fonts } from "./Fonts";
+
 
 export const globalStyle = StyleSheet.create (
     {
@@ -17,6 +17,7 @@ export const globalStyle = StyleSheet.create (
             fontWeight: '900',
             color: '#FFFFFF',
             marginTop: '5%',
+            fontFamily:Fonts.poppinsBlackItalic
         },
         g_appPageHeaderIconsContainer:{
             flexDirection: 'row',
@@ -41,22 +42,37 @@ export const globalStyle = StyleSheet.create (
             marginBottom: '10%',
         },
         g_appDefaultTextColor:{
-            color:'#d9d9d9'
+            color:'#389590',
+            // fontFamily:Fonts.poppinsBoldItalic
+        },
+        g_appMainContentHeaders:{
+            color: '#272727',
+            fontWeight: 'bold',
+            marginBottom: 10,
         },
         g_appMainContentIconColors:{
-            color:'#292929'
+            color:'#292929',
         },
         g_appMainContentColors:{
-            backgroundColor:'#389590',
+            // backgroundColor:'#389590',
             color:'#389590',
         },
         g_appMainContentActiveColors:{
-            color:'#f5f5f5'
+            color:'#f5f5f5',
+        },
+        g_appMainContentActiveBgColors:{
+            backgroundColor:'#389590',
         },
         g_appMainContentChexBoxSize:{
             fontSize:20,
             width:24,
             height:24
+        },
+        g_appMainContentInputs:{
+            borderColor: '#389590',
+            borderWidth: 1.5,
+            paddingLeft: 10,
+            borderRadius: 10,
         },
 
         //tabs

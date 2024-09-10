@@ -15,7 +15,7 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card, Modal, Portal, Button, Switch} from 'react-native-paper';
 
 //styles
-import { globalStyle } from '../assets/styles/GlobalStyles';
+import {globalStyle} from '../assets/styles/GlobalStyles';
 
 const Cater_Type = [
   {
@@ -179,33 +179,32 @@ const BookCateres = () => {
 
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
-      <View style={styles.BC_Header_Container}>
-        <View style={styles.BC_Header_Icons}>
+      <View style={[globalStyle.g_appPageHeaderContainer]}>
+        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
           <TouchableOpacity onPress={() => navigation.navigate('EventPage')}>
-            <Ionicons name="chevron-back" size={24} color="#ffff" />
+            <Ionicons
+              name="chevron-back"
+              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
+              color={globalStyle.g_appPageHeaderIconsColors.color}
+            />
           </TouchableOpacity>
           <Ionicons
             name="ellipsis-vertical"
-            size={15}
-            color="#ffff"
-            style={{
-              borderRadius: 100,
-              padding: 5,
-              width: 25,
-            }}
+            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
+            color={globalStyle.g_appPageHeaderIconsColors.color}
           />
         </View>
-        <Text style={styles.BC_Header_Text}>Book Cateres</Text>
+        <Text style={[globalStyle.g_appPageHeaderText]}>Book Caterer</Text>
       </View>
-      <View style={styles.BC_Content}>
+      <View style={globalStyle.g_appMainContent}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.BC_Date_Calendar_Container}>
             <View style={styles.BC_Dates_Content}>
-              <Text style={styles.BC_Content_Header}>Pick Dates</Text>
+              <Text style={[globalStyle.g_appMainContentHeaders]}>Pick Dates</Text>
               <View style={styles.BC_Date_Inputs}>
                 <TouchableOpacity
                   onPress={() => openModal('from')}
-                  style={styles.BC_Date_Input}>
+                  style={[styles.BC_Date_Input,globalStyle.g_appMainContentInputs]}>
                   <TextInput
                     keyboardType="decimal-pad"
                     placeholderTextColor="#d9d9d9"
@@ -216,7 +215,7 @@ const BookCateres = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => openModal('to')}
-                  style={styles.BC_Date_Input}>
+                  style={[styles.BC_Date_Input,globalStyle.g_appMainContentInputs]}>
                   <TextInput
                     keyboardType="decimal-pad"
                     placeholderTextColor="#d9d9d9"
@@ -229,7 +228,7 @@ const BookCateres = () => {
             </View>
           </View>
           <View style={styles.BC_Types_Container}>
-            <Text style={styles.BC_Content_Header}>Choose Types</Text>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>Choose Types</Text>
             <View style={styles.BC_Type_Cards_Container}>
               {Cater_Type.map(ItemType => (
                 <Card
@@ -242,18 +241,12 @@ const BookCateres = () => {
                   <MaIcons
                     name={ItemType.Icon}
                     size={20}
-                    color={
-                      selectedTypeId.includes(ItemType.Id)
-                        ? '#ffffff'
-                        : '#FF8915'
-                    }
+                    color={selectedTypeId.includes(ItemType.Id)? '#ffffff': globalStyle.g_appMainContentIconColors.color}
                   />
                   <Text
                     style={[
-                      styles.BC_Type_Name,
-                      selectedTypeId.includes(ItemType.Id) &&
-                        styles.selectedText, // Change text color if selected
-                    ]}>
+                      styles.BC_Type_Name, globalStyle.g_appDefaultTextColor,
+                      selectedTypeId.includes(ItemType.Id) && styles.selectedText]}>
                     {ItemType.name}
                   </Text>
                 </Card>
@@ -261,18 +254,18 @@ const BookCateres = () => {
             </View>
           </View>
           <View style={styles.BC_Cater_Allowcation_Container}>
-            <Text style={styles.BC_Content_Header}>Cater Allocation</Text>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>Cater Allocation</Text>
             {caterAllowcation.map(CA_Item => (
               <View key={CA_Item.Id}>
                 <Card style={styles.BC_Cater_Allowcation_Card}>
                   <View style={styles.BC_Cater_Allowcation_Card_Content}>
-                    <Text style={styles.BC_CA_Allocation_Text}>
+                    <Text style={[styles.BC_CA_Allocation_Text,globalStyle.g_appDefaultTextColor]}>
                       {CA_Item.Name}
                     </Text>
                     <Switch
                       value={isSwitchOn === CA_Item.Id} // Check if the switch is active
                       onValueChange={() => onToggleSwitch(CA_Item.Id)}
-                      color="#389590"
+                      color={globalStyle.g_appMainContentColors.color}
                     />
                   </View>
                 </Card>
@@ -282,7 +275,7 @@ const BookCateres = () => {
           <View style={styles.BC_Filter_Container}>
             {Filters.map(fItem => (
               <View key={fItem.Id} style={{marginBottom: 20}}>
-                <Text style={styles.Filter_Type_Header}>{fItem.Title}</Text>
+                <Text style={[globalStyle.g_appMainContentHeaders]}>{fItem.Title}</Text>
                 <View style={styles.BC_Filter_List}>
                   {fItem.FilterBy.map(filter => {
                     const isSelected = selectedFilters[fItem.Id] === filter.Id;
@@ -291,15 +284,12 @@ const BookCateres = () => {
                         key={filter.Id}
                         style={[
                           styles.BC_Filter_List_Content,
-                          isSelected && styles.selectedFilter, // Apply selected style if it's selected
+                          isSelected && globalStyle.g_appMainContentActiveBgColors, // Apply selected style if it's selected
                         ]}
                         onPress={() => handleFilterSelect(filter.Id, fItem.Id)} // Handle filter selection
                       >
                         <Text
-                          style={[
-                            styles.BC_Filter_List_Name,
-                            isSelected && styles.selectedFilterText, // Apply text color for selected filter
-                          ]}>
+                          style={[globalStyle.g_appMainContentColors,styles.BC_Filter_List_Name,isSelected && globalStyle.g_appMainContentActiveColors]}>
                           {filter.Name || filter.Rating || filter.Distance}
                         </Text>
                       </TouchableOpacity>
@@ -309,9 +299,9 @@ const BookCateres = () => {
               </View>
             ))}
             <TouchableOpacity
-              style={styles.BC_Search_Btn}
+              style={[globalStyle.g_Button]}
               onPress={() => navigation.navigate('FoodSession')}>
-              <Text style={styles.BC_Search_Btn_Text}>Next</Text>
+              <Text style={[globalStyle.g_ButtonText]}>Next</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -347,31 +337,6 @@ const BookCateres = () => {
 };
 
 const styles = StyleSheet.create({
-  //header
-  BC_Header_Container: {
-    padding: 15,
-  },
-  BC_Header_Text: {
-    fontSize: 25,
-    fontWeight: '900',
-    color: '#FFFFFF',
-    marginTop: '5%',
-  },
-  BC_Header_Icons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  //Main content
-  BC_Content: {
-    flex: 1,
-    backgroundColor: '#ffff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    padding: 20,
-    marginBottom: '10%',
-  },
 
   //Calendar and Dates
   BC_Content_Header: {
@@ -386,13 +351,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   BC_Date_Input: {
-    borderColor: '#fcf3cf',
-    borderWidth: 1.5,
-    borderRadius: 10,
     width: '48%',
     marginTop: '2%',
     marginRight: '2%',
-    paddingLeft: 10,
   },
 
   // Modal styles
@@ -424,7 +385,6 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#389590',
   },
   selectedCard: {
     backgroundColor: '#389590', // Blue background when selected
@@ -451,7 +411,6 @@ const styles = StyleSheet.create({
   BC_CA_Allocation_Text: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: '#389590',
   },
 
   //Filter
@@ -475,29 +434,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     fontSize: 10,
-    color: '#389590',
     fontWeight: 'bold',
-  },
-  selectedFilter: {
-    backgroundColor: '#389590',
-  },
-  selectedFilterText: {
-    color: 'white', // Change text color for selected filter
   },
 
-  //Next Btn
-  BC_Search_Btn: {
-    marginTop: 20,
-    borderColor: '#cccc',
-    borderWidth: 1,
-    margin: '1%',
-    padding: 10,
-  },
-  BC_Search_Btn_Text: {
-    textAlign: 'center',
-    color: '#389590',
-    fontWeight: 'bold',
-  },
 });
 
 export default BookCateres;

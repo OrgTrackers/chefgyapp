@@ -23,6 +23,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 //Global Styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
+import { Fonts } from '../assets/styles/Fonts';
 
 const FsDates = [
   {
@@ -330,7 +331,7 @@ const FoodSession = () => {
             color={globalStyle.g_appPageHeaderIconsColors.color}
           />
         </View>
-        {showMainContent && (
+        {showMainContent && ( 
           <Text style={[globalStyle.g_appPageHeaderText]}>Food Session</Text>
         )}
       </View>
@@ -555,3 +556,4 @@ const styles = StyleSheet.create({
 });
 
 export default FoodSession;
+  
