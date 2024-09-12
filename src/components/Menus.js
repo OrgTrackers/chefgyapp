@@ -55,26 +55,31 @@ const BreakfastMenus = [
         Id: 1,
         ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
         ItemName: 'Idly',
+        Price: '200 /-',
       },
       {
         Id: 2,
         ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
         ItemName: 'Dosa',
+        Price: '150 /-',
       },
       {
         Id: 3,
         ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
         ItemName: 'Masala Dosa',
+        Price: '180 /-',
       },
       {
         Id: 4,
         ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
         ItemName: 'Upma Dosa',
+        Price: '170 /-',
       },
       {
         Id: 5,
         ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
         ItemName: 'Uthapa',
+        Price: '160 /-',
       },
     ],
   },
@@ -87,26 +92,31 @@ const BreakfastMenus = [
         Id: 1,
         ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
         ItemName: 'Salads',
+        Price: '120 /-',
       },
       {
         Id: 2,
         ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
         ItemName: 'Salads',
+        Price: '130 /-',
       },
       {
         Id: 3,
         ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
         ItemName: 'Salads',
+        Price: '140 /-',
       },
       {
         Id: 4,
         ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
         ItemName: 'Salads',
+        Price: '150 /-',
       },
       {
         Id: 5,
         ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
         ItemName: 'Salads',
+        Price: '160 /-',
       },
     ],
   },
@@ -119,26 +129,31 @@ const BreakfastMenus = [
         Id: 1,
         ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
         ItemName: 'Tea',
+        Price: '50 /-',
       },
       {
         Id: 2,
         ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
         ItemName: 'Cold Coffee',
+        Price: '100 /-',
       },
       {
         Id: 3,
         ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
-        ItemName: 'Malasa Tea',
+        ItemName: 'Masala Tea',
+        Price: '60 /-',
       },
       {
         Id: 4,
         ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
         ItemName: 'Filter Coffee',
+        Price: '80 /-',
       },
       {
         Id: 5,
         ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
         ItemName: 'Cake',
+        Price: '150 /-',
       },
     ],
   },
@@ -151,30 +166,36 @@ const BreakfastMenus = [
         Id: 1,
         ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
         ItemName: 'Cakes',
+        Price: '120 /-',
       },
       {
         Id: 2,
         ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
         ItemName: 'Cup Cakes',
+        Price: '80 /-',
       },
       {
         Id: 3,
         ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
         ItemName: 'Samosa',
+        Price: '30 /-',
       },
       {
         Id: 4,
         ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
-        ItemName: 'Mirchi Bjji',
+        ItemName: 'Mirchi Baji',
+        Price: '40 /-',
       },
       {
         Id: 5,
         ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
         ItemName: 'Pakoda',
+        Price: '50 /-',
       },
     ],
   },
 ];
+
 
 const MenuTypes = [
   {
@@ -588,8 +609,7 @@ const Menus = () => {
                                     <View
                                       key={item.Id}
                                       style={styles.Menu_List_Item}>
-                                      <Image
-                                        source={item.ItemImage}
+                                      <Image source={item.ItemImage}
                                         style={{
                                           width: 50,
                                           height: 50,
@@ -604,6 +624,7 @@ const Menus = () => {
                                         }}>
                                         {item.ItemName}
                                       </Text>
+                                      <Text style={styles.Item_Price}>Price:{item.Price}</Text>
                                       {mType_Item.Name === 'Add-Ons' && (
                                         <View style={styles.Menu_List_Inputs}>
                                           <AntIcons
@@ -644,8 +665,8 @@ const Menus = () => {
                               </View>
                             </>
                           ))}
-                          <TouchableOpacity style={[globalStyle.g_Button]}>
-                            <Text style={[globalStyle.g_ButtonText]}>Add</Text>
+                          <TouchableOpacity style={[globalStyle.g_Button]} onPress={()=>navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -827,10 +848,16 @@ const styles = StyleSheet.create({
   Menu_List_Item: {
     marginRight: 30,
     marginTop: '3%',
+    flexDirection:'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  Item_Price:{
+    fontSize:10,
+    textAlign:'center',
+    width:'100%',
+    fontWeight:'900'
+  },
   Add_Btn: {
     backgroundColor: '#399590',
     paddingLeft: 10,

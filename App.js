@@ -18,7 +18,7 @@ import appIntroSlider from './src/components/appIntroSlider';
 
 import FoodSession from './src/components/FoodSessions';
 import Menus from './src/components/Menus';
-
+import OrderSummary from './src/components/OrderSummary';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -43,6 +43,8 @@ const App = () => {
 
           <Stack.Screen name="FoodSession" component={FoodSession} />
           <Stack.Screen name="Menus" component={Menus} />
+          <Stack.Screen name="OrderSummary" component={OrderSummary} />
+
 
           <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>

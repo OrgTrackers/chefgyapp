@@ -50,6 +50,9 @@ export const globalStyle = StyleSheet.create (
             fontWeight: 'bold',
             marginBottom: 10,
         },
+        g_g_appMainContentHeadersIcon:{
+            fontSize:24
+        },
         g_appMainContentIconColors:{
             color:'#292929',
         },

@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
+  Image,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Footer from './Footer';
@@ -23,7 +25,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 //Global Styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
-import { Fonts } from '../assets/styles/Fonts';
+import {Fonts} from '../assets/styles/Fonts';
 
 const FsDates = [
   {
@@ -277,13 +279,35 @@ const FoodSession = () => {
   const navigation = useNavigation();
 
   const [showMainContent, setShowMainContent] = useState(true);
-  const [sliderValue, setSliderValue] = useState([0, 100]);
+  const [sliderValue, setSliderValue] = useState([0, 1000]);
 
   const [activeDate, setActiveDate] = useState('24 Aug 2024');
   const [expanded, setExpanded] = React.useState(1);
 
   const [checked, setChecked] = React.useState([]);
   const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+
+  const [multiSliderValue, setMultiSliderValue] = useState([20, 80]);
+  const [minValue, setMinValue] = useState(multiSliderValue[0].toString());
+  const [maxValue, setMaxValue] = useState(multiSliderValue[1].toString());
+
+  const multiSliderValuesChange = values => {
+    setMultiSliderValue(values);
+    setMinValue(values[0].toString());
+    setMaxValue(values[1].toString());
+  };
+
+  const handleMinValueChange = value => {
+    const min = parseInt(value) || 0;
+    setMinValue(value);
+    setMultiSliderValue([min, multiSliderValue[1]]);
+  };
+
+  const handleMaxValueChange = value => {
+    const max = parseInt(value) || 100;
+    setMaxValue(value);
+    setMultiSliderValue([multiSliderValue[0], max]);
+  };
 
   const handleSliderChange = values => {
     setSliderValue(values);
@@ -331,7 +355,7 @@ const FoodSession = () => {
             color={globalStyle.g_appPageHeaderIconsColors.color}
           />
         </View>
-        {showMainContent && ( 
+        {showMainContent && (
           <Text style={[globalStyle.g_appPageHeaderText]}>Food Session</Text>
         )}
       </View>
@@ -410,29 +434,67 @@ const FoodSession = () => {
                           />
                         </View>
                         <Text style={styles.Fsa_ValueText}>
-                          Number Of People :  {sliderValue[0]} - {sliderValue[1]}
+                          Price Range : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
+                        <View style={styles.inputWrapper}>
+                          <TextInput
+                            style={styles.input}
+                            keyboardType="numeric"
+                            value={minValue}
+                            onChangeText={handleMinValueChange}
+                          />
+                          <TextInput
+                            style={styles.input}
+                            keyboardType="numeric"
+                            value={maxValue}
+                            onChangeText={handleMaxValueChange}
+                          />
+                        </View>
                         <View style={styles.Fsa_Quantity}>
-                          {/* <Slider
-                            style={{width: '100%', height: 40}}
-                            minimumValue={0}
-                            maximumValue={1000}
-                            minimumTrackTintColor="#5CB35E"
-                            maximumTrackTintColor="#FF9800"
-                            value={sliderValue}
-                            onValueChange={value => setSliderValue(value)}
-                            step={1}
-                          /> */}
                           <MultiSlider
-                            values={sliderValue}
+                            markerStyle={{
+                              height: 60,
+                              width: 60,
+                              borderRadius: 30,
+                              backgroundColor: 'transparent', // Transparent background to use images as markers
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                            customMarker={() => (
+                              <Image
+                                source={require('../assets/Updated/images/OrderSummary.jpg')}
+                                style={styles.attendeeImage}
+                              />
+                            )}
+                            pressedMarkerStyle={{
+                              ...Platform.select({
+                                android: {
+                                  height: 60,
+                                  width: 60,
+                                  borderRadius: 30,
+                                  backgroundColor: 'transparent',
+                                },
+                              }),
+                            }}
+                            selectedStyle={{
+                              backgroundColor: '#1792E8',
+                            }}
+                            trackStyle={{
+                              backgroundColor: '#CECECE',
+                            }}
+                            touchDimensions={{
+                              height: 60,
+                              width: 60,
+                              borderRadius: 30,
+                              slipDisplacement: 60,
+                            }}
+                            values={[multiSliderValue[0], multiSliderValue[1]]}
                             sliderLength={280}
-                            onValuesChange={handleSliderChange}
-                            min={10}
-                            max={200}
-                            step={1}
-                            selectedStyle={styles.selectedTrack}
-                            unselectedStyle={styles.unselectedTrack}
-                            markerStyle={styles.marker}
+                            onValuesChange={multiSliderValuesChange}
+                            min={0}
+                            max={100}
+                            allowOverlap={false}
+                            minMarkerOverlapDistance={10}
                           />
                         </View>
                         {FsaItem.Items.map(item => (
@@ -553,7 +615,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   },
+
+  attendeeImage: {
+    height: 30,
+    width: 30,
+    borderRadius: 25, // Make the image round
+    borderWidth: 2,
+    borderColor: '#1792E8',
+  },
 });
 
 export default FoodSession;
-  
