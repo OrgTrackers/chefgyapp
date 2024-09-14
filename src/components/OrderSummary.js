@@ -15,9 +15,10 @@ import Footer from './Footer';
 //Icons
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FaIcons from 'react-native-vector-icons/FontAwesome6';
 
 //Paper
-import {Card,Modal, Portal,} from 'react-native-paper';
+import {Card, Modal, Portal} from 'react-native-paper';
 
 const orderSummaryData = [
   {
@@ -279,7 +280,6 @@ export default function OrderSummary() {
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id); // Toggle accordion
@@ -380,7 +380,9 @@ export default function OrderSummary() {
                           <View style={styles.OS_Menu_Range_Container}>
                             {OS_MTypeItem.Menus.map(M_RangeItem => (
                               <View key={M_RangeItem.Id}>
-                                <Card style={styles.OS_Menu_Rnage_Card} onPress={showModal}>
+                                <Card
+                                  style={styles.OS_Menu_Rnage_Card}
+                                  onPress={showModal}>
                                   <Text
                                     style={[
                                       styles.M_Range_Type,
@@ -404,11 +406,28 @@ export default function OrderSummary() {
         </ScrollView>
       </View>
       <Portal>
-        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-          <Text>Hii</Text>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.modalContainer}>
+          <Text style={[styles.modal_Header,globalStyle.g_appMainContentHeaders]}>Royal Menu</Text>
+          <View style={styles.modal_Header_Details}>
+            <View style={styles.modal_Details}>
+              <MaIcons name='account-supervisor' size={20} color={globalStyle.g_appDefaultTextColor.color}/>
+              <Text>2000</Text>
+            </View>
+            <View style={styles.modal_Details}>
+              <MaIcons name='food-apple' size={20} color={globalStyle.g_appDefaultTextColor.color}/>
+              <Text>20</Text>
+            </View>
+            <View style={styles.modal_Details}>
+              <FaIcons name='indian-rupee-sign' size={15} color={globalStyle.g_appDefaultTextColor.color}/>
+              <Text>30,000 /-</Text>
+            </View>
+          </View>
         </Modal>
       </Portal>
-      <Footer/>
+      <Footer />
     </View>
   );
 }
@@ -519,4 +538,26 @@ const styles = StyleSheet.create({
   M_Range_Type: {
     fontSize: 12,
   },
+
+  // Modal styles
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    margin: 20,
+    borderRadius: 10,
+    height: 400,
+  },
+  modal_Header:{
+    fontSize:20
+  },
+  modal_Header_Details:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:20
+  },
+  modal_Details:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:5
+  }
 });
