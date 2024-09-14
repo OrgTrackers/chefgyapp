@@ -196,7 +196,6 @@ const BreakfastMenus = [
   },
 ];
 
-
 const MenuTypes = [
   {
     Id: 1,
@@ -609,7 +608,8 @@ const Menus = () => {
                                     <View
                                       key={item.Id}
                                       style={styles.Menu_List_Item}>
-                                      <Image source={item.ItemImage}
+                                      <Image
+                                        source={item.ItemImage}
                                         style={{
                                           width: 50,
                                           height: 50,
@@ -624,7 +624,9 @@ const Menus = () => {
                                         }}>
                                         {item.ItemName}
                                       </Text>
-                                      <Text style={styles.Item_Price}>Price:{item.Price}</Text>
+                                      <Text style={styles.Item_Price}>
+                                        Price:{item.Price}
+                                      </Text>
                                       {mType_Item.Name === 'Add-Ons' && (
                                         <View style={styles.Menu_List_Inputs}>
                                           <AntIcons
@@ -665,8 +667,12 @@ const Menus = () => {
                               </View>
                             </>
                           ))}
-                          <TouchableOpacity style={[globalStyle.g_Button]} onPress={()=>navigation.navigate('OrderSummary')}>
-                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          <TouchableOpacity
+                            style={[globalStyle.g_Button]}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>
+                              View Cart (1)
+                            </Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -848,15 +854,15 @@ const styles = StyleSheet.create({
   Menu_List_Item: {
     marginRight: 30,
     marginTop: '3%',
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  Item_Price:{
-    fontSize:10,
-    textAlign:'center',
-    width:'100%',
-    fontWeight:'900'
+  Item_Price: {
+    fontSize: 10,
+    textAlign: 'center',
+    width: '100%',
+    fontWeight: '900',
   },
   Add_Btn: {
     backgroundColor: '#399590',
@@ -875,7 +881,7 @@ const styles = StyleSheet.create({
     gap: 10,
     justifyContent: 'center',
     marginTop: '10%',
-    marginBottom:'5%'
+    marginBottom: '5%',
   },
   Menu_List_Input: {
     borderRadius: 5,
