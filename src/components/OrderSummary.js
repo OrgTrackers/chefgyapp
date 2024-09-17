@@ -18,7 +18,7 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FaIcons from 'react-native-vector-icons/FontAwesome6';
 
 //Paper
-import {Card, Modal, Portal} from 'react-native-paper';
+import {Button, Card, Modal, Portal} from 'react-native-paper';
 
 const orderSummaryData = [
   {
@@ -271,6 +271,23 @@ const orderSummaryData = [
     ],
   },
 ];
+const DishItems = [
+  {Id: 1, DishName: 'Masala Dosa'},
+  {Id: 2, DishName: 'Paneer Tikka'},
+  {Id: 3, DishName: 'Chicken Biryani'},
+  {Id: 4, DishName: 'Palak Paneer'},
+  {Id: 5, DishName: 'Butter Chicken'},
+  {Id: 6, DishName: 'Chole Bhature'},
+  {Id: 7, DishName: 'Aloo Paratha'},
+  {Id: 8, DishName: 'Rogan Josh'},
+  {Id: 9, DishName: 'Mutton Curry'},
+  {Id: 10, DishName: 'Pav Bhaji'},
+  {Id: 11, DishName: 'Fish Curry'},
+  {Id: 12, DishName: 'Vada Pav'},
+  {Id: 13, DishName: 'Dhokla'},
+  {Id: 14, DishName: 'Samosa'},
+  {Id: 15, DishName: 'Bhel Puri'},
+];
 
 export default function OrderSummary() {
   const navigation = useNavigation();
@@ -410,20 +427,68 @@ export default function OrderSummary() {
           visible={visible}
           onDismiss={hideModal}
           contentContainerStyle={styles.modalContainer}>
-          <Text style={[styles.modal_Header,globalStyle.g_appMainContentHeaders]}>Royal Menu</Text>
+          <View style={styles.Modal_Header_Container}>
+            <Text
+              style={[
+                styles.modal_Header,
+                globalStyle.g_appMainContentHeaders,
+              ]}>
+              Royal Menu
+            </Text>
+            <Ionicons
+              onPress={hideModal}
+              name="close"
+              size={24}
+              color={globalStyle.g_appMainContentIconColors.color}
+            />
+          </View>
           <View style={styles.modal_Header_Details}>
             <View style={styles.modal_Details}>
-              <MaIcons name='account-supervisor' size={20} color={globalStyle.g_appDefaultTextColor.color}/>
+              <MaIcons
+                name="account-supervisor"
+                size={20}
+                color={globalStyle.g_appDefaultTextColor.color}
+              />
               <Text>2000</Text>
             </View>
             <View style={styles.modal_Details}>
-              <MaIcons name='food-apple' size={20} color={globalStyle.g_appDefaultTextColor.color}/>
+              <MaIcons
+                name="food-apple"
+                size={20}
+                color={globalStyle.g_appDefaultTextColor.color}
+              />
               <Text>20</Text>
             </View>
             <View style={styles.modal_Details}>
-              <FaIcons name='indian-rupee-sign' size={15} color={globalStyle.g_appDefaultTextColor.color}/>
+              <FaIcons
+                name="indian-rupee-sign"
+                size={15}
+                color={globalStyle.g_appDefaultTextColor.color}
+              />
               <Text>30,000 /-</Text>
             </View>
+          </View>
+          <View style={styles.DishItem_Container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {DishItems.map(DItem => (
+                <View key={DItem.Id}>
+                  <View style={styles.DishItem_List}>
+                    <Text
+                      style={[
+                        globalStyle.g_appDefaultTextColor,
+                        styles.DishName_Text,
+                      ]}>
+                      {DItem.Id}. {DItem.DishName}
+                    </Text>
+                    <MaIcons
+                      name="pencil-box"
+                      size={20}
+                      color={globalStyle.g_appMainContentIconColors}
+                    />
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
           </View>
         </Modal>
       </Portal>
@@ -545,19 +610,38 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 20,
     borderRadius: 10,
-    height: 400,
+    height: 500,
+    justifyContent: 'flex-start',
   },
-  modal_Header:{
-    fontSize:20
+  Modal_Header_Container: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
   },
-  modal_Header_Details:{
+  modal_Header: {
+    fontSize: 20,
+  },
+  modal_Header_Details: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+  },
+  modal_Details: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  DishItem_Container: {
+    marginTop: 20,
+    marginBottom: 50,
+  },
+  DishName_Text: {
+    paddingBottom: 10,
+    fontWeight: 'bold',
+  },
+  DishItem_List:{
     flexDirection:'row',
-    alignItems:'center',
-    gap:20
-  },
-  modal_Details:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5
+    justifyContent:'space-between',
+    alignItems:'baseline'
   }
 });

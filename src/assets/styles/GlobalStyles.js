@@ -66,6 +66,9 @@ export const globalStyle = StyleSheet.create (
         g_appMainContentActiveBgColors:{
             backgroundColor:'#389590',
         },
+        g_appMainContentActiveIconText:{
+            color:'#389590'
+        },
         g_appMainContentChexBoxSize:{
             fontSize:20,
             width:24,

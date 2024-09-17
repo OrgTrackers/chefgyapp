@@ -21,25 +21,25 @@ const {width} = Dimensions.get('window');
 const App_Cate = [
   {
     Id: 1,
-    Img: require('../assets/Updated/images/H1.jpg'),
+    Img: require('../assets/Updated/images/H1.png'),
     Lable: 'Caters',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 2,
-    Img: require('../assets/Updated/images/H2.jpg'),
+    Img: require('../assets/Updated/images/H2.png'),
     Lable: 'Chef',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 3,
-    Img: require('../assets/Updated/images/H3.jpg'),
+    Img: require('../assets/Updated/images/H3.png'),
     Lable: 'Wish Dish',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 4,
-    Img: require('../assets/Updated/images/H4.jpg'),
+    Img: require('../assets/Updated/images/H4.png'),
     Lable: 'Food On Wheels',
     Offers: 'UPTO 20% OFF',
   },
@@ -52,10 +52,10 @@ const Home = () => {
   const navigation = useNavigation();
 
   const images = [
-    require('../assets/Updated/images/H1.jpg'),
-    require('../assets/Updated/images/H2.jpg'),
-    require('../assets/Updated/images/H3.jpg'),
-    require('../assets/Updated/images/H4.jpg'),
+    require('../assets/Updated/images/H1.png'),
+    require('../assets/Updated/images/H2.png'),
+    require('../assets/Updated/images/H3.png'),
+    require('../assets/Updated/images/H4.png'),
   ];
 
   useEffect(() => {
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   activeIndicator: {
-    backgroundColor: '#FFF0C8',
+    backgroundColor: '#389590',
   },
   Home_Carousel: {
     marginTop: 20,
@@ -294,8 +294,8 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   Home_Categories_Card: {
-    height: 200,
-    width: '45%', // Fit two cards per row
+    height: 150,
+    width: 150, // Fit two cards per row
     backgroundColor: '#FFFF',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -305,11 +305,13 @@ const styles = StyleSheet.create({
     borderRadius: 20, 
     margin: 5, 
     marginBottom: 20,
-    overflow: 'hidden', 
+    overflow: 'hidden',
+    alignItems:'center' ,
+    justifyContent:'center'
   },
   Home_Select_Images: {
-    width: '100%',
-    height: '100%',
+    width: 150,
+    height: 150,
     justifyContent: 'flex-end', 
   },
   Home_ImageBackground: {

@@ -437,14 +437,16 @@ const FoodSession = () => {
                           Price Range : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
+                          <Text>Min :  </Text>
                           <TextInput
-                            style={styles.input}
+                            style={[styles.Rangeinput,globalStyle.g_appMainContentInputs]}
                             keyboardType="numeric"
                             value={minValue}
                             onChangeText={handleMinValueChange}
                           />
+                          <Text>Max :   </Text>
                           <TextInput
-                            style={styles.input}
+                            style={[styles.Rangeinput,globalStyle.g_appMainContentInputs]}
                             keyboardType="numeric"
                             value={maxValue}
                             onChangeText={handleMaxValueChange}
@@ -623,6 +625,18 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#1792E8',
   },
+  inputWrapper:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  Rangeinput:{
+    width: '30%',
+    marginTop: '2%',
+    marginRight: '2%',
+    padding:0
+  }
 });
 
 export default FoodSession;
