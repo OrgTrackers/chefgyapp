@@ -61,50 +61,50 @@ const FsDates = [
 const FsAccordions = [
   {
     Id: 1,
-    name: 'Breakfast',
+    name: '',
     Items: [
-      {Id: 1, BType: 'Pancakes'},
-      {Id: 2, BType: 'Omelette'},
-      {Id: 3, BType: 'French Toast'},
-      {Id: 4, BType: 'Waffles'},
-      {Id: 5, BType: 'Cereal'},
-      {Id: 6, BType: 'Bagel'},
-      {Id: 7, BType: 'Smoothie'},
-      {Id: 8, BType: 'Muffin'},
-      {Id: 9, BType: 'Yogurt'},
-      {Id: 10, BType: 'Fruit Salad'},
+      { Id: 1, BType: 'South Indian ' }, // Dosa, Idli, etc.
+      { Id: 2, BType: 'Continental ' }, // Croissant, Eggs Benedict, etc.
+      { Id: 3, BType: 'American ' }, // Pancakes, Bacon, etc.
+      { Id: 4, BType: 'Mediterranean ' }, // Hummus, Pita, etc.
+      { Id: 5, BType: 'Japanese ' }, // Miso soup, Rice, etc.
+      { Id: 6, BType: 'English ' }, // Full English, Beans, etc.
+      { Id: 7, BType: 'Mexican ' }, // Chilaquiles, Huevos Rancheros, etc.
+      { Id: 8, BType: 'French ' }, // Baguette, Pastries, etc.
+      { Id: 9, BType: 'Vegan ' }, // Smoothie Bowls, Avocado Toast, etc.
+      { Id: 10, BType: 'Brunch Specialties' }, // Eggs Benedict, Frittatas, etc.
     ],
   },
   {
     Id: 2,
-    name: 'Lunch',
+    name: '',
     Items: [
-      {Id: 1, BType: 'Pancakes'},
-      {Id: 2, BType: 'Omelette'},
-      {Id: 3, BType: 'French Toast'},
-      {Id: 4, BType: 'Waffles'},
-      {Id: 5, BType: 'Cereal'},
-      {Id: 6, BType: 'Bagel'},
-      {Id: 7, BType: 'Smoothie'},
-      {Id: 8, BType: 'Muffin'},
-      {Id: 9, BType: 'Yogurt'},
-      {Id: 10, BType: 'Fruit Salad'},
+      { Id: 1, BType: 'Mediterranean ' }, // Falafel, Shawarma, etc.
+      { Id: 2, BType: 'Indian ' }, // Thali, Curry, etc.
+      { Id: 3, BType: 'Italian ' }, // Pasta, Pizza, etc.
+      { Id: 4, BType: 'Asian ' }, // Sushi, Ramen, etc.
+      { Id: 5, BType: 'Mexican ' }, // Tacos, Burritos, etc.
+      { Id: 6, BType: 'American ' }, // Burgers, Sandwiches, etc.
+      { Id: 7, BType: 'Thai ' }, // Pad Thai, Green Curry, etc.
+      { Id: 8, BType: 'French ' }, // Quiche, Ratatouille, etc.
+      { Id: 9, BType: 'Korean ' }, // Bibimbap, Kimchi, etc.
+      { Id: 10, BType: 'Healthy Bowl ' }, // Grain Bowls, Salads, etc.
     ],
   },
   {
     Id: 3,
-    name: 'Dinner',
+    name: '',
     Items: [
-      {Id: 1, BType: 'Pancakes'},
-      {Id: 2, BType: 'Omelette'},
-      {Id: 3, BType: 'French Toast'},
-      {Id: 4, BType: 'Waffles'},
-      {Id: 5, BType: 'Cereal'},
-      {Id: 6, BType: 'Bagel'},
-      {Id: 7, BType: 'Smoothie'},
-      {Id: 8, BType: 'Muffin'},
-      {Id: 9, BType: 'Yogurt'},
-      {Id: 10, BType: 'Fruit Salad'},
+      { Id: 1, BType: 'Steakhouse ' }, // Steak, Lobster, etc.
+      { Id: 2, BType: 'Italian ' }, // Risotto, Lasagna, etc.
+      { Id: 3, BType: 'Asian Fusion ' }, // Stir Fry, Dim Sum, etc.
+      { Id: 4, BType: 'Mediterranean ' }, // Grilled Fish, Meze, etc.
+      { Id: 5, BType: 'Indian ' }, // Biryani, Butter Chicken, etc.
+      { Id: 6, BType: 'Mexican ' }, // Enchiladas, Mole, etc.
+      { Id: 7, BType: 'Seafood ' }, // Grilled Salmon, Seafood Pasta, etc.
+      { Id: 8, BType: 'Vegan ' }, // Vegan Curry, Stuffed Peppers, etc.
+      { Id: 9, BType: 'Comfort Food ' }, // Mac and Cheese, Meatloaf, etc.
+      { Id: 10, BType: 'Fine Dining Specialties' }, // Tasting Menus, Gourmet Dishes, etc.
     ],
   },
 ];
@@ -398,7 +398,8 @@ const FoodSession = () => {
                       style={[
                         globalStyle.g_appMainContentAccordion,
                         styles.FS_Accordion,
-                      ]}>
+                      ]}
+                      onPress={() => handleAccordions(FsaItem.Id)}>
                       <View
                         style={[globalStyle.g_appMainContentAccordionHeader]}>
                         <Text
@@ -434,7 +435,7 @@ const FoodSession = () => {
                           />
                         </View>
                         <Text style={styles.Fsa_ValueText}>
-                          Price Range : {sliderValue[0]} - {sliderValue[1]}
+                          Attendees : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
                           <Text>Min :  </Text>

@@ -8,11 +8,12 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Calendar from 'react-native-calendar-range-picker';
+// import Calendar from 'react-native-calendar-range-picker';
 import Footer from '../components/Footer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card, Modal, Portal, Button, Switch} from 'react-native-paper';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 //styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
@@ -123,9 +124,10 @@ const BookCateres = () => {
   const navigation = useNavigation();
   const [selectedTypeId, setSelectedTypeId] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [activeInput, setActiveInput] = useState(null); // Tracks which input is active (From Date or To Date)
+  const [selectedDate, setSelectedDate] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [isFromDate, setIsFromDate] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
     1: 1, // Initially select 'All' for Price
     2: 1, // Initially select 'All' for Distance
@@ -141,15 +143,14 @@ const BookCateres = () => {
     }
   };
 
-  const handleDateChange = dateRange => {
-    if (dateRange && dateRange.startDate && dateRange.endDate) {
-      if (activeInput === 'from') {
-        setStartDate(dateRange.startDate);
-      } else if (activeInput === 'to') {
-        setEndDate(dateRange.endDate);
-      }
-      setShowModal(false); // Close modal after selection
+  const handleDateChange = day => {
+    const FormatDate = day.dateString;
+    if (isFromDate) {
+      setStartDate(FormatDate);
+    } else {
+      setEndDate(FormatDate);
     }
+    setShowModal(false);
   };
 
   const openModal = inputType => {
@@ -200,27 +201,43 @@ const BookCateres = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.BC_Date_Calendar_Container}>
             <View style={styles.BC_Dates_Content}>
-              <Text style={[globalStyle.g_appMainContentHeaders]}>Pick Dates</Text>
+              <Text style={[globalStyle.g_appMainContentHeaders]}>
+                Pick Dates
+              </Text>
               <View style={styles.BC_Date_Inputs}>
                 <TouchableOpacity
-                  onPress={() => openModal('from')}
-                  style={[styles.BC_Date_Input,globalStyle.g_appMainContentInputs]}>
+                  onPress={() => {
+                    setIsFromDate(true);
+                    setShowModal(true);
+                  }}
+                  style={[
+                    styles.BC_Date_Input,
+                    globalStyle.g_appMainContentInputs,
+                  ]}>
                   <TextInput
                     keyboardType="decimal-pad"
                     placeholderTextColor="#d9d9d9"
                     placeholder="From Date"
                     value={startDate}
+                    style={{color: startDate ? '#000000' : '#d9d9d9'}} // Black text when date is entered
                     editable={false} // Prevent manual editing
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => openModal('to')}
-                  style={[styles.BC_Date_Input,globalStyle.g_appMainContentInputs]}>
+                         onPress={() => {
+                          setIsFromDate(false);
+                          setShowModal(true);
+                        }}
+                  style={[
+                    styles.BC_Date_Input,
+                    globalStyle.g_appMainContentInputs,
+                  ]}>
                   <TextInput
                     keyboardType="decimal-pad"
                     placeholderTextColor="#d9d9d9"
                     placeholder="To Date"
                     value={endDate}
+                    style={{color: endDate ? '#000000' : '#d9d9d9'}} // Black text when date is entered
                     editable={false} // Prevent manual editing
                   />
                 </TouchableOpacity>
@@ -228,7 +245,9 @@ const BookCateres = () => {
             </View>
           </View>
           <View style={styles.BC_Types_Container}>
-            <Text style={[globalStyle.g_appMainContentHeaders]}>Choose Types</Text>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>
+              Choose Types
+            </Text>
             <View style={styles.BC_Type_Cards_Container}>
               {Cater_Type.map(ItemType => (
                 <Card
@@ -241,12 +260,19 @@ const BookCateres = () => {
                   <MaIcons
                     name={ItemType.Icon}
                     size={20}
-                    color={selectedTypeId.includes(ItemType.Id)? '#ffffff': globalStyle.g_appMainContentIconColors.color}
+                    color={
+                      selectedTypeId.includes(ItemType.Id)
+                        ? '#ffffff'
+                        : globalStyle.g_appMainContentIconColors.color
+                    }
                   />
                   <Text
                     style={[
-                      styles.BC_Type_Name, globalStyle.g_appDefaultTextColor,
-                      selectedTypeId.includes(ItemType.Id) && styles.selectedText]}>
+                      styles.BC_Type_Name,
+                      globalStyle.g_appDefaultTextColor,
+                      selectedTypeId.includes(ItemType.Id) &&
+                        styles.selectedText,
+                    ]}>
                     {ItemType.name}
                   </Text>
                 </Card>
@@ -254,12 +280,18 @@ const BookCateres = () => {
             </View>
           </View>
           <View style={styles.BC_Cater_Allowcation_Container}>
-            <Text style={[globalStyle.g_appMainContentHeaders]}>Cater Allocation</Text>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>
+              Cater Allocation
+            </Text>
             {caterAllowcation.map(CA_Item => (
               <View key={CA_Item.Id}>
                 <Card style={styles.BC_Cater_Allowcation_Card}>
                   <View style={styles.BC_Cater_Allowcation_Card_Content}>
-                    <Text style={[styles.BC_CA_Allocation_Text,globalStyle.g_appDefaultTextColor]}>
+                    <Text
+                      style={[
+                        styles.BC_CA_Allocation_Text,
+                        globalStyle.g_appDefaultTextColor,
+                      ]}>
                       {CA_Item.Name}
                     </Text>
                     <Switch
@@ -275,7 +307,9 @@ const BookCateres = () => {
           <View style={styles.BC_Filter_Container}>
             {Filters.map(fItem => (
               <View key={fItem.Id} style={{marginBottom: 20}}>
-                <Text style={[globalStyle.g_appMainContentHeaders]}>{fItem.Title}</Text>
+                <Text style={[globalStyle.g_appMainContentHeaders]}>
+                  {fItem.Title}
+                </Text>
                 <View style={styles.BC_Filter_List}>
                   {fItem.FilterBy.map(filter => {
                     const isSelected = selectedFilters[fItem.Id] === filter.Id;
@@ -284,12 +318,18 @@ const BookCateres = () => {
                         key={filter.Id}
                         style={[
                           styles.BC_Filter_List_Content,
-                          isSelected && globalStyle.g_appMainContentActiveBgColors, // Apply selected style if it's selected
+                          isSelected &&
+                            globalStyle.g_appMainContentActiveBgColors, // Apply selected style if it's selected
                         ]}
                         onPress={() => handleFilterSelect(filter.Id, fItem.Id)} // Handle filter selection
                       >
                         <Text
-                          style={[globalStyle.g_appMainContentColors,styles.BC_Filter_List_Name,isSelected && globalStyle.g_appMainContentActiveColors]}>
+                          style={[
+                            globalStyle.g_appMainContentColors,
+                            styles.BC_Filter_List_Name,
+                            isSelected &&
+                              globalStyle.g_appMainContentActiveColors,
+                          ]}>
                           {filter.Name || filter.Rating || filter.Distance}
                         </Text>
                       </TouchableOpacity>
@@ -315,29 +355,21 @@ const BookCateres = () => {
           contentContainerStyle={styles.modalContainer}>
           <View style={{height: 350}}>
             <Calendar
-              startDate="2024-03-05"
-              endDate="2024-03-12"
-              onChange={handleDateChange}
-              style={{
-                monthNameText: {fontSize: 14, color: '#272727'},
-                dayNameText: {fontSize: 12},
-                dayText: {fontSize: 12},
+              onDayPress={handleDateChange}
+              // onChange={handleDateChange}
+              markedDates={{
+                [selectedDate]:{selected: true,selectedDotColor: '#389590'}
               }}
             />
           </View>
-          <Button onPress={() => setShowModal(false)} style={{marginTop: 10}}>
-            Close
-          </Button>
         </Modal>
       </Portal>
-
       <Footer />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   //Calendar and Dates
   BC_Content_Header: {
     color: '#272727',
@@ -436,7 +468,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
-
 });
 
 export default BookCateres;

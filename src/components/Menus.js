@@ -18,7 +18,7 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntIcons from 'react-native-vector-icons/AntDesign';
 import FaIcons from 'react-native-vector-icons/FontAwesome';
 
-import {Card, Title, Switch} from 'react-native-paper';
+import {Card, Title, Switch, Checkbox} from 'react-native-paper';
 import {Image} from 'react-native';
 import {globalStyle} from '../assets/styles/GlobalStyles';
 
@@ -53,33 +53,38 @@ const BreakfastMenus = [
     Items: [
       {
         Id: 1,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_1.png'),
         ItemName: 'Idly',
-        Price: '200 /-',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 2,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_2.png'),
         ItemName: 'Dosa',
-        Price: '150 /-',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 3,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
-        ItemName: 'Masala Dosa',
-        Price: '180 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_3.png'),
+        ItemName: 'Sambar Rice',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 4,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
-        ItemName: 'Upma Dosa',
-        Price: '170 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_4.png'),
+        ItemName: 'Noodles',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 5,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
-        ItemName: 'Uthapa',
-        Price: '160 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_5.png'),
+        ItemName: 'Soup',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
     ],
   },
@@ -90,33 +95,38 @@ const BreakfastMenus = [
     Items: [
       {
         Id: 1,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
-        ItemName: 'Salads',
-        Price: '120 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_1.png'),
+        ItemName: 'Idly',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 2,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
-        ItemName: 'Salads',
-        Price: '130 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_2.png'),
+        ItemName: 'Dosa',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 3,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
-        ItemName: 'Salads',
-        Price: '140 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_3.png'),
+        ItemName: 'Sambar Rice',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 4,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
-        ItemName: 'Salads',
-        Price: '150 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_4.png'),
+        ItemName: 'Noodles',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 5,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
-        ItemName: 'Salads',
-        Price: '160 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_5.png'),
+        ItemName: 'Soup',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
     ],
   },
@@ -127,33 +137,38 @@ const BreakfastMenus = [
     Items: [
       {
         Id: 1,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
-        ItemName: 'Tea',
-        Price: '50 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_1.png'),
+        ItemName: 'Idly',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 2,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
-        ItemName: 'Cold Coffee',
-        Price: '100 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_2.png'),
+        ItemName: 'Dosa',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 3,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
-        ItemName: 'Masala Tea',
-        Price: '60 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_3.png'),
+        ItemName: 'Sambar Rice',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 4,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
-        ItemName: 'Filter Coffee',
-        Price: '80 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_4.png'),
+        ItemName: 'Noodles',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 5,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
-        ItemName: 'Cake',
-        Price: '150 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_5.png'),
+        ItemName: 'Soup',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
     ],
   },
@@ -164,33 +179,38 @@ const BreakfastMenus = [
     Items: [
       {
         Id: 1,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_1.png'),
-        ItemName: 'Cakes',
-        Price: '120 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_1.png'),
+        ItemName: 'Idly',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 2,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_2.jpg'),
-        ItemName: 'Cup Cakes',
-        Price: '80 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_2.png'),
+        ItemName: 'Dosa',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 3,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_3.jpg'),
-        ItemName: 'Samosa',
-        Price: '30 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_3.png'),
+        ItemName: 'Sambar Rice',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 4,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_4.jpg'),
-        ItemName: 'Mirchi Baji',
-        Price: '40 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_4.png'),
+        ItemName: 'Noodles',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
       {
         Id: 5,
-        ItemImage: require('../assets/images/homeCaters/Home_Img_5.jpg'),
-        ItemName: 'Pakoda',
-        Price: '50 /-',
+        ItemImage: require('../assets/Updated/images/MenuItems/Item_5.png'),
+        ItemName: 'Soup',
+        Rating: '4.5',
+        Decscription: 'A genuine fine-dining experience awaits.',
       },
     ],
   },
@@ -387,17 +407,20 @@ const Menus = () => {
   const [showCategories, setShowCategories] = useState(true);
   const [showMenus, setShowMenus] = useState(false);
   const [inputValue, setInputValue] = useState(0);
-
   const [selectedDateId, setSelectedDateId] = useState(null);
   const [expanded, setExpanded] = useState(MenuTypes[0].Id);
-
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const [isAdded, setIsAdded] = useState(null);
+
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id);
   };
 
+  const handleAddRemove = id => {
+    setIsAdded(isAdded === id ? null : id);
+  };
   const handleItemPress = item => {
     setActiveFilter(item.Name);
   };
@@ -429,7 +452,7 @@ const Menus = () => {
       <ImageBackground
         blurRadius={1}
         style={styles.M_Header_Img}
-        source={require('../assets/images/homeCaters/Home_Img_1.png')}>
+        source={require('../assets/Updated/images/MenuBanner.png')}>
         <View style={styles.overlay} />
         <View style={[globalStyle.g_appPageHeaderContainer]}>
           <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
@@ -446,7 +469,9 @@ const Menus = () => {
               color={globalStyle.g_appPageHeaderIconsColors.color}
             />
           </View>
-          <Text style={styles.M_Header_Text}>Saicharan Vadlamanu</Text>
+          <Text style={styles.M_Header_Text}>
+            Sri Venkata Ramana Kanaka Durga Deluxe Caterers
+          </Text>
           {showMenus && (
             <View>
               <Text style={styles.Show_Menu_Header}>
@@ -549,16 +574,25 @@ const Menus = () => {
             {activeFilter === 'First Menu' && (
               <View style={styles.Menu_Types_Content}>
                 <ScrollView showsVerticalScrollIndicator={false}>
+                  <Card style={styles.ApplyForAllDates_Card}>
+                    <View style={styles.ApplyForAllDates_CardBody}>
+                      <Text>Apply For All Dates</Text>
+                      <Switch
+                        color={globalStyle.g_appDefaultTextColor.color}
+                        value={isSwitchOn}
+                        onValueChange={onToggleSwitch}
+                      />
+                    </View>
+                  </Card>
                   {MenuTypes.map(mType_Item => (
-                    <Card key={mType_Item.Id} style={styles.Menu_Types_Card}>
+                    <Card key={mType_Item.Id} style={styles.Menu_Types_Card} onPress={() => handleAccordions(mType_Item.Id)}>
                       <View style={styles.Menu_Types_Card_Header}>
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            gap: 15,
-                          }}>
-                          <Text style={[globalStyle.g_appDefaultTextColor]}>
+                        <View style={{flexDirection: 'row',alignItems: 'center',gap: 15,}}>
+                          <Text
+                            style={[
+                              styles.MenuType_Header,
+                              globalStyle.g_appDefaultTextColor,
+                            ]} onPress={() => handleAccordions(mType_Item.Id)}>
                             {mType_Item.Name}
                           </Text>
                           <View
@@ -595,84 +629,82 @@ const Menus = () => {
                               <View
                                 key={mBItem.Id}
                                 style={styles.Menu_List_Content}>
-                                <Text style={styles.Menu_List_Header}>
+                                <Text
+                                  style={[
+                                    styles.Menu_List_Header,
+                                    globalStyle.g_appMainContentActiveBgColors,
+                                  ]}>
                                   {mBItem.Title}
                                 </Text>
-                                <Text style={styles.Menu_List_Header_Tag}>
+                                {/* <Text style={styles.Menu_List_Header_Tag}>
                                   {mBItem.TagLine}
-                                </Text>
-                                <ScrollView
-                                  horizontal
-                                  showsHorizontalScrollIndicator={false}>
-                                  {mBItem.Items.map(item => (
-                                    <View
-                                      key={item.Id}
-                                      style={styles.Menu_List_Item}>
-                                      <Image
-                                        source={item.ItemImage}
-                                        style={{
-                                          width: 50,
-                                          height: 50,
-                                          borderRadius: 10,
-                                        }}
-                                      />
-                                      <Text
-                                        style={{
-                                          textAlign: 'center',
-                                          fontWeight: 'bold',
-                                          marginTop: '10%',
-                                        }}>
-                                        {item.ItemName}
-                                      </Text>
-                                      <Text style={styles.Item_Price}>
-                                        Price:{item.Price}
-                                      </Text>
-                                      {mType_Item.Name === 'Add-Ons' && (
-                                        <View style={styles.Menu_List_Inputs}>
-                                          <AntIcons
-                                            name="minussquare"
-                                            size={20} // Adjust size to better suit the UI
-                                            color={
-                                              globalStyle.g_appDefaultTextColor
-                                                .color
-                                            }
-                                            onPress={handleDecrease}
-                                          />
-                                          <TextInput
-                                            style={styles.Menu_List_Input}
-                                            value={String(inputValue)}
-                                            keyboardType="numeric"
-                                            editable={false} // Make input non-editable
-                                            placeholderTextColor="#272727"
-                                          />
-                                          <AntIcons
-                                            name="plussquare"
-                                            size={20} // Adjust size to better suit the UI
-                                            color={
-                                              globalStyle.g_appDefaultTextColor
-                                                .color
-                                            }
-                                            onPress={handleIncrease}
-                                          />
-                                        </View>
-                                      )}
-                                      <TouchableOpacity style={styles.Add_Btn}>
-                                        <Text style={styles.Add_Btn_Text}>
-                                          Add
-                                        </Text>
-                                      </TouchableOpacity>
-                                    </View>
-                                  ))}
-                                </ScrollView>
+                                </Text> */}
+                                <View style={styles.Menu_Items_List}>
+                                  <ScrollView
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}>
+                                    {mBItem.Items.map(item => (
+                                      <View key={item.Id}>
+                                        <Card
+                                          style={styles.Menu_Item_List_Card}>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_List_CardBody
+                                            }>
+                                            <Image
+                                              source={item.ItemImage}
+                                              style={styles.Menu_Item_Image}
+                                            />
+                                          </View>
+                                          <Text style={[styles.Menu_Item_Name]}>
+                                            {item.ItemName}
+                                          </Text>
+                                          <Text
+                                            style={styles.Menu_Item_Desc}
+                                            numberOfLines={2}
+                                            textBreakStrategy="simple">
+                                            {item.Decscription}
+                                          </Text>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_Rating_AddBtn
+                                            }>
+                                            <View
+                                              style={styles.Menu_Item_Rating}>
+                                              <Text
+                                                style={
+                                                  styles.Menu_Item_Rating_Text
+                                                }>
+                                                {item.Rating}
+                                              </Text>
+                                              <AntIcons
+                                                name="star"
+                                                size={14}
+                                                color="#f1c40f"
+                                              />
+                                            </View>
+                                            <MaIcons
+                                              name={isAdded === item.Id ? 'minus-box':'plus-box'}
+                                              onPress={() => handleAddRemove(item.Id)}
+                                              size={20}
+                                              color={isAdded === item.Id ? '#FF6666':'#389590'}
+                                            />
+                                          </View>
+                                        </Card>
+                                      </View>
+                                    ))}
+                                  </ScrollView>
+                                </View>
                               </View>
                             </>
                           ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          </TouchableOpacity>
                           <TouchableOpacity
                             style={[globalStyle.g_Button]}
                             onPress={() => navigation.navigate('OrderSummary')}>
-                            <Text style={[globalStyle.g_ButtonText]}>
-                              View Cart (1)
-                            </Text>
+                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -829,7 +861,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-
+  MenuType_Header: {
+    fontWeight: 'bold',
+  },
   //Expanded Content
   M_List_Container: {
     backgroundColor: '#ffff',
@@ -841,39 +875,70 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   Menu_List_Header: {
-    color: '#292929',
+    color: '#ffff',
     fontWeight: 'bold',
     borderRadius: 50,
-    fontSize: 20,
+    fontSize: 15,
     marginTop: '10%',
+    backgroundColor: '',
+    width: 120,
+    textAlign: 'center',
+    padding: 5,
   },
   Menu_List_Header_Tag: {
     fontSize: 12,
     fontWeight: 'bold',
   },
-  Menu_List_Item: {
-    marginRight: 30,
-    marginTop: '3%',
+
+  Menu_Items_List: {
+    marginTop: 10,
+  },
+  Menu_Item_List_Card: {
+    padding: 10,
+    marginLeft: 2,
+    marginTop: 2,
+    marginRight: 10,
+    marginBottom: 10,
+    width: 140,
+    backgroundColor: '#ffff',
+    borderRadius: 10,
+    borderColor: '#cccc',
+    borderWidth: 0.5,
+  },
+  Menu_Item_List_CardBody: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  Item_Price: {
+  Menu_Item_Image: {
+    width: 130,
+    height: 120,
+  },
+  Menu_Item_Name: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#292929',
+  },
+  Menu_Item_Rating_AddBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  Menu_Item_Rating: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  Menu_Item_Rating_Text: {
+    fontWeight: 'bold',
+    color: '#272727',
+  },
+  Menu_Item_Desc: {
+    marginTop: 5,
+    fontWeight: 'bold',
     fontSize: 10,
-    textAlign: 'center',
-    width: '100%',
-    fontWeight: '900',
   },
-  Add_Btn: {
-    backgroundColor: '#399590',
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  Add_Btn_Text: {
-    color: '#ffff',
-    fontSize: 10,
-  },
-
   Menu_List_Inputs: {
     display: 'flex',
     flexDirection: 'row',
@@ -894,6 +959,19 @@ const styles = StyleSheet.create({
     paddingVertical: 5, // Add some padding to center the text vertically
     fontWeight: 'bold',
     color: '#272727',
+  },
+
+  //Card
+  ApplyForAllDates_Card: {
+    margin: 5,
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: '#ffff',
+  },
+  ApplyForAllDates_CardBody: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 export default Menus;
