@@ -400,7 +400,16 @@ const selectCategories = [
     ],
   },
 ];
-
+const menuType = [
+  {
+    Id: 1,
+    Name: 'Veg',
+  },
+  {
+    Id: 2,
+    Name: 'Non-Veg',
+  },
+];
 const Menus = () => {
   const navigation = useNavigation();
   const [activeFilter, setActiveFilter] = useState('First Menu');
@@ -411,8 +420,17 @@ const Menus = () => {
   const [expanded, setExpanded] = useState(MenuTypes[0].Id);
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const [isAdded, setIsAdded] = useState(null);
+  const [isMenuTypeOn, setIsMenuTypeOn] = React.useState(null);
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+  const onToggleMenuTypes = id => {
+    if (isMenuTypeOn === id) {
+      setIsMenuTypeOn(null); // Deselect if clicked again
+    } else {
+      setIsMenuTypeOn(id); // Set the clicked switch as active
+    }
+  };
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id);
@@ -584,15 +602,48 @@ const Menus = () => {
                       />
                     </View>
                   </Card>
+                  <View style={styles.Veg_NonVeg_Container}>
+                    {menuType.map(Menu_Item => (
+                      <View key={Menu_Item.Id}>
+                        <Card style={styles.Veg_NonVeg_Card}>
+                          <View style={styles.Veg_NonVeg_Card_Content}>
+                            <Text
+                              style={[
+                                styles.Veg_NonVeg_Text,
+                                globalStyle.g_appDefaultTextColor,
+                              ]}>
+                              {Menu_Item.Name}
+                            </Text>
+                            <Switch
+                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                              onValueChange={() =>
+                                onToggleMenuTypes(Menu_Item.Id)
+                              }
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                          </View>
+                        </Card>
+                      </View>
+                    ))}
+                  </View>
                   {MenuTypes.map(mType_Item => (
-                    <Card key={mType_Item.Id} style={styles.Menu_Types_Card} onPress={() => handleAccordions(mType_Item.Id)}>
+                    <Card
+                      key={mType_Item.Id}
+                      style={styles.Menu_Types_Card}
+                      onPress={() => handleAccordions(mType_Item.Id)}>
                       <View style={styles.Menu_Types_Card_Header}>
-                        <View style={{flexDirection: 'row',alignItems: 'center',gap: 15,}}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: 15,
+                          }}>
                           <Text
                             style={[
                               styles.MenuType_Header,
                               globalStyle.g_appDefaultTextColor,
-                            ]} onPress={() => handleAccordions(mType_Item.Id)}>
+                            ]}
+                            onPress={() => handleAccordions(mType_Item.Id)}>
                             {mType_Item.Name}
                           </Text>
                           <View
@@ -624,9 +675,35 @@ const Menus = () => {
                       </View>
                       {expanded === mType_Item.Id && (
                         <View>
+                          <View style={styles.Veg_NonVeg_Container}>
+                            {menuType.map(Menu_Item => (
+                              <View key={Menu_Item.Id}>
+                                <Card style={styles.Veg_NonVeg_Card}>
+                                  <View style={styles.Veg_NonVeg_Card_Content}>
+                                    <Text
+                                      style={[
+                                        styles.Veg_NonVeg_Text,
+                                        globalStyle.g_appDefaultTextColor,
+                                      ]}>
+                                      {Menu_Item.Name}
+                                    </Text>
+                                    <Switch
+                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                                      onValueChange={() =>
+                                        onToggleMenuTypes(Menu_Item.Id)
+                                      }
+                                      color={
+                                        globalStyle.g_appMainContentColors.color
+                                      }
+                                    />
+                                  </View>
+                                </Card>
+                              </View>
+                            ))}
+                          </View>
                           {BreakfastMenus.map(mBItem => (
                             <>
-                              <View 
+                              <View
                                 key={mBItem.Id}
                                 style={styles.Menu_List_Content}>
                                 <Text
@@ -635,7 +712,7 @@ const Menus = () => {
                                     globalStyle.g_appMainContentActiveBgColors,
                                   ]}>
                                   {mBItem.Title}
-                                </Text> 
+                                </Text>
                                 <Text>{mBItem.Items.length} Of</Text>
                                 <View style={styles.Menu_Items_List}>
                                   <ScrollView
@@ -682,10 +759,856 @@ const Menus = () => {
                                               />
                                             </View>
                                             <MaIcons
-                                              name={isAdded === item.Id ? 'minus-box':'plus-box'}
-                                              onPress={() => handleAddRemove(item.Id)}
+                                              name={
+                                                isAdded === item.Id
+                                                  ? 'minus-box'
+                                                  : 'plus-box'
+                                              }
+                                              onPress={() =>
+                                                handleAddRemove(item.Id)
+                                              }
                                               size={20}
-                                              color={isAdded === item.Id ? '#FF6666':'#389590'}
+                                              color={
+                                                isAdded === item.Id
+                                                  ? '#FF6666'
+                                                  : '#389590'
+                                              }
+                                            />
+                                          </View>
+                                        </Card>
+                                      </View>
+                                    ))}
+                                  </ScrollView>
+                                </View>
+                              </View>
+                            </>
+                          ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[globalStyle.g_Button]}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </Card>
+                  ))}
+                </ScrollView>
+              </View>
+            )}
+            {activeFilter === 'Second Menu' && (
+              <View style={styles.Menu_Types_Content}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <Card style={styles.ApplyForAllDates_Card}>
+                    <View style={styles.ApplyForAllDates_CardBody}>
+                      <Text>Apply For All Dates</Text>
+                      <Switch
+                        color={globalStyle.g_appDefaultTextColor.color}
+                        value={isSwitchOn}
+                        onValueChange={onToggleSwitch}
+                      />
+                    </View>
+                  </Card>
+                  <View style={styles.Veg_NonVeg_Container}>
+                    {menuType.map(Menu_Item => (
+                      <View key={Menu_Item.Id}>
+                        <Card style={styles.Veg_NonVeg_Card}>
+                          <View style={styles.Veg_NonVeg_Card_Content}>
+                            <Text
+                              style={[
+                                styles.Veg_NonVeg_Text,
+                                globalStyle.g_appDefaultTextColor,
+                              ]}>
+                              {Menu_Item.Name}
+                            </Text>
+                            <Switch
+                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                              onValueChange={() =>
+                                onToggleMenuTypes(Menu_Item.Id)
+                              }
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                          </View>
+                        </Card>
+                      </View>
+                    ))}
+                  </View>
+                  {MenuTypes.map(mType_Item => (
+                    <Card
+                      key={mType_Item.Id}
+                      style={styles.Menu_Types_Card}
+                      onPress={() => handleAccordions(mType_Item.Id)}>
+                      <View style={styles.Menu_Types_Card_Header}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: 15,
+                          }}>
+                          <Text
+                            style={[
+                              styles.MenuType_Header,
+                              globalStyle.g_appDefaultTextColor,
+                            ]}
+                            onPress={() => handleAccordions(mType_Item.Id)}>
+                            {mType_Item.Name}
+                          </Text>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 5,
+                            }}>
+                            <FaIcons
+                              name="rupee"
+                              size={12}
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                            <Text style={[globalStyle.g_appDefaultTextColor]}>
+                              {mType_Item.TotalCost}
+                            </Text>
+                          </View>
+                        </View>
+                        <Ionicons
+                          name={
+                            expanded === mType_Item.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(mType_Item.Id)}
+                          size={15}
+                          color="#399590"
+                        />
+                      </View>
+                      {expanded === mType_Item.Id && (
+                        <View>
+                          <View style={styles.Veg_NonVeg_Container}>
+                            {menuType.map(Menu_Item => (
+                              <View key={Menu_Item.Id}>
+                                <Card style={styles.Veg_NonVeg_Card}>
+                                  <View style={styles.Veg_NonVeg_Card_Content}>
+                                    <Text
+                                      style={[
+                                        styles.Veg_NonVeg_Text,
+                                        globalStyle.g_appDefaultTextColor,
+                                      ]}>
+                                      {Menu_Item.Name}
+                                    </Text>
+                                    <Switch
+                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                                      onValueChange={() =>
+                                        onToggleMenuTypes(Menu_Item.Id)
+                                      }
+                                      color={
+                                        globalStyle.g_appMainContentColors.color
+                                      }
+                                    />
+                                  </View>
+                                </Card>
+                              </View>
+                            ))}
+                          </View>
+                          {BreakfastMenus.map(mBItem => (
+                            <>
+                              <View
+                                key={mBItem.Id}
+                                style={styles.Menu_List_Content}>
+                                <Text
+                                  style={[
+                                    styles.Menu_List_Header,
+                                    globalStyle.g_appMainContentActiveBgColors,
+                                  ]}>
+                                  {mBItem.Title}
+                                </Text>
+                                <Text>{mBItem.Items.length} Of</Text>
+                                <View style={styles.Menu_Items_List}>
+                                  <ScrollView
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}>
+                                    {mBItem.Items.map(item => (
+                                      <View key={item.Id}>
+                                        <Card
+                                          style={styles.Menu_Item_List_Card}>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_List_CardBody
+                                            }>
+                                            <Image
+                                              source={item.ItemImage}
+                                              style={styles.Menu_Item_Image}
+                                            />
+                                          </View>
+                                          <Text style={[styles.Menu_Item_Name]}>
+                                            {item.ItemName}
+                                          </Text>
+                                          <Text
+                                            style={styles.Menu_Item_Desc}
+                                            numberOfLines={2}
+                                            textBreakStrategy="simple">
+                                            {item.Decscription}
+                                          </Text>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_Rating_AddBtn
+                                            }>
+                                            <View
+                                              style={styles.Menu_Item_Rating}>
+                                              <Text
+                                                style={
+                                                  styles.Menu_Item_Rating_Text
+                                                }>
+                                                {item.Rating}
+                                              </Text>
+                                              <AntIcons
+                                                name="star"
+                                                size={14}
+                                                color="#f1c40f"
+                                              />
+                                            </View>
+                                            <MaIcons
+                                              name={
+                                                isAdded === item.Id
+                                                  ? 'minus-box'
+                                                  : 'plus-box'
+                                              }
+                                              onPress={() =>
+                                                handleAddRemove(item.Id)
+                                              }
+                                              size={20}
+                                              color={
+                                                isAdded === item.Id
+                                                  ? '#FF6666'
+                                                  : '#389590'
+                                              }
+                                            />
+                                          </View>
+                                        </Card>
+                                      </View>
+                                    ))}
+                                  </ScrollView>
+                                </View>
+                              </View>
+                            </>
+                          ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[globalStyle.g_Button]}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </Card>
+                  ))}
+                </ScrollView>
+              </View>
+            )}
+            {activeFilter === 'Third Menu' && (
+              <View style={styles.Menu_Types_Content}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <Card style={styles.ApplyForAllDates_Card}>
+                    <View style={styles.ApplyForAllDates_CardBody}>
+                      <Text>Apply For All Dates</Text>
+                      <Switch
+                        color={globalStyle.g_appDefaultTextColor.color}
+                        value={isSwitchOn}
+                        onValueChange={onToggleSwitch}
+                      />
+                    </View>
+                  </Card>
+                  <View style={styles.Veg_NonVeg_Container}>
+                    {menuType.map(Menu_Item => (
+                      <View key={Menu_Item.Id}>
+                        <Card style={styles.Veg_NonVeg_Card}>
+                          <View style={styles.Veg_NonVeg_Card_Content}>
+                            <Text
+                              style={[
+                                styles.Veg_NonVeg_Text,
+                                globalStyle.g_appDefaultTextColor,
+                              ]}>
+                              {Menu_Item.Name}
+                            </Text>
+                            <Switch
+                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                              onValueChange={() =>
+                                onToggleMenuTypes(Menu_Item.Id)
+                              }
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                          </View>
+                        </Card>
+                      </View>
+                    ))}
+                  </View>
+                  {MenuTypes.map(mType_Item => (
+                    <Card
+                      key={mType_Item.Id}
+                      style={styles.Menu_Types_Card}
+                      onPress={() => handleAccordions(mType_Item.Id)}>
+                      <View style={styles.Menu_Types_Card_Header}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: 15,
+                          }}>
+                          <Text
+                            style={[
+                              styles.MenuType_Header,
+                              globalStyle.g_appDefaultTextColor,
+                            ]}
+                            onPress={() => handleAccordions(mType_Item.Id)}>
+                            {mType_Item.Name}
+                          </Text>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 5,
+                            }}>
+                            <FaIcons
+                              name="rupee"
+                              size={12}
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                            <Text style={[globalStyle.g_appDefaultTextColor]}>
+                              {mType_Item.TotalCost}
+                            </Text>
+                          </View>
+                        </View>
+                        <Ionicons
+                          name={
+                            expanded === mType_Item.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(mType_Item.Id)}
+                          size={15}
+                          color="#399590"
+                        />
+                      </View>
+                      {expanded === mType_Item.Id && (
+                        <View>
+                          <View style={styles.Veg_NonVeg_Container}>
+                            {menuType.map(Menu_Item => (
+                              <View key={Menu_Item.Id}>
+                                <Card style={styles.Veg_NonVeg_Card}>
+                                  <View style={styles.Veg_NonVeg_Card_Content}>
+                                    <Text
+                                      style={[
+                                        styles.Veg_NonVeg_Text,
+                                        globalStyle.g_appDefaultTextColor,
+                                      ]}>
+                                      {Menu_Item.Name}
+                                    </Text>
+                                    <Switch
+                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                                      onValueChange={() =>
+                                        onToggleMenuTypes(Menu_Item.Id)
+                                      }
+                                      color={
+                                        globalStyle.g_appMainContentColors.color
+                                      }
+                                    />
+                                  </View>
+                                </Card>
+                              </View>
+                            ))}
+                          </View>
+                          {BreakfastMenus.map(mBItem => (
+                            <>
+                              <View
+                                key={mBItem.Id}
+                                style={styles.Menu_List_Content}>
+                                <Text
+                                  style={[
+                                    styles.Menu_List_Header,
+                                    globalStyle.g_appMainContentActiveBgColors,
+                                  ]}>
+                                  {mBItem.Title}
+                                </Text>
+                                <Text>{mBItem.Items.length} Of</Text>
+                                <View style={styles.Menu_Items_List}>
+                                  <ScrollView
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}>
+                                    {mBItem.Items.map(item => (
+                                      <View key={item.Id}>
+                                        <Card
+                                          style={styles.Menu_Item_List_Card}>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_List_CardBody
+                                            }>
+                                            <Image
+                                              source={item.ItemImage}
+                                              style={styles.Menu_Item_Image}
+                                            />
+                                          </View>
+                                          <Text style={[styles.Menu_Item_Name]}>
+                                            {item.ItemName}
+                                          </Text>
+                                          <Text
+                                            style={styles.Menu_Item_Desc}
+                                            numberOfLines={2}
+                                            textBreakStrategy="simple">
+                                            {item.Decscription}
+                                          </Text>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_Rating_AddBtn
+                                            }>
+                                            <View
+                                              style={styles.Menu_Item_Rating}>
+                                              <Text
+                                                style={
+                                                  styles.Menu_Item_Rating_Text
+                                                }>
+                                                {item.Rating}
+                                              </Text>
+                                              <AntIcons
+                                                name="star"
+                                                size={14}
+                                                color="#f1c40f"
+                                              />
+                                            </View>
+                                            <MaIcons
+                                              name={
+                                                isAdded === item.Id
+                                                  ? 'minus-box'
+                                                  : 'plus-box'
+                                              }
+                                              onPress={() =>
+                                                handleAddRemove(item.Id)
+                                              }
+                                              size={20}
+                                              color={
+                                                isAdded === item.Id
+                                                  ? '#FF6666'
+                                                  : '#389590'
+                                              }
+                                            />
+                                          </View>
+                                        </Card>
+                                      </View>
+                                    ))}
+                                  </ScrollView>
+                                </View>
+                              </View>
+                            </>
+                          ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[globalStyle.g_Button]}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </Card>
+                  ))}
+                </ScrollView>
+              </View>
+            )}
+            {activeFilter === 'Fourth Menu' && (
+              <View style={styles.Menu_Types_Content}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <Card style={styles.ApplyForAllDates_Card}>
+                    <View style={styles.ApplyForAllDates_CardBody}>
+                      <Text>Apply For All Dates</Text>
+                      <Switch
+                        color={globalStyle.g_appDefaultTextColor.color}
+                        value={isSwitchOn}
+                        onValueChange={onToggleSwitch}
+                      />
+                    </View>
+                  </Card>
+                  <View style={styles.Veg_NonVeg_Container}>
+                    {menuType.map(Menu_Item => (
+                      <View key={Menu_Item.Id}>
+                        <Card style={styles.Veg_NonVeg_Card}>
+                          <View style={styles.Veg_NonVeg_Card_Content}>
+                            <Text
+                              style={[
+                                styles.Veg_NonVeg_Text,
+                                globalStyle.g_appDefaultTextColor,
+                              ]}>
+                              {Menu_Item.Name}
+                            </Text>
+                            <Switch
+                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                              onValueChange={() =>
+                                onToggleMenuTypes(Menu_Item.Id)
+                              }
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                          </View>
+                        </Card>
+                      </View>
+                    ))}
+                  </View>
+                  {MenuTypes.map(mType_Item => (
+                    <Card
+                      key={mType_Item.Id}
+                      style={styles.Menu_Types_Card}
+                      onPress={() => handleAccordions(mType_Item.Id)}>
+                      <View style={styles.Menu_Types_Card_Header}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: 15,
+                          }}>
+                          <Text
+                            style={[
+                              styles.MenuType_Header,
+                              globalStyle.g_appDefaultTextColor,
+                            ]}
+                            onPress={() => handleAccordions(mType_Item.Id)}>
+                            {mType_Item.Name}
+                          </Text>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 5,
+                            }}>
+                            <FaIcons
+                              name="rupee"
+                              size={12}
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                            <Text style={[globalStyle.g_appDefaultTextColor]}>
+                              {mType_Item.TotalCost}
+                            </Text>
+                          </View>
+                        </View>
+                        <Ionicons
+                          name={
+                            expanded === mType_Item.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(mType_Item.Id)}
+                          size={15}
+                          color="#399590"
+                        />
+                      </View>
+                      {expanded === mType_Item.Id && (
+                        <View>
+                          <View style={styles.Veg_NonVeg_Container}>
+                            {menuType.map(Menu_Item => (
+                              <View key={Menu_Item.Id}>
+                                <Card style={styles.Veg_NonVeg_Card}>
+                                  <View style={styles.Veg_NonVeg_Card_Content}>
+                                    <Text
+                                      style={[
+                                        styles.Veg_NonVeg_Text,
+                                        globalStyle.g_appDefaultTextColor,
+                                      ]}>
+                                      {Menu_Item.Name}
+                                    </Text>
+                                    <Switch
+                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                                      onValueChange={() =>
+                                        onToggleMenuTypes(Menu_Item.Id)
+                                      }
+                                      color={
+                                        globalStyle.g_appMainContentColors.color
+                                      }
+                                    />
+                                  </View>
+                                </Card>
+                              </View>
+                            ))}
+                          </View>
+                          {BreakfastMenus.map(mBItem => (
+                            <>
+                              <View
+                                key={mBItem.Id}
+                                style={styles.Menu_List_Content}>
+                                <Text
+                                  style={[
+                                    styles.Menu_List_Header,
+                                    globalStyle.g_appMainContentActiveBgColors,
+                                  ]}>
+                                  {mBItem.Title}
+                                </Text>
+                                <Text>{mBItem.Items.length} Of</Text>
+                                <View style={styles.Menu_Items_List}>
+                                  <ScrollView
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}>
+                                    {mBItem.Items.map(item => (
+                                      <View key={item.Id}>
+                                        <Card
+                                          style={styles.Menu_Item_List_Card}>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_List_CardBody
+                                            }>
+                                            <Image
+                                              source={item.ItemImage}
+                                              style={styles.Menu_Item_Image}
+                                            />
+                                          </View>
+                                          <Text style={[styles.Menu_Item_Name]}>
+                                            {item.ItemName}
+                                          </Text>
+                                          <Text
+                                            style={styles.Menu_Item_Desc}
+                                            numberOfLines={2}
+                                            textBreakStrategy="simple">
+                                            {item.Decscription}
+                                          </Text>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_Rating_AddBtn
+                                            }>
+                                            <View
+                                              style={styles.Menu_Item_Rating}>
+                                              <Text
+                                                style={
+                                                  styles.Menu_Item_Rating_Text
+                                                }>
+                                                {item.Rating}
+                                              </Text>
+                                              <AntIcons
+                                                name="star"
+                                                size={14}
+                                                color="#f1c40f"
+                                              />
+                                            </View>
+                                            <MaIcons
+                                              name={
+                                                isAdded === item.Id
+                                                  ? 'minus-box'
+                                                  : 'plus-box'
+                                              }
+                                              onPress={() =>
+                                                handleAddRemove(item.Id)
+                                              }
+                                              size={20}
+                                              color={
+                                                isAdded === item.Id
+                                                  ? '#FF6666'
+                                                  : '#389590'
+                                              }
+                                            />
+                                          </View>
+                                        </Card>
+                                      </View>
+                                    ))}
+                                  </ScrollView>
+                                </View>
+                              </View>
+                            </>
+                          ))}
+                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[globalStyle.g_Button]}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </Card>
+                  ))}
+                </ScrollView>
+              </View>
+            )}
+            {activeFilter === 'Fifth Menu' && (
+              <View style={styles.Menu_Types_Content}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <Card style={styles.ApplyForAllDates_Card}>
+                    <View style={styles.ApplyForAllDates_CardBody}>
+                      <Text>Apply For All Dates</Text>
+                      <Switch
+                        color={globalStyle.g_appDefaultTextColor.color}
+                        value={isSwitchOn}
+                        onValueChange={onToggleSwitch}
+                      />
+                    </View>
+                  </Card>
+                  <View style={styles.Veg_NonVeg_Container}>
+                    {menuType.map(Menu_Item => (
+                      <View key={Menu_Item.Id}>
+                        <Card style={styles.Veg_NonVeg_Card}>
+                          <View style={styles.Veg_NonVeg_Card_Content}>
+                            <Text
+                              style={[
+                                styles.Veg_NonVeg_Text,
+                                globalStyle.g_appDefaultTextColor,
+                              ]}>
+                              {Menu_Item.Name}
+                            </Text>
+                            <Switch
+                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                              onValueChange={() =>
+                                onToggleMenuTypes(Menu_Item.Id)
+                              }
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                          </View>
+                        </Card>
+                      </View>
+                    ))}
+                  </View>
+                  {MenuTypes.map(mType_Item => (
+                    <Card
+                      key={mType_Item.Id}
+                      style={styles.Menu_Types_Card}
+                      onPress={() => handleAccordions(mType_Item.Id)}>
+                      <View style={styles.Menu_Types_Card_Header}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: 15,
+                          }}>
+                          <Text
+                            style={[
+                              styles.MenuType_Header,
+                              globalStyle.g_appDefaultTextColor,
+                            ]}
+                            onPress={() => handleAccordions(mType_Item.Id)}>
+                            {mType_Item.Name}
+                          </Text>
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              gap: 5,
+                            }}>
+                            <FaIcons
+                              name="rupee"
+                              size={12}
+                              color={globalStyle.g_appMainContentColors.color}
+                            />
+                            <Text style={[globalStyle.g_appDefaultTextColor]}>
+                              {mType_Item.TotalCost}
+                            </Text>
+                          </View>
+                        </View>
+                        <Ionicons
+                          name={
+                            expanded === mType_Item.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(mType_Item.Id)}
+                          size={15}
+                          color="#399590"
+                        />
+                      </View>
+                      {expanded === mType_Item.Id && (
+                        <View>
+                          <View style={styles.Veg_NonVeg_Container}>
+                            {menuType.map(Menu_Item => (
+                              <View key={Menu_Item.Id}>
+                                <Card style={styles.Veg_NonVeg_Card}>
+                                  <View style={styles.Veg_NonVeg_Card_Content}>
+                                    <Text
+                                      style={[
+                                        styles.Veg_NonVeg_Text,
+                                        globalStyle.g_appDefaultTextColor,
+                                      ]}>
+                                      {Menu_Item.Name}
+                                    </Text>
+                                    <Switch
+                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                                      onValueChange={() =>
+                                        onToggleMenuTypes(Menu_Item.Id)
+                                      }
+                                      color={
+                                        globalStyle.g_appMainContentColors.color
+                                      }
+                                    />
+                                  </View>
+                                </Card>
+                              </View>
+                            ))}
+                          </View>
+                          {BreakfastMenus.map(mBItem => (
+                            <>
+                              <View
+                                key={mBItem.Id}
+                                style={styles.Menu_List_Content}>
+                                <Text
+                                  style={[
+                                    styles.Menu_List_Header,
+                                    globalStyle.g_appMainContentActiveBgColors,
+                                  ]}>
+                                  {mBItem.Title}
+                                </Text>
+                                <Text>{mBItem.Items.length} Of</Text>
+                                <View style={styles.Menu_Items_List}>
+                                  <ScrollView
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}>
+                                    {mBItem.Items.map(item => (
+                                      <View key={item.Id}>
+                                        <Card
+                                          style={styles.Menu_Item_List_Card}>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_List_CardBody
+                                            }>
+                                            <Image
+                                              source={item.ItemImage}
+                                              style={styles.Menu_Item_Image}
+                                            />
+                                          </View>
+                                          <Text style={[styles.Menu_Item_Name]}>
+                                            {item.ItemName}
+                                          </Text>
+                                          <Text
+                                            style={styles.Menu_Item_Desc}
+                                            numberOfLines={2}
+                                            textBreakStrategy="simple">
+                                            {item.Decscription}
+                                          </Text>
+                                          <View
+                                            style={
+                                              styles.Menu_Item_Rating_AddBtn
+                                            }>
+                                            <View
+                                              style={styles.Menu_Item_Rating}>
+                                              <Text
+                                                style={
+                                                  styles.Menu_Item_Rating_Text
+                                                }>
+                                                {item.Rating}
+                                              </Text>
+                                              <AntIcons
+                                                name="star"
+                                                size={14}
+                                                color="#f1c40f"
+                                              />
+                                            </View>
+                                            <MaIcons
+                                              name={
+                                                isAdded === item.Id
+                                                  ? 'minus-box'
+                                                  : 'plus-box'
+                                              }
+                                              onPress={() =>
+                                                handleAddRemove(item.Id)
+                                              }
+                                              size={20}
+                                              color={
+                                                isAdded === item.Id
+                                                  ? '#FF6666'
+                                                  : '#389590'
+                                              }
                                             />
                                           </View>
                                         </Card>
@@ -862,6 +1785,28 @@ const styles = StyleSheet.create({
   MenuType_Header: {
     fontWeight: 'bold',
   },
+
+  //Menu Type Selection
+  Veg_NonVeg_Container: {
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  Veg_NonVeg_Card: {
+    backgroundColor: '#ffff',
+    margin: '2%',
+    borderRadius: 5,
+  },
+  Veg_NonVeg_Card_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+    justifyContent: 'space-between',
+  },
+  Veg_NonVeg_Text: {
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+
   //Expanded Content
   M_List_Container: {
     backgroundColor: '#ffff',
@@ -965,6 +1910,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     backgroundColor: '#ffff',
+    marginBottom: 0,
   },
   ApplyForAllDates_CardBody: {
     flexDirection: 'row',

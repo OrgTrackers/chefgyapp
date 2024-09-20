@@ -52,10 +52,10 @@ const Home = () => {
   const navigation = useNavigation();
 
   const images = [
-    require('../assets/Updated/images/H1.png'),
-    require('../assets/Updated/images/H2.png'),
-    require('../assets/Updated/images/H3.png'),
-    require('../assets/Updated/images/H4.png'),
+    require('../assets/Updated/images/Home/Banner-1.png'),
+    require('../assets/Updated/images/Home/Banner-2.png'),
+    require('../assets/Updated/images/Home/Banner-3.png'),
+    require('../assets/Updated/images/Home/Banner-4.png'),
   ];
 
   useEffect(() => {
@@ -261,9 +261,11 @@ const styles = StyleSheet.create({
   // carousel content
   image: {
     width: width - 40,
-    height: 150,
+    height: 120,
     marginHorizontal: 20,
     borderRadius: 10,
+    objectFit:'cover',
+    
   },
   indicatorContainer: {
     flexDirection: 'row',
