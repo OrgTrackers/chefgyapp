@@ -61,50 +61,50 @@ const FsDates = [
 const FsAccordions = [
   {
     Id: 1,
-    name: '',
+    name: 'Breakfast',
     Items: [
-      { Id: 1, BType: 'South Indian ' }, // Dosa, Idli, etc.
-      { Id: 2, BType: 'Continental ' }, // Croissant, Eggs Benedict, etc.
-      { Id: 3, BType: 'American ' }, // Pancakes, Bacon, etc.
-      { Id: 4, BType: 'Mediterranean ' }, // Hummus, Pita, etc.
-      { Id: 5, BType: 'Japanese ' }, // Miso soup, Rice, etc.
-      { Id: 6, BType: 'English ' }, // Full English, Beans, etc.
-      { Id: 7, BType: 'Mexican ' }, // Chilaquiles, Huevos Rancheros, etc.
-      { Id: 8, BType: 'French ' }, // Baguette, Pastries, etc.
-      { Id: 9, BType: 'Vegan ' }, // Smoothie Bowls, Avocado Toast, etc.
-      { Id: 10, BType: 'Brunch Specialties' }, // Eggs Benedict, Frittatas, etc.
+      {Id: 1, BType: 'South Indian '}, // Dosa, Idli, etc.
+      {Id: 2, BType: 'Continental '}, // Croissant, Eggs Benedict, etc.
+      {Id: 3, BType: 'American '}, // Pancakes, Bacon, etc.
+      {Id: 4, BType: 'Mediterranean '}, // Hummus, Pita, etc.
+      {Id: 5, BType: 'Japanese '}, // Miso soup, Rice, etc.
+      {Id: 6, BType: 'English '}, // Full English, Beans, etc.
+      {Id: 7, BType: 'Mexican '}, // Chilaquiles, Huevos Rancheros, etc.
+      {Id: 8, BType: 'French '}, // Baguette, Pastries, etc.
+      {Id: 9, BType: 'Vegan '}, // Smoothie Bowls, Avocado Toast, etc.
+      {Id: 10, BType: 'Brunch Specialties'}, // Eggs Benedict, Frittatas, etc.
     ],
   },
   {
     Id: 2,
-    name: '',
+    name: 'Lunch',
     Items: [
-      { Id: 1, BType: 'Mediterranean ' }, // Falafel, Shawarma, etc.
-      { Id: 2, BType: 'Indian ' }, // Thali, Curry, etc.
-      { Id: 3, BType: 'Italian ' }, // Pasta, Pizza, etc.
-      { Id: 4, BType: 'Asian ' }, // Sushi, Ramen, etc.
-      { Id: 5, BType: 'Mexican ' }, // Tacos, Burritos, etc.
-      { Id: 6, BType: 'American ' }, // Burgers, Sandwiches, etc.
-      { Id: 7, BType: 'Thai ' }, // Pad Thai, Green Curry, etc.
-      { Id: 8, BType: 'French ' }, // Quiche, Ratatouille, etc.
-      { Id: 9, BType: 'Korean ' }, // Bibimbap, Kimchi, etc.
-      { Id: 10, BType: 'Healthy Bowl ' }, // Grain Bowls, Salads, etc.
+      {Id: 1, BType: 'Mediterranean '}, // Falafel, Shawarma, etc.
+      {Id: 2, BType: 'Indian '}, // Thali, Curry, etc.
+      {Id: 3, BType: 'Italian '}, // Pasta, Pizza, etc.
+      {Id: 4, BType: 'Asian '}, // Sushi, Ramen, etc.
+      {Id: 5, BType: 'Mexican '}, // Tacos, Burritos, etc.
+      {Id: 6, BType: 'American '}, // Burgers, Sandwiches, etc.
+      {Id: 7, BType: 'Thai '}, // Pad Thai, Green Curry, etc.
+      {Id: 8, BType: 'French '}, // Quiche, Ratatouille, etc.
+      {Id: 9, BType: 'Korean '}, // Bibimbap, Kimchi, etc.
+      {Id: 10, BType: 'Healthy Bowl '}, // Grain Bowls, Salads, etc.
     ],
   },
   {
     Id: 3,
-    name: '',
+    name: 'Dinner',
     Items: [
-      { Id: 1, BType: 'Steakhouse ' }, // Steak, Lobster, etc.
-      { Id: 2, BType: 'Italian ' }, // Risotto, Lasagna, etc.
-      { Id: 3, BType: 'Asian Fusion ' }, // Stir Fry, Dim Sum, etc.
-      { Id: 4, BType: 'Mediterranean ' }, // Grilled Fish, Meze, etc.
-      { Id: 5, BType: 'Indian ' }, // Biryani, Butter Chicken, etc.
-      { Id: 6, BType: 'Mexican ' }, // Enchiladas, Mole, etc.
-      { Id: 7, BType: 'Seafood ' }, // Grilled Salmon, Seafood Pasta, etc.
-      { Id: 8, BType: 'Vegan ' }, // Vegan Curry, Stuffed Peppers, etc.
-      { Id: 9, BType: 'Comfort Food ' }, // Mac and Cheese, Meatloaf, etc.
-      { Id: 10, BType: 'Fine Dining Specialties' }, // Tasting Menus, Gourmet Dishes, etc.
+      {Id: 1, BType: 'Steakhouse '}, // Steak, Lobster, etc.
+      {Id: 2, BType: 'Italian '}, // Risotto, Lasagna, etc.
+      {Id: 3, BType: 'Asian Fusion '}, // Stir Fry, Dim Sum, etc.
+      {Id: 4, BType: 'Mediterranean '}, // Grilled Fish, Meze, etc.
+      {Id: 5, BType: 'Indian '}, // Biryani, Butter Chicken, etc.
+      {Id: 6, BType: 'Mexican '}, // Enchiladas, Mole, etc.
+      {Id: 7, BType: 'Seafood '}, // Grilled Salmon, Seafood Pasta, etc.
+      {Id: 8, BType: 'Vegan '}, // Vegan Curry, Stuffed Peppers, etc.
+      {Id: 9, BType: 'Comfort Food '}, // Mac and Cheese, Meatloaf, etc.
+      {Id: 10, BType: 'Fine Dining Specialties'}, // Tasting Menus, Gourmet Dishes, etc.
     ],
   },
 ];
@@ -287,31 +287,8 @@ const FoodSession = () => {
   const [checked, setChecked] = React.useState([]);
   const [isSwitchOn, setIsSwitchOn] = React.useState(true);
 
-  const [multiSliderValue, setMultiSliderValue] = useState([20, 80]);
-  const [minValue, setMinValue] = useState(multiSliderValue[0].toString());
-  const [maxValue, setMaxValue] = useState(multiSliderValue[1].toString());
-
-  const multiSliderValuesChange = values => {
-    setMultiSliderValue(values);
-    setMinValue(values[0].toString());
-    setMaxValue(values[1].toString());
-  };
-
-  const handleMinValueChange = value => {
-    const min = parseInt(value) || 0;
-    setMinValue(value);
-    setMultiSliderValue([min, multiSliderValue[1]]);
-  };
-
-  const handleMaxValueChange = value => {
-    const max = parseInt(value) || 100;
-    setMaxValue(value);
-    setMultiSliderValue([multiSliderValue[0], max]);
-  };
-
-  const handleSliderChange = values => {
-    setSliderValue(values);
-  };
+  const [minValue, setMinValue] = useState(10);
+  const [maxValue, setMaxValue] = useState(0);
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id); // Toggle accordion
@@ -438,66 +415,55 @@ const FoodSession = () => {
                           Attendees : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
-                          <Text>Min :  </Text>
+                          <Text style={styles.maxMininputLabel}>Min: </Text>
                           <TextInput
-                            style={[styles.Rangeinput,globalStyle.g_appMainContentInputs]}
+                            style={[
+                              styles.Rangeinput,
+                              // globalStyle.g_appMainContentInputs,
+                            ]}
                             keyboardType="numeric"
-                            value={minValue}
-                            onChangeText={handleMinValueChange}
-                          />
-                          <Text>Max :   </Text>
-                          <TextInput
-                            style={[styles.Rangeinput,globalStyle.g_appMainContentInputs]}
-                            keyboardType="numeric"
-                            value={maxValue}
-                            onChangeText={handleMaxValueChange}
+                            value={String(minValue)}
+                            onChangeText={text => setMinValue(Number(text))}
                           />
                         </View>
-                        <View style={styles.Fsa_Quantity}>
-                          <MultiSlider
-                            markerStyle={{
-                              height: 60,
-                              width: 60,
-                              borderRadius: 30,
-                              backgroundColor: 'transparent', // Transparent background to use images as markers
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                            customMarker={() => (
-                              <Image
-                                source={require('../assets/Updated/images/OrderSummary.jpg')}
-                                style={styles.attendeeImage}
-                              />
-                            )}
-                            pressedMarkerStyle={{
-                              ...Platform.select({
-                                android: {
-                                  height: 60,
-                                  width: 60,
-                                  borderRadius: 30,
-                                  backgroundColor: 'transparent',
-                                },
-                              }),
-                            }}
-                            selectedStyle={{
-                              backgroundColor: '#1792E8',
-                            }}
-                            trackStyle={{
-                              backgroundColor: '#CECECE',
-                            }}
-                            touchDimensions={{
-                              height: 60,
-                              width: 60,
-                              borderRadius: 30,
-                              slipDisplacement: 60,
-                            }}
-                            values={[multiSliderValue[0], multiSliderValue[1]]}
-                            sliderLength={280}
-                            onValuesChange={multiSliderValuesChange}
-                            min={0}
-                            max={100}
-                            allowOverlap={false}
-                            minMarkerOverlapDistance={10}
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={10}
+                            maximumValue={10000}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={minValue}
+                            onValueChange={value => setMinValue(value)}
+                          />
+                        </View>
+                        <View style={styles.inputWrapper}>
+                          <Text style={styles.maxMininputLabel}>Max: </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              // globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(maxValue)}
+                            onChangeText={text => setMaxValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={maxValue}
+                            onValueChange={value => setMaxValue(value)}
                           />
                         </View>
                         {FsaItem.Items.map(item => (
@@ -626,18 +592,23 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#1792E8',
   },
-  inputWrapper:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  Rangeinput:{
+  Rangeinput: {
     width: '30%',
-    marginTop: '2%',
+    marginTop: '5%',
     marginRight: '2%',
-    padding:0
-  }
+    padding: 0,
+  },
+  inputWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  maxMininputLabel: {
+    marginTop: 10,
+    fontSize: 20,
+    marginLeft: 15,
+    fontWeight: 'bold',
+  },
 });
 
 export default FoodSession;

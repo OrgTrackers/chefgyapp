@@ -452,7 +452,7 @@ const Menus = () => {
       <ImageBackground
         blurRadius={1}
         style={styles.M_Header_Img}
-        source={require('../assets/Updated/images/MenuBanner.png')}>
+        source={require('../assets/Updated/images/MenuBanner-2.png')}>
         <View style={styles.overlay} />
         <View style={[globalStyle.g_appPageHeaderContainer]}>
           <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
@@ -626,7 +626,7 @@ const Menus = () => {
                         <View>
                           {BreakfastMenus.map(mBItem => (
                             <>
-                              <View
+                              <View 
                                 key={mBItem.Id}
                                 style={styles.Menu_List_Content}>
                                 <Text
@@ -635,10 +635,8 @@ const Menus = () => {
                                     globalStyle.g_appMainContentActiveBgColors,
                                   ]}>
                                   {mBItem.Title}
-                                </Text>
-                                {/* <Text style={styles.Menu_List_Header_Tag}>
-                                  {mBItem.TagLine}
-                                </Text> */}
+                                </Text> 
+                                <Text>{mBItem.Items.length} Of</Text>
                                 <View style={styles.Menu_Items_List}>
                                   <ScrollView
                                     horizontal

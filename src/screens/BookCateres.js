@@ -120,6 +120,17 @@ const caterAllowcation = [
   },
 ];
 
+const menuType = [
+  {
+    Id:1,
+    Name:'Veg',
+  },
+  {
+    Id:2,
+    Name:'Non-Veg'
+  }
+]
+
 const BookCateres = () => {
   const navigation = useNavigation();
   const [selectedTypeId, setSelectedTypeId] = useState([]);
@@ -134,12 +145,21 @@ const BookCateres = () => {
     3: 1, // Initially select 'All' for Rating
   });
   const [isSwitchOn, setIsSwitchOn] = React.useState(null);
+  const [isMenuTypeOn, setIsMenuTypeOn] = React.useState(null);
 
   const onToggleSwitch = id => {
     if (isSwitchOn === id) {
       setIsSwitchOn(null); // Deselect if clicked again
     } else {
       setIsSwitchOn(id); // Set the clicked switch as active
+    }
+  };
+
+  const onToggleMenuTypes = id => {
+    if (isMenuTypeOn === id) {
+      setIsMenuTypeOn(null); // Deselect if clicked again
+    } else {
+      setIsMenuTypeOn(id); // Set the clicked switch as active
     }
   };
 
@@ -304,6 +324,31 @@ const BookCateres = () => {
               </View>
             ))}
           </View>
+          <View style={styles.BC_MenuType_Container}>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>
+              Select Menu Type
+            </Text>
+            {menuType.map(Menu_Item => (
+              <View key={Menu_Item.Id}>
+                <Card style={styles.BC_MenuType_Card}>
+                  <View style={styles.BC_MenuType_Card_Content}>
+                    <Text
+                      style={[
+                        styles.BC_CA_Allocation_Text,
+                        globalStyle.g_appDefaultTextColor,
+                      ]}>
+                      {Menu_Item.Name}
+                    </Text>
+                    <Switch
+                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
+                      onValueChange={() => onToggleMenuTypes(Menu_Item.Id)}
+                      color={globalStyle.g_appMainContentColors.color}
+                    />
+                  </View>
+                </Card>
+              </View>
+            ))}
+          </View>
           <View style={styles.BC_Filter_Container}>
             {Filters.map(fItem => (
               <View key={fItem.Id} style={{marginBottom: 20}}>
@@ -435,6 +480,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   BC_Cater_Allowcation_Card_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+    justifyContent: 'space-between',
+  },
+  BC_CA_Allocation_Text: {
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+
+  //Menu Type Selection
+  BC_MenuType_Container: {
+    marginTop: 20,
+  },
+  BC_MenuType_Card: {
+    backgroundColor: '#ffff',
+    margin: '2%',
+    borderRadius: 5,
+  },
+  BC_MenuType_Card_Content: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 5,
