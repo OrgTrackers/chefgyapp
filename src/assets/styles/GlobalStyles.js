@@ -30,7 +30,9 @@ export const globalStyle = StyleSheet.create (
         g_appPageHeaderIconsSize:{
             fontSize:24
         },
-
+        g_appDefaultContentBgColor:{
+            backgroundColor:'#389590'
+        },
 
         //App Main Content
         g_appMainContent:{

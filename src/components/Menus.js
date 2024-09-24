@@ -443,6 +443,11 @@ const Menus = () => {
     setActiveFilter(item.Name);
   };
 
+  const handleShowDates = () => {
+    setShowMenus(false);
+    setShowCategories(true);
+  };
+
   const handleIncrease = () => {
     setInputValue(prevValue => prevValue + 1);
   };
@@ -627,10 +632,7 @@ const Menus = () => {
                     ))}
                   </View>
                   {MenuTypes.map(mType_Item => (
-                    <Card
-                      key={mType_Item.Id}
-                      style={styles.Menu_Types_Card}
-                      onPress={() => handleAccordions(mType_Item.Id)}>
+                    <Card key={mType_Item.Id} style={styles.Menu_Types_Card}>
                       <View style={styles.Menu_Types_Card_Header}>
                         <View
                           style={{
@@ -706,14 +708,18 @@ const Menus = () => {
                               <View
                                 key={mBItem.Id}
                                 style={styles.Menu_List_Content}>
-                                <Text
-                                  style={[
-                                    styles.Menu_List_Header,
-                                    globalStyle.g_appMainContentActiveBgColors,
-                                  ]}>
-                                  {mBItem.Title}
-                                </Text>
-                                <Text>{mBItem.Items.length} Of</Text>
+                                <View style={styles.Menu_List_Header_Container}>
+                                  <Text
+                                    style={[
+                                      styles.Menu_List_Header,
+                                      globalStyle.g_appMainContentActiveBgColors,
+                                    ]}>
+                                    {mBItem.Title}
+                                  </Text>
+                                  <Text style={styles.Menu_List_Selected_Count}>
+                                    3 Of {mBItem.Items.length}
+                                  </Text>
+                                </View>
                                 <View style={styles.Menu_Items_List}>
                                   <ScrollView
                                     horizontal
@@ -783,14 +789,14 @@ const Menus = () => {
                               </View>
                             </>
                           ))}
-                          <TouchableOpacity style={[globalStyle.g_Button]}>
+                          {/* <TouchableOpacity style={[globalStyle.g_Button]}>
                             <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
                             style={[globalStyle.g_Button]}
-                            onPress={() => navigation.navigate('OrderSummary')}>
+                          >
                             <Text style={[globalStyle.g_ButtonText]}>Next</Text>
-                          </TouchableOpacity>
+                          </TouchableOpacity> */}
                         </View>
                       )}
                     </Card>
@@ -1463,10 +1469,7 @@ const Menus = () => {
                     ))}
                   </View>
                   {MenuTypes.map(mType_Item => (
-                    <Card
-                      key={mType_Item.Id}
-                      style={styles.Menu_Types_Card}
-                      onPress={() => handleAccordions(mType_Item.Id)}>
+                    <Card key={mType_Item.Id} style={styles.Menu_Types_Card}>
                       <View style={styles.Menu_Types_Card_Header}>
                         <View
                           style={{
@@ -1637,7 +1640,21 @@ const Menus = () => {
           </View>
         )}
       </View>
-      <Footer />
+      {showCategories && <Footer />}
+      {showMenus && (
+        <TouchableOpacity
+          style={styles.Pay_Buttons}
+          // handleShowDates
+          onPress={()=>navigation.navigate('OrderSummary')}>
+          <Text
+            style={[
+              styles.Pay_Buttons_Text,
+              globalStyle.g_appDefaultTextColor,
+            ]}>
+            Next
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
   c;
@@ -1775,6 +1792,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     padding: 10,
     backgroundColor: '#ffff',
+    marginBottom: 20,
   },
   Menu_Types_Card_Header: {
     display: 'flex',
@@ -1816,6 +1834,22 @@ const styles = StyleSheet.create({
     marginBottom: '5%',
     borderColor: '#cccc',
     borderWidth: 1,
+  },
+  Menu_List_Header_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  Menu_List_Selected_Count: {
+    marginTop: '10%',
+    backgroundColor: '#d5f5e3',
+    padding: 5,
+    width: 70,
+    textAlign: 'center',
+    borderRadius: 10,
+    color: '#27ae60',
+    fontWeight: '900',
   },
   Menu_List_Header: {
     color: '#ffff',
@@ -1916,6 +1950,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+
+  Pay_Buttons: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60, // Adjust height as needed
+    backgroundColor: '#FFFF', // Adjust background color as needed
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#e7e7e7', // Adjust border color as needed
+  },
+  Pay_Buttons_Text: {
+    textAlign: 'center',
   },
 });
 export default Menus;

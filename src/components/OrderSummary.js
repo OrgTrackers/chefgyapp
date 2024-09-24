@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -18,7 +19,7 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FaIcons from 'react-native-vector-icons/FontAwesome6';
 
 //Paper
-import {Button, Card, Modal, Portal} from 'react-native-paper';
+import {Button, Card, Modal, Portal, Tooltip} from 'react-native-paper';
 
 const orderSummaryData = [
   {
@@ -294,9 +295,11 @@ export default function OrderSummary() {
 
   const [expanded, setExpanded] = React.useState(1);
   const [visible, setVisible] = React.useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+  const toggleTooltip = () => setTooltipVisible(!tooltipVisible);
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id); // Toggle accordion
@@ -326,10 +329,10 @@ export default function OrderSummary() {
         <ScrollView showsVerticalScrollIndicator={false}>
           {orderSummaryData.map(OS_DateItem => (
             <View key={OS_DateItem.Id}>
-              <View
-                style={styles.Date_Day_Container}
-                onPress={() => handleAccordions(OS_DateItem.Id)}>
-                <View style={styles.Date_Container}>
+              <View style={styles.Date_Day_Container}>
+                <TouchableOpacity
+                  style={styles.Date_Container}
+                  onPress={() => handleAccordions(OS_DateItem.Id)}>
                   <Text
                     style={[
                       globalStyle.g_appDefaultTextColor,
@@ -338,7 +341,7 @@ export default function OrderSummary() {
                     {OS_DateItem.Date}
                   </Text>
                   <Text style={styles.OS_Month_Text}>{OS_DateItem.Month}</Text>
-                </View>
+                </TouchableOpacity>
                 <Text
                   style={[
                     globalStyle.g_appDefaultTextColor,
@@ -420,6 +423,80 @@ export default function OrderSummary() {
               )}
             </View>
           ))}
+          <View style={styles.GrandTotal_Container}>
+            <Text style={styles.GrandTotal_Container_Header}>
+              Billing Details
+            </Text>
+            <View style={styles.SubTotal_Content}>
+              <Text style={styles.SubTotal_Label}>Subtotal</Text>
+              <View style={styles.TotalCost_Container}>
+                <FaIcons name="indian-rupee-sign" size={12} color="#000" />
+                <Text style={styles.SubCost_Text}>38.06</Text>
+              </View>
+            </View>
+            <View style={styles.Tax_Content}>
+              <Text>Estimated Tax</Text>
+              <Text>2.85</Text>
+            </View>
+            <View style={styles.Tax_Content}>
+              <Text>Platform Fee</Text>
+              <View style={styles.TotalCost_Container}>
+                <FaIcons name="indian-rupee-sign" size={12} color="#272727" />
+                <Text>6.00</Text>
+              </View>
+            </View>
+            <View style={styles.Tax_Content}>
+              <Text>Delivery Fee</Text>
+              <View style={styles.TotalCost_Container}>
+                <FaIcons name="indian-rupee-sign" size={12} color="#272727" />
+                <Text>75.00</Text>
+              </View>
+            </View>
+            <View style={styles.Overall_Content}>
+              <Text style={styles.Order_Label}>Order Total</Text>
+              <View style={styles.TotalCost_Container}>
+                <FaIcons name="indian-rupee-sign" size={15} color="#000" />
+                <Text style={styles.SubCost_Text}>40.91</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.Bidding_Inputs_Form_Container}>
+            <View style={styles.Form_Inputs}>
+              <Text style={styles.Bidding_Input_Label}>Ask/Bidding Price</Text>
+              <View style={styles.Bidding_Input_Info}>
+                <TextInput
+                  placeholder="0.00"
+                  style={[
+                    styles.Bidding_Input,
+                    globalStyle.g_appMainContentInputs,
+                  ]}
+                />
+                <Tooltip
+                  visible={tooltipVisible}
+                  onDismiss={toggleTooltip}
+                  content={<Text>This is the tooltip text!</Text>}
+                  placement="top">
+                  <Ionicons
+                    name="information-circle"
+                    size={20}
+                    color="#000"
+                    onPress={toggleTooltip}
+                  />
+                </Tooltip>
+              </View>
+            </View>
+            <View style={styles.Form_Inputs}>
+              <TextInput
+                multiline
+                numberOfLines={1}
+                placeholder="comments"
+                style={[
+                  styles.Comments_Section,
+                  globalStyle.g_appMainContentInputs,
+                ]}
+              />
+            </View>
+          </View>
         </ScrollView>
       </View>
       <Portal>
@@ -492,7 +569,16 @@ export default function OrderSummary() {
           </View>
         </Modal>
       </Portal>
-      <Footer />
+      <Button
+        style={[styles.Pay_Buttons, globalStyle.g_appDefaultContentBgColor]}>
+        <View style={styles.Pay_Button_Content}>
+          <Text style={[styles.Pay_Buttons_Text]}>Submit Order</Text>
+          {/* <View style={styles.TotalCost_Container}>
+            <FaIcons name="indian-rupee-sign" size={12} color="#fff" />
+            <Text style={[styles.Pay_Buttons_Text]}>98.68</Text>
+          </View> */}
+        </View>
+      </Button>
     </View>
   );
 }
@@ -639,9 +725,105 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     fontWeight: 'bold',
   },
-  DishItem_List:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'baseline'
-  }
+  DishItem_List: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
+
+  Pay_Buttons: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60, // Adjust height as needed
+    backgroundColor: '#FFFF', // Adjust background color as needed
+    justifyContent: 'center',
+    // borderTopWidth: 1,
+    borderRadius: 0,
+  },
+  Pay_Buttons_Text: {
+    textAlign: 'center',
+    color: '#fff',
+  },
+  Pay_Button_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  Comments_Section: {
+    marginTop: 10,
+    textAlignVertical: 'top', // This aligns the text to the top
+  },
+  Bidding_Inputs_Form_Container: {
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  Form_Inputs: {
+    marginTop: 10,
+  },
+  Bidding_Input_Label: {
+    marginBottom: 5,
+  },
+
+  Bidding_Input_Info: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'center',
+  },
+  Bidding_Input: {
+    width: '85%',
+  },
+  //Grand total
+  GrandTotal_Container: {
+    marginTop: 10,
+  },
+  SubTotal_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  TotalCost_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  SubTotal_Label: {
+    // fontWeight: 'bold',
+    // color: '#000',
+    // fontSize: 15,
+  },
+  SubCost_Text: {
+    // fontSize: 15,
+    // color: '#000',
+    // fontWeight: 'bold',
+  },
+  Tax_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  Overall_Content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 15,
+    marginBottom: 10,
+    paddingTop: 5,
+    borderTopColor: '#cccc',
+    borderTopWidth: 1,
+  },
+  Order_Label: {
+    fontWeight: 'bold',
+    color: '#000',
+    fontSize: 15,
+  },
+  GrandTotal_Container_Header: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    fontWeight: 'bold',
+    color: '#000',
+    fontSize: 15,
+  },
 });
