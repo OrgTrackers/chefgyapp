@@ -24,6 +24,11 @@ import OrderSummary from './src/components/OrderSummary';
 import CaterSelection from './src/screens/CaterSelection';
 import Invoice from './src/screens/Invoice';
 
+//chef
+import ChefFilters from './src/components/Chef/ChefFilters';
+import ChefList from './src/components/Chef/ChefList';
+import ChefConformation from './src/components/Chef/ChefConformation';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -89,6 +94,10 @@ const App = () => {
           <Stack.Screen name="OrderSummary" component={OrderSummary} />
           <Stack.Screen name="CaterSelection" component={CaterSelection} />
           <Stack.Screen name="Invoice" component={Invoice} />
+
+          <Stack.Screen name="ChefFilters" component={ChefFilters} />
+          <Stack.Screen name="ChefList" component={ChefList} />
+          <Stack.Screen name="ChefConformation" component={ChefConformation} />
           <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>
       </NavigationContainer>

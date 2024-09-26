@@ -90,7 +90,9 @@ const Home = () => {
       case 'Caters':
         navigation.navigate('EventPage');
         break;
-
+      case 'Chef':
+        navigation.navigate ('ChefFilters');
+        break;
       default:
         break;
     }
@@ -133,6 +135,7 @@ const Home = () => {
           />
           <TextInput
             placeholder="What are you looking for ?"
+            placeholderTextColor="#000"
             style={styles.Home_Search_Input}></TextInput>
         </View>
       </View>
@@ -218,6 +221,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     width: '80%',
+    color:'#272727'
   },
   Home_Header_User_Img: {
     width: 40,
