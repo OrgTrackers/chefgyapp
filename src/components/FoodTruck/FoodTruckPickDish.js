@@ -276,7 +276,7 @@ const Dates = [
 
 const BgColors = ['#f4d03f', '#FF2200', '#FA5F0F'];
 
-const ChefPickDish = () => {
+const FoodTruckPickDish = () => {
   const navigation = useNavigation();
   const [expanded, setExpanded] = useState(1);
   const [checked, setChecked] = React.useState([]);
@@ -312,7 +312,7 @@ const ChefPickDish = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <Header onBackPress={()=>navigation.navigate('ChefFilters')}/>
+        <Header onBackPress={()=>navigation.navigate('FoodTruckFilters')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Pick Your Dish</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>
@@ -425,7 +425,7 @@ const ChefPickDish = () => {
       </View>
       <TouchableOpacity
         style={[styles.Btn_As_Footer, globalStyle.g_appDefaultContentBgColor]}
-        onPress={() => navigation.navigate('ChefList')}>
+        onPress={() => navigation.navigate('FoodTruckList')}>
         <Text style={styles.Btn_As_Footer_Text}>Next</Text>
       </TouchableOpacity>
     </View>
@@ -544,4 +544,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChefPickDish;
+export default FoodTruckPickDish;

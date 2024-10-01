@@ -36,6 +36,12 @@ import HomeFoodList from './src/components/HomeFood/HomeFoodList';
 import HomeFoodConformation from './src/components/HomeFood/HomeFoodConformation';
 import HomeFoodPickDish from './src/components/HomeFood/HomeFoodPickDish';
 
+//Food Truck
+import FoodTruckFilters from './src/components/FoodTruck/FoodTruckFilter';
+import FoodTruckList from './src/components/FoodTruck/FoodTruckList';
+import FoodTruckConformation from './src/components/FoodTruck/FoodTruckConfromation';
+import FoodTruckPickDish from './src/components/FoodTruck/FoodTruckPickDish';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -111,6 +117,11 @@ const App = () => {
           <Stack.Screen name="HomeFoodList" component={HomeFoodList} />
           <Stack.Screen name="HomeFoodConformation" component={HomeFoodConformation} />
           <Stack.Screen name="HomeFoodPickDish" component={HomeFoodPickDish} />
+
+          <Stack.Screen name="FoodTruckFilters" component={FoodTruckFilters} />
+          <Stack.Screen name="FoodTruckList" component={FoodTruckList} />
+          <Stack.Screen name="FoodTruckConformation" component={FoodTruckConformation} />
+          <Stack.Screen name="FoodTruckPickDish" component={FoodTruckPickDish} />
           <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>
       </NavigationContainer>

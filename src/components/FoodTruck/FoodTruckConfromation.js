@@ -21,12 +21,12 @@ import Header from '../Header';
 
 import {Card} from 'react-native-paper';
 
-const ChefConformation = () => {
+const FoodTruckConformation = () => {
   const navigation = useNavigation();
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <Header onBackPress={()=>navigation.navigate('ChefFilters')}/>
+        <Header onBackPress={()=>navigation.navigate('FoodTruckFilters')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Summary</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>
@@ -244,4 +244,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChefConformation;
+export default FoodTruckConformation;
