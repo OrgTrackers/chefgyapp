@@ -21,6 +21,7 @@ import FaIcons from 'react-native-vector-icons/FontAwesome';
 import {Card, Title, Switch, Checkbox} from 'react-native-paper';
 import {Image} from 'react-native';
 import {globalStyle} from '../assets/styles/GlobalStyles';
+import Header from './Header';
 
 const MenuFilters = [
   {
@@ -478,20 +479,7 @@ const Menus = () => {
         source={require('../assets/Updated/images/MenuBanner-2.png')}>
         <View style={styles.overlay} />
         <View style={[globalStyle.g_appPageHeaderContainer]}>
-          <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-            <TouchableOpacity onPress={handleBackBtn}>
-              <Ionicons
-                name="chevron-back"
-                size={24}
-                color={globalStyle.g_appPageHeaderIconsColors.color}
-              />
-            </TouchableOpacity>
-            <Ionicons
-              name="ellipsis-vertical"
-              size={15}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </View>
+          <Header onBackPress={handleBackBtn} />
           <Text style={styles.M_Header_Text}>
             Sri Venkata Ramana Kanaka Durga Deluxe Caterers
           </Text>

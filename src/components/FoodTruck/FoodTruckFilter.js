@@ -205,7 +205,7 @@ const FoodTruckFilters = () => {
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <Header onBackPress={()=>navigation.navigate('Home')}/>
-        <Text style={[globalStyle.g_appPageHeaderText]}>FoodTruck Filters</Text>
+        <Text style={[globalStyle.g_appPageHeaderText]}>Food Truck Filters</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>
         <ScrollView

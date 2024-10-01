@@ -21,6 +21,7 @@ import FaIcons from 'react-native-vector-icons/FontAwesome6';
 
 //Paper
 import {Button, Card, Modal, Portal, Tooltip} from 'react-native-paper';
+import Header from './Header';
 
 const orderSummaryData = [
   {
@@ -316,20 +317,7 @@ export default function OrderSummary() {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('Menus')}>
-            <Ionicons
-              name="chevron-back"
-              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </TouchableOpacity>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-            color={globalStyle.g_appPageHeaderIconsColors.color}
-          />
-        </View>
+        <Header onBackPress={()=>navigation.navigate('Menus')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Order Summary</Text>
         <Text style={styles.OS_Header_Tag}>Final Review Before Checkout</Text>
       </View>

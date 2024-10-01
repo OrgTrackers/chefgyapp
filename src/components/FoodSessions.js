@@ -26,6 +26,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 //Global Styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
 import {Fonts} from '../assets/styles/Fonts';
+import Header from './Header';
 
 const FsDates = [
   {
@@ -323,20 +324,7 @@ const FoodSession = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('BookCateres')}>
-            <Ionicons
-              name="chevron-back"
-              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </TouchableOpacity>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-            color={globalStyle.g_appPageHeaderIconsColors.color}
-          />
-        </View>
+        <Header onBackPress={()=>navigation.navigate('BookCateres')}/>
         {showMainContent && (
           <Text style={[globalStyle.g_appPageHeaderText]}>Food Session</Text>
         )}

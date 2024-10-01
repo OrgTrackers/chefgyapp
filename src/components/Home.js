@@ -40,7 +40,7 @@ const App_Cate = [
   {
     Id: 4,
     Img: require('../assets/Updated/images/H4.png'),
-    Lable: 'Food On Wheels',
+    Lable: 'Food Truck',
     Offers: 'UPTO 20% OFF',
   },
 ];
@@ -95,6 +95,9 @@ const Home = () => {
         break;
       case 'Home Food':
         navigation.navigate('HomeFoodFilters');
+        break;
+      case 'Food Truck':
+        navigation.navigate('FoodTruckFilters');
         break;
       default:
         break;

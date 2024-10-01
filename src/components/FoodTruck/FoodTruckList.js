@@ -93,7 +93,7 @@ const FoodTruckList = () => {
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <Header onBackPress={()=>navigation.navigate('FoodTruckFilters')}/>
-        <Text style={[globalStyle.g_appPageHeaderText]}>FoodTruck Selection</Text>
+        <Text style={[globalStyle.g_appPageHeaderText]}>Food Truck Selection</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>
         <ScrollView showsVerticalScrollIndicator={false}>

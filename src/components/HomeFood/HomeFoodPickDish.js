@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {globalStyle} from '../../assets/styles/GlobalStyles';
 import {Card} from 'react-native-paper';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import Header from '../Header';
 
 const PickDishData = [
   {
@@ -119,20 +120,7 @@ const HomeFoodPickDish = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('HomeFoodFilters')}>
-            <Ionicons
-              name="chevron-back"
-              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </TouchableOpacity>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-            color={globalStyle.g_appPageHeaderIconsColors.color}
-          />
-        </View>
+        <Header onBackPress={()=>navigation.navigate('HomeFoodFilters')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Pick Your Dish</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>

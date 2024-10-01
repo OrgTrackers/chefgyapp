@@ -18,6 +18,7 @@ import AntIcons from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto'
 
 import {Card} from 'react-native-paper';
+import Header from '../Header';
 
 const HomeFoodData = [
   {
@@ -91,20 +92,7 @@ const HomeFoodList = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('HomeFoodFilters')}>
-            <Ionicons
-              name="chevron-back"
-              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </TouchableOpacity>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-            color={globalStyle.g_appPageHeaderIconsColors.color}
-          />
-        </View>
+        <Header onBackPress={()=>navigation.navigate('HomeFoodFilters')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Home Food Selection</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>

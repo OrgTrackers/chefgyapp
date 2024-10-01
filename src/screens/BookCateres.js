@@ -17,6 +17,7 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 //styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
+import Header from '../components/Header';
 
 const Cater_Type = [
   {
@@ -201,20 +202,7 @@ const BookCateres = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('EventPage')}>
-            <Ionicons
-              name="chevron-back"
-              size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-              color={globalStyle.g_appPageHeaderIconsColors.color}
-            />
-          </TouchableOpacity>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={globalStyle.g_appPageHeaderIconsSize.fontSize}
-            color={globalStyle.g_appPageHeaderIconsColors.color}
-          />
-        </View>
+        <Header onBackPress={()=>navigation.navigate('EventPage')}/>
         <Text style={[globalStyle.g_appPageHeaderText]}>Book Caterer</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>
