@@ -142,18 +142,7 @@ const FoodSpecialties = [
     Decscription: 'A genuine fine-dining experience awaits.',
   },
 ];
-
-const chefAllowcation = [
-  {
-    Id: 1,
-    Name: 'Auto Asign',
-  },
-  {
-    Id: 2,
-    Name: 'Let Me Do It My Self',
-  },
-];
-const ChefFilters = () => {
+const HomeFoodFilters = () => {
   const navigation = useNavigation();
   const [selectedFilters, setSelectedFilters] = useState({
     1: 1, // Initially select 'All' for Price
@@ -161,13 +150,12 @@ const ChefFilters = () => {
     3: 1, // Initially select 'All' for Rating
   });
   const [isAdded, setIsAdded] = useState([]);
-  const [showIngredients, setShowIngredients] = React.useState(false);
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isFromDate, setIsFromDate] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [isSwitchOn, setIsSwitchOn] = React.useState(null);
 
   const handleAddRemove = id => {
     setIsAdded(prevItems =>
@@ -182,7 +170,7 @@ const ChefFilters = () => {
       [categoryId]: filterId, // Update the selected filter for the category
     }));
   };
-  const toggleIngredients = () => setShowIngredients(!showIngredients);
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
   const handleDateChange = day => {
     const FormatDate = day.dateString;
@@ -193,13 +181,7 @@ const ChefFilters = () => {
     }
     setShowModal(false);
   };
-  const onToggleSwitch = id => {
-    if (isSwitchOn === id) {
-      setIsSwitchOn(null); // Deselect if clicked again
-    } else {
-      setIsSwitchOn(id); // Set the clicked switch as active
-    }
-  };
+
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
@@ -217,7 +199,7 @@ const ChefFilters = () => {
             color={globalStyle.g_appPageHeaderIconsColors.color}
           />
         </View>
-        <Text style={[globalStyle.g_appPageHeaderText]}>Chef Filters</Text>
+        <Text style={[globalStyle.g_appPageHeaderText]}>Home Food Filters</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>
         <ScrollView
@@ -239,9 +221,7 @@ const ChefFilters = () => {
                   <TextInput
                     placeholder="From Date"
                     placeholderTextColor="#ccc"
-                    onPress={() => {
-                      setShowModal(true);
-                    }}
+                    onPress={()=>{ setShowModal(true)}}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -256,9 +236,7 @@ const ChefFilters = () => {
                   <TextInput
                     placeholder="To Date"
                     placeholderTextColor="#ccc"
-                    onPress={() => {
-                      setShowModal(true);
-                    }}
+                    onPress={()=>{ setShowModal(true)}}
                   />
                 </TouchableOpacity>
               </View>
@@ -286,60 +264,6 @@ const ChefFilters = () => {
             </View>
           </View>
           <View style={styles.Filter_Container}>
-            <View style={styles.Chef_Allowcation_Container}>
-              <Text style={[globalStyle.g_appMainContentHeaders]}>
-                Cater Allocation
-              </Text>
-              {chefAllowcation.map(CA_Item => (
-                <View key={CA_Item.Id}>
-                  <Card style={styles.Chef_Allowcation_Card}>
-                    <View style={styles.Chef_Allowcation_Card_Content}>
-                      <Text
-                        style={[
-                          styles.BC_CA_Allocation_Text,
-                          globalStyle.g_appDefaultTextColor,
-                        ]}>
-                        {CA_Item.Name}
-                      </Text>
-                      <Switch
-                        value={isSwitchOn === CA_Item.Id} // Check if the switch is active
-                        onValueChange={() => onToggleSwitch(CA_Item.Id)}
-                        color={globalStyle.g_appMainContentColors.color}
-                      />
-                    </View>
-                  </Card>
-                </View>
-              ))}
-            </View>
-            <View style={styles.Enter_Crowd_Input_Container}>
-              <Text style={globalStyle.g_appMainContentHeaders}>
-                Number Of Attendees
-              </Text>
-              <View style={styles.Crowd_Input_Icons}>
-                <TextInput
-                  placeholder="Enter Number Of Attendees"
-                  placeholderTextColor="#ccc"
-                  style={[
-                    styles.Crowd_Input,
-                    globalStyle.g_appMainContentInputs,
-                  ]}
-                />
-              </View>
-            </View>
-            <View style={styles.Chef_Ingredients}>
-              <Card style={styles.Chef_Ingredients_Card}>
-                <View style={styles.Chef_Ingredients_CardBody}>
-                  <Text style={[globalStyle.g_appDefaultTextColor]}>
-                    Chef Ingredients
-                  </Text>
-                  <Switch
-                    value={showIngredients}
-                    onValueChange={toggleIngredients}
-                    color={globalStyle.g_appDefaultTextColor.color}
-                  />
-                </View>
-              </Card>
-            </View>
             <View style={styles.Fs_Container}>
               <Text style={globalStyle.g_appMainContentHeaders}>
                 Food Specialties
@@ -420,13 +344,39 @@ const ChefFilters = () => {
                 </View>
               </View>
             ))}
-            <TouchableOpacity style={[globalStyle.g_Button]}onPress={() => navigation.navigate('ChefPickDish')}>
-              <Text style={globalStyle.g_ButtonText}>Proceed</Text>
-            </TouchableOpacity>
+            <View style={styles.Enter_Crowd_Input_Container}>
+              <Text style={globalStyle.g_appMainContentHeaders}>
+                Number Of Attendees
+              </Text>
+              <View style={styles.Crowd_Input_Icons}>
+                <TextInput
+                  placeholder="Enter Number Of Attendees"
+                  placeholderTextColor="#ccc"
+                  style={[
+                    styles.Crowd_Input,
+                    globalStyle.g_appMainContentInputs,
+                  ]}
+                />
+              </View>
+            </View>
+            <View style={styles.HomeFood_Ingredients}>
+              <Card style={styles.HomeFood_Ingredients_Card}>
+                <View style={styles.HomeFood_Ingredients_CardBody}>
+                  <Text style={[globalStyle.g_appDefaultTextColor]}>
+                    HomeFood Ingredients
+                  </Text>
+                  <Switch
+                    value={isSwitchOn}
+                    onValueChange={onToggleSwitch}
+                    color={globalStyle.g_appDefaultTextColor.color}
+                  />
+                </View>
+              </Card>
+            </View>
           </View>
         </ScrollView>
       </View>
-      <Footer />
+      {/* <Footer /> */}
       <Portal>
         <Modal
           visible={showModal}
@@ -443,13 +393,16 @@ const ChefFilters = () => {
           </View>
         </Modal>
       </Portal>
+      <TouchableOpacity style={[styles.Btn_As_Footer, globalStyle.g_appDefaultContentBgColor]} onPress={()=>navigation.navigate('HomeFoodPickDish')}>
+        <Text style={styles.Btn_As_Footer_Text}>Proceed</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   Btn_As_Footer: {
-    // position: 'absolute',
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
@@ -504,22 +457,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 10,
     fontWeight: 'bold',
-  },
-
-  //Chef alloctation
-  Chef_Allowcation_Container: {
-    marginBottom: 15,
-  },
-  Chef_Allowcation_Card: {
-    backgroundColor: '#ffff',
-    margin: '1%',
-    borderRadius: 5,
-  },
-  Chef_Allowcation_Card_Content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    justifyContent: 'space-between',
   },
 
   //Food Specialties
@@ -579,16 +516,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
 
-  Chef_Ingredients: {
+  HomeFood_Ingredients: {
     margin: 2,
     marginTop: 20,
     marginBottom: 20,
   },
-  Chef_Ingredients_Card: {
+  HomeFood_Ingredients_Card: {
     backgroundColor: '#fff',
     padding: 10,
   },
-  Chef_Ingredients_CardBody: {
+  HomeFood_Ingredients_CardBody: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -604,4 +541,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChefFilters;
+export default HomeFoodFilters;

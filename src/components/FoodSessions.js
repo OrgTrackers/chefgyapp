@@ -289,6 +289,7 @@ const FoodSession = () => {
 
   const [minValue, setMinValue] = useState(10);
   const [maxValue, setMaxValue] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const handleAccordions = id => {
     setExpanded(expanded === id ? null : id); // Toggle accordion
@@ -313,6 +314,10 @@ const FoodSession = () => {
 
   const handleItemPress = item => {
     setActiveDate(item.Dates);
+  };
+
+  const showCompleted = () => {
+    setIsCompleted(true);
   };
 
   return (
@@ -373,23 +378,41 @@ const FoodSession = () => {
                   <View key={FsaItem.Id}>
                     <Card
                       style={[
+                        isCompleted ? {backgroundColor: '#389590'} : {},
                         globalStyle.g_appMainContentAccordion,
                         styles.FS_Accordion,
                       ]}
                       onPress={() => handleAccordions(FsaItem.Id)}>
                       <View
                         style={[globalStyle.g_appMainContentAccordionHeader]}>
-                        <Text
-                          style={[
-                            globalStyle.g_appMainContentAccordionHeaderColorsSizes,
-                          ]}
-                          onPress={handleAccordions}>
-                          {FsaItem.name}
-                        </Text>
-
+                        <View style={styles.FS_Accordion_Name_Container}>
+                          {isCompleted && (
+                            <Ionicons
+                              name="checkmark-done"
+                              size={15}
+                              color={
+                                isCompleted
+                                  ? 'white'
+                                  : globalStyle.g_appMainContentColors.color
+                              }
+                            />
+                          )}
+                          <Text
+                            style={[
+                              globalStyle.g_appMainContentAccordionHeaderColorsSizes,
+                              {color: isCompleted ? 'white' : '#389590'},
+                            ]}
+                            onPress={handleAccordions}>
+                            {FsaItem.name}
+                          </Text>
+                        </View>
                         <Ionicons
                           size={15}
-                          color={globalStyle.g_appMainContentColors.color}
+                          color={
+                            isCompleted
+                              ? 'white'
+                              : globalStyle.g_appMainContentColors.color
+                          }
                           name={
                             expanded === FsaItem.Id
                               ? 'chevron-up'
@@ -495,6 +518,11 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
+                        <TouchableOpacity
+                          style={[globalStyle.g_Button]}
+                          onPress={showCompleted}>
+                          <Text style={globalStyle.g_ButtonText}>Next</Text>
+                        </TouchableOpacity>
                       </View>
                     )}
                   </View>
@@ -608,6 +636,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 15,
     fontWeight: 'bold',
+  },
+
+  //
+  FS_Accordion_Name_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  completed: {
+    backgroundColor: '#000',
   },
 });
 

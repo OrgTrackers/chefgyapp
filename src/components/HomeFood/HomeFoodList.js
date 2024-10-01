@@ -19,7 +19,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 
 import {Card} from 'react-native-paper';
 
-const ChefData = [
+const HomeFoodData = [
   {
     Id: 1,
     Name: 'Saicharan Vadlamanu',
@@ -86,13 +86,13 @@ const ChefData = [
   },
 ];
 
-const ChefList = () => {
+const HomeFoodList = () => {
   const navigation = useNavigation();
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('ChefFilters')}>
+          <TouchableOpacity onPress={() => navigation.navigate('HomeFoodFilters')}>
             <Ionicons
               name="chevron-back"
               size={globalStyle.g_appPageHeaderIconsSize.fontSize}
@@ -105,53 +105,53 @@ const ChefList = () => {
             color={globalStyle.g_appPageHeaderIconsColors.color}
           />
         </View>
-        <Text style={[globalStyle.g_appPageHeaderText]}>Chef Selection</Text>
+        <Text style={[globalStyle.g_appPageHeaderText]}>Home Food Selection</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {ChefData.map(ChefItem => (
-            <View key={ChefItem.Id}>
-              <Card style={styles.Chef_List_Card}>
-                <View style={styles.Chef_List_CardBody}>
+          {HomeFoodData.map(HomeFoodItem => (
+            <View key={HomeFoodItem.Id}>
+              <Card style={styles.HomeFood_List_Card}>
+                <View style={styles.HomeFood_List_CardBody}>
                   <View>
                     <MaIcons name="chef-hat" size={25} />
                   </View>
-                  <View style={styles.Chef_List_Content}>
+                  <View style={styles.HomeFood_List_Content}>
                     <Text
                       style={[
-                        styles.Chef_Name,
+                        styles.HomeFood_Name,
                         globalStyle.g_appDefaultTextColor,
                       ]}
                       numberOfLines={1}>
-                      {ChefItem.Name}
+                      {HomeFoodItem.Name}
                     </Text>
-                    <View style={styles.Chef_Filter_Content}>
+                    <View style={styles.HomeFood_Filter_Content}>
                       <View style={styles.Fliters}>
                         <MaIcons
                           name="checkbox-intermediate"
                           size={12}
-                          color={ChefItem.MenuType === 'Veg' ? 'green' : 'red'}
+                          color={HomeFoodItem.MenuType === 'Veg' ? 'green' : 'red'}
                         />
                         <Text style={styles.Fliters_Text}>
-                          {ChefItem.MenuType}
+                          {HomeFoodItem.MenuType}
                         </Text>
                       </View>
                       <View style={styles.Fliters}>
                         <MaIcons
                           name={
-                            ChefItem.Price === 'Low' ? 'arrow-down' : 'arrow-up'
+                            HomeFoodItem.Price === 'Low' ? 'arrow-down' : 'arrow-up'
                           }
                           size={12}
                           color="black"
                         />
                         <Text style={styles.Fliters_Text}>
-                          {ChefItem.Price}
+                          {HomeFoodItem.Price}
                         </Text>
                       </View>
                       <View style={styles.Fliters}>
                         <AntIcons name="star" size={12} color="#f1c40f" />
                         <Text style={styles.Fliters_Text}>
-                          {ChefItem.Rating}
+                          {HomeFoodItem.Rating}
                         </Text>
                       </View>
                       <View style={styles.Fliters}>
@@ -161,7 +161,7 @@ const ChefList = () => {
                           color="blue"
                         />
                         <Text style={styles.Fliters_Text}>
-                          {ChefItem.Distance}
+                          {HomeFoodItem.Distance}
                         </Text>
                       </View>
                     </View>
@@ -173,7 +173,7 @@ const ChefList = () => {
         </ScrollView>
       </View>
       {/* <Footer /> */}
-      <TouchableOpacity style={[styles.Btn_As_Footer, globalStyle.g_appDefaultContentBgColor]} onPress={()=>navigation.navigate('ChefConformation')}>
+      <TouchableOpacity style={[styles.Btn_As_Footer, globalStyle.g_appDefaultContentBgColor]} onPress={()=>navigation.navigate('HomeFoodConformation')}>
         <Text style={styles.Btn_As_Footer_Text}>Next</Text>
       </TouchableOpacity>
     </View>
@@ -181,20 +181,20 @@ const ChefList = () => {
 };
 
 const styles = StyleSheet.create({
-    Chef_List_Card: {
+    HomeFood_List_Card: {
       margin: 5,
       padding: 15,
       backgroundColor: '#ffff',
     },
-    Chef_List_CardBody:{
+    HomeFood_List_CardBody:{
       flexDirection:'row',
       alignItems:'center',
       gap:20
     },
-    Chef_Name: {
+    HomeFood_Name: {
       fontWeight: 'bold',
     },
-    Chef_Filter_Content: {
+    HomeFood_Filter_Content: {
       flexDirection: 'row',
       gap: 15,
       alignItems: 'center',
@@ -227,4 +227,4 @@ const styles = StyleSheet.create({
       },
   });
 
-export default ChefList;
+export default HomeFoodList;

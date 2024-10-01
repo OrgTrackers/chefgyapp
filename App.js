@@ -28,6 +28,13 @@ import Invoice from './src/screens/Invoice';
 import ChefFilters from './src/components/Chef/ChefFilters';
 import ChefList from './src/components/Chef/ChefList';
 import ChefConformation from './src/components/Chef/ChefConformation';
+import ChefPickDish from './src/components/Chef/ChefPickDish';
+
+//Home Food
+import HomeFoodFilters from './src/components/HomeFood/HomeFoodFilters';
+import HomeFoodList from './src/components/HomeFood/HomeFoodList';
+import HomeFoodConformation from './src/components/HomeFood/HomeFoodConformation';
+import HomeFoodPickDish from './src/components/HomeFood/HomeFoodPickDish';
 
 const Stack = createNativeStackNavigator();
 
@@ -98,6 +105,12 @@ const App = () => {
           <Stack.Screen name="ChefFilters" component={ChefFilters} />
           <Stack.Screen name="ChefList" component={ChefList} />
           <Stack.Screen name="ChefConformation" component={ChefConformation} />
+          <Stack.Screen name="ChefPickDish" component={ChefPickDish} />
+
+          <Stack.Screen name="HomeFoodFilters" component={HomeFoodFilters} />
+          <Stack.Screen name="HomeFoodList" component={HomeFoodList} />
+          <Stack.Screen name="HomeFoodConformation" component={HomeFoodConformation} />
+          <Stack.Screen name="HomeFoodPickDish" component={HomeFoodPickDish} />
           <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -81,7 +81,7 @@ const Footer = () => {
   };
 
   return (
-    <View style={styles.footer}>
+    <View style={[styles.footer,globalStyle.g_appDefaultContentBgColor]}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -97,9 +97,9 @@ const Footer = () => {
               <MCIcons
                 name={Footer_Item.Icon}
                 size={24}
-                color={isActive ? globalStyle.g_appMainContentActiveIconText.color : globalStyle.g_appMainContentIconColors.color} // Change icon color based on active state
+                color={isActive ? "#ffff" : "#cccc"} // Change icon color based on active state
               />
-              <Text style={[styles.Footer_Text, { color: isActive ? globalStyle.g_appMainContentActiveIconText.color : globalStyle.g_appMainContentIconColors.color}]}>
+              <Text style={[styles.Footer_Text, { color: isActive ? "#ffff" : "#cccc"}]}>
                 {Footer_Item.Label}
               </Text>
             </TouchableOpacity>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 60, // Adjust height as needed
-    backgroundColor: '#FFFF', // Adjust background color as needed
+    // backgroundColor: '#FFFF', // Adjust background color as needed
     justifyContent: 'center',
     borderTopWidth: 1,
     borderTopColor: '#e7e7e7', // Adjust border color as needed

@@ -20,13 +20,13 @@ import FaIcons from 'react-native-vector-icons/FontAwesome';
 
 import {Card} from 'react-native-paper';
 
-const ChefConformation = () => {
+const HomeFoodConformation = () => {
   const navigation = useNavigation();
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('ChefFilters')}>
+          <TouchableOpacity onPress={() => navigation.navigate('HomeFoodFilters')}>
             <Ionicons
               name="chevron-back"
               size={globalStyle.g_appPageHeaderIconsSize.fontSize}
@@ -256,4 +256,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChefConformation;
+export default HomeFoodConformation;

@@ -34,7 +34,7 @@ const App_Cate = [
   {
     Id: 3,
     Img: require('../assets/Updated/images/H3.png'),
-    Lable: 'Wish Dish',
+    Lable: 'Home Food',
     Offers: 'UPTO 20% OFF',
   },
   {
@@ -91,7 +91,10 @@ const Home = () => {
         navigation.navigate('EventPage');
         break;
       case 'Chef':
-        navigation.navigate ('ChefFilters');
+        navigation.navigate('ChefFilters');
+        break;
+      case 'Home Food':
+        navigation.navigate('HomeFoodFilters');
         break;
       default:
         break;
@@ -176,9 +179,7 @@ const Home = () => {
                 source={item.Img}
                 style={styles.Home_Select_Images}
                 imageStyle={styles.Home_ImageBackground}
-                resizeMode="cover"
-              >
-              </ImageBackground>
+                resizeMode="cover"></ImageBackground>
             </TouchableOpacity>
           ))}
         </View>
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     width: '80%',
-    color:'#272727'
+    color: '#272727',
   },
   Home_Header_User_Img: {
     width: 40,
@@ -268,8 +269,7 @@ const styles = StyleSheet.create({
     height: 120,
     marginHorizontal: 20,
     borderRadius: 10,
-    objectFit:'cover',
-    
+    objectFit: 'cover',
   },
   indicatorContainer: {
     flexDirection: 'row',
@@ -304,21 +304,21 @@ const styles = StyleSheet.create({
     width: 150, // Fit two cards per row
     backgroundColor: '#FFFF',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius: 20, 
-    margin: 5, 
+    borderRadius: 20,
+    margin: 5,
     marginBottom: 20,
     overflow: 'hidden',
-    alignItems:'center' ,
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   Home_Select_Images: {
     width: 150,
     height: 150,
-    justifyContent: 'flex-end', 
+    justifyContent: 'flex-end',
   },
   Home_ImageBackground: {
     borderRadius: 20,

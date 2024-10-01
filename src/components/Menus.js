@@ -648,21 +648,6 @@ const Menus = () => {
                             onPress={() => handleAccordions(mType_Item.Id)}>
                             {mType_Item.Name}
                           </Text>
-                          <View
-                            style={{
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                              gap: 5,
-                            }}>
-                            <FaIcons
-                              name="rupee"
-                              size={12}
-                              color={globalStyle.g_appMainContentColors.color}
-                            />
-                            <Text style={[globalStyle.g_appDefaultTextColor]}>
-                              {mType_Item.TotalCost}
-                            </Text>
-                          </View>
                         </View>
                         <Ionicons
                           name={
@@ -674,6 +659,21 @@ const Menus = () => {
                           size={15}
                           color="#399590"
                         />
+                      </View>
+                      <View style={styles.Crowed_Cost_Container}>
+                        <View style={styles.Cost_Container}>
+                          <Text style={[globalStyle.g_appDefaultTextColor]}>Attendees : 20000</Text>
+                        </View>
+                        <View style={styles.Cost_Container}>
+                          <FaIcons
+                            name="rupee"
+                            size={12}
+                            color={globalStyle.g_appMainContentColors.color}
+                          />
+                          <Text style={[globalStyle.g_appDefaultTextColor]}>
+                            {mType_Item.TotalCost}
+                          </Text>
+                        </View>
                       </View>
                       {expanded === mType_Item.Id && (
                         <View>
@@ -1645,7 +1645,7 @@ const Menus = () => {
         <TouchableOpacity
           style={styles.Pay_Buttons}
           // handleShowDates
-          onPress={()=>navigation.navigate('OrderSummary')}>
+          onPress={() => navigation.navigate('OrderSummary')}>
           <Text
             style={[
               styles.Pay_Buttons_Text,
@@ -1966,5 +1966,18 @@ const styles = StyleSheet.create({
   Pay_Buttons_Text: {
     textAlign: 'center',
   },
+
+
+  Crowed_Cost_Container:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:20,
+    marginTop:10
+  },
+  Cost_Container:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:5
+  }
 });
 export default Menus;
