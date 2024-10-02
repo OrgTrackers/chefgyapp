@@ -276,7 +276,7 @@ const FoodTruckFilters = () => {
           <View style={styles.Filter_Container}>
             <View style={styles.FoodTruck_Allowcation_Container}>
               <Text style={[globalStyle.g_appMainContentHeaders]}>
-                Cater Allocation
+                Chef Allocation
               </Text>
               {chefAllowcation.map(CA_Item => (
                 <View key={CA_Item.Id}>

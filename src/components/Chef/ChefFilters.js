@@ -19,6 +19,7 @@ import Footer from '../Footer';
 import {Card, Switch, Modal, Portal} from 'react-native-paper';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Header from '../Header';
+import {SelectList} from 'react-native-dropdown-select-list';
 
 const Filters = [
   {
@@ -169,6 +170,7 @@ const ChefFilters = () => {
   const [isFromDate, setIsFromDate] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [isSwitchOn, setIsSwitchOn] = React.useState(null);
+  const [selected, setSelected] = React.useState('');
 
   const handleAddRemove = id => {
     setIsAdded(prevItems =>
@@ -184,6 +186,16 @@ const ChefFilters = () => {
     }));
   };
   const toggleIngredients = () => setShowIngredients(!showIngredients);
+
+  const data = [
+    {key: '1', value: 'Mobiles'},
+    {key: '2', value: 'Appliances'},
+    {key: '3', value: 'Cameras'},
+    {key: '4', value: 'Computers'},
+    {key: '5', value: 'Vegetables'},
+    {key: '6', value: 'Diary Products'},
+    {key: '7', value: 'Drinks'},
+  ];
 
   const handleDateChange = day => {
     const FormatDate = day.dateString;
@@ -204,7 +216,7 @@ const ChefFilters = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <Header onBackPress={()=>navigation.navigate('Home')}/>
+        <Header onBackPress={() => navigation.navigate('Home')} />
         <Text style={[globalStyle.g_appPageHeaderText]}>Chef Filters</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>
@@ -276,7 +288,7 @@ const ChefFilters = () => {
           <View style={styles.Filter_Container}>
             <View style={styles.Chef_Allowcation_Container}>
               <Text style={[globalStyle.g_appMainContentHeaders]}>
-                Cater Allocation
+                Chef Allocation
               </Text>
               {chefAllowcation.map(CA_Item => (
                 <View key={CA_Item.Id}>
@@ -327,6 +339,20 @@ const ChefFilters = () => {
                   />
                 </View>
               </Card>
+            </View>
+            <View style={styles.Form_DropDown_Container}>
+              <SelectList
+                boxStyles={styles.Form_DropDown_Input_Box}
+                setSelected={val => setSelected(val)}
+                data={data}
+                save="value"
+                placeholder="Choose Owner"
+                inputStyles={[
+                  globalStyle.g_textColor,
+                  styles.Form_DropDown_Input,
+                ]}
+                dropdownStyles={styles.Form_DropDown_List}
+              />
             </View>
             <View style={styles.Fs_Container}>
               <Text style={globalStyle.g_appMainContentHeaders}>
@@ -408,7 +434,9 @@ const ChefFilters = () => {
                 </View>
               </View>
             ))}
-            <TouchableOpacity style={[globalStyle.g_Button]}onPress={() => navigation.navigate('ChefPickDish')}>
+            <TouchableOpacity
+              style={[globalStyle.g_Button]}
+              onPress={() => navigation.navigate('ChefPickDish')}>
               <Text style={globalStyle.g_ButtonText}>Proceed</Text>
             </TouchableOpacity>
           </View>
@@ -589,6 +617,25 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 10,
     height: 400,
+  },
+
+  //Dropdown
+  Form_DropDown_Container: {
+    marginBottom: 20,
+  },
+  Form_DropDown_Input_Box: {
+    borderRadius: 10,
+  },
+  Form_DropDown_List: {
+    position: 'absolute',
+    width: '100%',
+    zIndex: 10,
+    backgroundColor: '#f4f4f4',
+    top: 50,
+    height: 500,
+  },
+  Form_DropDown_Input: {
+    fontSize: 15,
   },
 });
 
