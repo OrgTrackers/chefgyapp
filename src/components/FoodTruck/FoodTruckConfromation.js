@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     borderRadius: 5,
+    backgroundColor:'#fff'
   },
   Apply_Offers_Cardbody: {
     justifyContent: 'space-between',

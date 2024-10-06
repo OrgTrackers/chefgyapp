@@ -348,10 +348,11 @@ const ChefFilters = () => {
                 save="value"
                 placeholder="Choose Owner"
                 inputStyles={[
-                  globalStyle.g_textColor,
+                  globalStyle.g_appTextBlack.color,
                   styles.Form_DropDown_Input,
                 ]}
                 dropdownStyles={styles.Form_DropDown_List}
+                placeholderTextColor={globalStyle.g_appTextBlack.color}
               />
             </View>
             <View style={styles.Fs_Container}>
@@ -636,6 +637,7 @@ const styles = StyleSheet.create({
   },
   Form_DropDown_Input: {
     fontSize: 15,
+    color:'#000'
   },
 });
 

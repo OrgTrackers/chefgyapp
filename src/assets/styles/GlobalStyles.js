@@ -31,7 +31,9 @@ export const globalStyle = StyleSheet.create({
   g_appDefaultContentBgColor: {
     backgroundColor: '#092844',
   },
-
+  g_appTextBlack:{
+    color:'#000'
+  },
   //App Main Content
   g_appMainContent: {
     flex: 1,
@@ -79,8 +81,12 @@ export const globalStyle = StyleSheet.create({
     borderWidth: 1.5,
     paddingLeft: 10,
     borderRadius: 10,
+    color:'#000'
   },
 
+  g_ListMainIconColor:{
+    color:'#FBBC20'
+  },
   //tabs
   g_appMainContentTabs: {
     color: '#292929',

@@ -536,7 +536,7 @@ const Menus = () => {
                     {cateItem.Title}
                   </Text>
                 </View>
-                <Text style={styles.selectCategories_Header_Tag}>
+                <Text style={[styles.selectCategories_Header_Tag,globalStyle.g_appTextBlack]}>
                   {cateItem.Decscription}
                 </Text>
                 <View style={styles.cateDate_Container}>
@@ -587,7 +587,7 @@ const Menus = () => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <Card style={styles.ApplyForAllDates_Card}>
                     <View style={styles.ApplyForAllDates_CardBody}>
-                      <Text>Apply For All Dates</Text>
+                      <Text style={[globalStyle.g_appTextBlack]}>Apply For All Dates</Text>
                       <Switch
                         color={globalStyle.g_appDefaultTextColor.color}
                         value={isSwitchOn}
@@ -729,7 +729,7 @@ const Menus = () => {
                                             {item.ItemName}
                                           </Text>
                                           <Text
-                                            style={styles.Menu_Item_Desc}
+                                            style={[styles.Menu_Item_Desc,globalStyle.g_appTextBlack]}
                                             numberOfLines={2}
                                             textBreakStrategy="simple">
                                             {item.Decscription}

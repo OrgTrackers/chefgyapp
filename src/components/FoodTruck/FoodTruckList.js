@@ -102,7 +102,7 @@ const FoodTruckList = () => {
               <Card style={styles.FoodTruck_List_Card}>
                 <View style={styles.FoodTruck_List_CardBody}>
                   <View>
-                    <MaIcons name="chef-hat" size={25} />
+                    <MaIcons name="chef-hat" size={25} color={globalStyle.g_ListMainIconColor.color}/>
                   </View>
                   <View style={styles.FoodTruck_List_Content}>
                     <Text

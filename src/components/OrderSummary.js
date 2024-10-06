@@ -392,7 +392,7 @@ export default function OrderSummary() {
                           <Text style={[styles.OS_MenuType_Text]}>
                             {OS_MTypeItem.Type}
                           </Text>
-                          <Text>Attendees: {OS_MTypeItem.People}</Text>
+                          <Text style={globalStyle.g_appTextBlack}>Attendees: {OS_MTypeItem.People}</Text>
                           <View style={styles.OS_Menu_Range_Container}>
                             {OS_MTypeItem.Menus.map(M_RangeItem => (
                               <View key={M_RangeItem.Id}>
@@ -406,7 +406,7 @@ export default function OrderSummary() {
                                     ]}>
                                     {M_RangeItem.MenuName}
                                   </Text>
-                                  <Text>Price : 2000 /-</Text>
+                                  <Text style={globalStyle.g_appTextBlack}>Price : 2000 /-</Text>
                                 </Card>
                               </View>
                             ))}
@@ -424,41 +424,41 @@ export default function OrderSummary() {
               Billing Details
             </Text>
             <View style={styles.SubTotal_Content}>
-              <Text style={styles.SubTotal_Label}>Subtotal</Text>
+              <Text style={[styles.SubTotal_Label,globalStyle.g_appTextBlack]}>Subtotal</Text>
               <View style={styles.TotalCost_Container}>
                 <FaIcons name="indian-rupee-sign" size={12} color="#000" />
-                <Text style={styles.SubCost_Text}>38.06</Text>
+                <Text style={[styles.SubCost_Text,globalStyle.g_appTextBlack]}>38.06</Text>
               </View>
             </View>
             <View style={styles.Tax_Content}>
-              <Text>Estimated Tax</Text>
-              <Text>2.85</Text>
+              <Text style={[globalStyle.g_appTextBlack]}>Estimated Tax</Text>
+              <Text style={[globalStyle.g_appTextBlack]}>2.85</Text>
             </View>
             <View style={styles.Tax_Content}>
-              <Text>Platform Fee</Text>
+              <Text style={[globalStyle.g_appTextBlack]}>Platform Fee</Text>
               <View style={styles.TotalCost_Container}>
                 <FaIcons name="indian-rupee-sign" size={12} color="#272727" />
-                <Text>6.00</Text>
+                <Text style={[globalStyle.g_appTextBlack]}>6.00</Text>
               </View>
             </View>
             <View style={styles.Tax_Content}>
-              <Text>Delivery Fee</Text>
+              <Text style={[globalStyle.g_appTextBlack]}>Delivery Fee</Text>
               <View style={styles.TotalCost_Container}>
                 <FaIcons name="indian-rupee-sign" size={12} color="#272727" />
-                <Text>75.00</Text>
+                <Text style={[globalStyle.g_appTextBlack]}>75.00</Text>
               </View>
             </View>
             <View style={styles.Overall_Content}>
-              <Text style={styles.Order_Label}>Order Total</Text>
+              <Text style={[styles.Order_Label,globalStyle.g_appTextBlack]}>Order Total</Text>
               <View style={styles.TotalCost_Container}>
                 <FaIcons name="indian-rupee-sign" size={15} color="#000" />
-                <Text style={styles.SubCost_Text}>40.91</Text>
+                <Text style={[styles.SubCost_Text,globalStyle.g_appTextBlack]}>40.91</Text>
               </View>
             </View>
           </View>
           <View style={styles.Bidding_Inputs_Form_Container}>
             <View style={styles.Form_Inputs}>
-              <Text style={styles.Bidding_Input_Label}>Ask/Bidding Price</Text>
+              <Text style={[styles.Bidding_Input_Label,globalStyle.g_appTextBlack]}>Ask/Bidding Price</Text>
               <View style={styles.Bidding_Input_Info}>
                 <TextInput
                   placeholder="0.00"
@@ -466,6 +466,7 @@ export default function OrderSummary() {
                     styles.Bidding_Input,
                     globalStyle.g_appMainContentInputs,
                   ]}
+                  placeholderTextColor={globalStyle.g_appTextBlack.color}
                 />
                 <TouchableOpacity onPress={handleTooltip}>
                   <Ionicons name="information-circle" size={20} color="#000" />
@@ -496,6 +497,7 @@ export default function OrderSummary() {
                   styles.Comments_Section,
                   globalStyle.g_appMainContentInputs,
                 ]}
+                placeholderTextColor={globalStyle.g_appTextBlack.color}
               />
             </View>
           </View>

@@ -69,7 +69,7 @@ const ChefConformation = () => {
             <View style={styles.Summary_Details_Body}>
               <Card style={styles.Apply_Offers_Card}>
                 <View style={styles.Apply_Offers_Cardbody}>
-                  <View>
+                  <View >
                     <Text style={styles.Summary_Details_Label}>
                       Apply Coupons
                     </Text>
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     borderRadius: 5,
+    backgroundColor:'#fff'
   },
   Apply_Offers_Cardbody: {
     justifyContent: 'space-between',

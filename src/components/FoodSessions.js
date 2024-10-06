@@ -366,7 +366,7 @@ const FoodSession = () => {
                   <View key={FsaItem.Id}>
                     <Card
                       style={[
-                        isCompleted ? {backgroundColor: '#389590'} : {},
+                        isCompleted ? {backgroundColor: '#389590'} : {backgroundColor:'#ffff'},
                         globalStyle.g_appMainContentAccordion,
                         styles.FS_Accordion,
                       ]}
@@ -413,7 +413,7 @@ const FoodSession = () => {
                     {expanded === FsaItem.Id && (
                       <View style={styles.Fsa_Content}>
                         <View style={styles.Required_Switch}>
-                          <Text style={styles.Required_Switch_Text}>
+                          <Text style={[styles.Required_Switch_Text,globalStyle.g_appTextBlack]}>
                             Needed ?
                           </Text>
                           <Switch
@@ -426,11 +426,11 @@ const FoodSession = () => {
                           Attendees : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
-                          <Text style={styles.maxMininputLabel}>Min: </Text>
+                          <Text style={[styles.maxMininputLabel,globalStyle.g_appTextBlack]}>Min: </Text>
                           <TextInput
                             style={[
                               styles.Rangeinput,
-                              // globalStyle.g_appMainContentInputs,
+                              globalStyle.g_appMainContentInputs,
                             ]}
                             keyboardType="numeric"
                             value={String(minValue)}
@@ -452,11 +452,11 @@ const FoodSession = () => {
                           />
                         </View>
                         <View style={styles.inputWrapper}>
-                          <Text style={styles.maxMininputLabel}>Max: </Text>
+                          <Text style={[styles.maxMininputLabel,globalStyle.g_appTextBlack]}>Max: </Text>
                           <TextInput
                             style={[
                               styles.Rangeinput,
-                              // globalStyle.g_appMainContentInputs,
+                              globalStyle.g_appMainContentInputs,
                             ]}
                             keyboardType="numeric"
                             value={String(maxValue)}
@@ -494,7 +494,7 @@ const FoodSession = () => {
                                   globalStyle.g_appMainContentChexBoxSize,
                                 ]}
                               />
-                              <Text>{item.BType}</Text>
+                              <Text style={[globalStyle.g_appTextBlack]}>{item.BType}</Text>
                             </View>
                             {checked.includes(item.Id) && (
                               <Ionicons
