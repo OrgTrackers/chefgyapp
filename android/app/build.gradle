@@ -108,6 +108,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+     applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            // Define a new APK name
+            def newName = "ChefGy-${variant.name}.apk"
+            output.outputFileName = newName
+        }
+    }
 }
 
 dependencies {
