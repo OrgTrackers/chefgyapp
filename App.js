@@ -23,6 +23,7 @@ import Menus from './src/components/Menus';
 import OrderSummary from './src/components/OrderSummary';
 import CaterSelection from './src/screens/CaterSelection';
 import Invoice from './src/screens/Invoice';
+import Rating from './src/components/Rating';
 
 //chef
 import ChefFilters from './src/components/Chef/ChefFilters';
@@ -107,6 +108,7 @@ const App = () => {
           <Stack.Screen name="OrderSummary" component={OrderSummary} />
           <Stack.Screen name="CaterSelection" component={CaterSelection} />
           <Stack.Screen name="Invoice" component={Invoice} />
+          <Stack.Screen name="Rating" component={Rating} />
 
           <Stack.Screen name="ChefFilters" component={ChefFilters} />
           <Stack.Screen name="ChefList" component={ChefList} />
@@ -123,6 +125,7 @@ const App = () => {
           <Stack.Screen name="FoodTruckConformation" component={FoodTruckConformation} />
           <Stack.Screen name="FoodTruckPickDish" component={FoodTruckPickDish} />
           <Stack.Screen name="Splash" component={Splash} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

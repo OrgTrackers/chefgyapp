@@ -74,6 +74,9 @@ const Footer = () => {
         break;
       case 'Caterer':
         navigation.navigate('EventPage');
+        break;
+      case 'On Wheels':
+        navigation.navigate('Rating');
         break
       default:
         break;
