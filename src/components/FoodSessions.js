@@ -49,14 +49,6 @@ const FsDates = [
     Id: 5,
     Dates: '28 Aug 2024',
   },
-  {
-    Id: 6,
-    Dates: '29 Aug 2024',
-  },
-  {
-    Id: 7,
-    Dates: '30 Aug 2024',
-  },
 ];
 
 const FsAccordions = [
@@ -324,7 +316,7 @@ const FoodSession = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <Header onBackPress={()=>navigation.navigate('BookCateres')}/>
+        <Header onBackPress={() => navigation.navigate('BookCateres')} />
         {showMainContent && (
           <Text style={[globalStyle.g_appPageHeaderText]}>Food Session</Text>
         )}
@@ -335,7 +327,7 @@ const FoodSession = () => {
             <Text style={styles.FS_Selected_Dates}>
               24 Aug 2024
               <Text style={{color: '#292929'}}> To </Text>
-              30 Aug 2024
+              28 Aug 2024
             </Text>
             <View style={styles.FS_Filters}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -366,7 +358,9 @@ const FoodSession = () => {
                   <View key={FsaItem.Id}>
                     <Card
                       style={[
-                        isCompleted ? {backgroundColor: '#389590'} : {backgroundColor:'#ffff'},
+                        isCompleted
+                          ? {backgroundColor: '#389590'}
+                          : {backgroundColor: '#ffff'},
                         globalStyle.g_appMainContentAccordion,
                         styles.FS_Accordion,
                       ]}
@@ -413,7 +407,11 @@ const FoodSession = () => {
                     {expanded === FsaItem.Id && (
                       <View style={styles.Fsa_Content}>
                         <View style={styles.Required_Switch}>
-                          <Text style={[styles.Required_Switch_Text,globalStyle.g_appTextBlack]}>
+                          <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
                             Needed ?
                           </Text>
                           <Switch
@@ -426,7 +424,13 @@ const FoodSession = () => {
                           Attendees : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
-                          <Text style={[styles.maxMininputLabel,globalStyle.g_appTextBlack]}>Min: </Text>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Min:{' '}
+                          </Text>
                           <TextInput
                             style={[
                               styles.Rangeinput,
@@ -452,7 +456,13 @@ const FoodSession = () => {
                           />
                         </View>
                         <View style={styles.inputWrapper}>
-                          <Text style={[styles.maxMininputLabel,globalStyle.g_appTextBlack]}>Max: </Text>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Max:{' '}
+                          </Text>
                           <TextInput
                             style={[
                               styles.Rangeinput,
@@ -494,7 +504,737 @@ const FoodSession = () => {
                                   globalStyle.g_appMainContentChexBoxSize,
                                 ]}
                               />
-                              <Text style={[globalStyle.g_appTextBlack]}>{item.BType}</Text>
+                              <Text style={[globalStyle.g_appTextBlack]}>
+                                {item.BType}
+                              </Text>
+                            </View>
+                            {checked.includes(item.Id) && (
+                              <Ionicons
+                                name="close"
+                                size={20}
+                                color="#D9D9D9"
+                                onPress={() => unCheck(item.Id)}
+                              />
+                            )}
+                          </View>
+                        ))}
+                        <TouchableOpacity
+                          style={[globalStyle.g_Button]}
+                          onPress={showCompleted}>
+                          <Text style={globalStyle.g_ButtonText}>Next</Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </View>
+                ))}
+                <TouchableOpacity
+                  style={[globalStyle.g_Button]}
+                  onPress={() => navigation.navigate('Menus')}>
+                  <Text style={[globalStyle.g_ButtonText]}>Search</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            )}
+            {activeDate === '25 Aug 2024' && (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {FsAccordions.map(FsaItem => (
+                  <View key={FsaItem.Id}>
+                    <Card
+                      style={[
+                        isCompleted
+                          ? {backgroundColor: '#389590'}
+                          : {backgroundColor: '#ffff'},
+                        globalStyle.g_appMainContentAccordion,
+                        styles.FS_Accordion,
+                      ]}
+                      onPress={() => handleAccordions(FsaItem.Id)}>
+                      <View
+                        style={[globalStyle.g_appMainContentAccordionHeader]}>
+                        <View style={styles.FS_Accordion_Name_Container}>
+                          {isCompleted && (
+                            <Ionicons
+                              name="checkmark-done"
+                              size={15}
+                              color={
+                                isCompleted
+                                  ? 'white'
+                                  : globalStyle.g_appMainContentColors.color
+                              }
+                            />
+                          )}
+                          <Text
+                            style={[
+                              globalStyle.g_appMainContentAccordionHeaderColorsSizes,
+                              {color: isCompleted ? 'white' : '#389590'},
+                            ]}
+                            onPress={handleAccordions}>
+                            {FsaItem.name}
+                          </Text>
+                        </View>
+                        <Ionicons
+                          size={15}
+                          color={
+                            isCompleted
+                              ? 'white'
+                              : globalStyle.g_appMainContentColors.color
+                          }
+                          name={
+                            expanded === FsaItem.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(FsaItem.Id)}
+                        />
+                      </View>
+                    </Card>
+                    {expanded === FsaItem.Id && (
+                      <View style={styles.Fsa_Content}>
+                        <View style={styles.Required_Switch}>
+                          <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Needed ?
+                          </Text>
+                          <Switch
+                            value={isSwitchOn}
+                            onValueChange={onToggleSwitch}
+                            color={globalStyle.g_appMainContentColors.color}
+                          />
+                        </View>
+                        <Text style={styles.Fsa_ValueText}>
+                          Attendees : {sliderValue[0]} - {sliderValue[1]}
+                        </Text>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Min:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(minValue)}
+                            onChangeText={text => setMinValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={10}
+                            maximumValue={10000}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={minValue}
+                            onValueChange={value => setMinValue(value)}
+                          />
+                        </View>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Max:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(maxValue)}
+                            onChangeText={text => setMaxValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={maxValue}
+                            onValueChange={value => setMaxValue(value)}
+                          />
+                        </View>
+                        {FsaItem.Items.map(item => (
+                          <View key={item.Id} style={styles.Fsa_Items_Content}>
+                            <View style={styles.Fsa_Items}>
+                              <BouncyCheckbox
+                                isChecked={checked.includes(item.Id)}
+                                onPress={() => handleCheck(item.Id)}
+                                fillColor={
+                                  globalStyle.g_appMainContentColors.color
+                                }
+                                size={
+                                  globalStyle.g_appMainContentChexBoxSize
+                                    .fontSize
+                                }
+                                style={[
+                                  globalStyle.g_appMainContentChexBoxSize,
+                                ]}
+                              />
+                              <Text style={[globalStyle.g_appTextBlack]}>
+                                {item.BType}
+                              </Text>
+                            </View>
+                            {checked.includes(item.Id) && (
+                              <Ionicons
+                                name="close"
+                                size={20}
+                                color="#D9D9D9"
+                                onPress={() => unCheck(item.Id)}
+                              />
+                            )}
+                          </View>
+                        ))}
+                        <TouchableOpacity
+                          style={[globalStyle.g_Button]}
+                          onPress={showCompleted}>
+                          <Text style={globalStyle.g_ButtonText}>Next</Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </View>
+                ))}
+                <TouchableOpacity
+                  style={[globalStyle.g_Button]}
+                  onPress={() => navigation.navigate('Menus')}>
+                  <Text style={[globalStyle.g_ButtonText]}>Search</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            )}
+            {activeDate === '26 Aug 2024' && (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {FsAccordions.map(FsaItem => (
+                  <View key={FsaItem.Id}>
+                    <Card
+                      style={[
+                        isCompleted
+                          ? {backgroundColor: '#389590'}
+                          : {backgroundColor: '#ffff'},
+                        globalStyle.g_appMainContentAccordion,
+                        styles.FS_Accordion,
+                      ]}
+                      onPress={() => handleAccordions(FsaItem.Id)}>
+                      <View
+                        style={[globalStyle.g_appMainContentAccordionHeader]}>
+                        <View style={styles.FS_Accordion_Name_Container}>
+                          {isCompleted && (
+                            <Ionicons
+                              name="checkmark-done"
+                              size={15}
+                              color={
+                                isCompleted
+                                  ? 'white'
+                                  : globalStyle.g_appMainContentColors.color
+                              }
+                            />
+                          )}
+                          <Text
+                            style={[
+                              globalStyle.g_appMainContentAccordionHeaderColorsSizes,
+                              {color: isCompleted ? 'white' : '#389590'},
+                            ]}
+                            onPress={handleAccordions}>
+                            {FsaItem.name}
+                          </Text>
+                        </View>
+                        <Ionicons
+                          size={15}
+                          color={
+                            isCompleted
+                              ? 'white'
+                              : globalStyle.g_appMainContentColors.color
+                          }
+                          name={
+                            expanded === FsaItem.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(FsaItem.Id)}
+                        />
+                      </View>
+                    </Card>
+                    {expanded === FsaItem.Id && (
+                      <View style={styles.Fsa_Content}>
+                        <View style={styles.Required_Switch}>
+                          <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Needed ?
+                          </Text>
+                          <Switch
+                            value={isSwitchOn}
+                            onValueChange={onToggleSwitch}
+                            color={globalStyle.g_appMainContentColors.color}
+                          />
+                        </View>
+                        <Text style={styles.Fsa_ValueText}>
+                          Attendees : {sliderValue[0]} - {sliderValue[1]}
+                        </Text>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Min:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(minValue)}
+                            onChangeText={text => setMinValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={10}
+                            maximumValue={10000}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={minValue}
+                            onValueChange={value => setMinValue(value)}
+                          />
+                        </View>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Max:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(maxValue)}
+                            onChangeText={text => setMaxValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={maxValue}
+                            onValueChange={value => setMaxValue(value)}
+                          />
+                        </View>
+                        {FsaItem.Items.map(item => (
+                          <View key={item.Id} style={styles.Fsa_Items_Content}>
+                            <View style={styles.Fsa_Items}>
+                              <BouncyCheckbox
+                                isChecked={checked.includes(item.Id)}
+                                onPress={() => handleCheck(item.Id)}
+                                fillColor={
+                                  globalStyle.g_appMainContentColors.color
+                                }
+                                size={
+                                  globalStyle.g_appMainContentChexBoxSize
+                                    .fontSize
+                                }
+                                style={[
+                                  globalStyle.g_appMainContentChexBoxSize,
+                                ]}
+                              />
+                              <Text style={[globalStyle.g_appTextBlack]}>
+                                {item.BType}
+                              </Text>
+                            </View>
+                            {checked.includes(item.Id) && (
+                              <Ionicons
+                                name="close"
+                                size={20}
+                                color="#D9D9D9"
+                                onPress={() => unCheck(item.Id)}
+                              />
+                            )}
+                          </View>
+                        ))}
+                        <TouchableOpacity
+                          style={[globalStyle.g_Button]}
+                          onPress={showCompleted}>
+                          <Text style={globalStyle.g_ButtonText}>Next</Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </View>
+                ))}
+                <TouchableOpacity
+                  style={[globalStyle.g_Button]}
+                  onPress={() => navigation.navigate('Menus')}>
+                  <Text style={[globalStyle.g_ButtonText]}>Search</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            )}
+            {activeDate === '27 Aug 2024' && (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {FsAccordions.map(FsaItem => (
+                  <View key={FsaItem.Id}>
+                    <Card
+                      style={[
+                        isCompleted
+                          ? {backgroundColor: '#389590'}
+                          : {backgroundColor: '#ffff'},
+                        globalStyle.g_appMainContentAccordion,
+                        styles.FS_Accordion,
+                      ]}
+                      onPress={() => handleAccordions(FsaItem.Id)}>
+                      <View
+                        style={[globalStyle.g_appMainContentAccordionHeader]}>
+                        <View style={styles.FS_Accordion_Name_Container}>
+                          {isCompleted && (
+                            <Ionicons
+                              name="checkmark-done"
+                              size={15}
+                              color={
+                                isCompleted
+                                  ? 'white'
+                                  : globalStyle.g_appMainContentColors.color
+                              }
+                            />
+                          )}
+                          <Text
+                            style={[
+                              globalStyle.g_appMainContentAccordionHeaderColorsSizes,
+                              {color: isCompleted ? 'white' : '#389590'},
+                            ]}
+                            onPress={handleAccordions}>
+                            {FsaItem.name}
+                          </Text>
+                        </View>
+                        <Ionicons
+                          size={15}
+                          color={
+                            isCompleted
+                              ? 'white'
+                              : globalStyle.g_appMainContentColors.color
+                          }
+                          name={
+                            expanded === FsaItem.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(FsaItem.Id)}
+                        />
+                      </View>
+                    </Card>
+                    {expanded === FsaItem.Id && (
+                      <View style={styles.Fsa_Content}>
+                        <View style={styles.Required_Switch}>
+                          <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Needed ?
+                          </Text>
+                          <Switch
+                            value={isSwitchOn}
+                            onValueChange={onToggleSwitch}
+                            color={globalStyle.g_appMainContentColors.color}
+                          />
+                        </View>
+                        <Text style={styles.Fsa_ValueText}>
+                          Attendees : {sliderValue[0]} - {sliderValue[1]}
+                        </Text>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Min:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(minValue)}
+                            onChangeText={text => setMinValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={10}
+                            maximumValue={10000}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={minValue}
+                            onValueChange={value => setMinValue(value)}
+                          />
+                        </View>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Max:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(maxValue)}
+                            onChangeText={text => setMaxValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={maxValue}
+                            onValueChange={value => setMaxValue(value)}
+                          />
+                        </View>
+                        {FsaItem.Items.map(item => (
+                          <View key={item.Id} style={styles.Fsa_Items_Content}>
+                            <View style={styles.Fsa_Items}>
+                              <BouncyCheckbox
+                                isChecked={checked.includes(item.Id)}
+                                onPress={() => handleCheck(item.Id)}
+                                fillColor={
+                                  globalStyle.g_appMainContentColors.color
+                                }
+                                size={
+                                  globalStyle.g_appMainContentChexBoxSize
+                                    .fontSize
+                                }
+                                style={[
+                                  globalStyle.g_appMainContentChexBoxSize,
+                                ]}
+                              />
+                              <Text style={[globalStyle.g_appTextBlack]}>
+                                {item.BType}
+                              </Text>
+                            </View>
+                            {checked.includes(item.Id) && (
+                              <Ionicons
+                                name="close"
+                                size={20}
+                                color="#D9D9D9"
+                                onPress={() => unCheck(item.Id)}
+                              />
+                            )}
+                          </View>
+                        ))}
+                        <TouchableOpacity
+                          style={[globalStyle.g_Button]}
+                          onPress={showCompleted}>
+                          <Text style={globalStyle.g_ButtonText}>Next</Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </View>
+                ))}
+                <TouchableOpacity
+                  style={[globalStyle.g_Button]}
+                  onPress={() => navigation.navigate('Menus')}>
+                  <Text style={[globalStyle.g_ButtonText]}>Search</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            )}
+            {activeDate === '28 Aug 2024' && (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {FsAccordions.map(FsaItem => (
+                  <View key={FsaItem.Id}>
+                    <Card
+                      style={[
+                        isCompleted
+                          ? {backgroundColor: '#389590'}
+                          : {backgroundColor: '#ffff'},
+                        globalStyle.g_appMainContentAccordion,
+                        styles.FS_Accordion,
+                      ]}
+                      onPress={() => handleAccordions(FsaItem.Id)}>
+                      <View
+                        style={[globalStyle.g_appMainContentAccordionHeader]}>
+                        <View style={styles.FS_Accordion_Name_Container}>
+                          {isCompleted && (
+                            <Ionicons
+                              name="checkmark-done"
+                              size={15}
+                              color={
+                                isCompleted
+                                  ? 'white'
+                                  : globalStyle.g_appMainContentColors.color
+                              }
+                            />
+                          )}
+                          <Text
+                            style={[
+                              globalStyle.g_appMainContentAccordionHeaderColorsSizes,
+                              {color: isCompleted ? 'white' : '#389590'},
+                            ]}
+                            onPress={handleAccordions}>
+                            {FsaItem.name}
+                          </Text>
+                        </View>
+                        <Ionicons
+                          size={15}
+                          color={
+                            isCompleted
+                              ? 'white'
+                              : globalStyle.g_appMainContentColors.color
+                          }
+                          name={
+                            expanded === FsaItem.Id
+                              ? 'chevron-up'
+                              : 'chevron-down'
+                          }
+                          onPress={() => handleAccordions(FsaItem.Id)}
+                        />
+                      </View>
+                    </Card>
+                    {expanded === FsaItem.Id && (
+                      <View style={styles.Fsa_Content}>
+                        <View style={styles.Required_Switch}>
+                          <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Needed ?
+                          </Text>
+                          <Switch
+                            value={isSwitchOn}
+                            onValueChange={onToggleSwitch}
+                            color={globalStyle.g_appMainContentColors.color}
+                          />
+                        </View>
+                        <Text style={styles.Fsa_ValueText}>
+                          Attendees : {sliderValue[0]} - {sliderValue[1]}
+                        </Text>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Min:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(minValue)}
+                            onChangeText={text => setMinValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={10}
+                            maximumValue={10000}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={minValue}
+                            onValueChange={value => setMinValue(value)}
+                          />
+                        </View>
+                        <View style={styles.inputWrapper}>
+                          <Text
+                            style={[
+                              styles.maxMininputLabel,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                            Max:{' '}
+                          </Text>
+                          <TextInput
+                            style={[
+                              styles.Rangeinput,
+                              globalStyle.g_appMainContentInputs,
+                            ]}
+                            keyboardType="numeric"
+                            value={String(maxValue)}
+                            onChangeText={text => setMaxValue(Number(text))}
+                          />
+                        </View>
+                        <View style={styles.SliderContainer}>
+                          <Slider
+                            style={{width: '100%', height: 40}}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            minimumTrackTintColor="green"
+                            maximumTrackTintColor={
+                              globalStyle.g_appDefaultTextColor.color
+                            }
+                            value={maxValue}
+                            onValueChange={value => setMaxValue(value)}
+                          />
+                        </View>
+                        {FsaItem.Items.map(item => (
+                          <View key={item.Id} style={styles.Fsa_Items_Content}>
+                            <View style={styles.Fsa_Items}>
+                              <BouncyCheckbox
+                                isChecked={checked.includes(item.Id)}
+                                onPress={() => handleCheck(item.Id)}
+                                fillColor={
+                                  globalStyle.g_appMainContentColors.color
+                                }
+                                size={
+                                  globalStyle.g_appMainContentChexBoxSize
+                                    .fontSize
+                                }
+                                style={[
+                                  globalStyle.g_appMainContentChexBoxSize,
+                                ]}
+                              />
+                              <Text style={[globalStyle.g_appTextBlack]}>
+                                {item.BType}
+                              </Text>
                             </View>
                             {checked.includes(item.Id) && (
                               <Ionicons

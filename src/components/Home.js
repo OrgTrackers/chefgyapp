@@ -16,6 +16,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from './Footer';
 
+import {globalStyle} from '../assets/styles/GlobalStyles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import {Modal, Portal, Button, PaperProvider} from 'react-native-paper';
+
 const {width} = Dimensions.get('window');
 
 const App_Cate = [
@@ -50,6 +55,11 @@ const Home = () => {
   const scrollViewRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigation = useNavigation();
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20, margin: 30};
 
   const images = [
     require('../assets/Updated/images/Home/Banner-1.png'),
@@ -105,128 +115,135 @@ const Home = () => {
   };
 
   return (
-    <View style={styles.Container}>
-      <View style={styles.Home_Header}>
-        <View style={styles.Home_Header_Address}>
-          <View style={styles.Home_Location_Icon_Content}>
+    <View style={[globalStyle.g_appDefaultBackground]}>
+      <View style={[globalStyle.g_appPageHeaderContainer]}>
+        <View style={styles.homePage_Header_Container}>
+          <View style={styles.Location_Container}>
+            <Ionicons name="location" color="#FFCD78" size={30} />
+            <View style={styles.Location_Content}>
+              <Text style={styles.Location_Type}>Home</Text>
+              <Text
+                style={styles.Location_Text}
+                numberOfLines={1}
+                ellipsizeMode="tail">
+                5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity>
             <Image
-              source={require('../assets/icon/Home_Loca_Icon.png')}
-              style={styles.Home_Header_Loaction_Icon}
+              source={require('../assets/images/user.jpg')}
+              style={styles.Home_Header_User_Img}
             />
-          </View>
-          <TouchableOpacity
-            style={styles.Home_Location_Text_Content}
-            onPress={() => navigation.navigate('Location')}>
-            <Text style={styles.Home_Location_Text}>Home</Text>
-            <Text
-              style={styles.Home_Location_Sub_Text}
-              numberOfLines={1}
-              ellipsizeMode="tail">
-              5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088
-            </Text>
           </TouchableOpacity>
-          <View style={styles.Home_Header_User}>
-            <TouchableOpacity onPress={handleUserSignIn}>
-              <Image
-                source={require('../assets/images/user.jpg')}
-                style={styles.Home_Header_User_Img}
-              />
-            </TouchableOpacity>
-          </View>
         </View>
-        <View style={styles.Home_Search}>
-          <Image
-            source={require('../assets/images/search_Img.png')}
-            style={styles.Home_Search_Iocn}
+        <View style={styles.Search_Container}>
+          <Ionicons
+            name="search"
+            size={20}
+            color="#ffff"
+            style={styles.SearchIcon}
           />
           <TextInput
-            placeholder="What are you looking for ?"
-            placeholderTextColor="#000"
-            style={styles.Home_Search_Input}></TextInput>
+            placeholder="Search ..."
+            placeholderTextColor="#ffff"
+            style={styles.Search_Input}
+          />
+          <TouchableOpacity onPress={showModal} style={styles.MicIcon}>
+            <Ionicons name="mic" size={20} color="#ffff" />
+          </TouchableOpacity>
         </View>
       </View>
-      <ScrollView
-        contentContainerStyle={styles.ContainerContent}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.Home_Carousel}>
-          <Animated.ScrollView
-            ref={scrollViewRef}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            onScroll={onScroll}
-            scrollEventThrottle={16}>
-            {images.map((image, index) => (
-              <Image key={index} source={image} style={styles.image} />
-            ))}
-          </Animated.ScrollView>
-          <View style={styles.indicatorContainer}>
-            {images.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.indicator,
-                  currentIndex === index && styles.activeIndicator,
-                ]}
-              />
+      <View style={[globalStyle.g_appMainContent]}>
+        <ScrollView
+          contentContainerStyle={styles.ContainerContent}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.Home_Carousel}>
+            <Animated.ScrollView
+              ref={scrollViewRef}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onScroll={onScroll}
+              scrollEventThrottle={16}>
+              {images.map((image, index) => (
+                <Image key={index} source={image} style={styles.image} />
+              ))}
+            </Animated.ScrollView>
+            <View style={styles.indicatorContainer}>
+              {images.map((_, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.indicator,
+                    currentIndex === index && styles.activeIndicator,
+                  ]}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={styles.Home_Categories_Grid}>
+            {App_Cate.map(item => (
+              <TouchableOpacity
+                key={item.Id}
+                style={styles.Home_Categories_Card}
+                onPress={() => handleNavigation(item.Lable)}>
+                <ImageBackground
+                  source={item.Img}
+                  style={styles.Home_Select_Images}
+                  imageStyle={styles.Home_ImageBackground}
+                  resizeMode="cover"></ImageBackground>
+              </TouchableOpacity>
             ))}
           </View>
-        </View>
-        <View style={styles.Home_Categories_Grid}>
-          {App_Cate.map(item => (
-            <TouchableOpacity
-              key={item.Id}
-              style={styles.Home_Categories_Card}
-              onPress={() => handleNavigation(item.Lable)}>
-              <ImageBackground
-                source={item.Img}
-                style={styles.Home_Select_Images}
-                imageStyle={styles.Home_ImageBackground}
-                resizeMode="cover"></ImageBackground>
+        </ScrollView>
+      </View>
+      <Portal>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={containerStyle}>
+          <Text style={styles.Allow_Mic_Text}>
+            Allow Miciophone Access for Voice Search
+          </Text>
+          <Text>It'll help translate your voice to search within Swiggy</Text>
+          <View style={styles.Model_Button_Container}>
+            <TouchableOpacity style={styles.Deny_Button} onPress={hideModal}>
+              <Text style={styles.Deny_Text}>Deny</Text>
             </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
+            <TouchableOpacity style={styles.Allow_Button} onPress={hideModal}>
+              <Text style={styles.Allow_Text}>Allow</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </Portal>
       <Footer />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  Container: {
-    backgroundColor: '#ffff',
-    width: '100%',
-    height: '100%',
-  },
-  Home_Header: {
-    padding: 20,
-    // backgroundColor:'#FFF0C8',
-    height: 100,
-  },
-  Home_Header_Address: {
-    display: 'flex',
-    gap: 10,
-    alignItems: 'center',
+  homePage_Header_Container: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  Home_Header_Loaction_Icon: {
-    width: 20,
-    height: 25,
-  },
-  Home_Location_Text_Content: {
-    width: '80%',
-  },
-  Home_Location_Text: {
-    fontSize: 15,
+  Location_Type: {
+    color: '#fff',
     fontWeight: 'bold',
-    color: '#D48B35',
+    fontSize: 18,
   },
-  Home_Location_Sub_Text: {
+  Location_Text: {
+    color: '#ffff',
     fontSize: 10,
-    fontWeight: 'bold',
-    width: '80%',
-    color: '#272727',
+    width: 200,
   },
+  Location_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  //User Image
   Home_Header_User_Img: {
     width: 40,
     height: 40,
@@ -236,36 +253,29 @@ const styles = StyleSheet.create({
     borderColor: '#FFCD78',
   },
 
-  //search
-  Home_Search: {
-    marginTop: 20,
-    zIndex: 2,
+  Search_Container: {
+    position: 'relative',
+    marginTop: '5%',
   },
-  Home_Search_Input: {
-    paddingLeft: 40,
-    backgroundColor: '#ffff',
-    borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // for Android
+  Search_Input: {
+    borderRadius: 10,
+    borderColor: '#ffff',
+    borderWidth: 1,
     height: 40,
-    fontSize: 12,
+    textAlignVertical: 'center',
+    paddingLeft: 40,
   },
-  Home_Search_Iocn: {
-    width: 20,
-    height: 20,
+  SearchIcon: {
     position: 'absolute',
-    left: 8,
+    left: 10,
     top: 10,
-    zIndex: 3,
+  },
+  MicIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
   },
 
-  ContainerContent: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
   // carousel content
   image: {
     width: width - 40,
@@ -325,6 +335,39 @@ const styles = StyleSheet.create({
   },
   Home_ImageBackground: {
     borderRadius: 20,
+  },
+
+  //Model
+  Allow_Mic_Text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  Model_Button_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: '5%',
+  },
+  Deny_Button: {
+    backgroundColor: '#ebedef',
+    width: '45%',
+    borderRadius: 10,
+    padding: 10,
+  },
+  Deny_Text: {
+    color: '#092844',
+    textAlign: 'center',
+  },
+  Allow_Button: {
+    backgroundColor: '#092844',
+    width: '45%',
+    borderRadius: 10,
+    padding: 10,
+  },
+  Allow_Text: {
+    color: '#ffff',
+    textAlign: 'center',
   },
 });
 

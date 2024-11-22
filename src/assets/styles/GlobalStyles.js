@@ -15,7 +15,8 @@ export const globalStyle = StyleSheet.create({
     fontWeight: '900',
     color: '#FFFFFF',
     marginTop: '5%',
-    fontFamily: Fonts.poppinsBlackItalic,
+    fontFamily: 'Poppins-Medium',
+    lineHeight: 30,
   },
   g_appPageHeaderIconsContainer: {
     flexDirection: 'row',
