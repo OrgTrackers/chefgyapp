@@ -26,25 +26,25 @@ const {width} = Dimensions.get('window');
 const App_Cate = [
   {
     Id: 1,
-    Img: require('../assets/Updated/images/H1.png'),
+    Img: require('../assets/Updated/images/HCU2.png'),
     Lable: 'Caters',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 2,
-    Img: require('../assets/Updated/images/H2.png'),
+    Img: require('../assets/Updated/images/HCU1.png'),
     Lable: 'Chef',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 3,
-    Img: require('../assets/Updated/images/H3.png'),
+    Img: require('../assets/Updated/images/HCU3.png'),
     Lable: 'Home Food',
     Offers: 'UPTO 20% OFF',
   },
   {
     Id: 4,
-    Img: require('../assets/Updated/images/H4.png'),
+    Img: require('../assets/Updated/images/HCU4.png'),
     Lable: 'Food Truck',
     Offers: 'UPTO 20% OFF',
   },

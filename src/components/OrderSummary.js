@@ -574,7 +574,7 @@ export default function OrderSummary() {
         </Modal>
       </Portal>
       <Button
-        style={[styles.Pay_Buttons, globalStyle.g_appDefaultContentBgColor]}>
+        style={[styles.Pay_Buttons, globalStyle.g_appDefaultContentBgColor]} onPress={()=>navigation.navigate('Coupons')}>
         <View style={styles.Pay_Button_Content}>
           <Text style={[styles.Pay_Buttons_Text]}>Submit Order</Text>
           {/* <View style={styles.TotalCost_Container}>

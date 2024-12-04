@@ -21,6 +21,7 @@ import appIntroSlider from './src/components/appIntroSlider';
 import FoodSession from './src/components/FoodSessions';
 import Menus from './src/components/Menus';
 import OrderSummary from './src/components/OrderSummary';
+import Coupons from './src/components/Coupon/coupon';
 import CaterSelection from './src/screens/CaterSelection';
 import Invoice from './src/screens/Invoice';
 import Rating from './src/components/Rating';
@@ -109,6 +110,7 @@ const App = () => {
           <Stack.Screen name="CaterSelection" component={CaterSelection} />
           <Stack.Screen name="Invoice" component={Invoice} />
           <Stack.Screen name="Rating" component={Rating} />
+          <Stack.Screen name="Coupons" component={Coupons} />
 
           <Stack.Screen name="ChefFilters" component={ChefFilters} />
           <Stack.Screen name="ChefList" component={ChefList} />
