@@ -25,6 +25,7 @@ import Coupons from './src/components/Coupon/coupon';
 import CaterSelection from './src/screens/CaterSelection';
 import Invoice from './src/screens/Invoice';
 import Rating from './src/components/Rating';
+import Bidding from './src/components/Bidding/Bidding';
 
 //chef
 import ChefFilters from './src/components/Chef/ChefFilters';
@@ -111,6 +112,7 @@ const App = () => {
           <Stack.Screen name="Invoice" component={Invoice} />
           <Stack.Screen name="Rating" component={Rating} />
           <Stack.Screen name="Coupons" component={Coupons} />
+          <Stack.Screen name="Bidding" component={Bidding} />
 
           <Stack.Screen name="ChefFilters" component={ChefFilters} />
           <Stack.Screen name="ChefList" component={ChefList} />

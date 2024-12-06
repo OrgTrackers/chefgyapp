@@ -456,50 +456,18 @@ export default function OrderSummary() {
               </View>
             </View>
           </View>
-          <View style={styles.Bidding_Inputs_Form_Container}>
-            <View style={styles.Form_Inputs}>
-              <Text style={[styles.Bidding_Input_Label,globalStyle.g_appTextBlack]}>Ask/Bidding Price</Text>
-              <View style={styles.Bidding_Input_Info}>
-                <TextInput
-                  placeholder="0.00"
-                  style={[
-                    styles.Bidding_Input,
-                    globalStyle.g_appMainContentInputs,
-                  ]}
-                  placeholderTextColor={globalStyle.g_appTextBlack.color}
-                />
-                <TouchableOpacity onPress={handleTooltip}>
-                  <Ionicons name="information-circle" size={20} color="#000" />
-                </TouchableOpacity>
-                {tooltipVisible && (
-                  <>
-                    <View style={styles.BiddingToolTip_Container}>
-                      <Text style={styles.ToolTip_Header}>Bidding Details</Text>
-                      <Text style={styles.ToolTip_Content_Text}>
-                        Please note that submitting a bid does not guarantee
-                        approval at the quoted price. The final decision lies
-                        solely with the vendor, who reserves the right to accept
-                        or reject your bid based on their discretion and
-                        requirements.
-                      </Text>
-                    </View>
-                    <View style={styles.ToolTip_Triangle}></View>
-                  </>
-                )}
-              </View>
-            </View>
-            <View style={styles.Form_Inputs}>
-              <TextInput
-                multiline
-                numberOfLines={1}
-                placeholder="comments"
-                style={[
-                  styles.Comments_Section,
-                  globalStyle.g_appMainContentInputs,
-                ]}
-                placeholderTextColor={globalStyle.g_appTextBlack.color}
-              />
-            </View>
+          <View style={styles.Coupons_Bidding_Section}>
+            <Text style={styles.GrandTotal_Container_Header}>
+             Choose :
+            </Text>
+            <TouchableOpacity style={styles.Coupons_Container} onPress={()=>navigation.navigate('Coupons')}>
+              <Text style={styles.ChooseHeader}>Applay Coupons</Text>
+              <Ionicons name='chevron-forward-sharp' color="#000" size={15}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.Bidding_Container} onPress={()=>navigation.navigate('Bidding')}>
+              <Text style={styles.ChooseHeader}>Go For Bidding</Text>
+              <Ionicons name='chevron-forward-sharp' color="#000" size={15}/>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -755,31 +723,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
   },
-  Comments_Section: {
-    width: '85%',
-    marginTop: 10,
-    textAlignVertical: 'top', // This aligns the text to the top
-  },
-  Bidding_Inputs_Form_Container: {
-    marginTop: 5,
-    marginBottom: 10,
-  },
-  Form_Inputs: {
-    marginTop: 10,
-  },
-  Bidding_Input_Label: {
-    marginBottom: 5,
-  },
 
-  Bidding_Input_Info: {
-    flexDirection: 'row',
-    gap: 10,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  Bidding_Input: {
-    width: '85%',
-  },
   //Grand total
   GrandTotal_Container: {
     marginTop: 10,
@@ -833,50 +777,25 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  //tooltip
-  BiddingToolTip_Container: {
-    backgroundColor: '#5d6d7e',
-    position: 'absolute',
-    right: 0,
-    top: -125,
-    left: 0,
-    padding: 15,
-    borderRadius: 15,
-    zIndex: 5,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 7,
-    // },
-    // shadowOpacity: 0.43,
-    // shadowRadius: 9.51,
-
-    // elevation: 15,
+  //Coupons_Bidding_Section
+  Coupons_Bidding_Section:{
+    marginTop:'5%'
   },
-  ToolTip_Header: {
-    fontSize: 20,
-    color: '#f7f7f7',
-    fontWeight: 'bold',
+  Coupons_Container:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    marginBottom:10
   },
-  ToolTip_Content_Text: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#ccc',
+  Bidding_Container:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    marginBottom:10
   },
-  ToolTip_Triangle:{
-    width: 0,
-    height: 0,
-    backgroundColor: "transparent",
-    borderStyle: "solid",
-    borderLeftWidth: 10,
-    borderRightWidth: 10,
-    borderBottomWidth: 30,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "#5d6d7e",
-    position:'absolute',
-    transform:[{rotate:"180deg"}],
-    right:23,
-    top:-12
+  ChooseHeader:{
+    color:'#000',
+    fontSize:15,
+    fontWeight:'bold'
   }
 });
