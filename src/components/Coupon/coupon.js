@@ -15,7 +15,7 @@ import {globalStyle} from '../../assets/styles/GlobalStyles';
 //Components
 import Header from '../Header';
 // import Footer from '../Footer';
-import {Button,Card} from 'react-native-paper';
+import {Button,Card,Modal,Portal,} from 'react-native-paper';
 
 const OffersCardData = [
   {
@@ -62,6 +62,11 @@ const OffersCardData = [
 
 const Coupons = () => {
   const navigation = useNavigation();
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20,margin:10,borderRadius:10};
 
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
@@ -73,9 +78,7 @@ const Coupons = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {OffersCardData.map(OffersItem => (
             <View key={OffersItem.Id}>
-              <Card
-                style={styles.OffersCard}
-                onPress={() => navigation.navigate('OfferDetails')}>
+              <Card style={styles.OffersCard} onPress={showModal}>
                 <View style={styles.OffersCardBody}>
                   <View style={styles.OffersImgContainer}>
                     <Image source={OffersItem.Img} style={styles.OffersImg} />
@@ -110,6 +113,15 @@ const Coupons = () => {
           <Text style={[styles.Pay_Buttons_Text]}>Back</Text>
         </View>
       </Button>
+      <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+          <Text style={styles.GreetingTitle}>Yaahooo.!</Text>
+          <Text style={styles.Offer_Text}>You Got 10% Off</Text>
+          <TouchableOpacity style={styles.Ok_Button} onPress={hideModal}>
+            <Text style={styles.Ok_Button_Text}>Ok</Text>
+          </TouchableOpacity>
+        </Modal>
+      </Portal>
     </View>
   );
 };
@@ -256,5 +268,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
   },
+
+
+  //Modal 
+  GreetingTitle:{
+    fontSize:30,
+    textAlign:'center',
+    fontWeight:'bold',
+    color:'#3498db',
+    marginBottom:'5%'
+  },
+  Offer_Text:{
+    fontSize:25,
+    fontWeight:'bold',
+    textAlign:'center',
+    color:'#000'
+  },
+  Ok_Button:{
+    backgroundColor:'#3498db',
+    padding:10,
+    marginTop:'5%',
+    borderRadius:10,
+
+  },
+  Ok_Button_Text:{
+    textAlign:'center',
+    color:'#fff',
+    fontSize:15,
+    fontWeight:'bold'
+  }
 });
 export default Coupons;

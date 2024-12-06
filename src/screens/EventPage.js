@@ -42,6 +42,52 @@ const Evnt_Data = [
   },
 ];
 
+const Food_SpecData = [
+  {
+    Id: 1,
+    Name: 'Chicken Biryani',
+    Img: require('../assets/Updated/images/Chef/FoodSpec/FS1.jpeg'),
+  },
+  {
+    Id: 2,
+    Name: 'Mutton Biryani',
+    Img: require('../assets/Updated/images/Chef/FoodSpec/FS2.jpeg'),
+  },
+  {
+    Id: 3,
+    Name: 'Veg Biryani',
+    Img: require('../assets/Updated/images/Chef/FoodSpec/FS3.jpeg'),
+  },
+  {
+    Id: 4,
+    Name: 'Special Chicken Biryani',
+    Img: require('../assets/Updated/images/Chef/FoodSpec/FS4.jpeg'),
+  },
+];
+
+const Best_CatersData = [
+  {
+    Id:1,
+    Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
+    Name:'Venkateswara Mess'
+  },
+  {
+    Id:2,
+    Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
+    Name:'Venkateswara Mess'
+  },
+  {
+    Id:3,
+    Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
+    Name:'Venkateswara Mess'
+  },
+  {
+    Id:4,
+    Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
+    Name:'Venkateswara Mess'
+  },
+];
+
 const EventPage = () => {
   const navigation = useNavigation();
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -77,36 +123,64 @@ const EventPage = () => {
         <Text style={[globalStyle.g_appPageHeaderText]}>Cater Events</Text>
       </View>
       <View style={[globalStyle.g_appMainContent]}>
-        <TouchableOpacity
-          style={styles.Book_Btn}
-          onPress={() => navigation.navigate('BookCateres')}>
-          <Text style={styles.Book_Btn_Text}>Book Cater</Text>
-        </TouchableOpacity>
-        <Text style={styles.Event_Content_Header}>We Serve Food For</Text>
-        <View style={styles.Home_Carousel}>
-          <Animated.ScrollView
-            ref={scrollViewRef}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            onScroll={onScroll}
-            scrollEventThrottle={16}>
-            {images.map((image, index) => (
-              <Image key={index} source={image} style={styles.image} />
-            ))}
-          </Animated.ScrollView>
-          <View style={styles.indicatorContainer}>
-            {images.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.indicator,
-                  currentIndex === index && styles.activeIndicator,
-                ]}
-              />
-            ))}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <TouchableOpacity
+            style={styles.Book_Btn}
+            onPress={() => navigation.navigate('BookCateres')}>
+            <Text style={styles.Book_Btn_Text}>Book Cater</Text>
+          </TouchableOpacity>
+          <Text style={styles.Event_Content_Header}>We Serve Food For</Text>
+          <View style={styles.Home_Carousel}>
+            <Animated.ScrollView
+              ref={scrollViewRef}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              onScroll={onScroll}
+              scrollEventThrottle={16}>
+              {images.map((image, index) => (
+                <Image key={index} source={image} style={styles.image} />
+              ))}
+            </Animated.ScrollView>
+            <View style={styles.indicatorContainer}>
+              {images.map((_, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.indicator,
+                    currentIndex === index && styles.activeIndicator,
+                  ]}
+                />
+              ))}
+            </View>
           </View>
-        </View>
+          <View style={styles.Best_Food_Container}>
+            <Text style={styles.Section_Title}>Our Specials :</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Food_SpecData.map(FoodItem => (
+                <View key={FoodItem.Id}>
+                  <Card style={styles.FoodItem_Card}>
+                    <Image source={FoodItem.Img} style={styles.FoodItem_Img} />
+                    <Text numberOfLines={1} style={styles.FoodItem_Name}>{FoodItem.Name}</Text>
+                  </Card>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.Best_Caters_Container}>
+          <Text style={styles.Section_Title}>Best Caterers:</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Best_CatersData.map((CaterItem)=>(
+                <View key={CaterItem.Id}>
+                  <Card style={styles.Best_Caters_Card}>
+                    <Image source={CaterItem.Img} style={styles.Best_Caterers_Img}/>
+                    <Text style={styles.Cater_Name}>{CaterItem.Name}</Text>
+                  </Card>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        </ScrollView>
       </View>
       <Footer />
     </View>
@@ -194,6 +268,52 @@ const styles = StyleSheet.create({
   Home_Carousel: {
     marginTop: 20,
   },
+
+  //Food Spec
+  Best_Food_Container:{
+    marginTop:20
+  },
+  Section_Title:{
+    fontSize:20,
+    fontWeight:'bold',
+    color:'#000',
+    margin:10
+  },
+  FoodItem_Card: {
+    marginRight: 10,
+    marginBottom:10,
+    backgroundColor:'#fff',
+    marginLeft:10
+  },
+  FoodItem_Img: {
+    width: 100,
+    height: 100,
+    borderRadius:10
+  },
+  FoodItem_Name:{
+    margin:5,
+    fontSize:12,
+    fontWeight:'bold',
+    color:'#000',
+    width:80,
+  },
+
+  //Best Caterers
+  Best_Caterers_Img:{
+    width:200,
+    height:100,
+    borderRadius:10
+  },
+  Best_Caters_Card:{
+    margin:10,
+    backgroundColor:'#ffff'
+  },
+  Cater_Name:{
+    fontSize:15,
+    fontWeight:'bold',
+    color:'#000',
+    margin:5
+  }
 });
 
 export default EventPage;
