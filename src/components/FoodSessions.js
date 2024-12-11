@@ -280,8 +280,8 @@ const FoodSession = () => {
   const [checked, setChecked] = React.useState([]);
   const [isSwitchOn, setIsSwitchOn] = React.useState(true);
 
-  const [minValue, setMinValue] = useState(10);
-  const [maxValue, setMaxValue] = useState(0);
+  const [minValue, setMinValue] = useState("");
+  const [maxValue, setMaxValue] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
 
   const handleAccordions = id => {

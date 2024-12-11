@@ -420,6 +420,7 @@ const Menus = () => {
   const [selectedDateId, setSelectedDateId] = useState(null);
   const [expanded, setExpanded] = useState(MenuTypes[0].Id);
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const [isVeg, setIsVeg] = useState(true);
   const [isAdded, setIsAdded] = useState(null);
   const [isMenuTypeOn, setIsMenuTypeOn] = React.useState(null);
 
@@ -536,7 +537,11 @@ const Menus = () => {
                     {cateItem.Title}
                   </Text>
                 </View>
-                <Text style={[styles.selectCategories_Header_Tag,globalStyle.g_appTextBlack]}>
+                <Text
+                  style={[
+                    styles.selectCategories_Header_Tag,
+                    globalStyle.g_appTextBlack,
+                  ]}>
                   {cateItem.Decscription}
                 </Text>
                 <View style={styles.cateDate_Container}>
@@ -587,7 +592,9 @@ const Menus = () => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <Card style={styles.ApplyForAllDates_Card}>
                     <View style={styles.ApplyForAllDates_CardBody}>
-                      <Text style={[globalStyle.g_appTextBlack]}>Apply For All Dates</Text>
+                      <Text style={[globalStyle.g_appTextBlack]}>
+                        Apply For All Dates
+                      </Text>
                       <Switch
                         color={globalStyle.g_appDefaultTextColor.color}
                         value={isSwitchOn}
@@ -595,30 +602,44 @@ const Menus = () => {
                       />
                     </View>
                   </Card>
-                  <View style={styles.Veg_NonVeg_Container}>
-                    {menuType.map(Menu_Item => (
-                      <View key={Menu_Item.Id}>
-                        <Card style={styles.Veg_NonVeg_Card}>
-                          <View style={styles.Veg_NonVeg_Card_Content}>
-                            <Text
-                              style={[
-                                styles.Veg_NonVeg_Text,
-                                globalStyle.g_appDefaultTextColor,
-                              ]}>
-                              {Menu_Item.Name}
-                            </Text>
-                            <Switch
-                              value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
-                              onValueChange={() =>
-                                onToggleMenuTypes(Menu_Item.Id)
-                              }
-                              color={globalStyle.g_appMainContentColors.color}
-                            />
-                          </View>
-                        </Card>
-                      </View>
-                    ))}
-                  </View>
+                  <Card style={styles.Veg_NonVeg_Container}>
+                    <Text style={styles.Select_Type_Text}>
+                      Select Your Type :
+                    </Text>
+                    <View style={styles.container}>
+                      <TouchableOpacity
+                        style={[
+                          styles.toggleButton,
+                          isVeg ? styles.activeVeg : styles.inactive,
+                        ]}
+                        onPress={() => setIsVeg(true)}>
+                        <Ionicons
+                          name="ellipse"
+                          size={15}
+                          color={isVeg ? 'green' : 'gray'}
+                        />
+                        <Text style={[styles.text, isVeg && styles.activeText]}>
+                          Veg
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.toggleButton,
+                          !isVeg ? styles.activeNonVeg : styles.inactive,
+                        ]}
+                        onPress={() => setIsVeg(false)}>
+                        <Ionicons
+                          name="triangle"
+                          size={15}
+                          color={!isVeg ? 'red' : 'gray'}
+                        />
+                        <Text
+                          style={[styles.text, !isVeg && styles.activeText]}>
+                          Non-Veg
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </Card>
                   {MenuTypes.map(mType_Item => (
                     <Card key={mType_Item.Id} style={styles.Menu_Types_Card}>
                       <View style={styles.Menu_Types_Card_Header}>
@@ -650,7 +671,9 @@ const Menus = () => {
                       </View>
                       <View style={styles.Crowed_Cost_Container}>
                         <View style={styles.Cost_Container}>
-                          <Text style={[globalStyle.g_appDefaultTextColor]}>Attendees : 20000</Text>
+                          <Text style={[globalStyle.g_appDefaultTextColor]}>
+                            Attendees : 20000
+                          </Text>
                         </View>
                         <View style={styles.Cost_Container}>
                           <FaIcons
@@ -665,32 +688,53 @@ const Menus = () => {
                       </View>
                       {expanded === mType_Item.Id && (
                         <View>
-                          <View style={styles.Veg_NonVeg_Container}>
-                            {menuType.map(Menu_Item => (
-                              <View key={Menu_Item.Id}>
-                                <Card style={styles.Veg_NonVeg_Card}>
-                                  <View style={styles.Veg_NonVeg_Card_Content}>
-                                    <Text
-                                      style={[
-                                        styles.Veg_NonVeg_Text,
-                                        globalStyle.g_appDefaultTextColor,
-                                      ]}>
-                                      {Menu_Item.Name}
-                                    </Text>
-                                    <Switch
-                                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
-                                      onValueChange={() =>
-                                        onToggleMenuTypes(Menu_Item.Id)
-                                      }
-                                      color={
-                                        globalStyle.g_appMainContentColors.color
-                                      }
-                                    />
-                                  </View>
-                                </Card>
-                              </View>
-                            ))}
-                          </View>
+                          <Card style={styles.Veg_NonVeg_Container}>
+                            <Text style={styles.Select_Type_Text}>
+                              Select Your Type :
+                            </Text>
+                            <View style={styles.container}>
+                              <TouchableOpacity
+                                style={[
+                                  styles.toggleButton,
+                                  isVeg ? styles.activeVeg : styles.inactive,
+                                ]}
+                                onPress={() => setIsVeg(true)}>
+                                <Ionicons
+                                  name="ellipse"
+                                  size={15}
+                                  color={isVeg ? 'green' : 'gray'}
+                                />
+                                <Text
+                                  style={[
+                                    styles.text,
+                                    isVeg && styles.activeText,
+                                  ]}>
+                                  Veg
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={[
+                                  styles.toggleButton,
+                                  !isVeg
+                                    ? styles.activeNonVeg
+                                    : styles.inactive,
+                                ]}
+                                onPress={() => setIsVeg(false)}>
+                                <Ionicons
+                                  name="triangle"
+                                  size={15}
+                                  color={!isVeg ? 'red' : 'gray'}
+                                />
+                                <Text
+                                  style={[
+                                    styles.text,
+                                    !isVeg && styles.activeText,
+                                  ]}>
+                                  Non-Veg
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </Card>
                           {BreakfastMenus.map(mBItem => (
                             <>
                               <View
@@ -729,7 +773,10 @@ const Menus = () => {
                                             {item.ItemName}
                                           </Text>
                                           <Text
-                                            style={[styles.Menu_Item_Desc,globalStyle.g_appTextBlack]}
+                                            style={[
+                                              styles.Menu_Item_Desc,
+                                              globalStyle.g_appTextBlack,
+                                            ]}
                                             numberOfLines={2}
                                             textBreakStrategy="simple">
                                             {item.Decscription}
@@ -777,14 +824,6 @@ const Menus = () => {
                               </View>
                             </>
                           ))}
-                          {/* <TouchableOpacity style={[globalStyle.g_Button]}>
-                            <Text style={[globalStyle.g_ButtonText]}>Save</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            style={[globalStyle.g_Button]}
-                          >
-                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
-                          </TouchableOpacity> */}
                         </View>
                       )}
                     </Card>
@@ -1645,7 +1684,6 @@ const Menus = () => {
       )}
     </View>
   );
-  c;
 };
 
 const styles = StyleSheet.create({
@@ -1955,17 +1993,66 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-
-  Crowed_Cost_Container:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:20,
-    marginTop:10
+  Crowed_Cost_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+    marginTop: 10,
   },
-  Cost_Container:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5
-  }
+  Cost_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  
+  //Buttons
+  Veg_NonVeg_Container: {
+    margin: 5,
+    marginTop: 10,
+    backgroundColor: '#fff',
+  },
+  Select_Type_Text: {
+    fontSize: 15,
+    margin: 15,
+    marginBottom: 0,
+    color:'#000'
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 10,
+  },
+  toggleButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 25,
+    marginHorizontal: 5,
+  },
+  activeVeg: {
+    backgroundColor: '#ffff',
+    borderColor: 'green',
+  },
+  activeNonVeg: {
+    backgroundColor: '#ffff',
+    borderColor: 'red',
+  },
+  inactive: {
+    backgroundColor: '#f2f2f2',
+  },
+  text: {
+    marginLeft: 5,
+    color: 'gray',
+    fontSize: 12,
+  },
+  activeText: {
+    color: '#000',
+    fontWeight: 'bold',
+  },
 });
 export default Menus;

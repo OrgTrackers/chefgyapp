@@ -123,14 +123,14 @@ const caterAllowcation = [
 
 const menuType = [
   {
-    Id:1,
-    Name:'Veg',
+    Id: 1,
+    Name: 'Veg',
   },
   {
-    Id:2,
-    Name:'Non-Veg'
-  }
-]
+    Id: 2,
+    Name: 'Non-Veg',
+  },
+];
 
 const BookCateres = () => {
   const navigation = useNavigation();
@@ -140,6 +140,7 @@ const BookCateres = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isFromDate, setIsFromDate] = useState(true);
+  const [isVeg, setIsVeg] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
     1: 1, // Initially select 'All' for Price
     2: 1, // Initially select 'All' for Distance
@@ -202,7 +203,7 @@ const BookCateres = () => {
   return (
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
-        <Header onBackPress={()=>navigation.navigate('EventPage')}/>
+        <Header onBackPress={() => navigation.navigate('EventPage')} />
         <Text style={[globalStyle.g_appPageHeaderText]}>Book Caterer</Text>
       </View>
       <View style={globalStyle.g_appMainContent}>
@@ -232,10 +233,10 @@ const BookCateres = () => {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                         onPress={() => {
-                          setIsFromDate(false);
-                          setShowModal(true);
-                        }}
+                  onPress={() => {
+                    setIsFromDate(false);
+                    setShowModal(true);
+                  }}
                   style={[
                     styles.BC_Date_Input,
                     globalStyle.g_appMainContentInputs,
@@ -316,26 +317,40 @@ const BookCateres = () => {
             <Text style={[globalStyle.g_appMainContentHeaders]}>
               Select Menu Type
             </Text>
-            {menuType.map(Menu_Item => (
-              <View key={Menu_Item.Id}>
-                <Card style={styles.BC_MenuType_Card}>
-                  <View style={styles.BC_MenuType_Card_Content}>
-                    <Text
-                      style={[
-                        styles.BC_CA_Allocation_Text,
-                        globalStyle.g_appDefaultTextColor,
-                      ]}>
-                      {Menu_Item.Name}
-                    </Text>
-                    <Switch
-                      value={isMenuTypeOn === Menu_Item.Id} // Check if the switch is active
-                      onValueChange={() => onToggleMenuTypes(Menu_Item.Id)}
-                      color={globalStyle.g_appMainContentColors.color}
-                    />
-                  </View>
-                </Card>
+            <View style={styles.Veg_NonVeg_Container}>
+              <View style={styles.container}>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    isVeg ? styles.activeVeg : styles.inactive,
+                  ]}
+                  onPress={() => setIsVeg(true)}>
+                  <Ionicons
+                    name="ellipse"
+                    size={15}
+                    color={isVeg ? 'green' : 'gray'}
+                  />
+                  <Text style={[styles.text, isVeg && styles.activeText]}>
+                    Veg
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    !isVeg ? styles.activeNonVeg : styles.inactive,
+                  ]}
+                  onPress={() => setIsVeg(false)}>
+                  <Ionicons
+                    name="triangle"
+                    size={15}
+                    color={!isVeg ? 'red' : 'gray'}
+                  />
+                  <Text style={[styles.text, !isVeg && styles.activeText]}>
+                    Non-Veg
+                  </Text>
+                </TouchableOpacity>
               </View>
-            ))}
+            </View>
           </View>
           <View style={styles.BC_Filter_Container}>
             {Filters.map(fItem => (
@@ -391,7 +406,7 @@ const BookCateres = () => {
               onDayPress={handleDateChange}
               // onChange={handleDateChange}
               markedDates={{
-                [selectedDate]:{selected: true,selectedDotColor: '#389590'}
+                [selectedDate]: {selected: true, selectedDotColor: '#389590'},
               }}
             />
           </View>
@@ -519,6 +534,57 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     fontSize: 10,
+    fontWeight: 'bold',
+  },
+
+  //Buttons
+  Veg_NonVeg_Container: {
+    margin: 5,
+    marginTop: 5,
+    backgroundColor: '#fff',
+    marginLeft:-10
+  },
+  Select_Type_Text: {
+    fontSize: 15,
+    margin: 15,
+    marginBottom: 0,
+    color: '#000',
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 10,
+  },
+  toggleButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 25,
+    marginHorizontal: 5,
+  },
+  activeVeg: {
+    backgroundColor: '#ffff',
+    borderColor: 'green',
+  },
+  activeNonVeg: {
+    backgroundColor: '#ffff',
+    borderColor: 'red',
+  },
+  inactive: {
+    backgroundColor: '#f2f2f2',
+  },
+  text: {
+    marginLeft: 5,
+    color: 'gray',
+    fontSize: 12,
+  },
+  activeText: {
+    color: '#000',
     fontWeight: 'bold',
   },
 });
