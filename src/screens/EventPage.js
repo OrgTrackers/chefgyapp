@@ -95,8 +95,9 @@ const EventPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    require('../assets/Updated/images/Events/EV1.png'),
-    require('../assets/Updated/images/Events/EV2.png'),
+    require('../assets/Updated/images/Events/EV3.jpg'),
+    require('../assets/Updated/images/Events/EV4.jpg'),
+    require('../assets/Updated/images/Events/EV5.jpg'),
   ];
 
   useEffect(() => {

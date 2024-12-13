@@ -92,7 +92,7 @@ const CaterSelection = () => {
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('BookCateres')}>
+          <TouchableOpacity onPress={() => navigation.navigate('FoodSession')}>
             <Ionicons
               name="chevron-back"
               size={globalStyle.g_appPageHeaderIconsSize.fontSize}
@@ -173,7 +173,17 @@ const CaterSelection = () => {
           ))}
         </ScrollView>
       </View>
-      <Footer />
+      {/* <Footer /> */}
+      <TouchableOpacity
+          style={styles.Pay_Buttons}
+          onPress={() => navigation.navigate('Menus')}>
+          <Text
+            style={[
+              styles.Pay_Buttons_Text,
+            ]}>
+            Next
+          </Text>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -207,6 +217,22 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     color:'#000'
+  },
+
+  Pay_Buttons: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60, // Adjust height as needed
+    backgroundColor: '#002744', // Adjust background color as needed
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#e7e7e7', // Adjust border color as needed
+  },
+  Pay_Buttons_Text: {
+    textAlign: 'center',
+    color:'#fff'
   },
 });
 

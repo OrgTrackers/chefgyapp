@@ -469,7 +469,7 @@ const Menus = () => {
       setShowMenus(false);
       setShowCategories(true);
     } else {
-      navigation.navigate('FoodSession');
+      navigation.navigate('CaterSelection');
     }
   };
   return (

@@ -518,18 +518,18 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={[globalStyle.g_Button]}
                           onPress={showCompleted}>
                           <Text style={globalStyle.g_ButtonText}>Next</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                     )}
                   </View>
                 ))}
                 <TouchableOpacity
                   style={[globalStyle.g_Button]}
-                  onPress={() => navigation.navigate('Menus')}>
+                  onPress={() => navigation.navigate('CaterSelection')}>
                   <Text style={[globalStyle.g_ButtonText]}>Search</Text>
                 </TouchableOpacity>
               </ScrollView>
@@ -700,11 +700,11 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={[globalStyle.g_Button]}
                           onPress={showCompleted}>
                           <Text style={globalStyle.g_ButtonText}>Next</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                     )}
                   </View>
@@ -882,11 +882,11 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={[globalStyle.g_Button]}
                           onPress={showCompleted}>
                           <Text style={globalStyle.g_ButtonText}>Next</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                     )}
                   </View>
@@ -1064,11 +1064,11 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={[globalStyle.g_Button]}
                           onPress={showCompleted}>
                           <Text style={globalStyle.g_ButtonText}>Next</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                     )}
                   </View>
@@ -1246,11 +1246,11 @@ const FoodSession = () => {
                             )}
                           </View>
                         ))}
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={[globalStyle.g_Button]}
                           onPress={showCompleted}>
                           <Text style={globalStyle.g_ButtonText}>Next</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                     )}
                   </View>

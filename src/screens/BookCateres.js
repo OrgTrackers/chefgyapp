@@ -405,6 +405,7 @@ const BookCateres = () => {
             <Calendar
               onDayPress={handleDateChange}
               // onChange={handleDateChange}
+              minDate={new Date().toISOString().split('T')[0]}
               markedDates={{
                 [selectedDate]: {selected: true, selectedDotColor: '#389590'},
               }}
