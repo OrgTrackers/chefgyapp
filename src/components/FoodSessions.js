@@ -424,23 +424,23 @@ const FoodSession = () => {
                           Attendees : {sliderValue[0]} - {sliderValue[1]}
                         </Text>
                         <View style={styles.inputWrapper}>
-                          <Text
-                            style={[
-                              styles.maxMininputLabel,
-                              globalStyle.g_appTextBlack,
-                            ]}>
-                            Min:{' '}
-                          </Text>
-                          <TextInput
-                            style={[
-                              styles.Rangeinput,
-                              globalStyle.g_appMainContentInputs,
-                            ]}
-                            keyboardType="numeric"
-                            value={String(minValue)}
-                            onChangeText={text => setMinValue(Number(text))}
-                          />
-                        </View>
+                        <Text
+                          style={[
+                            styles.maxMininputLabel,
+                            globalStyle.g_appTextBlack,
+                          ]}>
+                          Min:{' '}
+                        </Text>
+                        <TextInput
+                          style={[
+                            styles.Rangeinput,
+                            globalStyle.g_appMainContentInputs,
+                          ]}
+                          keyboardType="numeric"
+                          value={minValue !== null ? String(minValue) : ''}
+                          onChangeText={text => setMinValue(text === '' ? null : Number(text))}
+                        />
+                      </View>
                         <View style={styles.SliderContainer}>
                           <Slider
                             style={{width: '100%', height: 40}}
@@ -456,23 +456,23 @@ const FoodSession = () => {
                           />
                         </View>
                         <View style={styles.inputWrapper}>
-                          <Text
-                            style={[
-                              styles.maxMininputLabel,
-                              globalStyle.g_appTextBlack,
-                            ]}>
-                            Max:{' '}
-                          </Text>
-                          <TextInput
-                            style={[
-                              styles.Rangeinput,
-                              globalStyle.g_appMainContentInputs,
-                            ]}
-                            keyboardType="numeric"
-                            value={String(maxValue)}
-                            onChangeText={text => setMaxValue(Number(text))}
-                          />
-                        </View>
+                        <Text
+                          style={[
+                            styles.maxMininputLabel,
+                            globalStyle.g_appTextBlack,
+                          ]}>
+                          Max:{' '}
+                        </Text>
+                        <TextInput
+                          style={[
+                            styles.Rangeinput,
+                            globalStyle.g_appMainContentInputs,
+                          ]}
+                          keyboardType="numeric"
+                          value={maxValue !== null ? String(maxValue) : ''}
+                          onChangeText={text => setMaxValue(text === '' ? null : Number(text))}
+                        />
+                      </View>
                         <View style={styles.SliderContainer}>
                           <Slider
                             style={{width: '100%', height: 40}}
