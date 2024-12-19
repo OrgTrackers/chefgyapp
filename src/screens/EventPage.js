@@ -50,12 +50,12 @@ const Food_SpecData = [
   },
   {
     Id: 2,
-    Name: 'Mutton Biryani',
+    Name: 'Veg Noodles',
     Img: require('../assets/Updated/images/Chef/FoodSpec/FS2.jpeg'),
   },
   {
     Id: 3,
-    Name: 'Veg Biryani',
+    Name: 'Korean Crab',
     Img: require('../assets/Updated/images/Chef/FoodSpec/FS3.jpeg'),
   },
   {
@@ -74,17 +74,17 @@ const Best_CatersData = [
   {
     Id:2,
     Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
-    Name:'Venkateswara Mess'
+    Name:'Sri Ragavendra Caters'
   },
   {
     Id:3,
     Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
-    Name:'Venkateswara Mess'
+    Name:'New Brown Hotel'
   },
   {
     Id:4,
     Img:require('../assets/Updated/images/Events/BestCaters/BestCaters.jpeg'),
-    Name:'Venkateswara Mess'
+    Name:'Sairam Hotel And Mess'
   },
 ];
 

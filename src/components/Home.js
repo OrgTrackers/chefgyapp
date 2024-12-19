@@ -62,10 +62,10 @@ const Home = () => {
   const containerStyle = {backgroundColor: 'white', padding: 20, margin: 30};
 
   const images = [
-    require('../assets/Updated/images/Home/Banner-1.png'),
-    require('../assets/Updated/images/Home/Banner-2.png'),
-    require('../assets/Updated/images/Home/Banner-3.png'),
-    require('../assets/Updated/images/Home/Banner-4.png'),
+    require('../assets/Updated/images/HCU2.png'),
+    require('../assets/Updated/images/HCU1.png'),
+    require('../assets/Updated/images/HCU3.png'),
+    require('../assets/Updated/images/HCU4.png'),
   ];
 
   useEffect(() => {
@@ -130,7 +130,7 @@ const Home = () => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('UserProfile')}>
             <Image
               source={require('../assets/images/user.jpg')}
               style={styles.Home_Header_User_Img}

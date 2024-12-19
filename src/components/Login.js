@@ -28,11 +28,11 @@ const Login = () => {
 
   return (
     <ImageBackground style={styles.Login_Container} source={require('../assets/images/login_banner.jpg')}>
-      <View style={styles.Back_To_Home}>
+      {/* <View style={styles.Back_To_Home}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Image source={require('../assets/icon/back.png')} style={styles.Back_To_Home_Icon} />
         </TouchableOpacity>
-      </View>
+      </View> */}
       <View style={styles.Login_Card}>
         <Text style={styles.Welcome_Text}>Welcome back</Text>
         <Text style={styles.Login_Text}>Sign in to continue</Text>

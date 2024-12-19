@@ -58,7 +58,7 @@ const Filters = [
   },
   {
     Id: 2,
-    Title: 'Distance',
+    Title: 'Caterer distance under?',
     FilterBy: [
       {
         Id: 1,
@@ -88,22 +88,22 @@ const Filters = [
       },
       {
         Id: 2,
-        Rating: '0 To 1',
+        Rating: '1',
         Icon: 'star',
       },
       {
         Id: 3,
-        Rating: '1 To 2',
+        Rating: '2',
         Icon: 'star',
       },
       {
         Id: 4,
-        Rating: '2 To 3',
+        Rating: '3',
         Icon: 'star',
       },
       {
         Id: 5,
-        Rating: '3 To 4',
+        Rating: '4',
         Icon: 'star',
       },
     ],
@@ -140,7 +140,7 @@ const BookCateres = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isFromDate, setIsFromDate] = useState(true);
-  const [isVeg, setIsVeg] = useState(true);
+  const [menuType, setMenuType] = useState({veg: true, nonVeg: true});
   const [selectedFilters, setSelectedFilters] = useState({
     1: 1, // Initially select 'All' for Price
     2: 1, // Initially select 'All' for Distance
@@ -211,7 +211,7 @@ const BookCateres = () => {
           <View style={styles.BC_Date_Calendar_Container}>
             <View style={styles.BC_Dates_Content}>
               <Text style={[globalStyle.g_appMainContentHeaders]}>
-                Pick Dates
+                When do you want this service ?
               </Text>
               <View style={styles.BC_Date_Inputs}>
                 <TouchableOpacity
@@ -255,7 +255,7 @@ const BookCateres = () => {
           </View>
           <View style={styles.BC_Types_Container}>
             <Text style={[globalStyle.g_appMainContentHeaders]}>
-              Choose Types
+              Type of Meals
             </Text>
             <View style={styles.BC_Type_Cards_Container}>
               {Cater_Type.map(ItemType => (
@@ -288,31 +288,6 @@ const BookCateres = () => {
               ))}
             </View>
           </View>
-          <View style={styles.BC_Cater_Allowcation_Container}>
-            <Text style={[globalStyle.g_appMainContentHeaders]}>
-              Cater Allocation
-            </Text>
-            {caterAllowcation.map(CA_Item => (
-              <View key={CA_Item.Id}>
-                <Card style={styles.BC_Cater_Allowcation_Card}>
-                  <View style={styles.BC_Cater_Allowcation_Card_Content}>
-                    <Text
-                      style={[
-                        styles.BC_CA_Allocation_Text,
-                        globalStyle.g_appDefaultTextColor,
-                      ]}>
-                      {CA_Item.Name}
-                    </Text>
-                    <Switch
-                      value={isSwitchOn === CA_Item.Id} // Check if the switch is active
-                      onValueChange={() => onToggleSwitch(CA_Item.Id)}
-                      color={globalStyle.g_appMainContentColors.color}
-                    />
-                  </View>
-                </Card>
-              </View>
-            ))}
-          </View>
           <View style={styles.BC_MenuType_Container}>
             <Text style={[globalStyle.g_appMainContentHeaders]}>
               Select Menu Type
@@ -322,30 +297,32 @@ const BookCateres = () => {
                 <TouchableOpacity
                   style={[
                     styles.toggleButton,
-                    isVeg ? styles.activeVeg : styles.inactive,
+                    menuType.veg ? styles.activeVeg : styles.inactive,
                   ]}
-                  onPress={() => setIsVeg(true)}>
+                  onPress={() => setMenuType({veg: true, nonVeg: false})}>
                   <Ionicons
                     name="ellipse"
                     size={15}
-                    color={isVeg ? 'green' : 'gray'}
+                    color={menuType.veg ? 'green' : 'gray'}
                   />
-                  <Text style={[styles.text, isVeg && styles.activeText]}>
+                  <Text
+                    style={[styles.text, menuType.veg && styles.activeText]}>
                     Veg
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
                     styles.toggleButton,
-                    !isVeg ? styles.activeNonVeg : styles.inactive,
+                    menuType.nonVeg ? styles.activeNonVeg : styles.inactive,
                   ]}
-                  onPress={() => setIsVeg(false)}>
+                  onPress={() => setMenuType({veg: false, nonVeg: true})}>
                   <Ionicons
                     name="triangle"
                     size={15}
-                    color={!isVeg ? 'red' : 'gray'}
+                    color={menuType.nonVeg ? 'red' : 'gray'}
                   />
-                  <Text style={[styles.text, !isVeg && styles.activeText]}>
+                  <Text
+                    style={[styles.text, menuType.nonVeg && styles.activeText]}>
                     Non-Veg
                   </Text>
                 </TouchableOpacity>
@@ -353,6 +330,7 @@ const BookCateres = () => {
             </View>
           </View>
           <View style={styles.BC_Filter_Container}>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>Sort By :</Text>
             {Filters.map(fItem => (
               <View key={fItem.Id} style={{marginBottom: 20}}>
                 <Text style={[globalStyle.g_appMainContentHeaders]}>
@@ -386,12 +364,37 @@ const BookCateres = () => {
                 </View>
               </View>
             ))}
-            <TouchableOpacity
-              style={[globalStyle.g_Button]}
-              onPress={() => navigation.navigate('FoodSession')}>
-              <Text style={[globalStyle.g_ButtonText]}>Next</Text>
-            </TouchableOpacity>
           </View>
+          <View style={styles.BC_Cater_Allowcation_Container}>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>
+              Cater Allocation
+            </Text>
+            {caterAllowcation.map(CA_Item => (
+              <View key={CA_Item.Id}>
+                <Card style={styles.BC_Cater_Allowcation_Card}>
+                  <View style={styles.BC_Cater_Allowcation_Card_Content}>
+                    <Text
+                      style={[
+                        styles.BC_CA_Allocation_Text,
+                        globalStyle.g_appDefaultTextColor,
+                      ]}>
+                      {CA_Item.Name}
+                    </Text>
+                    <Switch
+                      value={isSwitchOn === CA_Item.Id} // Check if the switch is active
+                      onValueChange={() => onToggleSwitch(CA_Item.Id)}
+                      color={globalStyle.g_appMainContentColors.color}
+                    />
+                  </View>
+                </Card>
+              </View>
+            ))}
+          </View>
+          <TouchableOpacity
+            style={[globalStyle.g_Button]}
+            onPress={() => navigation.navigate('FoodSession')}>
+            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
 
@@ -543,7 +546,7 @@ const styles = StyleSheet.create({
     margin: 5,
     marginTop: 5,
     backgroundColor: '#fff',
-    marginLeft:-10
+    marginLeft: -10,
   },
   Select_Type_Text: {
     fontSize: 15,

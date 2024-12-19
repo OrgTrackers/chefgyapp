@@ -111,7 +111,7 @@ const CaterSelection = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {CatersList.map(CaterItem => (
             <View key={CaterItem.Id}>
-              <Card style={styles.Cater_List_Card}>
+              <Card style={styles.Cater_List_Card} onPress={()=>navigation.navigate('Menus')}>
                 <View style={styles.Cater_List_CardBody}>
                   <View>
                     <Fontisto name='shopping-store' size={25}/>
