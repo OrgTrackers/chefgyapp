@@ -354,6 +354,7 @@ const FoodSession = () => {
             </View>
             {activeDate === '24 Aug 2024' && (
               <ScrollView showsVerticalScrollIndicator={false}>
+              
                 {FsAccordions.map(FsaItem => (
                   <View key={FsaItem.Id}>
                     <Card
@@ -365,6 +366,7 @@ const FoodSession = () => {
                         styles.FS_Accordion,
                       ]}
                       onPress={() => handleAccordions(FsaItem.Id)}>
+                          
                       <View
                         style={[globalStyle.g_appMainContentAccordionHeader]}>
                         <View style={styles.FS_Accordion_Name_Container}>
@@ -487,7 +489,16 @@ const FoodSession = () => {
                             onValueChange={value => setMaxValue(value)}
                           />
                         </View>
+                        
+                        <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                          Choose Your Meal Type 
+                          </Text>
                         {FsaItem.Items.map(item => (
+                          
                           <View key={item.Id} style={styles.Fsa_Items_Content}>
                             <View style={styles.Fsa_Items}>
                               <BouncyCheckbox
@@ -669,6 +680,13 @@ const FoodSession = () => {
                             onValueChange={value => setMaxValue(value)}
                           />
                         </View>
+                        <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                          Choose Your Meal Type 
+                          </Text>
                         {FsaItem.Items.map(item => (
                           <View key={item.Id} style={styles.Fsa_Items_Content}>
                             <View style={styles.Fsa_Items}>
@@ -851,6 +869,13 @@ const FoodSession = () => {
                             onValueChange={value => setMaxValue(value)}
                           />
                         </View>
+                        <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                          Choose Your Meal Type 
+                          </Text>
                         {FsaItem.Items.map(item => (
                           <View key={item.Id} style={styles.Fsa_Items_Content}>
                             <View style={styles.Fsa_Items}>
@@ -1033,6 +1058,13 @@ const FoodSession = () => {
                             onValueChange={value => setMaxValue(value)}
                           />
                         </View>
+                        <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                          Choose Your Meal Type 
+                          </Text>
                         {FsaItem.Items.map(item => (
                           <View key={item.Id} style={styles.Fsa_Items_Content}>
                             <View style={styles.Fsa_Items}>
@@ -1215,6 +1247,13 @@ const FoodSession = () => {
                             onValueChange={value => setMaxValue(value)}
                           />
                         </View>
+                        <Text
+                            style={[
+                              styles.Required_Switch_Text,
+                              globalStyle.g_appTextBlack,
+                            ]}>
+                          Choose Your Meal Type 
+                          </Text>
                         {FsaItem.Items.map(item => (
                           <View key={item.Id} style={styles.Fsa_Items_Content}>
                             <View style={styles.Fsa_Items}>

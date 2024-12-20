@@ -16,6 +16,8 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card, Modal, Portal, Button, Switch} from 'react-native-paper';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 //styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
 import Header from '../components/Header';
@@ -90,34 +92,9 @@ const Filters = [
     ],
   },
   {
-    Id: 3,
-    Title: 'Rating',
-    FilterBy: [
-      {
-        Id: 1,
-        Rating: 'All',
-      },
-      {
-        Id: 2,
-        Rating: '1',
-        Icon: 'star',
-      },
-      {
-        Id: 3,
-        Rating: '2',
-        Icon: 'star',
-      },
-      {
-        Id: 4,
-        Rating: '3',
-        Icon: 'star',
-      },
-      {
-        Id: 5,
-        Rating: '4',
-        Icon: 'star',
-      },
-    ],
+    id: 3,
+    title: 'Caterer rating',
+    options: [1, 2, 3, 4, 5], // Represent star ratings
   },
 ];
 
@@ -383,49 +360,69 @@ const BookCateres = () => {
                 </View>
 
                 <View style={styles.section}>
-                  <Text style={styles.sectionTitle}>Sort & Filter</Text>
-                  <View style={styles.sortContainer}>
-                    {SORT_OPTIONS.map(sortOption => (
-                      <View key={sortOption.id} style={styles.sortOption}>
-                        <View style={styles.sortHeader}>
-                          <sortOption.icon size={16} color={sortOption.color} />
-                          <Text style={styles.sortLabel}>
-                            {sortOption.label}
-                          </Text>
-                        </View>
-                        <View style={styles.sortOptions}>
-                          {sortOption.options.map(option => (
-                            <TouchableOpacity
-                              key={option}
-                              style={[
-                                styles.sortButton,
-                                activeSort[sortOption.id] === option &&
-                                  styles.sortButtonActive,
-                              ]}
-                              onPress={() =>
-                                setActiveSort(prev => ({
-                                  ...prev,
-                                  [sortOption.id]:
-                                    prev[sortOption.id] === option
-                                      ? undefined
-                                      : option,
-                                }))
-                              }>
-                              <Text
-                                style={
-                                  activeSort[sortOption.id] === option
-                                    ? styles.sortButtonTextActive
-                                    : styles.sortButtonText
-                                }>
-                                {option}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
-                        </View>
-                      </View>
-                    ))}
-                  </View>
-                </View>
+      <Text style={styles.sectionTitle}>Sort List Using Below Filters</Text>
+      <View style={styles.sortContainer}>
+        {SORT_OPTIONS.map((sortOption) => (
+          <View key={sortOption.id} style={styles.sortOption}>
+            <View style={styles.sortHeader}>
+              <Text style={styles.sortLabel}>{sortOption.title}</Text>
+            </View>
+            <View style={styles.sortOptions}>
+              {sortOption.options.map((option) => (
+                <TouchableOpacity
+                  key={option}
+                  style={[
+                    styles.sortButton,
+                    activeSort[sortOption.id] === option &&
+                      styles.sortButtonActive,
+                  ]}
+                  onPress={() =>
+                    setActiveSort((prev) => ({
+                      ...prev,
+                      [sortOption.id]:
+                        prev[sortOption.id] === option ? undefined : option,
+                    }))
+                  }>
+                  {sortOption.id === 3 ? (
+                    // Render stars for rating filter
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      {[...Array(option)].map((_, index) => (
+                        <FontAwesome
+                          key={index}
+                          name="star"
+                          size={16}
+                          color="gold"
+                          style={{ marginRight: 2 }}
+                        />
+                      ))}
+                      {[...Array(5 - option)].map((_, index) => (
+                        <FontAwesome
+                          key={index + option}
+                          name="star-o"
+                          size={16}
+                          color="#ccc"
+                          style={{ marginRight: 2 }}
+                        />
+                      ))}
+                    </View>
+                  ) : (
+                    // Render text for other filters
+                    <Text
+                      style={
+                        activeSort[sortOption.id] === option
+                          ? styles.sortButtonTextActive
+                          : styles.sortButtonText
+                      }>
+                      {option}
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ))}
+      </View>
+    </View>
 
                 {/* Add RecipeCard components for Recently Viewed and Recommended Sections */}
               </ScrollView>
@@ -433,7 +430,7 @@ const BookCateres = () => {
           </View>
           <View style={styles.BC_Cater_Allowcation_Container}>
             <Text style={[globalStyle.g_appMainContentHeaders]}>
-              Cater Allocation
+              Caterer Allocation
             </Text>
             {caterAllowcation.map(CA_Item => (
               <View key={CA_Item.Id}>
