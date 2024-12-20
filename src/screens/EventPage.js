@@ -130,7 +130,7 @@ const EventPage = () => {
             onPress={() => navigation.navigate('BookCateres')}>
             <Text style={styles.Book_Btn_Text}>Book Cater</Text>
           </TouchableOpacity>
-          <Text style={styles.Event_Content_Header}>We Serve Food For</Text>
+          <Text style={styles.Event_Content_Header}>Easy and Hassle-free Booking</Text>
           <View style={styles.Home_Carousel}>
             <Animated.ScrollView
               ref={scrollViewRef}
