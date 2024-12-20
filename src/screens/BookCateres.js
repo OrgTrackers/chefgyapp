@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Pressable
+  Pressable,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 // import Calendar from 'react-native-calendar-range-picker';
@@ -20,8 +20,15 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {globalStyle} from '../assets/styles/GlobalStyles';
 import Header from '../components/Header';
 
-import { Leaf, Beef, Clock, Users, DollarSign, MapPin, Star } from 'lucide-react-native';
-
+import {
+  Leaf,
+  Beef,
+  Clock,
+  Users,
+  DollarSign,
+  MapPin,
+  Star,
+} from 'lucide-react-native';
 
 const Cater_Type = [
   {
@@ -156,31 +163,29 @@ const BookCateres = () => {
   const [filterVeg, setFilterVeg] = useState(null);
   const [activeSort, setActiveSort] = useState({});
 
- 
-
-    const SORT_OPTIONS = [
-      { 
-        id: 'price', 
-        label: 'Price', 
-        icon: DollarSign, 
-        color: '#FEC6A1',
-        options: ['Low to High', 'High to Low'] 
-      },
-      { 
-        id: 'distance', 
-        label: 'Distance', 
-        icon: MapPin, 
-        color: '#D3E4FD',
-        options: ['Nearest', '< 5km', '< 10km'] 
-      },
-      { 
-        id: 'rating', 
-        label: 'Rating', 
-        icon: Star, 
-        color: '#FEF7CD',
-        options: ['4+ Stars', '3+ Stars', 'All'] 
-      },
-    ];
+  const SORT_OPTIONS = [
+    {
+      id: 'price',
+      label: 'Price',
+      icon: DollarSign,
+      color: '#FEC6A1',
+      options: ['Low to High', 'High to Low'],
+    },
+    {
+      id: 'distance',
+      label: 'Distance',
+      icon: MapPin,
+      color: '#D3E4FD',
+      options: ['Nearest', '< 5km', '< 10km'],
+    },
+    {
+      id: 'rating',
+      label: 'Rating',
+      icon: Star,
+      color: '#FEF7CD',
+      options: ['4+ Stars', '3+ Stars', 'All'],
+    },
+  ];
 
   const onToggleSwitch = id => {
     if (isSwitchOn === id) {
@@ -325,85 +330,106 @@ const BookCateres = () => {
             <Text style={[globalStyle.g_appMainContentHeaders]}>
               Select Menu Type
             </Text>
-            
-    
-
           </View>
           <View style={styles.BC_Filter_Container}>
-
-          <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.section}>     
-          <View style={styles.toggleContainer}>
-            <TouchableOpacity
-              style={[
-                styles.toggleButton,
-                filterVeg === true && styles.toggleButtonActiveVeg,
-              ]}
-              onPress={() => setFilterVeg(filterVeg === true ? null : true)}
-            >
-              <Leaf size={16} color={filterVeg === true ? "green" : "gray"} />
-              <Text style={filterVeg === true ? styles.toggleTextActiveVeg : styles.toggleText}>Veg</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.toggleButton,
-                filterVeg === false && styles.toggleButtonActiveNonVeg,
-              ]}
-              onPress={() => setFilterVeg(filterVeg === false ? null : false)}
-            >
-              <Beef size={16} color={filterVeg === false ? "red" : "gray"} />
-              <Text style={filterVeg === false ? styles.toggleTextActiveNonVeg : styles.toggleText}>Non-Veg</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Sort & Filter</Text>
-          <View style={styles.sortContainer}>
-            {SORT_OPTIONS.map((sortOption) => (
-              <View key={sortOption.id} style={styles.sortOption}>
-                <View style={styles.sortHeader}>
-                  <sortOption.icon size={16} color={sortOption.color} />
-                  <Text style={styles.sortLabel}>{sortOption.label}</Text>
-                </View>
-                <View style={styles.sortOptions}>
-                  {sortOption.options.map((option) => (
+            <View style={styles.container}>
+              <ScrollView contentContainerStyle={styles.content}>
+                <View style={styles.section}>
+                  <View style={styles.toggleContainer}>
                     <TouchableOpacity
-                      key={option}
                       style={[
-                        styles.sortButton,
-                        activeSort[sortOption.id] === option && styles.sortButtonActive,
+                        styles.toggleButton,
+                        filterVeg === true && styles.toggleButtonActiveVeg,
                       ]}
                       onPress={() =>
-                        setActiveSort((prev) => ({
-                          ...prev,
-                          [sortOption.id]: prev[sortOption.id] === option ? undefined : option,
-                        }))
-                      }
-                    >
+                        setFilterVeg(filterVeg === true ? null : true)
+                      }>
+                      <Leaf
+                        size={16}
+                        color={filterVeg === true ? 'green' : 'gray'}
+                      />
                       <Text
                         style={
-                          activeSort[sortOption.id] === option
-                            ? styles.sortButtonTextActive
-                            : styles.sortButtonText
-                        }
-                      >
-                        {option}
+                          filterVeg === true
+                            ? styles.toggleTextActiveVeg
+                            : styles.toggleText
+                        }>
+                        Veg
                       </Text>
                     </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
 
-        {/* Add RecipeCard components for Recently Viewed and Recommended Sections */}
-      </ScrollView>
-  
-    </View>
+                    <TouchableOpacity
+                      style={[
+                        styles.toggleButton,
+                        filterVeg === false && styles.toggleButtonActiveNonVeg,
+                      ]}
+                      onPress={() =>
+                        setFilterVeg(filterVeg === false ? null : false)
+                      }>
+                      <Beef
+                        size={16}
+                        color={filterVeg === false ? 'red' : 'gray'}
+                      />
+                      <Text
+                        style={
+                          filterVeg === false
+                            ? styles.toggleTextActiveNonVeg
+                            : styles.toggleText
+                        }>
+                        Non-Veg
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                <View style={styles.section}>
+                  <Text style={styles.sectionTitle}>Sort & Filter</Text>
+                  <View style={styles.sortContainer}>
+                    {SORT_OPTIONS.map(sortOption => (
+                      <View key={sortOption.id} style={styles.sortOption}>
+                        <View style={styles.sortHeader}>
+                          <sortOption.icon size={16} color={sortOption.color} />
+                          <Text style={styles.sortLabel}>
+                            {sortOption.label}
+                          </Text>
+                        </View>
+                        <View style={styles.sortOptions}>
+                          {sortOption.options.map(option => (
+                            <TouchableOpacity
+                              key={option}
+                              style={[
+                                styles.sortButton,
+                                activeSort[sortOption.id] === option &&
+                                  styles.sortButtonActive,
+                              ]}
+                              onPress={() =>
+                                setActiveSort(prev => ({
+                                  ...prev,
+                                  [sortOption.id]:
+                                    prev[sortOption.id] === option
+                                      ? undefined
+                                      : option,
+                                }))
+                              }>
+                              <Text
+                                style={
+                                  activeSort[sortOption.id] === option
+                                    ? styles.sortButtonTextActive
+                                    : styles.sortButtonText
+                                }>
+                                {option}
+                              </Text>
+                            </TouchableOpacity>
+                          ))}
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+                </View>
+
+                {/* Add RecipeCard components for Recently Viewed and Recommended Sections */}
+              </ScrollView>
+            </View>
           </View>
           <View style={styles.BC_Cater_Allowcation_Container}>
             <Text style={[globalStyle.g_appMainContentHeaders]}>
@@ -632,133 +658,131 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   toggleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
-    borderColor: "#E0E0E0",
+    borderColor: '#E0E0E0',
     borderRadius: 50,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: "#F9F9F9",
-    transition: "all 0.3s",
+    backgroundColor: '#F9F9F9',
+    transition: 'all 0.3s',
   },
   vegButton: {
-    backgroundColor: "",
-    borderColor: "#AED581",
-    fontWeight:100,
+    backgroundColor: '',
+    borderColor: '#AED581',
+    fontWeight: 100,
   },
   nonVegButton: {
-    backgroundColor: "",
-    borderColor: "#E57373",
-    fontWeight:100,
+    backgroundColor: '',
+    borderColor: '#E57373',
+    fontWeight: 100,
   },
   toggleText: {
     marginLeft: 8,
     fontSize: 14,
-    color: "#757575",
+    color: '#757575',
   },
   vegText: {
-    color: "#2E7D32",
+    color: '#2E7D32',
   },
   nonVegText: {
-    color: "#C62828",
+    color: '#C62828',
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#333",
+    fontWeight: 'bold',
+    color: '#333',
   },
   subtitle: {
     fontSize: 16,
-    color: "#666",
+    color: '#666',
   },
   section: {
     marginBottom: 24,
   },
   sectionTitle: {
     fontSize: 14,
-    fontWeight: "bold",
-    color: "#888",
+    fontWeight: 'bold',
+    color: '#888',
     marginBottom: 8,
   },
   toggleContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
   },
   toggleButton: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 16,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: "#DDD",
+    borderColor: '#DDD',
   },
   toggleButtonActiveVeg: {
-    backgroundColor: "#E5FFE5",
-    borderColor: "#A8E6A8",
+    backgroundColor: '#E5FFE5',
+    borderColor: '#A8E6A8',
   },
   toggleButtonActiveNonVeg: {
-    backgroundColor: "#FFE5E5",
-    borderColor: "#F5A8A8",
+    backgroundColor: '#FFE5E5',
+    borderColor: '#F5A8A8',
   },
   toggleText: {
     marginLeft: 8,
     fontSize: 14,
-    color: "#666",
+    color: '#666',
   },
   toggleTextActiveVeg: {
-    color: "green",
+    color: 'green',
   },
   toggleTextActiveNonVeg: {
-    color: "red",
+    color: 'red',
   },
   sortContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
   sortOption: {
-    width: "100%",
+    width: '100%',
   },
   sortHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 8,
   },
   sortLabel: {
     fontSize: 14,
     marginLeft: 8,
-    color: "#333",
+    color: '#333',
   },
   sortOptions: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
   },
   sortButton: {
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 16,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: "#DDD",
+    borderColor: '#DDD',
   },
   sortButtonActive: {
-    backgroundColor: "#D3E4FD",
-    borderColor: "#A8C5F5",
+    backgroundColor: '#D3E4FD',
+    borderColor: '#A8C5F5',
   },
   sortButtonText: {
     fontSize: 12,
-    color: "#666",
+    color: '#666',
   },
   sortButtonTextActive: {
-    color: "#333",
+    color: '#333',
   },
-
-
 });
 
 export default BookCateres;

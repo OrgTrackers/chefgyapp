@@ -123,14 +123,16 @@ export const globalStyle = StyleSheet.create({
   // Buttons
   g_Button: {
     marginTop: 20,
-    borderColor: '#092844',
-    borderWidth: 1,
+    // borderColor: '#092844',
+    // borderWidth: 1,
     margin: '1%',
     padding: 10,
+    backgroundColor:'#092844',
+    borderRadius:10
   },
   g_ButtonText: {
     textAlign: 'center',
-    color: '#092844',
+    color: '#ffff',
     fontWeight: 'bold',
   },
 });

@@ -1028,10 +1028,15 @@ const Menus = () => {
                           <TouchableOpacity style={[globalStyle.g_Button]}>
                             <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity
+                          {/* <TouchableOpacity
                             style={[globalStyle.g_Button]}
                             onPress={() => navigation.navigate('OrderSummary')}>
                             <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                          </TouchableOpacity> */}
+                          <TouchableOpacity
+                            style={styles.Pay_Buttons}
+                            onPress={() => navigation.navigate('OrderSummary')}>
+                            <Text style={[styles.Pay_Buttons_Text]}>Next</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -1238,9 +1243,9 @@ const Menus = () => {
                             <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            style={[globalStyle.g_Button]}
+                            style={styles.Pay_Buttons}
                             onPress={() => navigation.navigate('OrderSummary')}>
-                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                            <Text style={[styles.Pay_Buttons_Text]}>Next</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -1447,9 +1452,9 @@ const Menus = () => {
                             <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            style={[globalStyle.g_Button]}
+                            style={styles.Pay_Buttons}
                             onPress={() => navigation.navigate('OrderSummary')}>
-                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                            <Text style={[styles.Pay_Buttons_Text]}>Next</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -1653,9 +1658,9 @@ const Menus = () => {
                             <Text style={[globalStyle.g_ButtonText]}>Save</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            style={[globalStyle.g_Button]}
+                            style={styles.Pay_Buttons}
                             onPress={() => navigation.navigate('OrderSummary')}>
-                            <Text style={[globalStyle.g_ButtonText]}>Next</Text>
+                            <Text style={[styles.Pay_Buttons_Text]}>Next</Text>
                           </TouchableOpacity>
                         </View>
                       )}
@@ -1671,15 +1676,8 @@ const Menus = () => {
       {showMenus && (
         <TouchableOpacity
           style={styles.Pay_Buttons}
-          // handleShowDates
           onPress={() => navigation.navigate('OrderSummary')}>
-          <Text
-            style={[
-              styles.Pay_Buttons_Text,
-              globalStyle.g_appDefaultTextColor,
-            ]}>
-            Next
-          </Text>
+          <Text style={[styles.Pay_Buttons_Text]}>Next</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -1984,13 +1982,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 60, // Adjust height as needed
-    backgroundColor: '#FFFF', // Adjust background color as needed
+    backgroundColor: '#092844', // Adjust background color as needed
     justifyContent: 'center',
     borderTopWidth: 1,
     borderTopColor: '#e7e7e7', // Adjust border color as needed
   },
   Pay_Buttons_Text: {
     textAlign: 'center',
+    color:'#fff'
   },
 
   Crowed_Cost_Container: {
@@ -2004,7 +2003,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 5,
   },
-  
+
   //Buttons
   Veg_NonVeg_Container: {
     margin: 5,
@@ -2015,7 +2014,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     margin: 15,
     marginBottom: 0,
-    color:'#000'
+    color: '#000',
   },
   container: {
     flexDirection: 'row',
