@@ -84,32 +84,30 @@ const Footer = () => {
   };
 
   return (
-    <View style={[styles.footer,globalStyle.g_appDefaultContentBgColor]}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.Footer_Container}>
-        {App_Footer.map((Footer_Item) => {
-          const isActive = activeTab === Footer_Item.Label;
-          return (
-            <TouchableOpacity
-              key={Footer_Item.Id}
-              style={styles.Footer_Content}
-              onPress={() => handleNavigation(Footer_Item.Label)}
-            >
-              <MCIcons
-                name={Footer_Item.Icon}
-                size={24}
-                color={isActive ? "#ffff" : "#cccc"} // Change icon color based on active state
-              />
-              <Text style={[styles.Footer_Text, { color: isActive ? "#ffff" : "#cccc"}]}>
-                {Footer_Item.Label}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
+    <View style={[styles.footer, globalStyle.g_appDefaultContentBgColor]}>
+  <View style={[styles.Footer_Container, {  flexDirection: 'row', justifyContent: 'space-evenly' }]}>
+    {App_Footer.map((Footer_Item) => {
+      const isActive = activeTab === Footer_Item.Label;
+      return (
+        <TouchableOpacity
+          key={Footer_Item.Id}
+          style={styles.Footer_Content}
+          onPress={() => handleNavigation(Footer_Item.Label)}
+        >
+          <MCIcons
+            name={Footer_Item.Icon}
+            size={24}
+            color={isActive ? "#ffff" : "#cccc"} // Change icon color based on active state
+          />
+          <Text style={[styles.Footer_Text, { color: isActive ? "#ffff" : "#cccc" }]}>
+            {Footer_Item.Label}
+          </Text>
+        </TouchableOpacity>
+      );
+    })}
+  </View>
+</View>
+
   );
 };
 
