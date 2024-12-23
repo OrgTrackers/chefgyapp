@@ -284,12 +284,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginBottom:10,
     backgroundColor:'#fff',
-    marginLeft:10
+    marginLeft:10,
+    textAlign:'center',
   },
   FoodItem_Img: {
     width: 100,
     height: 100,
-    borderRadius:10
+    borderRadius:10,
+    
   },
   FoodItem_Name:{
     margin:5,
@@ -297,6 +299,7 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color:'#000',
     width:80,
+    textAlign:'center',
   },
 
   //Best Caterers
