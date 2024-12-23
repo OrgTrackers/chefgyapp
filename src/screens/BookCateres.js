@@ -16,8 +16,6 @@ import MaIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card, Modal, Portal, Button, Switch} from 'react-native-paper';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 //styles
 import {globalStyle} from '../assets/styles/GlobalStyles';
 import Header from '../components/Header';
@@ -92,9 +90,34 @@ const Filters = [
     ],
   },
   {
-    id: 3,
-    title: 'Caterer rating',
-    options: [1, 2, 3, 4, 5], // Represent star ratings
+    Id: 3,
+    Title: 'Rating',
+    FilterBy: [
+      {
+        Id: 1,
+        Rating: 'All',
+      },
+      {
+        Id: 2,
+        Rating: '1',
+        Icon: 'star',
+      },
+      {
+        Id: 3,
+        Rating: '2',
+        Icon: 'star',
+      },
+      {
+        Id: 4,
+        Rating: '3',
+        Icon: 'star',
+      },
+      {
+        Id: 5,
+        Rating: '4',
+        Icon: 'star',
+      },
+    ],
   },
 ];
 
@@ -307,130 +330,90 @@ const BookCateres = () => {
             <Text style={[globalStyle.g_appMainContentHeaders]}>
               Select Menu Type
             </Text>
+            <View style={styles.Veg_NonVeg_Btns}>
+              <TouchableOpacity
+                style={[
+                  styles.toggleButton,
+                  filterVeg === true && styles.toggleButtonActiveVeg,
+                ]}
+                onPress={() => setFilterVeg(filterVeg === true ? null : true)}>
+                <Leaf size={16} color={filterVeg === true ? 'green' : 'gray'} />
+                <Text
+                  style={
+                    filterVeg === true
+                      ? styles.toggleTextActiveVeg
+                      : styles.toggleText
+                  }>
+                  Veg
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.toggleButton,
+                  filterVeg === false && styles.toggleButtonActiveNonVeg,
+                ]}
+                onPress={() =>
+                  setFilterVeg(filterVeg === false ? null : false)
+                }>
+                <Beef size={16} color={filterVeg === false ? 'red' : 'gray'} />
+                <Text
+                  style={
+                    filterVeg === false
+                      ? styles.toggleTextActiveNonVeg
+                      : styles.toggleText
+                  }>
+                  Non-Veg
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.BC_Filter_Container}>
-            <View style={styles.container}>
-              <ScrollView contentContainerStyle={styles.content}>
-                <View style={styles.section}>
-                  <View style={styles.toggleContainer}>
-                    <TouchableOpacity
-                      style={[
-                        styles.toggleButton,
-                        filterVeg === true && styles.toggleButtonActiveVeg,
-                      ]}
-                      onPress={() =>
-                        setFilterVeg(filterVeg === true ? null : true)
-                      }>
-                      <Leaf
-                        size={16}
-                        color={filterVeg === true ? 'green' : 'gray'}
-                      />
-                      <Text
-                        style={
-                          filterVeg === true
-                            ? styles.toggleTextActiveVeg
-                            : styles.toggleText
+          <View style={styles.section}>
+            <Text style={[globalStyle.g_appMainContentHeaders]}>
+              Sort List Using Below Filters
+            </Text>
+            <View style={styles.sortContainer}>
+              {SORT_OPTIONS.map(sortOption => (
+                <View key={sortOption.id} style={styles.sortOption}>
+                  {/* <View style={styles.sortHeader}>
+                    <sortOption.icon size={16} color={sortOption.color} />
+                    <Text style={styles.sortLabel}>{sortOption.label}</Text>
+                  </View> */}
+                  <View style={styles.sortOptions}>
+                    {sortOption.options.map(option => (
+                      <TouchableOpacity
+                        key={option}
+                        style={[
+                          styles.sortButton,
+                          activeSort[sortOption.id] === option &&
+                            styles.sortButtonActive,
+                        ]}
+                        onPress={() =>
+                          setActiveSort(prev => ({
+                            ...prev,
+                            [sortOption.id]:
+                              prev[sortOption.id] === option
+                                ? undefined
+                                : option,
+                          }))
                         }>
-                        Veg
-                      </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={[
-                        styles.toggleButton,
-                        filterVeg === false && styles.toggleButtonActiveNonVeg,
-                      ]}
-                      onPress={() =>
-                        setFilterVeg(filterVeg === false ? null : false)
-                      }>
-                      <Beef
-                        size={16}
-                        color={filterVeg === false ? 'red' : 'gray'}
-                      />
-                      <Text
-                        style={
-                          filterVeg === false
-                            ? styles.toggleTextActiveNonVeg
-                            : styles.toggleText
-                        }>
-                        Non-Veg
-                      </Text>
-                    </TouchableOpacity>
+                        <Text
+                          style={
+                            activeSort[sortOption.id] === option
+                              ? styles.sortButtonTextActive
+                              : styles.sortButtonText
+                          }>
+                          {option}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
                   </View>
                 </View>
-
-                <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Sort List Using Below Filters</Text>
-      <View style={styles.sortContainer}>
-        {SORT_OPTIONS.map((sortOption) => (
-          <View key={sortOption.id} style={styles.sortOption}>
-            <View style={styles.sortHeader}>
-              <Text style={styles.sortLabel}>{sortOption.title}</Text>
-            </View>
-            <View style={styles.sortOptions}>
-              {sortOption.options.map((option) => (
-                <TouchableOpacity
-                  key={option}
-                  style={[
-                    styles.sortButton,
-                    activeSort[sortOption.id] === option &&
-                      styles.sortButtonActive,
-                  ]}
-                  onPress={() =>
-                    setActiveSort((prev) => ({
-                      ...prev,
-                      [sortOption.id]:
-                        prev[sortOption.id] === option ? undefined : option,
-                    }))
-                  }>
-                  {sortOption.id === 3 ? (
-                    // Render stars for rating filter
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      {[...Array(option)].map((_, index) => (
-                        <FontAwesome
-                          key={index}
-                          name="star"
-                          size={16}
-                          color="gold"
-                          style={{ marginRight: 2 }}
-                        />
-                      ))}
-                      {[...Array(5 - option)].map((_, index) => (
-                        <FontAwesome
-                          key={index + option}
-                          name="star-o"
-                          size={16}
-                          color="#ccc"
-                          style={{ marginRight: 2 }}
-                        />
-                      ))}
-                    </View>
-                  ) : (
-                    // Render text for other filters
-                    <Text
-                      style={
-                        activeSort[sortOption.id] === option
-                          ? styles.sortButtonTextActive
-                          : styles.sortButtonText
-                      }>
-                      {option}
-                    </Text>
-                  )}
-                </TouchableOpacity>
               ))}
-            </View>
-          </View>
-        ))}
-      </View>
-    </View>
-
-                {/* Add RecipeCard components for Recently Viewed and Recommended Sections */}
-              </ScrollView>
             </View>
           </View>
           <View style={styles.BC_Cater_Allowcation_Container}>
             <Text style={[globalStyle.g_appMainContentHeaders]}>
-              Caterer Allocation
+              Cater Allocation
             </Text>
             {caterAllowcation.map(CA_Item => (
               <View key={CA_Item.Id}>
@@ -470,15 +453,39 @@ const BookCateres = () => {
           <View style={{height: 350}}>
             <Calendar
               onDayPress={handleDateChange}
-              // onChange={handleDateChange}
               minDate={new Date().toISOString().split('T')[0]}
               markedDates={{
-                [selectedDate]: {selected: true, selectedDotColor: '#389590'},
+                [selectedDate]: {
+                  selected: true,
+                  selectedColor: 'blue', // Background color for the selected date
+                  textColor: 'white', // Text color for the selected date
+                  customStyles: {
+                    container: {
+                      backgroundColor: 'blue', // Blue rounded background
+                      borderRadius: 50, // Ensure the shape is circular
+                    },
+                    text: {
+                      color: 'white', // Text color
+                      fontWeight: 'bold',
+                    },
+                  },
+                },
               }}
-            />
+              theme={{
+                todayTextColor: 'blue',
+                arrowColor: 'blue',
+                textDayFontWeight: '300',
+                textMonthFontWeight: 'bold',
+                textDayHeaderFontWeight: '300',
+                textDayFontSize: 16,
+                textMonthFontSize: 18,
+                textDayHeaderFontSize: 14,
+              }}
+           />
           </View>
         </Modal>
       </Portal>
+
       <Footer />
     </View>
   );
@@ -604,110 +611,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  //Buttons
-  Veg_NonVeg_Container: {
-    margin: 5,
-    marginTop: 5,
-    backgroundColor: '#fff',
-    marginLeft: -10,
-  },
-  Select_Type_Text: {
-    fontSize: 15,
-    margin: 15,
-    marginBottom: 0,
-    color: '#000',
-  },
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: 10,
-  },
-  toggleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 25,
-    marginHorizontal: 5,
-  },
-  activeVeg: {
-    backgroundColor: '#ffff',
-    borderColor: 'green',
-  },
-  activeNonVeg: {
-    backgroundColor: '#ffff',
-    borderColor: 'red',
-  },
-  inactive: {
-    backgroundColor: '#f2f2f2',
-  },
-  text: {
-    marginLeft: 5,
-    color: 'gray',
-    fontSize: 12,
-  },
-  activeText: {
-    color: '#000',
-    fontWeight: 'bold',
-  },
-  toggleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 50,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: '#F9F9F9',
-    transition: 'all 0.3s',
-  },
-  vegButton: {
-    backgroundColor: '',
-    borderColor: '#AED581',
-    fontWeight: 100,
-  },
-  nonVegButton: {
-    backgroundColor: '',
-    borderColor: '#E57373',
-    fontWeight: 100,
-  },
-  toggleText: {
-    marginLeft: 8,
-    fontSize: 14,
-    color: '#757575',
-  },
-  vegText: {
-    color: '#2E7D32',
-  },
-  nonVegText: {
-    color: '#C62828',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  section: {
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#888',
-    marginBottom: 8,
-  },
-  toggleContainer: {
+  //Veg and Non veg
+  Veg_NonVeg_Btns: {
     flexDirection: 'row',
     gap: 10,
+    marginBottom: '5%',
   },
   toggleButton: {
     flexDirection: 'row',
@@ -718,25 +626,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#DDD',
+    gap: 5,
   },
   toggleButtonActiveVeg: {
-    backgroundColor: '#E5FFE5',
+    //backgroundColor: '#E5FFE5',
     borderColor: '#A8E6A8',
   },
   toggleButtonActiveNonVeg: {
-    backgroundColor: '#FFE5E5',
+    //backgroundColor: '#FFE5E5',
     borderColor: '#F5A8A8',
   },
   toggleText: {
     marginLeft: 8,
     fontSize: 14,
-    color: '#666',
+    color: '#000',
+    fontWeight: 'bold',
   },
   toggleTextActiveVeg: {
     color: 'green',
+    fontWeight: 'bold',
   },
   toggleTextActiveNonVeg: {
     color: 'red',
+    fontWeight: 'bold',
+  },
+  section: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#888',
+    marginBottom: 8,
   },
   sortContainer: {
     flexDirection: 'row',
