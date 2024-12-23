@@ -23,6 +23,16 @@ import {Image} from 'react-native';
 import {globalStyle} from '../assets/styles/GlobalStyles';
 import Header from './Header';
 
+import {
+  Leaf,
+  Beef,
+  Clock,
+  Users,
+  DollarSign,
+  MapPin,
+  Star,
+} from 'lucide-react-native';
+
 const MenuFilters = [
   {
     Id: 1,
@@ -420,7 +430,7 @@ const Menus = () => {
   const [selectedDateId, setSelectedDateId] = useState(null);
   const [expanded, setExpanded] = useState(MenuTypes[0].Id);
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-  const [isVeg, setIsVeg] = useState(true);
+  const [filterVeg, setFilterVeg] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
   const [isMenuTypeOn, setIsMenuTypeOn] = React.useState(null);
 
@@ -603,38 +613,50 @@ const Menus = () => {
                     </View>
                   </Card>
                   <Card style={styles.Veg_NonVeg_Container}>
-                    <Text style={styles.Select_Type_Text}>
-                      Select Your Type :
+                    <Text style={[globalStyle.g_appMainContentHeaders]}>
+                      Select Menu Type
                     </Text>
-                    <View style={styles.container}>
+                    <View style={styles.Veg_NonVeg_Btns}>
                       <TouchableOpacity
                         style={[
                           styles.toggleButton,
-                          isVeg ? styles.activeVeg : styles.inactive,
+                          filterVeg === true && styles.toggleButtonActiveVeg,
                         ]}
-                        onPress={() => setIsVeg(true)}>
-                        <Ionicons
-                          name="ellipse"
-                          size={15}
-                          color={isVeg ? 'green' : 'gray'}
+                        onPress={() =>
+                          setFilterVeg(filterVeg === true ? null : true)
+                        }>
+                        <Leaf
+                          size={16}
+                          color={filterVeg === true ? 'green' : 'gray'}
                         />
-                        <Text style={[styles.text, isVeg && styles.activeText]}>
+                        <Text
+                          style={
+                            filterVeg === true
+                              ? styles.toggleTextActiveVeg
+                              : styles.toggleText
+                          }>
                           Veg
                         </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={[
                           styles.toggleButton,
-                          !isVeg ? styles.activeNonVeg : styles.inactive,
+                          filterVeg === false &&
+                            styles.toggleButtonActiveNonVeg,
                         ]}
-                        onPress={() => setIsVeg(false)}>
-                        <Ionicons
-                          name="triangle"
-                          size={15}
-                          color={!isVeg ? 'red' : 'gray'}
+                        onPress={() =>
+                          setFilterVeg(filterVeg === false ? null : false)
+                        }>
+                        <Beef
+                          size={16}
+                          color={filterVeg === false ? 'red' : 'gray'}
                         />
                         <Text
-                          style={[styles.text, !isVeg && styles.activeText]}>
+                          style={
+                            filterVeg === false
+                              ? styles.toggleTextActiveNonVeg
+                              : styles.toggleText
+                          }>
                           Non-Veg
                         </Text>
                       </TouchableOpacity>
@@ -689,47 +711,53 @@ const Menus = () => {
                       {expanded === mType_Item.Id && (
                         <View>
                           <Card style={styles.Veg_NonVeg_Container}>
-                            <Text style={styles.Select_Type_Text}>
-                              Select Your Type :
+                            <Text style={[globalStyle.g_appMainContentHeaders]}>
+                              Select Menu Type
                             </Text>
-                            <View style={styles.container}>
+                            <View style={styles.Veg_NonVeg_Btns}>
                               <TouchableOpacity
                                 style={[
                                   styles.toggleButton,
-                                  isVeg ? styles.activeVeg : styles.inactive,
+                                  filterVeg === true &&
+                                    styles.toggleButtonActiveVeg,
                                 ]}
-                                onPress={() => setIsVeg(true)}>
-                                <Ionicons
-                                  name="ellipse"
-                                  size={15}
-                                  color={isVeg ? 'green' : 'gray'}
+                                onPress={() =>
+                                  setFilterVeg(filterVeg === true ? null : true)
+                                }>
+                                <Leaf
+                                  size={16}
+                                  color={filterVeg === true ? 'green' : 'gray'}
                                 />
                                 <Text
-                                  style={[
-                                    styles.text,
-                                    isVeg && styles.activeText,
-                                  ]}>
+                                  style={
+                                    filterVeg === true
+                                      ? styles.toggleTextActiveVeg
+                                      : styles.toggleText
+                                  }>
                                   Veg
                                 </Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={[
                                   styles.toggleButton,
-                                  !isVeg
-                                    ? styles.activeNonVeg
-                                    : styles.inactive,
+                                  filterVeg === false &&
+                                    styles.toggleButtonActiveNonVeg,
                                 ]}
-                                onPress={() => setIsVeg(false)}>
-                                <Ionicons
-                                  name="triangle"
-                                  size={15}
-                                  color={!isVeg ? 'red' : 'gray'}
+                                onPress={() =>
+                                  setFilterVeg(
+                                    filterVeg === false ? null : false,
+                                  )
+                                }>
+                                <Beef
+                                  size={16}
+                                  color={filterVeg === false ? 'red' : 'gray'}
                                 />
                                 <Text
-                                  style={[
-                                    styles.text,
-                                    !isVeg && styles.activeText,
-                                  ]}>
+                                  style={
+                                    filterVeg === false
+                                      ? styles.toggleTextActiveNonVeg
+                                      : styles.toggleText
+                                  }>
                                   Non-Veg
                                 </Text>
                               </TouchableOpacity>
@@ -1828,27 +1856,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  //Menu Type Selection
-  Veg_NonVeg_Container: {
-    marginTop: 5,
-    marginBottom: 10,
-  },
-  Veg_NonVeg_Card: {
-    backgroundColor: '#ffff',
-    margin: '2%',
-    borderRadius: 5,
-  },
-  Veg_NonVeg_Card_Content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 5,
-    justifyContent: 'space-between',
-  },
-  Veg_NonVeg_Text: {
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-
   //Expanded Content
   M_List_Container: {
     backgroundColor: '#ffff',
@@ -1989,7 +1996,7 @@ const styles = StyleSheet.create({
   },
   Pay_Buttons_Text: {
     textAlign: 'center',
-    color:'#fff'
+    color: '#fff',
   },
 
   Crowed_Cost_Container: {
@@ -2005,53 +2012,63 @@ const styles = StyleSheet.create({
   },
 
   //Buttons
+  //Menu Type Selection
   Veg_NonVeg_Container: {
-    margin: 5,
-    marginTop: 10,
-    backgroundColor: '#fff',
+    margin:'3%',
+    padding:10,
+    backgroundColor:'#fff'
   },
-  Select_Type_Text: {
-    fontSize: 15,
-    margin: 15,
-    marginBottom: 0,
-    color: '#000',
+  Veg_NonVeg_Card: {
+    backgroundColor: '#ffff',
+    margin: '2%',
+    borderRadius: 5,
   },
-  container: {
+  Veg_NonVeg_Card_Content: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 10,
+    padding: 5,
+    justifyContent: 'space-between',
+  },
+  Veg_NonVeg_Text: {
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  Veg_NonVeg_Btns: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: '5%',
   },
   toggleButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 15,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    backgroundColor: '#FFF',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 25,
-    marginHorizontal: 5,
+    borderColor: '#DDD',
+    gap:5
   },
-  activeVeg: {
-    backgroundColor: '#ffff',
-    borderColor: 'green',
+  toggleButtonActiveVeg: {
+    //backgroundColor: '#E5FFE5',
+    borderColor: '#A8E6A8',
   },
-  activeNonVeg: {
-    backgroundColor: '#ffff',
-    borderColor: 'red',
+  toggleButtonActiveNonVeg: {
+    //backgroundColor: '#FFE5E5',
+    borderColor: '#F5A8A8',
   },
-  inactive: {
-    backgroundColor: '#f2f2f2',
+  toggleText: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#666',
   },
-  text: {
-    marginLeft: 5,
-    color: 'gray',
-    fontSize: 12,
+  toggleTextActiveVeg: {
+    color: 'green',
+    fontWeight:'bold'
   },
-  activeText: {
-    color: '#000',
-    fontWeight: 'bold',
+  toggleTextActiveNonVeg: {
+    color: 'red',
+    fontWeight:'bold'
   },
 });
 export default Menus;
