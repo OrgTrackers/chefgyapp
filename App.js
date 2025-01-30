@@ -46,6 +46,18 @@ import FoodTruckList from './src/components/FoodTruck/FoodTruckList';
 import FoodTruckConformation from './src/components/FoodTruck/FoodTruckConfromation';
 import FoodTruckPickDish from './src/components/FoodTruck/FoodTruckPickDish';
 
+
+
+//new Screens
+import LoginScreen from './newsrc/newscreens/Login/LoginScreen';
+import OtpScreen from './newsrc/newscreens/Otp/OtpScreen';
+import EventsScreen from './newsrc/newscreens/Events/EventsScreen';
+import CaterSelectionScreen from './newsrc/newscreens/Cater-Selection/CaterSelectionScreen';
+import MenuSelection from './newsrc/newscreens/Menu-Selection/MenuSelectionScreen';
+import OrderSummaryScreen from './newsrc/newscreens/Order-Summary/OrderSummaryScreen';
+import FinalScreen from './newsrc/newscreens/FinalPage/FinalScreen';
+import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -92,7 +104,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="Splash"
+          initialRouteName="MenuSelection"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -130,6 +142,18 @@ const App = () => {
           <Stack.Screen name="FoodTruckList" component={FoodTruckList} />
           <Stack.Screen name="FoodTruckConformation" component={FoodTruckConformation} />
           <Stack.Screen name="FoodTruckPickDish" component={FoodTruckPickDish} />
+
+
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="OtpScreen" component={OtpScreen} />
+          <Stack.Screen name="EventsScreen" component={EventsScreen} />
+          <Stack.Screen name="CaterSelectionScreen" component={CaterSelectionScreen} />
+          <Stack.Screen name="MenuSelection" component={MenuSelection} />
+          <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
+          <Stack.Screen name="FinalScreen" component={FinalScreen} />
+          <Stack.Screen name="FooterComponent" component={FooterComponent} />
+
+
           <Stack.Screen name="Splash" component={Splash} />
 
         </Stack.Navigator>
