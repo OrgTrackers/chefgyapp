@@ -134,7 +134,7 @@ const MenuSelectionData = [
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Idly',
                 Rating: '4.3',
                 Price: '150',
@@ -143,7 +143,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dosa',
                 Rating: '4.3',
                 Price: '150',
@@ -152,7 +152,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dal Rice',
                 Rating: '4.3',
                 Price: '150',
@@ -161,7 +161,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Noodles',
                 Rating: '4.3',
                 Price: '150',
@@ -170,7 +170,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Soup',
                 Rating: '4.3',
                 Price: '150',
@@ -185,7 +185,7 @@ const MenuSelectionData = [
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Idly',
                 Rating: '4.3',
                 Price: '150',
@@ -194,7 +194,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dosa',
                 Rating: '4.3',
                 Price: '150',
@@ -203,7 +203,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dal Rice',
                 Rating: '4.3',
                 Price: '150',
@@ -212,7 +212,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Noodles',
                 Rating: '4.3',
                 Price: '150',
@@ -221,7 +221,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Soup',
                 Rating: '4.3',
                 Price: '150',
@@ -236,7 +236,7 @@ const MenuSelectionData = [
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Idly',
                 Rating: '4.3',
                 Price: '150',
@@ -245,7 +245,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dosa',
                 Rating: '4.3',
                 Price: '150',
@@ -254,7 +254,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dal Rice',
                 Rating: '4.3',
                 Price: '150',
@@ -263,7 +263,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Noodles',
                 Rating: '4.3',
                 Price: '150',
@@ -272,7 +272,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Soup',
                 Rating: '4.3',
                 Price: '150',
@@ -287,7 +287,7 @@ const MenuSelectionData = [
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Idly',
                 Rating: '4.3',
                 Price: '150',
@@ -296,7 +296,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dosa',
                 Rating: '4.3',
                 Price: '150',
@@ -305,7 +305,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Dal Rice',
                 Rating: '4.3',
                 Price: '150',
@@ -314,7 +314,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Noodles',
                 Rating: '4.3',
                 Price: '150',
@@ -323,7 +323,7 @@ const MenuSelectionData = [
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/popular_Img_1.jpg'),
+                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
                 ItemName: 'Soup',
                 Rating: '4.3',
                 Price: '150',
@@ -487,135 +487,140 @@ const MenuSelection = () => {
                             </View>
                             <View style={MenuSelectionStyles.ItemContent}>
                               {FoodType.Items.map((FoodItem, index) => (
-                                <View key={FoodItem.Id}>
-                                  <Card
-                                    style={MenuSelectionStyles.FoodItemCard}>
-                                    <View
-                                      style={
-                                        MenuSelectionStyles.FoodItemCardBody
-                                      }>
+                                <>
+                                  <View key={FoodItem.Id}>
+                                    <Card
+                                      style={MenuSelectionStyles.FoodItemCard}>
                                       <View
                                         style={
-                                          MenuSelectionStyles.FoodImgContainer
-                                        }>
-                                        <Image
-                                          source={FoodItem.ItemImg}
-                                          style={
-                                            MenuSelectionStyles.FoodItemImg
-                                          }
-                                        />
-                                      </View>
-                                      <View
-                                        style={
-                                          MenuSelectionStyles.FoodItemDetailsContainer
+                                          MenuSelectionStyles.FoodItemCardBody
                                         }>
                                         <View
                                           style={
-                                            MenuSelectionStyles.FoodItemNameLikeButton
+                                            MenuSelectionStyles.FoodImgContainer
                                           }>
-                                          <Text
+                                          <Image
+                                            source={FoodItem.ItemImg}
                                             style={
-                                              MenuSelectionStyles.FoodItemName
-                                            }>
-                                            {FoodItem.ItemName}
-                                          </Text>
-                                          <TouchableOpacity
-                                            style={
-                                              MenuSelectionStyles.LikeButton
+                                              MenuSelectionStyles.FoodItemImg
                                             }
-                                            onPress={() =>
-                                              toggleLike(FoodItem.Id)
-                                            }>
-                                            <MCIcons
-                                              name={
-                                                likedItems[FoodItem.Id]
-                                                  ? 'cards-heart'
-                                                  : 'cards-heart-outline'
-                                              }
-                                              size={15}
-                                              color="#FFB20B"
-                                            />
-                                          </TouchableOpacity>
-                                        </View>
-                                        <Text
-                                          style={
-                                            MenuSelectionStyles.FoodItemDescription
-                                          }>
-                                          {FoodItem.Description}
-                                        </Text>
-                                        <View
-                                          style={
-                                            MenuSelectionStyles.ItemPriceContent
-                                          }>
-                                          <FaIcons
-                                            name="rupee"
-                                            size={15}
-                                            color="#000"
                                           />
-                                          <Text
-                                            style={
-                                              MenuSelectionStyles.FoodItemPrice
-                                            }>
-                                            {FoodItem.Price}
-                                          </Text>
                                         </View>
                                         <View
                                           style={
-                                            MenuSelectionStyles.FoodItemTimeAddButtonContainer
+                                            MenuSelectionStyles.FoodItemDetailsContainer
                                           }>
                                           <View
                                             style={
-                                              MenuSelectionStyles.WeightTimeContainer
+                                              MenuSelectionStyles.FoodItemNameLikeButton
                                             }>
-                                            <View
+                                            <Text
                                               style={
-                                                MenuSelectionStyles.WeightContainer
+                                                MenuSelectionStyles.FoodItemName
                                               }>
-                                              <FaIcons
-                                                name="shopping-bag"
-                                                size={12}
-                                                color="#FFB20B"
-                                              />
-                                              <Text
-                                                style={
-                                                  MenuSelectionStyles.Weight
-                                                }>
-                                                250 g
-                                              </Text>
-                                            </View>
-                                            <View
+                                              {FoodItem.ItemName}
+                                            </Text>
+                                            <TouchableOpacity
                                               style={
-                                                MenuSelectionStyles.TimeContainer
+                                                MenuSelectionStyles.LikeButton
+                                              }
+                                              onPress={() =>
+                                                toggleLike(FoodItem.Id)
                                               }>
                                               <MCIcons
-                                                name="progress-clock"
-                                                size={13}
+                                                name={
+                                                  likedItems[FoodItem.Id]
+                                                    ? 'cards-heart'
+                                                    : 'cards-heart-outline'
+                                                }
+                                                size={15}
                                                 color="#FFB20B"
                                               />
-                                              <Text
-                                                style={
-                                                  MenuSelectionStyles.Time
-                                                }>
-                                                45 Min
-                                              </Text>
-                                            </View>
+                                            </TouchableOpacity>
                                           </View>
-                                          <TouchableOpacity
+                                          <Text
                                             style={
-                                              MenuSelectionStyles.AddButtonContainer
+                                              MenuSelectionStyles.FoodItemDescription
                                             }>
-                                            <MCIcons
-                                              name="plus-circle-outline"
+                                            {FoodItem.Description}
+                                          </Text>
+                                          <View
+                                            style={
+                                              MenuSelectionStyles.ItemPriceContent
+                                            }>
+                                            <FaIcons
+                                              name="rupee"
                                               size={15}
-                                              color="#FFB20B"
+                                              color="#000"
                                             />
-                                          </TouchableOpacity>
+                                            <Text
+                                              style={
+                                                MenuSelectionStyles.FoodItemPrice
+                                              }>
+                                              {FoodItem.Price}
+                                            </Text>
+                                          </View>
+                                          <View
+                                            style={
+                                              MenuSelectionStyles.FoodItemTimeAddButtonContainer
+                                            }>
+                                            <View
+                                              style={
+                                                MenuSelectionStyles.WeightTimeContainer
+                                              }>
+                                              <View
+                                                style={
+                                                  MenuSelectionStyles.WeightContainer
+                                                }>
+                                                <FaIcons
+                                                  name="shopping-bag"
+                                                  size={12}
+                                                  color="#FFB20B"
+                                                />
+                                                <Text
+                                                  style={
+                                                    MenuSelectionStyles.Weight
+                                                  }>
+                                                  250 g
+                                                </Text>
+                                              </View>
+                                              <View
+                                                style={
+                                                  MenuSelectionStyles.TimeContainer
+                                                }>
+                                                <MCIcons
+                                                  name="progress-clock"
+                                                  size={13}
+                                                  color="#FFB20B"
+                                                />
+                                                <Text
+                                                  style={
+                                                    MenuSelectionStyles.Time
+                                                  }>
+                                                  45 Min
+                                                </Text>
+                                              </View>
+                                            </View>
+                                            <TouchableOpacity
+                                              style={
+                                                MenuSelectionStyles.AddButtonContainer
+                                              }>
+                                              <MCIcons
+                                                name="plus-circle-outline"
+                                                size={15}
+                                                color="#FFB20B"
+                                              />
+                                            </TouchableOpacity>
+                                          </View>
                                         </View>
                                       </View>
-                                    </View>
-                                  </Card>
-                                </View>
+                                    </Card>
+                                  </View>
+                                </>
                               ))}
+                              <View
+                                style={MenuSelectionStyles.SectionDivider}
+                              />
                             </View>
                           </View>
                         ))}

@@ -240,4 +240,13 @@ export const MenuSelectionStyles = StyleSheet.create({
     fontWeight:'bold',
     fontSize:15
   },
+
+  SectionDivider: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginVertical: 10, // Adjust spacing
+    width: '100%',
+    marginTop:30
+  },
+  
 });

@@ -24,10 +24,18 @@ export const EventsScreenStyles = StyleSheet.create({
     padding:10
   },
   PageHeader:{
-    fontSize:30,
+    fontSize:20,
     margin:15,
     color:'#272727',
-    fontWeight:'bold'
+    fontWeight:'bold',
+    marginBottom:0
+  },
+  Location_Text:{
+    fontSize:10,
+    marginLeft:15,
+    fontWeight:'bold',
+    color:'#0A7A77',
+    marginBottom:10
   },
   Bottom_Buttons:{
     position: 'absolute',

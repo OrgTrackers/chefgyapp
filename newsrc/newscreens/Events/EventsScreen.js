@@ -80,9 +80,18 @@ const EventsScreen = () => {
             onPress={() => navigation.navigate('LoginScreen')}
           />
           <Text style={EventsScreenStyles.PageHeader}>Events</Text>
+          <Text
+            style={EventsScreenStyles.Location_Text}
+            numberOfLines={1}
+            ellipsizeMode="tail">
+            5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088
+          </Text>
         </View>
         <View style>
-            <Image source={require('../../newassets/images/EventImages/EventMain.png')} style={EventsScreenStyles.EventChefImg}/>
+          <Image
+            source={require('../../newassets/images/EventImages/EventMain.png')}
+            style={EventsScreenStyles.EventChefImg}
+          />
         </View>
         <View style={EventsScreenStyles.OurSpc_Container}>
           <Text style={EventsScreenStyles.Our_Specials_Header}>
