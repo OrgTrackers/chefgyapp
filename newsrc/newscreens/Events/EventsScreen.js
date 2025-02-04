@@ -1,116 +1,191 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
-  FlatList,
+  Dimensions,
+  Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  Image,
+  TextInput,
   TouchableOpacity,
-  Dimensions,
+  View,
+  Animated,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Svg, {Path} from 'react-native-svg';
 import {EventsScreenStyles} from './Events.styles';
+import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
+import {Card} from 'react-native-paper';
 
-const Our_Specials = [
+const {width} = Dimensions.get('window');
+const Food_SpecData = [
   {
     Id: 1,
-    Name: 'Idly',
-    Rating: 4.5,
-    Image: require('../../newassets/images/EventImages/Item_1.png'),
+    Name: 'Chicken Biryani',
+    Img: require('../../newassets/images/Events/FoodSpec/FS1.jpeg'),
   },
   {
     Id: 2,
-    Name: 'Dosa',
-    Rating: 4.5,
-    Image: require('../../newassets/images/EventImages/Item_2.png'),
+    Name: 'Veg Noodles',
+    Img: require('../../newassets/images/Events/FoodSpec/FS2.jpeg'),
   },
   {
     Id: 3,
-    Name: 'Dhal With Rice',
-    Rating: 4.5,
-    Image: require('../../newassets/images/EventImages/Item_3.png'),
+    Name: 'Korean Crab',
+    Img: require('../../newassets/images/Events/FoodSpec/FS3.jpeg'),
   },
   {
     Id: 4,
-    Name: 'Noodles',
-    Rating: 4.5,
-    Image: require('../../newassets/images/EventImages/Item_4.png'),
+    Name: 'Special Chicken Biryani',
+    Img: require('../../newassets/images/Events/FoodSpec/FS4.jpeg'),
+  },
+];
+
+const Best_CatersData = [
+  {
+    Id: 1,
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Name: 'Venkateswara Mess',
   },
   {
-    Id: 5,
-    Name: 'Veg Soup',
-    Rating: 4.5,
-    Image: require('../../newassets/images/EventImages/Item_5.png'),
+    Id: 2,
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Name: 'Sri Ragavendra Caters',
+  },
+  {
+    Id: 3,
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Name: 'New Brown Hotel',
+  },
+  {
+    Id: 4,
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Name: 'Sairam Hotel And Mess',
   },
 ];
 
 const EventsScreen = () => {
-  const renderItem = ({item}) => (
-    <View style={EventsScreenStyles.card}>
-      <Image source={item.Image} style={EventsScreenStyles.image} />
-      <Text style={EventsScreenStyles.name}>{item.Name}</Text>
-      <Text style={EventsScreenStyles.rating}>Rating: {item.Rating}</Text>
-    </View>
-  );
-  return (
-    <View style={EventsScreenStyles.Page_Background}>
-      <View style={EventsScreenStyles.Bottom_Wave_Container}>
-        <View style={EventsScreenStyles.Bottom_Wave_Box}>
-          <Svg
-            height={200}
-            width={Dimensions.get('screen').width}
-            viewBox="0 0 1440 320"
-            style={EventsScreenStyles.Bottom_Wave}>
-            <Path
-              fill="#E8841C"
-              d="M0,192L26.7,202.7C53.3,213,107,235,160,218.7C213.3,203,267,149,320,128C373.3,107,427,117,480,138.7C533.3,160,587,192,640,192C693.3,192,747,160,800,144C853.3,128,907,128,960,128C1013.3,128,1067,128,1120,133.3C1173.3,139,1227,149,1280,133.3C1333.3,117,1387,75,1413,53.3L1440,32L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"
-            />
-          </Svg>
-        </View>
-      </View>
+  const navigation = useNavigation();
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const scrollViewRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-      <View style={EventsScreenStyles.Events_Container}>
-        <View style={EventsScreenStyles.Header_Content}>
-          <MCIcons
-            name="chevron-left"
-            size={45}
-            color="#272727"
-            onPress={() => navigation.navigate('LoginScreen')}
-          />
-          <Text style={EventsScreenStyles.PageHeader}>Events</Text>
-          <Text
-            style={EventsScreenStyles.Location_Text}
-            numberOfLines={1}
-            ellipsizeMode="tail">
-            5-74,Arunodaya coloney,Jaihind Enclave,Madhapur,Hyd,500088
-          </Text>
-        </View>
-        <View style>
-          <Image
-            source={require('../../newassets/images/EventImages/EventMain.png')}
-            style={EventsScreenStyles.EventChefImg}
-          />
-        </View>
-        <View style={EventsScreenStyles.OurSpc_Container}>
-          <Text style={EventsScreenStyles.Our_Specials_Header}>
-            Our Specials
-          </Text>
-          <FlatList
-            data={Our_Specials}
-            renderItem={renderItem}
-            keyExtractor={item => item.Id.toString()}
+  const images = [
+    require('../../newassets/images/Events/EV1.jpg'),
+    require('../../newassets/images/Events/EV2.jpg'),
+    require('../../newassets/images/Events/EV3.jpg'),
+    require('../../newassets/images/Events/EV4.jpg'),
+  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        const nextIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
+        scrollViewRef.current.scrollTo({x: nextIndex * width, animated: true});
+        return nextIndex;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const onScroll = Animated.event(
+    [{nativeEvent: {contentOffset: {x: scrollX}}}],
+    {useNativeDriver: false},
+  );
+
+  return (
+    <View style={GlobalCss.pageLayout}>
+      <View style={GlobalCss.HeaderContainer}>
+        <TouchableOpacity style={EventsScreenStyles.HeaderContent}>
+          <MCIcons name="chevron-left" size={35} color="#000" />
+          <Text style={EventsScreenStyles.PageName}>Events</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        style={GlobalCss.MainContainer}
+        showsVerticalScrollIndicator={false}>
+        <Text style={EventsScreenStyles.Event_Content_Header}>
+          Easy and Hassle-free Booking
+        </Text>
+        <View style={EventsScreenStyles.Home_Carousel}>
+          <Animated.ScrollView
+            ref={scrollViewRef}
             horizontal
+            pagingEnabled
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={EventsScreenStyles.listContainer}
-            bounces={false}
-          />
+            onScroll={onScroll}
+            scrollEventThrottle={16}>
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                source={image}
+                style={EventsScreenStyles.image}
+              />
+            ))}
+          </Animated.ScrollView>
+          <View style={EventsScreenStyles.indicatorContainer}>
+            {images.map((_, index) => (
+              <View
+                key={index}
+                style={[
+                  EventsScreenStyles.indicator,
+                  currentIndex === index && EventsScreenStyles.activeIndicator,
+                ]}
+              />
+            ))}
+          </View>
+        </View>
+        <View style={EventsScreenStyles.Best_Food_Container}>
+          <Text style={EventsScreenStyles.Section_Title}>Our Specials :</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Food_SpecData.map(FoodItem => (
+              <View key={FoodItem.Id}>
+                <Card style={EventsScreenStyles.FoodItem_Card}>
+                  <Image
+                    source={FoodItem.Img}
+                    style={EventsScreenStyles.FoodItem_Img}
+                  />
+                  <Text
+                    numberOfLines={1}
+                    style={EventsScreenStyles.FoodItem_Name}>
+                    {FoodItem.Name}
+                  </Text>
+                </Card>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+        <View style={EventsScreenStyles.Best_Caters_Container}>
+          <Text style={EventsScreenStyles.Section_Title}>Best Caterers:</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Best_CatersData.map(CaterItem => (
+              <View key={CaterItem.Id}>
+                <Card style={EventsScreenStyles.Best_Caters_Card}>
+                  <Image
+                    source={CaterItem.Img}
+                    style={EventsScreenStyles.Best_Caterers_Img}
+                  />
+                  <Text style={EventsScreenStyles.Cater_Name}>
+                    {CaterItem.Name}
+                  </Text>
+                </Card>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </ScrollView>
+      <View style={GlobalCss.FooterContainer}>
+        <View style={EventsScreenStyles.FooterButtonContainer}>
+          <TouchableOpacity
+            style={[
+              EventsScreenStyles.BookCaterButton,
+              GlobalCss.ThemeBackgroundColor,
+            ]}>
+            <Text style={EventsScreenStyles.BookCaterText}>Book Cater</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity style={EventsScreenStyles.Bottom_Buttons}>
-        <Text style={EventsScreenStyles.Bottom_Button_Text}>Book an Event</Text>
-      </TouchableOpacity>
     </View>
   );
 };

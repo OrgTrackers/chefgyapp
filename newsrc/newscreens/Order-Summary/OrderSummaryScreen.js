@@ -16,6 +16,7 @@ import Svg, {Path} from 'react-native-svg';
 import {OrderSummaryStyles} from './OrderSummary.style';
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
 import {Card} from 'react-native-paper';
+import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 
 const dayList = [
   {
@@ -135,27 +136,81 @@ const OrderSummaryList = [
   },
 ];
 
+const DishesList = [
+  {
+    Id: 1,
+    Image: require('../../newassets/images/MenuItems/Item_1.png'),
+    Name: 'Biryani',
+    Description:
+      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+  },
+  {
+    Id: 2,
+    Image: require('../../newassets/images/MenuItems/Item_2.png'),
+    Name: 'Idly',
+    Description:
+      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+  },
+  {
+    Id: 3,
+    Image: require('../../newassets/images/MenuItems/Item_3.png'),
+    Name: 'Masala Dosa',
+    Description:
+      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+  },
+  {
+    Id: 4,
+    Image: require('../../newassets/images/MenuItems/Item_4.png'),
+    Name: 'Sambar rice',
+    Description:
+      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+  },
+  {
+    Id: 5,
+    Image: require('../../newassets/images/MenuItems/Item_5.png'),
+    Name: 'Noodles',
+    Description:
+      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+  },
+];
+
 const OrderSummaryScreen = () => {
   const navigation = useNavigation();
   const [activeDay, setActiveDay] = useState('Day 1');
+  const [showDishes, setShowDishes] = useState({});
+  const [count, setCount] = useState(0);
 
   const handleTabPres = Day => {
     setActiveDay(Day.Name);
   };
 
+  const handleShowHideDishes = id => {
+    setShowDishes(prev => ({
+      ...prev,
+      [id]: !prev[id], // Toggle the specific category
+    }));
+  };
+
+  const increaseCount = () => {
+    setCount(prevCount => prevCount + 1);
+  };
+
+  const decreaseCount = () => {
+    setCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
+  };
+
   return (
-    <View style={OrderSummaryStyles.MainPageLayout}>
-      <View style={OrderSummaryStyles.PageContent}>
-        <View style={OrderSummaryStyles.PageHeader}>
-          <MCIcons
-            name="chevron-left"
-            size={40}
-            color="#272727"
-            onPress={() => navigation.navigate('LoginScreen')}
-          />
+    <View style={GlobalCss.pageLayout}>
+      <View style={GlobalCss.HeaderContainer}>
+        <TouchableOpacity style={OrderSummaryStyles.HeaderContent}>
+          <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={OrderSummaryStyles.PageName}>Order Summary</Text>
-          <Text style={OrderSummaryStyles.YearName}>Jan 2025</Text>
-        </View>
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        style={GlobalCss.MainContainer}
+        showsVerticalScrollIndicator={false}>
+        <Text style={OrderSummaryStyles.YearText}>Jan 2025</Text>
         <View style={OrderSummaryStyles.DaysContainer}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {dayList.map((DayItem, DayIndex) => (
@@ -163,7 +218,7 @@ const OrderSummaryScreen = () => {
                 key={DayIndex}
                 style={[
                   OrderSummaryStyles.DayCard,
-                  activeDay === DayItem.Name && OrderSummaryStyles.DayActiveTab,
+                  activeDay === DayItem.Name && GlobalCss.ThemeBackgroundColor,
                 ]}
                 onPress={() => handleTabPres(DayItem)}>
                 <Text
@@ -227,7 +282,11 @@ const OrderSummaryScreen = () => {
                       <View style={OrderSummaryStyles.CategoriesContainer}>
                         {CateItem.Category.map(CategoryItem => (
                           <View key={CategoryItem.Id}>
-                            <Card style={OrderSummaryStyles.CategoryCard}>
+                            <Card
+                              style={OrderSummaryStyles.CategoryCard}
+                              onPress={() =>
+                                handleShowHideDishes(CategoryItem.Id)
+                              }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
@@ -252,6 +311,71 @@ const OrderSummaryScreen = () => {
                                 </View>
                               </View>
                             </Card>
+                            {showDishes[CategoryItem.Id] && (
+                              <>
+                                {DishesList.map(DishItem => (
+                                  <View key={DishItem.Id}>
+                                    <Card
+                                      style={OrderSummaryStyles.DishItemCard}>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.DishItemCardbody
+                                        }>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishImageContent
+                                          }>
+                                          <Image
+                                            source={DishItem.Image}
+                                            style={OrderSummaryStyles.DishImage}
+                                          />
+                                        </View>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishDetailsContent
+                                          }>
+                                          <Text
+                                            style={OrderSummaryStyles.DishName}>
+                                            {DishItem.Name}
+                                          </Text>
+                                          <Text
+                                            style={
+                                              OrderSummaryStyles.DishDescription
+                                            }
+                                            numberOfLines={3}>
+                                            {DishItem.Description}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.AddRemoveButtons
+                                        }>
+                                        <TouchableOpacity
+                                          onPress={decreaseCount}>
+                                          <MCIcons
+                                            name="minus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                        <Text style={OrderSummaryStyles.Count}>
+                                          {count}
+                                        </Text>
+                                        <TouchableOpacity
+                                          onPress={increaseCount}>
+                                          <MCIcons
+                                            name="plus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                      </View>
+                                    </Card>
+                                  </View>
+                                ))}
+                              </>
+                            )}
                           </View>
                         ))}
                       </View>
@@ -303,7 +427,11 @@ const OrderSummaryScreen = () => {
                       <View style={OrderSummaryStyles.CategoriesContainer}>
                         {CateItem.Category.map(CategoryItem => (
                           <View key={CategoryItem.Id}>
-                            <Card style={OrderSummaryStyles.CategoryCard}>
+                            <Card
+                              style={OrderSummaryStyles.CategoryCard}
+                              onPress={() =>
+                                handleShowHideDishes(CategoryItem.Id)
+                              }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
@@ -328,6 +456,71 @@ const OrderSummaryScreen = () => {
                                 </View>
                               </View>
                             </Card>
+                            {showDishes[CategoryItem.Id] && (
+                              <>
+                                {DishesList.map(DishItem => (
+                                  <View key={DishItem.Id}>
+                                    <Card
+                                      style={OrderSummaryStyles.DishItemCard}>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.DishItemCardbody
+                                        }>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishImageContent
+                                          }>
+                                          <Image
+                                            source={DishItem.Image}
+                                            style={OrderSummaryStyles.DishImage}
+                                          />
+                                        </View>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishDetailsContent
+                                          }>
+                                          <Text
+                                            style={OrderSummaryStyles.DishName}>
+                                            {DishItem.Name}
+                                          </Text>
+                                          <Text
+                                            style={
+                                              OrderSummaryStyles.DishDescription
+                                            }
+                                            numberOfLines={3}>
+                                            {DishItem.Description}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.AddRemoveButtons
+                                        }>
+                                        <TouchableOpacity
+                                          onPress={decreaseCount}>
+                                          <MCIcons
+                                            name="minus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                        <Text style={OrderSummaryStyles.Count}>
+                                          {count}
+                                        </Text>
+                                        <TouchableOpacity
+                                          onPress={increaseCount}>
+                                          <MCIcons
+                                            name="plus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                      </View>
+                                    </Card>
+                                  </View>
+                                ))}
+                              </>
+                            )}
                           </View>
                         ))}
                       </View>
@@ -379,7 +572,11 @@ const OrderSummaryScreen = () => {
                       <View style={OrderSummaryStyles.CategoriesContainer}>
                         {CateItem.Category.map(CategoryItem => (
                           <View key={CategoryItem.Id}>
-                            <Card style={OrderSummaryStyles.CategoryCard}>
+                            <Card
+                              style={OrderSummaryStyles.CategoryCard}
+                              onPress={() =>
+                                handleShowHideDishes(CategoryItem.Id)
+                              }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
@@ -404,6 +601,71 @@ const OrderSummaryScreen = () => {
                                 </View>
                               </View>
                             </Card>
+                            {showDishes[CategoryItem.Id] && (
+                              <>
+                                {DishesList.map(DishItem => (
+                                  <View key={DishItem.Id}>
+                                    <Card
+                                      style={OrderSummaryStyles.DishItemCard}>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.DishItemCardbody
+                                        }>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishImageContent
+                                          }>
+                                          <Image
+                                            source={DishItem.Image}
+                                            style={OrderSummaryStyles.DishImage}
+                                          />
+                                        </View>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishDetailsContent
+                                          }>
+                                          <Text
+                                            style={OrderSummaryStyles.DishName}>
+                                            {DishItem.Name}
+                                          </Text>
+                                          <Text
+                                            style={
+                                              OrderSummaryStyles.DishDescription
+                                            }
+                                            numberOfLines={3}>
+                                            {DishItem.Description}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.AddRemoveButtons
+                                        }>
+                                        <TouchableOpacity
+                                          onPress={decreaseCount}>
+                                          <MCIcons
+                                            name="minus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                        <Text style={OrderSummaryStyles.Count}>
+                                          {count}
+                                        </Text>
+                                        <TouchableOpacity
+                                          onPress={increaseCount}>
+                                          <MCIcons
+                                            name="plus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                      </View>
+                                    </Card>
+                                  </View>
+                                ))}
+                              </>
+                            )}
                           </View>
                         ))}
                       </View>
@@ -455,7 +717,11 @@ const OrderSummaryScreen = () => {
                       <View style={OrderSummaryStyles.CategoriesContainer}>
                         {CateItem.Category.map(CategoryItem => (
                           <View key={CategoryItem.Id}>
-                            <Card style={OrderSummaryStyles.CategoryCard}>
+                            <Card
+                              style={OrderSummaryStyles.CategoryCard}
+                              onPress={() =>
+                                handleShowHideDishes(CategoryItem.Id)
+                              }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
@@ -480,6 +746,71 @@ const OrderSummaryScreen = () => {
                                 </View>
                               </View>
                             </Card>
+                            {showDishes[CategoryItem.Id] && (
+                              <>
+                                {DishesList.map(DishItem => (
+                                  <View key={DishItem.Id}>
+                                    <Card
+                                      style={OrderSummaryStyles.DishItemCard}>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.DishItemCardbody
+                                        }>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishImageContent
+                                          }>
+                                          <Image
+                                            source={DishItem.Image}
+                                            style={OrderSummaryStyles.DishImage}
+                                          />
+                                        </View>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishDetailsContent
+                                          }>
+                                          <Text
+                                            style={OrderSummaryStyles.DishName}>
+                                            {DishItem.Name}
+                                          </Text>
+                                          <Text
+                                            style={
+                                              OrderSummaryStyles.DishDescription
+                                            }
+                                            numberOfLines={3}>
+                                            {DishItem.Description}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.AddRemoveButtons
+                                        }>
+                                        <TouchableOpacity
+                                          onPress={decreaseCount}>
+                                          <MCIcons
+                                            name="minus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                        <Text style={OrderSummaryStyles.Count}>
+                                          {count}
+                                        </Text>
+                                        <TouchableOpacity
+                                          onPress={increaseCount}>
+                                          <MCIcons
+                                            name="plus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                      </View>
+                                    </Card>
+                                  </View>
+                                ))}
+                              </>
+                            )}
                           </View>
                         ))}
                       </View>
@@ -531,7 +862,11 @@ const OrderSummaryScreen = () => {
                       <View style={OrderSummaryStyles.CategoriesContainer}>
                         {CateItem.Category.map(CategoryItem => (
                           <View key={CategoryItem.Id}>
-                            <Card style={OrderSummaryStyles.CategoryCard}>
+                            <Card
+                              style={OrderSummaryStyles.CategoryCard}
+                              onPress={() =>
+                                handleShowHideDishes(CategoryItem.Id)
+                              }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
@@ -556,6 +891,71 @@ const OrderSummaryScreen = () => {
                                 </View>
                               </View>
                             </Card>
+                            {showDishes[CategoryItem.Id] && (
+                              <>
+                                {DishesList.map(DishItem => (
+                                  <View key={DishItem.Id}>
+                                    <Card
+                                      style={OrderSummaryStyles.DishItemCard}>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.DishItemCardbody
+                                        }>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishImageContent
+                                          }>
+                                          <Image
+                                            source={DishItem.Image}
+                                            style={OrderSummaryStyles.DishImage}
+                                          />
+                                        </View>
+                                        <View
+                                          style={
+                                            OrderSummaryStyles.DishDetailsContent
+                                          }>
+                                          <Text
+                                            style={OrderSummaryStyles.DishName}>
+                                            {DishItem.Name}
+                                          </Text>
+                                          <Text
+                                            style={
+                                              OrderSummaryStyles.DishDescription
+                                            }
+                                            numberOfLines={3}>
+                                            {DishItem.Description}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                      <View
+                                        style={
+                                          OrderSummaryStyles.AddRemoveButtons
+                                        }>
+                                        <TouchableOpacity
+                                          onPress={decreaseCount}>
+                                          <MCIcons
+                                            name="minus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                        <Text style={OrderSummaryStyles.Count}>
+                                          {count}
+                                        </Text>
+                                        <TouchableOpacity
+                                          onPress={increaseCount}>
+                                          <MCIcons
+                                            name="plus-circle-outline"
+                                            size={15}
+                                            color={GlobalCss.ThemeColor.color}
+                                          />
+                                        </TouchableOpacity>
+                                      </View>
+                                    </Card>
+                                  </View>
+                                ))}
+                              </>
+                            )}
                           </View>
                         ))}
                       </View>
@@ -566,11 +966,15 @@ const OrderSummaryScreen = () => {
             </ScrollView>
           </View>
         )}
-      </View>
-      <View style={OrderSummaryStyles.PageFooter}>
+      </ScrollView>
+      <View style={GlobalCss.FooterContainer}>
         <View style={OrderSummaryStyles.FooterButtonContainer}>
-          <TouchableOpacity style={OrderSummaryStyles.SubmitButton}>
-            <Text style={OrderSummaryStyles.SubmitButtonText}>Submit</Text>
+          <TouchableOpacity
+            style={[
+              OrderSummaryStyles.BookCaterButton,
+              GlobalCss.ThemeBackgroundColor,
+            ]}>
+            <Text style={OrderSummaryStyles.BookCaterText}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>

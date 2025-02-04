@@ -1,27 +1,30 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const OrderSummaryStyles = StyleSheet.create({
-  MainPageLayout: {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
-    backgroundColor: '#ffff',
-  },
-  PageContent: {
-    margin: 20,
-    flex: 0.85,
+  HeaderContent: {
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   PageName: {
-    padding: 10,
     fontSize: 20,
-    color: '#79CEFF',
     fontWeight: 'bold',
+    color: 'gray',
+    marginTop: 3,
   },
-  YearName: {
-    padding: 10,
-    paddingTop: 0,
-    marginTop: -10,
-    color: '#F59E00',
+  YearText:{
+    padding:10,
+    fontSize:30,
+    paddingBottom:0,
+    fontWeight:'bold',
+    color:'#000'
   },
+
+
+
+
+
   //Days List
   DaysContainer: {
     marginTop:10
@@ -30,7 +33,7 @@ export const OrderSummaryStyles = StyleSheet.create({
     margin:10,
     borderRadius:5,
     borderWidth:2,
-    borderColor:'#F59E00',
+    borderColor:'#FA3B3D',
     padding:10,
     backgroundColor:'#fff'
   },
@@ -120,26 +123,68 @@ export const OrderSummaryStyles = StyleSheet.create({
     color:'#000'
   },
 
-  PageFooter: {
-    flex: 0.15,
-    backgroundColor: '#FEF6E7',
-  },
-  FooterButtonContainer:{
-    flexDirection:'column',
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  SubmitButton:{
-    backgroundColor:'#FFB20B',
+  //Dish List
+  DishItemCard:{
+    backgroundColor:'#fff',
     margin:10,
+    position:'relative'
+  },
+  DishItemCardbody:{
     padding:10,
-    width:'80%',
-    borderRadius:10
+    flexDirection:'row',
+    gap:10
   },
-  SubmitButtonText:{
-    textAlign:'center',
-    color:'#f7f7f7',
-    fontWeight:'bold',
-    fontSize:15
+  DishImage:{
+    width:100,
+    height:100,
+    borderRadius:10,
+    borderWidth:0.5,
+    borderColor:'gray',
   },
+  DishName:{
+    fontSize:15,
+    color:'#000',
+    fontWeight:'bold'
+  },
+  DishDescription:{
+    fontSize:10,
+    width:150,
+    marginTop:5,
+    color:'gray'
+  },
+
+  // Add minus buttons
+  AddRemoveButtons:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:10,
+    position:'absolute',
+    right:10,
+    bottom:10
+  },
+  Count:{
+    fontSize:12,
+    color:'#000',
+    fontWeight:'bold'
+  },
+
+  //Submit
+  FooterButtonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  BookCaterButton: {
+    padding: 10,
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop:15
+  },
+  BookCaterText: {
+    color: '#ffff',
+    textAlign: 'center',
+  },
+
 });

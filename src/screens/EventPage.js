@@ -107,7 +107,7 @@ const EventPage = () => {
         scrollViewRef.current.scrollTo({x: nextIndex * width, animated: true});
         return nextIndex;
       });
-    }, 3000); // Change image every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);

@@ -62,7 +62,7 @@ const HomeScreen = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={falsezw}>
+            <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
                 <TouchableOpacity style={HomeScreenStyles.UserDetailsCotainer}>
                     <View style={HomeScreenStyles.UserImgNameContainer}>
                         <Image source={require('../../newassets/images/user.jpg')} style={HomeScreenStyles.UserImg}/>
