@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FooterComponentStyles } from './Footer.styles';
+import { GlobalCss } from '../../newassets/GlobalStyles/GlobalCss.styles';
 
 const FooterItems = [
   {

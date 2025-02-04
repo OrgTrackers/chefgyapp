@@ -233,7 +233,7 @@ const CaterSelection = () => {
       </View>
       <View style={CaterSelectionStyles.PageFooter}>
         <View style={CaterSelectionStyles.FooterButtonContainer}>
-          <TouchableOpacity style={CaterSelectionStyles.SaveButton}>
+          <TouchableOpacity style={CaterSelectionStyles.SaveButton} onPress={()=>navigation.navigate('')}>
             <Text style={CaterSelectionStyles.SaveButtonText}>Next</Text>
           </TouchableOpacity>
         </View>

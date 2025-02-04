@@ -56,6 +56,7 @@ import CaterSelectionScreen from './newsrc/newscreens/Cater-Selection/CaterSelec
 import MenuSelection from './newsrc/newscreens/Menu-Selection/MenuSelectionScreen';
 import OrderSummaryScreen from './newsrc/newscreens/Order-Summary/OrderSummaryScreen';
 import FinalScreen from './newsrc/newscreens/FinalPage/FinalScreen';
+import HomeScreen from './newsrc/newscreens/HomePage/HomeScreen';
 import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
 
 const Stack = createNativeStackNavigator();
@@ -104,7 +105,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="MenuSelection"
+          initialRouteName="HomeScreen"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -151,6 +152,7 @@ const App = () => {
           <Stack.Screen name="MenuSelection" component={MenuSelection} />
           <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="FooterComponent" component={FooterComponent} />
 
 
