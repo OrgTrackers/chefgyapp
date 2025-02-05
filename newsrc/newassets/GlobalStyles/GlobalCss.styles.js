@@ -27,4 +27,20 @@ export const GlobalCss = StyleSheet.create({
        backgroundColor:'#ffff' 
     },
 
+    //Inputs
+    g_Inputs: {
+        borderColor: '#FA3B3D',
+        borderWidth: 1,
+        paddingLeft: 10,
+        borderRadius: 10,
+        color:'#000'
+    },
+    
+    //Page side headers
+    g_SideHeaders: {
+        color: '#272727',
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+
 })

@@ -61,11 +61,11 @@ const FooterComponent = () => {
           <MCIcons
             name={activeId === item.Id ? item.ActiveIcon : item.InActiveIcon}
             size={20}
-            color={activeId === item.Id ? '#FFB20B' : '#808080'}
+            color={activeId === item.Id ? '#FA3B3D' : '#808080'}
           />
           <Text
             style={{
-              color: activeId === item.Id ? '#FFB20B' : '#808080',
+              color: activeId === item.Id ? '#FA3B3D' : '#808080',
               fontSize: 12,
             }}
           >

@@ -57,7 +57,10 @@ import MenuSelection from './newsrc/newscreens/Menu-Selection/MenuSelectionScree
 import OrderSummaryScreen from './newsrc/newscreens/Order-Summary/OrderSummaryScreen';
 import FinalScreen from './newsrc/newscreens/FinalPage/FinalScreen';
 import HomeScreen from './newsrc/newscreens/HomePage/HomeScreen';
+import BookCaterScreen from './newsrc/newscreens/Book-Cater/BookCaterScreen';
+import DayFoodSelectionScreen from './newsrc/newscreens/FoodSessions/DayFoodSelectionScreen';
 import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
+import FoodSessionScreen from './newsrc/newscreens/FoodSessions/FoodSessionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -105,7 +108,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="OrderSummaryScreen"
+          initialRouteName="BookCaterScreen"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -153,6 +156,9 @@ const App = () => {
           <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
+          {/* <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
+          <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} /> */}
           <Stack.Screen name="FooterComponent" component={FooterComponent} />
 
 
