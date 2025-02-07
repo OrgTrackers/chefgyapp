@@ -15,320 +15,263 @@ import FaIcons from 'react-native-vector-icons/FontAwesome';
 import Svg, {Path} from 'react-native-svg';
 import {Card} from 'react-native-paper';
 import {MenuSelectionStyles} from './MenuSelection.styles';
+import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 
 //Footer
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
+import {Item} from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
-const DaySelection = [
+const dayList = [
   {
     Id: 1,
-    Name: 'Breakfast',
-    Year: 'Jan 2025',
-    Days: [
-      {
-        Id: 1,
-        Day: 'Day 1',
-        Date: '27',
-      },
-      {
-        Id: 2,
-        Day: 'Day 2',
-        Date: '28',
-      },
-      {
-        Id: 3,
-        Day: 'Day 3',
-        Date: '29',
-      },
-      {
-        Id: 4,
-        Day: 'Day 4',
-        Date: '30',
-      },
-      {
-        Id: 5,
-        Day: 'Day 5',
-        Date: '31',
-      },
-    ],
+    Name: 'Day 1',
+    Date: 27,
   },
   {
     Id: 2,
-    Name: 'Lunch',
-    Year: 'Jan 2025',
-    Days: [
-      {
-        Id: 1,
-        Day: 'Day 1',
-        Date: '27',
-      },
-      {
-        Id: 2,
-        Day: 'Day 2',
-        Date: '28',
-      },
-      {
-        Id: 3,
-        Day: 'Day 3',
-        Date: '29',
-      },
-      {
-        Id: 4,
-        Day: 'Day 4',
-        Date: '30',
-      },
-      {
-        Id: 5,
-        Day: 'Day 5',
-        Date: '31',
-      },
-    ],
+    Name: 'Day 2',
+    Date: 28,
   },
   {
     Id: 3,
-    Name: 'Dinner',
-    Year: 'Jan 2025',
-    Days: [
-      {
-        Id: 1,
-        Day: 'Day 1',
-        Date: '27',
-      },
-      {
-        Id: 2,
-        Day: 'Day 2',
-        Date: '28',
-      },
-      {
-        Id: 3,
-        Day: 'Day 3',
-        Date: '29',
-      },
-      {
-        Id: 4,
-        Day: 'Day 4',
-        Date: '30',
-      },
-      {
-        Id: 5,
-        Day: 'Day 5',
-        Date: '31',
-      },
-    ],
+    Name: 'Day 3',
+    Date: 29,
+  },
+  {
+    Id: 4,
+    Name: 'Day 4',
+    Date: 30,
+  },
+  {
+    Id: 5,
+    Name: 'Day 5',
+    Date: 31,
   },
 ];
 
-const MenuSelectionData = [
+const MenusData = [
   {
     Id: 1,
-    Name: 'Breakfast',
-    Day: [
+    MenuName: 'Royal Menu',
+    CategoryTypes: [
       {
         Id: 1,
-        DayName: 'Day 1',
-        Date: '27',
-        DayItems: [
+        Category: 'Breakfast',
+        ItemCategory: [
           {
             Id: 1,
-            FoodType: 'Italian',
+            ItemCategoryName: 'Indian',
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Idly',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_1.png'),
+                Name: 'Biryani',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dosa',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_2.png'),
+                Name: 'Idly',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dal Rice',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_3.png'),
+                Name: 'Masala Dosa',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Noodles',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_4.png'),
+                Name: 'Sambar rice',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Soup',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_5.png'),
+                Name: 'Noodles',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
             ],
           },
           {
             Id: 2,
-            FoodType: 'Indian',
+            ItemCategoryName: 'Japanese',
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Idly',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_1.png'),
+                Name: 'Biryani',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dosa',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_2.png'),
+                Name: 'Idly',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dal Rice',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_3.png'),
+                Name: 'Masala Dosa',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Noodles',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_4.png'),
+                Name: 'Sambar rice',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Soup',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_5.png'),
+                Name: 'Noodles',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
             ],
           },
           {
             Id: 3,
-            FoodType: 'Japanese',
+            ItemCategoryName: 'Korean',
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Idly',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_1.png'),
+                Name: 'Biryani',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dosa',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_2.png'),
+                Name: 'Idly',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dal Rice',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_3.png'),
+                Name: 'Masala Dosa',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Noodles',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_4.png'),
+                Name: 'Sambar rice',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Soup',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_5.png'),
+                Name: 'Noodles',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
             ],
           },
+        ],
+      },
+      {
+        Id: 2,
+        Category: 'Lunch',
+        ItemCategory: [
           {
-            Id: 4,
-            FoodType: 'Korean',
+            Id: 1,
+            ItemCategoryName: 'Indian',
             Items: [
               {
                 Id: 1,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Idly',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_1.png'),
+                Name: 'Biryani',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 2,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dosa',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_2.png'),
+                Name: 'Idly',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 3,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Dal Rice',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_3.png'),
+                Name: 'Masala Dosa',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 4,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Noodles',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_4.png'),
+                Name: 'Sambar rice',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
               {
                 Id: 5,
-                ItemImg: require('../../newassets/images/MenuItems/biryani.png'),
-                ItemName: 'Soup',
-                Rating: '4.3',
-                Price: '150',
+                Image: require('../../newassets/images/MenuItems/Item_5.png'),
+                Name: 'Noodles',
                 Description:
-                  'Good food is the foundation of genuine happiness.',
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        Id: 3,
+        Category: 'Dinner',
+        ItemCategory: [
+          {
+            Id: 1,
+            ItemCategoryName: 'Indian',
+            Items: [
+              {
+                Id: 1,
+                Image: require('../../newassets/images/MenuItems/Item_1.png'),
+                Name: 'Biryani',
+                Description:
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+              },
+              {
+                Id: 2,
+                Image: require('../../newassets/images/MenuItems/Item_2.png'),
+                Name: 'Idly',
+                Description:
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+              },
+              {
+                Id: 3,
+                Image: require('../../newassets/images/MenuItems/Item_3.png'),
+                Name: 'Masala Dosa',
+                Description:
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+              },
+              {
+                Id: 4,
+                Image: require('../../newassets/images/MenuItems/Item_4.png'),
+                Name: 'Sambar rice',
+                Description:
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+              },
+              {
+                Id: 5,
+                Image: require('../../newassets/images/MenuItems/Item_5.png'),
+                Name: 'Noodles',
+                Description:
+                  'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
               },
             ],
           },
@@ -336,313 +279,286 @@ const MenuSelectionData = [
       },
     ],
   },
+  // {
+  //   Id: 2,
+  //   MenuName: 'Standard Menu',
+  //   CategoryTypes: [
+  //     {
+  //       Id: 1,
+  //       Category: 'Breakfast',
+  //       ItemCategory: [
+  //         {
+  //           Id: 1,
+  //           ItemCategoryName: 'Indian',
+  //           Items: [
+  //             {
+  //               Id: 1,
+  //               Name: 'Biryani',
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 
 const MenuSelection = () => {
-  const navigation = useNavigation();
-  const [showTypeContent, setShowTypeContent] = useState(true);
-  const [showSelectContent, setShowSelectContent] = useState(false);
-  const [expanded, setExpanded] = useState({});
-  const [likedItems, setLikedItems] = useState({});
+  const [activeDay, setActiveDay] = useState('Day 1');
+  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedItemCategory, setSelectedItemCategory] = useState(null);
+  const [count, setCount] = useState(0);
 
-  const handleDaySelection = () => {
-    setShowTypeContent(false);
-    setShowSelectContent(true);
+  const handleTabPres = Day => {
+    setActiveDay(Day.Name);
   };
-  const handleItemSelection = () => {
-    setShowTypeContent(true);
-    setShowSelectContent(false);
-  };
-  const toggleAccordion = dayId => {
-    setExpanded(prevState => ({
-      ...prevState,
-      [dayId]: !prevState[dayId],
-    }));
+  const increaseCount = () => {
+    setCount(prevCount => prevCount + 1);
   };
 
-  const toggleLike = itemId => {
-    setLikedItems(prev => ({
-      ...prev,
-      [itemId]: !prev[itemId], // Toggle the liked state
-    }));
+  const decreaseCount = () => {
+    setCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
   };
-
   return (
-    <View style={MenuSelectionStyles.MainPageLayout}>
-      <View style={MenuSelectionStyles.PageContent}>
-        <View style={MenuSelectionStyles.PageHeader}>
-          <MCIcons
-            name="chevron-left"
-            size={40}
-            color="#272727"
-            onPress={() => navigation.navigate('LoginScreen')}
-          />
-          <Text style={MenuSelectionStyles.PageName}>Restaurant</Text>
-          <Text style={MenuSelectionStyles.RestaurantName}>
-            Sairam Breakfast And Meals
-          </Text>
-        </View>
-        {showTypeContent && (
-          <View style={MenuSelectionStyles.PageMainContent}>
-            <ScrollView>
-              {DaySelection.map(MenuTypeItem => (
-                <View key={MenuTypeItem.Id}>
-                  <Card style={MenuSelectionStyles.MenuTypeCard}>
-                    <View style={MenuSelectionStyles.AddDayContainer}>
-                      <TouchableOpacity>
-                        <Text style={MenuSelectionStyles.AddDayName}>
-                          + Add Day
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View style={MenuSelectionStyles.MenuTypeCardBody}>
-                      <Text style={MenuSelectionStyles.MenuTypeName}>
-                        {MenuTypeItem.Name}
-                      </Text>
-                      <Text style={MenuSelectionStyles.YearName}>
-                        {MenuTypeItem.Year}
-                      </Text>
-                      <View style={MenuSelectionStyles.DatesContainer}>
-                        <FlatList
-                          data={MenuTypeItem.Days}
-                          keyExtractor={item => item.Id.toString()}
-                          horizontal
-                          renderItem={({item, index}) => (
-                            <Card
-                              style={[
-                                MenuSelectionStyles.DayDateCard,
-                                index === 0 && {marginLeft: 0}, // Conditional style for the first card
-                              ]}
-                              onPress={handleDaySelection}>
-                              <View style={MenuSelectionStyles.DayDateCardBody}>
-                                <Text style={MenuSelectionStyles.DayText}>
-                                  {item.Day}
-                                </Text>
-                                <Text style={MenuSelectionStyles.DateText}>
-                                  {item.Date}
-                                </Text>
-                              </View>
-                            </Card>
-                          )}
-                          showsHorizontalScrollIndicator={false}
-                        />
-                      </View>
-                    </View>
-                  </Card>
-                </View>
-              ))}
-            </ScrollView>
+    <View style={GlobalCss.pageLayout}>
+      <View style={GlobalCss.HeaderContainer}>
+        <TouchableOpacity style={MenuSelectionStyles.HeaderContent}>
+          <MCIcons name="chevron-left" size={35} color="#000" />
+          {/* <Text style={MenuSelectionStyles.PageName}>Menu Selection</Text> */}
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
+        <View style={MenuSelectionStyles.Restaurant_Info_Container}>
+          <View style={MenuSelectionStyles.Best_Container}>
+            <MCIcons name="trophy" size={12} color="#F7D000" />
+            <Text style={MenuSelectionStyles.Best_Text}>Best in all</Text>
           </View>
-        )}
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {showSelectContent && (
-            <View style={MenuSelectionStyles.MenuSelectionContainer}>
-              {MenuSelectionData.map(MenuItem => (
-                <View key={MenuItem.Id}>
-                  <Text style={MenuSelectionStyles.MenuName}>
-                    {MenuItem.Name}
+          <View style={MenuSelectionStyles.Restaurant_Name_Rating_Container}>
+            <View style={MenuSelectionStyles.Restaurant_Name_Container}>
+              <Text style={MenuSelectionStyles.Restaurant_Name_Text}>
+                Sri Chaithanya Hotel
+              </Text>
+            </View>
+            <View style={MenuSelectionStyles.Restaurant_Rating_Container}>
+              <MCIcons name="star" size={12} color="#ffff" />
+              <Text style={MenuSelectionStyles.Rating_Text}>4.5</Text>
+            </View>
+          </View>
+          <View style={MenuSelectionStyles.Distance_Container}>
+            <Text style={MenuSelectionStyles.Distance_Text}>30 - 40 min</Text>
+            <Text style={MenuSelectionStyles.Distance_Separater}>.</Text>
+            <Text style={MenuSelectionStyles.Distance_Text}>15 km</Text>
+            <Text style={MenuSelectionStyles.Distance_Separater}>.</Text>
+            <Text style={MenuSelectionStyles.Distance_Text}>Kukatpally</Text>
+          </View>
+        </View>
+        <View style={MenuSelectionStyles.DaysContainer}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {dayList.map((DayItem, DayIndex) => (
+              <TouchableOpacity
+                key={DayIndex}
+                style={[
+                  MenuSelectionStyles.DayCard,
+                  activeDay === DayItem.Name && GlobalCss.ThemeBackgroundColor,
+                ]}
+                onPress={() => handleTabPres(DayItem)}>
+                <Text
+                  style={[
+                    MenuSelectionStyles.DayDate,
+                    activeDay === DayItem.Name &&
+                      MenuSelectionStyles.DayDateActiveText,
+                  ]}>
+                  {DayItem.Date}
+                </Text>
+                <Text
+                  style={[
+                    MenuSelectionStyles.DayName,
+                    activeDay === DayItem.Name &&
+                      MenuSelectionStyles.DayNameActiveText,
+                  ]}>
+                  {DayItem.Name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+        {activeDay === 'Day 1' && (
+          <View style={MenuSelectionStyles.Menu_Container}>
+            {MenusData.map(menu => (
+              <View key={menu.Id}>
+                <TouchableOpacity
+                  style={MenuSelectionStyles.menuButton}
+                  onPress={() =>
+                    setSelectedMenu(selectedMenu === menu.Id ? null : menu.Id)
+                  }>
+                  <Text style={MenuSelectionStyles.Accordion_Header_Text}>
+                    {menu.MenuName}
                   </Text>
-                  {MenuItem.Day.map(DayAccordionItem => (
-                    <View
-                      key={DayAccordionItem.Id}
-                      style={MenuSelectionStyles.DayAccordion}>
-                      <TouchableOpacity
-                        onPress={() => toggleAccordion(DayAccordionItem.Id)}
-                        style={MenuSelectionStyles.DayAccordionCard}>
-                        <View style={MenuSelectionStyles.DayAccordionCardBody}>
-                          <Text style={MenuSelectionStyles.DayAccordionTitle}>
-                            {DayAccordionItem.DayName}, {DayAccordionItem.Date}
+                  <MCIcons
+                    name={
+                      selectedMenu === menu.Id
+                        ? 'chevron-down'
+                        : 'chevron-right'
+                    }
+                    size={20}
+                    color="#000"
+                  />
+                </TouchableOpacity>
+                {selectedMenu === menu.Id && (
+                  <View style={MenuSelectionStyles.subContainer}>
+                    {menu.CategoryTypes.map(category => (
+                      <View key={category.Id}>
+                        <TouchableOpacity
+                          style={MenuSelectionStyles.categoryButton}
+                          onPress={() =>
+                            setSelectedCategory(
+                              selectedCategory === category.Id
+                                ? null
+                                : category.Id,
+                            )
+                          }>
+                          <Text
+                            style={
+                              MenuSelectionStyles.Accordion_Category_Header_Text
+                            }>
+                            {category.Category}
                           </Text>
+                          <View
+                            style={
+                              MenuSelectionStyles.Accordion_Separator
+                            }></View>
                           <MCIcons
                             name={
-                              expanded[DayAccordionItem.Id]
+                              selectedCategory === category.Id
                                 ? 'chevron-down'
                                 : 'chevron-right'
                             }
-                            size={20}
+                            size={16}
                             color="#000"
                           />
-                        </View>
-                      </TouchableOpacity>
-                      {expanded[DayAccordionItem.Id] &&
-                        DayAccordionItem.DayItems.map(FoodType => (
-                          <View
-                            key={FoodType.Id}
-                            style={MenuSelectionStyles.DayItem}>
-                            <View
-                              style={MenuSelectionStyles.FoodCategoryHeader}>
-                              <Text
-                                style={
-                                  MenuSelectionStyles.FoodCategoryHeaderText
-                                }>
-                                {FoodType.FoodType}
-                              </Text>
-                              <TouchableOpacity
-                                style={MenuSelectionStyles.ViewAllButton}>
-                                <Text
-                                  style={MenuSelectionStyles.ViewAllButtonText}>
-                                  View All
-                                </Text>
-                              </TouchableOpacity>
-                            </View>
-                            <View style={MenuSelectionStyles.ItemContent}>
-                              {FoodType.Items.map((FoodItem, index) => (
-                                <>
-                                  <View key={FoodItem.Id}>
-                                    <Card
-                                      style={MenuSelectionStyles.FoodItemCard}>
-                                      <View
-                                        style={
-                                          MenuSelectionStyles.FoodItemCardBody
-                                        }>
-                                        <View
+                        </TouchableOpacity>
+                        {selectedCategory === category.Id && (
+                          <View style={MenuSelectionStyles.subContainer}>
+                            {category.ItemCategory.map(itemCategory => (
+                              <View key={itemCategory.Id}>
+                                <TouchableOpacity
+                                  style={MenuSelectionStyles.itemCategoryButton}
+                                  onPress={() =>
+                                    setSelectedItemCategory(
+                                      selectedItemCategory === itemCategory.Id
+                                        ? null
+                                        : itemCategory.Id,
+                                    )
+                                  }>
+                                  <Text
+                                    style={
+                                      MenuSelectionStyles.Accordion_Item_Category_Text
+                                    }>
+                                    {itemCategory.ItemCategoryName}
+                                  </Text>
+                                  <MCIcons
+                                    name={
+                                      selectedItemCategory === itemCategory.Id
+                                        ? 'chevron-down'
+                                        : 'chevron-right'
+                                    }
+                                    size={15}
+                                    color="#ffff"
+                                  />
+                                </TouchableOpacity>
+                                {selectedItemCategory === itemCategory.Id && (
+                                  <View
+                                    style={MenuSelectionStyles.subContainer}>
+                                    {itemCategory.Items.map(DishItem => (
+                                      <View key={DishItem.Id}>
+                                        <Card
                                           style={
-                                            MenuSelectionStyles.FoodImgContainer
-                                          }>
-                                          <Image
-                                            source={FoodItem.ItemImg}
-                                            style={
-                                              MenuSelectionStyles.FoodItemImg
-                                            }
-                                          />
-                                        </View>
-                                        <View
-                                          style={
-                                            MenuSelectionStyles.FoodItemDetailsContainer
+                                            MenuSelectionStyles.DishItemCard
                                           }>
                                           <View
                                             style={
-                                              MenuSelectionStyles.FoodItemNameLikeButton
-                                            }>
-                                            <Text
-                                              style={
-                                                MenuSelectionStyles.FoodItemName
-                                              }>
-                                              {FoodItem.ItemName}
-                                            </Text>
-                                            <TouchableOpacity
-                                              style={
-                                                MenuSelectionStyles.LikeButton
-                                              }
-                                              onPress={() =>
-                                                toggleLike(FoodItem.Id)
-                                              }>
-                                              <MCIcons
-                                                name={
-                                                  likedItems[FoodItem.Id]
-                                                    ? 'cards-heart'
-                                                    : 'cards-heart-outline'
-                                                }
-                                                size={15}
-                                                color="#FFB20B"
-                                              />
-                                            </TouchableOpacity>
-                                          </View>
-                                          <Text
-                                            style={
-                                              MenuSelectionStyles.FoodItemDescription
-                                            }>
-                                            {FoodItem.Description}
-                                          </Text>
-                                          <View
-                                            style={
-                                              MenuSelectionStyles.ItemPriceContent
-                                            }>
-                                            <FaIcons
-                                              name="rupee"
-                                              size={15}
-                                              color="#000"
-                                            />
-                                            <Text
-                                              style={
-                                                MenuSelectionStyles.FoodItemPrice
-                                              }>
-                                              {FoodItem.Price}
-                                            </Text>
-                                          </View>
-                                          <View
-                                            style={
-                                              MenuSelectionStyles.FoodItemTimeAddButtonContainer
+                                              MenuSelectionStyles.DishItemCardbody
                                             }>
                                             <View
                                               style={
-                                                MenuSelectionStyles.WeightTimeContainer
+                                                MenuSelectionStyles.DishImageContent
                                               }>
-                                              <View
+                                              <Image
+                                                source={DishItem.Image}
                                                 style={
-                                                  MenuSelectionStyles.WeightContainer
-                                                }>
-                                                <FaIcons
-                                                  name="shopping-bag"
-                                                  size={12}
-                                                  color="#FFB20B"
-                                                />
-                                                <Text
-                                                  style={
-                                                    MenuSelectionStyles.Weight
-                                                  }>
-                                                  250 g
-                                                </Text>
-                                              </View>
-                                              <View
-                                                style={
-                                                  MenuSelectionStyles.TimeContainer
-                                                }>
-                                                <MCIcons
-                                                  name="progress-clock"
-                                                  size={13}
-                                                  color="#FFB20B"
-                                                />
-                                                <Text
-                                                  style={
-                                                    MenuSelectionStyles.Time
-                                                  }>
-                                                  45 Min
-                                                </Text>
-                                              </View>
+                                                  MenuSelectionStyles.DishImage
+                                                }
+                                              />
                                             </View>
-                                            <TouchableOpacity
+                                            <View
                                               style={
-                                                MenuSelectionStyles.AddButtonContainer
+                                                MenuSelectionStyles.DishDetailsContent
                                               }>
+                                              <Text
+                                                style={
+                                                  MenuSelectionStyles.DishName
+                                                }>
+                                                {DishItem.Name}
+                                              </Text>
+                                              <Text
+                                                style={
+                                                  MenuSelectionStyles.DishDescription
+                                                }
+                                                numberOfLines={3}>
+                                                {DishItem.Description}
+                                              </Text>
+                                            </View>
+                                          </View>
+                                          <View
+                                            style={
+                                              MenuSelectionStyles.AddRemoveButtons
+                                            }>
+                                            <TouchableOpacity
+                                              onPress={decreaseCount}>
+                                              <MCIcons
+                                                name="minus-circle-outline"
+                                                size={15}
+                                                color={
+                                                  GlobalCss.ThemeColor.color
+                                                }
+                                              />
+                                            </TouchableOpacity>
+                                            <Text
+                                              style={MenuSelectionStyles.Count}>
+                                              {count}
+                                            </Text>
+                                            <TouchableOpacity
+                                              onPress={increaseCount}>
                                               <MCIcons
                                                 name="plus-circle-outline"
                                                 size={15}
-                                                color="#FFB20B"
+                                                color={
+                                                  GlobalCss.ThemeColor.color
+                                                }
                                               />
                                             </TouchableOpacity>
                                           </View>
-                                        </View>
+                                        </Card>
                                       </View>
-                                    </Card>
+                                    ))}
                                   </View>
-                                </>
-                              ))}
-                              <View
-                                style={MenuSelectionStyles.SectionDivider}
-                              />
-                            </View>
+                                )}
+                              </View>
+                            ))}
                           </View>
-                        ))}
-                    </View>
-                  ))}
-                </View>
-              ))}
-            </View>
-          )}
-        </ScrollView>
-      </View>
-      <View style={MenuSelectionStyles.PageFooter}>
-        {showTypeContent && <FooterComponent />}
-        {showSelectContent && (
-          <View style={MenuSelectionStyles.FooterButtonContainer}>
-            <TouchableOpacity
-              style={MenuSelectionStyles.SaveButton}
-              onPress={handleItemSelection}>
-              <Text style={MenuSelectionStyles.SaveButtonText}>Save</Text>
-            </TouchableOpacity>
+                        )}
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </View>
+            ))}
           </View>
         )}
+      </ScrollView>
+      <View style={GlobalCss.FooterContainer}>
+        <FooterComponent />
       </View>
     </View>
   );

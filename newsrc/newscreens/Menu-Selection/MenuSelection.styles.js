@@ -1,252 +1,213 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const MenuSelectionStyles = StyleSheet.create({
-  MainPageLayout: {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
-    backgroundColor: '#ffff',
-  },
-  PageContent: {
-    margin: 20,
-    flex: 0.85,
+  HeaderContent: {
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   PageName: {
-    fontSize: 15,
-    padding: 10,
-    marginTop: 15,
-    fontWeight: 'bold',
-    color: '#FFB20B',
-  },
-  RestaurantName: {
-    fontSize: 15,
-    paddingLeft: 10,
-    marginTop: -10,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-
-  //Menu Type Card
-  MenuTypeCard: {
-    margin: 10,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginTop: 20,
-  },
-  MenuTypeCardBody: {
-    padding: 10,
-    paddingTop: 0,
-  },
-  MenuTypeName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#0B7973',
-    marginTop: 10,
-  },
-  YearName: {
-    fontSize: 10,
-    color: '#FFB20B',
-    fontWeight: 'bold',
+    color: 'gray',
+    marginTop: 3,
   },
 
-  //Add Button
-  AddDayContainer: {
-    position: 'absolute',
-    right: 0,
-    backgroundColor: '#E8F8F5',
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    padding: 5,
+  //Restro Info
+  Restaurant_Info_Container: {
+    padding: 10,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 0.5,
   },
-  AddDayName: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#0B7973',
-  },
-
-  // Day date cards
-  DatesContainer: {
-    marginTop: 10,
-  },
-  DayDateCard: {
-    backgroundColor: '#fff',
-    margin: 10,
-    borderWidth: 2,
-    borderColor: '#0B7973',
-  },
-  DayDateCardBody: {
-    flexDirection: 'column',
+  Best_Container: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
+    gap: 5,
   },
-  DayText: {
-    fontSize: 10,
-    fontWeight: 'bold',
+  Best_Text: {
     color: '#000',
+    fontWeight: '500',
   },
-  DateText: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-
-  //Menu selection
-  MenuSelectionContainer: {
-    padding: 10,
-  },
-  MenuName: {
-    marginTop: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#0B7973',
-  },
-
-  //accordion
-  DayAccordionCard: {
-    backgroundColor: '#ffff',
-    marginTop: 10,
-    borderBottomWidth: 1,
-  },
-  DayAccordionCardBody: {
+  Restaurant_Name_Rating_Container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
-    paddingLeft: 0,
-    alignItems: 'center',
+    marginTop: 10,
   },
-  DayAccordionTitle: {
-    fontSize: 15,
-    color: '#000',
-    fontWeight: 'bold',
+  Restaurant_Name_Container: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
   },
-  FoodCategoryHeader:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    marginTop:10
-  },
-  FoodCategoryHeaderText: {
+  Restaurant_Name_Text: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
   },
-  ViewAllButtonText:{
-    fontSize:12,
-    fontWeight:'bold',
-    color:'#FFB20B'
+  Distance_Container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
-  FoodItemCard:{
-    backgroundColor:'#ffff',
-    borderRadius:5,
-    borderWidth:1,
-    borderColor:'#cccc',
-    marginTop:10,
-    position:'relative',
-
+  Distance_Text: {
+    fontSize: 12,
+    color: 'gray',
+    fontWeight: '400',
   },
-  FoodItemCardBody:{
-    flexDirection:'row',
-    padding:10,
-    gap:10
+  Distance_Separater: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'gray',
   },
-  FoodItemImg:{
-    width:100,
-    height:110,
-    borderRadius:10
+  Restaurant_Rating_Container: {
+    backgroundColor: '#FA3B3D',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 5,
+    gap: 3,
+    borderRadius: 10,
   },
-  FoodItemName:{
-    fontSize:15,
-    color:'#000',
-    fontWeight:'bold'
-  },
-  FoodItemDescription:{
-    fontSize:10,
-    width:'90%',
-    marginTop:5
-  },
-  LikeButton:{
-    position:'absolute',
-    right:50
+  Rating_Text: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#ffff',
   },
 
-  ItemPriceContent:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:2,
-    marginTop:5
+  //Days List
+  DaysContainer: {
+    marginTop: 10,
   },
-  FoodItemPrice:{
-    color:'#000',
-    fontSize:15,
-    fontWeight:'bold'
+  DayCard: {
+    margin: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#FA3B3D',
+    padding: 10,
+    backgroundColor: '#fff',
   },
-
-  FoodItemTimeAddButtonContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    width:'80%',
-    marginTop:10
+  DayDate: {
+    color: '#000',
+    fontWeight: 'bold',
   },
-  WeightTimeContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    gap:10
+  DayName: {
+    color: '#000',
+    fontWeight: 'bold',
   },
-  WeightContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5
+  DayActiveTab: {
+    backgroundColor: '#F59E00',
   },
-  TimeContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    gap:5
+  DayDateActiveText: {
+    color: '#ffff',
   },
-  Weight:{
-    fontSize:10,
-    fontWeight:'bold',
-    color:'#000'
-  },
-  Time:{
-    fontSize:10,
-    fontWeight:'bold',
-    color:'#000'
+  DayNameActiveText: {
+    color: '#ffff',
   },
 
-
-
-
-  PageFooter: {
-    flex: 0.15,
-    backgroundColor: '#FEF6E7',
+  menuButton: {
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    borderColor: '#FA3B3D',
+    borderWidth: 0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  FooterButtonContainer:{
-    flexDirection:'column',
-    justifyContent:'center',
-    alignItems:'center'
+  categoryButton: {
+    padding: 10,
+    marginVertical: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 2.5,
+    marginRight: 2.5,
   },
-  SaveButton:{
-    backgroundColor:'#FFB20B',
-    margin:10,
-    padding:10,
-    width:'80%',
-    borderRadius:10
+  itemCategoryButton: {
+    padding: 8,
+    marginVertical: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: 10,
+    marginRight: 10,
+    gap: 5,
+    paddingTop: 5,
+    backgroundColor: '#FA3B3D',
+    width: '30%',
+    borderRadius: 10,
   },
-  SaveButtonText:{
-    textAlign:'center',
-    color:'#f7f7f7',
-    fontWeight:'bold',
-    fontSize:15
+  Accordion_Header_Text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  Accordion_Category_Header_Text: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  Accordion_Item_Category_Text: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: '#ffff',
+  },
+  itemText: {
+    fontSize: 14,
+    color: '#333',
+    marginLeft: 60,
+    marginVertical: 3,
   },
 
-  SectionDivider: {
+  // Accordion_Separator
+  Accordion_Separator: {
+    flex: 1,
     height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 10, // Adjust spacing
-    width: '100%',
-    marginTop:30
+    backgroundColor: 'gray',
+    marginHorizontal: 5,
   },
-  
+
+  //Dish List
+  DishItemCard: {
+    backgroundColor: '#fff',
+    margin: 10,
+    position: 'relative',
+  },
+  DishItemCardbody: {
+    padding: 10,
+    flexDirection: 'row',
+    gap: 10,
+  },
+  DishImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+  },
+  DishName: {
+    fontSize: 15,
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  DishDescription: {
+    fontSize: 10,
+    width: 150,
+    marginTop: 5,
+    color: 'gray',
+  },
+
+  // Add minus buttons
+  AddRemoveButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+  },
+  Count: {
+    fontSize: 12,
+    color: '#000',
+    fontWeight: 'bold',
+  },
 });

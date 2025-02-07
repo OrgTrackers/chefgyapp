@@ -18,6 +18,20 @@ import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
 import { DayFoodSelectionStyles } from './DayFoodSelection.styles';
 
+const TypesData =[
+  {
+    Id:1,
+    Name:'Breakfast',
+    Items:[
+      {
+        Id:1,
+        Name:'Italian',
+        // Image:require('')
+      }
+    ]
+  }
+]
+
 const DayFoodSelectionScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
@@ -27,9 +41,10 @@ const DayFoodSelectionScreen = () => {
           <Text style={DayFoodSelectionStyles.PageName}>Food Session</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={GlobalCss.MainContainer}
-        showsVerticalScrollIndicator={false}></ScrollView>
+      <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
+
+
+      </ScrollView>
       <View style={GlobalCss.FooterContainer}>
         <FooterComponent />
       </View>

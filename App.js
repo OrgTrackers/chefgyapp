@@ -108,7 +108,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="BookCaterScreen"
+          initialRouteName="MenuSelection"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
