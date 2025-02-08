@@ -328,7 +328,9 @@ const MenuSelection = () => {
           {/* <Text style={MenuSelectionStyles.PageName}>Menu Selection</Text> */}
         </TouchableOpacity>
       </View>
-      <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={GlobalCss.MainContainer}
+        showsVerticalScrollIndicator={false}>
         <View style={MenuSelectionStyles.Restaurant_Info_Container}>
           <View style={MenuSelectionStyles.Best_Container}>
             <MCIcons name="trophy" size={12} color="#F7D000" />
@@ -395,6 +397,12 @@ const MenuSelection = () => {
                   <Text style={MenuSelectionStyles.Accordion_Header_Text}>
                     {menu.MenuName}
                   </Text>
+                  <View style={MenuSelectionStyles.Details_Content}>
+                    <Text style={MenuSelectionStyles.Label}>Price :</Text>
+                    <Text style={MenuSelectionStyles.Details_Text}>
+                      Rs.2000 /-
+                    </Text>
+                  </View>
                   <MCIcons
                     name={
                       selectedMenu === menu.Id
@@ -407,6 +415,33 @@ const MenuSelection = () => {
                 </TouchableOpacity>
                 {selectedMenu === menu.Id && (
                   <View style={MenuSelectionStyles.subContainer}>
+                    <Card style={MenuSelectionStyles.Menu_Details_Container}>
+                      <Text style={MenuSelectionStyles.Menu_Details_Header}>
+                        Our Royal Menu With Regular Prices
+                      </Text>
+                      <View style={MenuSelectionStyles.Details_Content}>
+                        <Text style={MenuSelectionStyles.Label}>Price :</Text>
+                        <Text style={MenuSelectionStyles.Details_Text}>
+                          Rs.2000 /-
+                        </Text>
+                      </View>
+                      <View style={MenuSelectionStyles.Details_Content}>
+                        <Text style={MenuSelectionStyles.Label}>
+                          Serves #No.of :
+                        </Text>
+                        <Text style={MenuSelectionStyles.Details_Text}>
+                          10 - 50 People
+                        </Text>
+                      </View>
+                      <View style={MenuSelectionStyles.Details_Content}>
+                        <Text style={MenuSelectionStyles.Label}>
+                          Serves with in :
+                        </Text>
+                        <Text style={MenuSelectionStyles.Details_Text}>
+                          15 km
+                        </Text>
+                      </View>
+                    </Card>
                     {menu.CategoryTypes.map(category => (
                       <View key={category.Id}>
                         <TouchableOpacity
@@ -424,10 +459,6 @@ const MenuSelection = () => {
                             }>
                             {category.Category}
                           </Text>
-                          <View
-                            style={
-                              MenuSelectionStyles.Accordion_Separator
-                            }></View>
                           <MCIcons
                             name={
                               selectedCategory === category.Id

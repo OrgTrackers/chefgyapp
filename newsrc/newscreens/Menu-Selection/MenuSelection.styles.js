@@ -103,6 +103,33 @@ export const MenuSelectionStyles = StyleSheet.create({
     color: '#ffff',
   },
 
+  //Mail Containers
+  Menu_Details_Container:{
+    padding:10,
+    backgroundColor:'#ffff',
+    margin:2
+  },
+  Menu_Details_Header:{
+    fontSize:15,
+    fontWeight:'bold',
+    color:'#000',
+    marginBottom:5
+  },
+  Details_Content:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:5
+  },
+  Label:{
+    fontSize:12,
+    fontWeight:'500',
+    color:'#000'
+  },
+  Details_Text:{
+    fontSize:12,
+    fontWeight:'bold',
+    color:'gray'
+  },
   menuButton: {
     padding: 10,
     marginVertical: 5,
@@ -121,6 +148,8 @@ export const MenuSelectionStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 2.5,
     marginRight: 2.5,
+    backgroundColor:'#F8F9FA',
+    borderRadius:10
   },
   itemCategoryButton: {
     padding: 8,
