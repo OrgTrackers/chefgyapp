@@ -165,6 +165,15 @@ export const MenuSelectionStyles = StyleSheet.create({
     width: '30%',
     borderRadius: 10,
   },
+  Add_Menu_Button:{
+    backgroundColor:'#FA3B3D',
+    borderRadius:5
+  },
+  Add_Menu_Button_Text:{
+    color:'#ffff',
+    fontSize:10,
+    padding:5,
+  },
   Accordion_Header_Text: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -239,4 +248,24 @@ export const MenuSelectionStyles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
   },
+
+
+    //Footer
+    FooterButtonContainer: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    FooterButton: {
+      padding: 10,
+      width: '80%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      marginTop: 15,
+    },
+    FooterButtonText: {
+      color: '#ffff',
+      textAlign: 'center',
+    },
 });

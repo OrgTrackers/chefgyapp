@@ -20,6 +20,8 @@ import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 //Footer
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
 import {Item} from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
+import { Navigation } from 'lucide-react-native';
+
 
 const dayList = [
   {
@@ -309,6 +311,7 @@ const MenuSelection = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItemCategory, setSelectedItemCategory] = useState(null);
   const [count, setCount] = useState(0);
+  const navigation = useNavigation();
 
   const handleTabPres = Day => {
     setActiveDay(Day.Name);
@@ -323,7 +326,7 @@ const MenuSelection = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={MenuSelectionStyles.HeaderContent}>
+        <TouchableOpacity style={MenuSelectionStyles.HeaderContent} onPress={()=>navigation.navigate('CaterSelectionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           {/* <Text style={MenuSelectionStyles.PageName}>Menu Selection</Text> */}
         </TouchableOpacity>
@@ -403,6 +406,9 @@ const MenuSelection = () => {
                       Rs.2000 /-
                     </Text>
                   </View>
+                  <TouchableOpacity style={MenuSelectionStyles.Add_Menu_Button}>
+                    <Text style={MenuSelectionStyles.Add_Menu_Button_Text}>Add Menu</Text>
+                  </TouchableOpacity>
                   <MCIcons
                     name={
                       selectedMenu === menu.Id
@@ -589,7 +595,15 @@ const MenuSelection = () => {
         )}
       </ScrollView>
       <View style={GlobalCss.FooterContainer}>
-        <FooterComponent />
+        <View style={MenuSelectionStyles.FooterButtonContainer}>
+          <TouchableOpacity
+            style={[
+              MenuSelectionStyles.FooterButton,
+              GlobalCss.ThemeBackgroundColor,
+            ]} onPress={()=>navigation.navigate('OrderSummaryScreen')}>
+            <Text style={MenuSelectionStyles.FooterButtonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

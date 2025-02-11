@@ -17,159 +17,147 @@ import Svg, {Path} from 'react-native-svg';
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
 import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 import {FoodSessionStyles} from './FoodSession.styles';
-import {Card} from 'react-native-paper';
+import {Card, Switch} from 'react-native-paper';
+import Slider from '@react-native-community/slider';
 
-const FoodDates = [
+const caterAllowcation = [
   {
     Id: 1,
-    Date: '05 Feb 2025',
-    Items: [
-      {
-        Id: 1,
-        Icon: 'food-apple',
-        name: 'Breakfast',
-      },
-      {
-        Id: 2,
-        Icon: 'food',
-        name: 'Lunch',
-      },
-      {
-        Id: 3,
-        Icon: 'food-turkey',
-        name: 'Dinner',
-      },
-    ],
+    Name: 'Auto Asign',
   },
   {
     Id: 2,
-    Date: '06 Feb 2025',
-    Items: [
-      {
-        Id: 1,
-        Icon: 'food-apple',
-        name: 'Breakfast',
-      },
-      {
-        Id: 2,
-        Icon: 'food',
-        name: 'Lunch',
-      },
-      {
-        Id: 3,
-        Icon: 'food-turkey',
-        name: 'Dinner',
-      },
-    ],
-  },
-  {
-    Id: 3,
-    Date: '07 Feb 2025',
-    Items: [
-      {
-        Id: 1,
-        Icon: 'food-apple',
-        name: 'Breakfast',
-      },
-      {
-        Id: 2,
-        Icon: 'food',
-        name: 'Lunch',
-      },
-      {
-        Id: 3,
-        Icon: 'food-turkey',
-        name: 'Dinner',
-      },
-    ],
-  },
-  {
-    Id: 4,
-    Date: '08 Feb 2025',
-    Items: [
-      {
-        Id: 1,
-        Icon: 'food-apple',
-        name: 'Breakfast',
-      },
-      {
-        Id: 2,
-        Icon: 'food',
-        name: 'Lunch',
-      },
-      {
-        Id: 3,
-        Icon: 'food-turkey',
-        name: 'Dinner',
-      },
-    ],
-  },
-  {
-    Id: 5,
-    Date: '09 Feb 2025',
-    Items: [
-      {
-        Id: 1,
-        Icon: 'food-apple',
-        name: 'Breakfast',
-      },
-      {
-        Id: 2,
-        Icon: 'food',
-        name: 'Lunch',
-      },
-      {
-        Id: 3,
-        Icon: 'food-turkey',
-        name: 'Dinner',
-      },
-    ],
+    Name: 'Let Me Do It My Self',
   },
 ];
 
 const FoodSessionScreen = () => {
+  const navigation = useNavigation();
+  const [minValue, setMinValue] = useState('');
+  const [maxValue, setMaxValue] = useState('');
+  const [sliderValue, setSliderValue] = useState([0, 1000]);
+  const [isSwitchOn, setIsSwitchOn] = React.useState(null);
+
+  const onToggleSwitch = id => {
+    if (isSwitchOn === id) {
+      setIsSwitchOn(null); // Deselect if clicked again
+    } else {
+      setIsSwitchOn(id); // Set the clicked switch as active
+    }
+  };
+
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={FoodSessionStyles.HeaderContent}>
+        <TouchableOpacity
+          style={FoodSessionStyles.HeaderContent}
+          onPress={() => navigation.navigate('BookCaterScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={FoodSessionStyles.PageName}>Food Session</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
-      <View style={FoodSessionStyles.DateFromTo}>
-        <Text style={FoodSessionStyles.DateFromToText}>
-          05 Feb 2025 To 08 Feb 2025
-        </Text>
-      </View>
-        {FoodDates.map(FoodItemData => (
-          <View key={FoodItemData.Id}>
-            <Card style={FoodSessionStyles.FoodDateCard}>
-              <View style={FoodSessionStyles.FoodDateCardbody}>
-                <Text style={FoodSessionStyles.FoodDateText}>
-                  {FoodItemData.Date}
-                </Text>
-                <View style={FoodSessionStyles.FoodTypeConatiner}>
-                  {FoodItemData.Items.map(FoodTypeItem => (
-                    <TouchableOpacity style={FoodSessionStyles.FoodTypeTextIcon}>
-                      <MCIcons
-                        name={FoodTypeItem.Icon}
-                        size={15}
-                        color="#FA3B3D"
-                      />
-                      <Text style={FoodSessionStyles.FoodTypeName}>
-                        {FoodTypeItem.name}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
+      <ScrollView
+        style={GlobalCss.MainContainer}
+        showsVerticalScrollIndicator={false}>
+        <View style={FoodSessionStyles.BC_Cater_Allowcation_Container}>
+          <Text style={[GlobalCss.g_SideHeaders]}>Cater Allocation</Text>
+          {caterAllowcation.map(CA_Item => (
+            <View key={CA_Item.Id}>
+              <Card style={FoodSessionStyles.BC_Cater_Allowcation_Card}>
+                <View
+                  style={FoodSessionStyles.BC_Cater_Allowcation_Card_Content}>
+                  <Text
+                    style={[
+                      FoodSessionStyles.BC_CA_Allocation_Text,
+                      GlobalCss.ThemeColor.color,
+                    ]}>
+                    {CA_Item.Name}
+                  </Text>
+                  <Switch
+                    value={isSwitchOn === CA_Item.Id} // Check if the switch is active
+                    onValueChange={() => onToggleSwitch(CA_Item.Id)}
+                    color={GlobalCss.ThemeColor.color}
+                  />
                 </View>
-              </View>
-            </Card>
+              </Card>
+            </View>
+          ))}
+        </View>
+        <View style={FoodSessionStyles.No_Of_People_Container}>
+          <Text style={FoodSessionStyles.Fsa_ValueText}>
+            Attendees : {sliderValue[0]} - {sliderValue[1]}
+          </Text>
+          <View style={FoodSessionStyles.inputWrapper}>
+            <Text
+              style={[
+                FoodSessionStyles.maxMininputLabel,
+                GlobalCss.g_appTextBlack,
+              ]}>
+              Min:{' '}
+            </Text>
+            <TextInput
+              style={[FoodSessionStyles.Rangeinput, GlobalCss.g_Inputs]}
+              keyboardType="numeric"
+              value={minValue !== null ? String(minValue) : ''}
+              onChangeText={text =>
+                setMinValue(text === '' ? null : Number(text))
+              }
+            />
           </View>
-        ))}
+          <View style={FoodSessionStyles.SliderContainer}>
+            <Slider
+              style={{width: '100%', height: 40}}
+              minimumValue={10}
+              maximumValue={10000}
+              step={1}
+              minimumTrackTintColor="green"
+              maximumTrackTintColor={GlobalCss.ThemeColor.color}
+              value={minValue}
+              onValueChange={value => setMinValue(value)}
+            />
+          </View>
+          <View style={FoodSessionStyles.inputWrapper}>
+            <Text
+              style={[
+                FoodSessionStyles.maxMininputLabel,
+                GlobalCss.g_appTextBlack,
+              ]}>
+              Max:{' '}
+            </Text>
+            <TextInput
+              style={[FoodSessionStyles.Rangeinput, GlobalCss.g_Inputs]}
+              keyboardType="numeric"
+              value={maxValue !== null ? String(maxValue) : ''}
+              onChangeText={text =>
+                setMaxValue(text === '' ? null : Number(text))
+              }
+            />
+          </View>
+          <View style={FoodSessionStyles.SliderContainer}>
+            <Slider
+              style={{width: '100%', height: 40}}
+              minimumValue={0}
+              maximumValue={100}
+              step={1}
+              minimumTrackTintColor="green"
+              maximumTrackTintColor={GlobalCss.ThemeColor.color}
+              value={maxValue}
+              onValueChange={value => setMaxValue(value)}
+            />
+          </View>
+        </View>
       </ScrollView>
       <View style={GlobalCss.FooterContainer}>
-        <FooterComponent />
+        <View style={FoodSessionStyles.FooterButtonContainer}>
+          <TouchableOpacity
+            style={[
+              FoodSessionStyles.FooterButton,
+              GlobalCss.ThemeBackgroundColor,
+            ]}
+            onPress={() => navigation.navigate('CaterSelectionScreen')}>
+            <Text style={FoodSessionStyles.FooterButtonText}>Select Cater</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

@@ -13,8 +13,9 @@ import {useNavigation} from '@react-navigation/native';
 import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FaIcons from 'react-native-vector-icons/FontAwesome';
 import Svg, {Path} from 'react-native-svg';
-import {CaterSelectionStyles} from './CaterSelection.styles';
+import {CaterSelectionScreenStyles} from './CaterSelection.styles';
 import {Card} from 'react-native-paper';
+import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 
 const CatersData = [
   {
@@ -129,112 +130,111 @@ const CatersData = [
   },
 ];
 
-const CaterSelection = () => {
+const CaterSelectionScreen = () => {
   const navigation = useNavigation();
   const [likedItems, setLikedItems] = useState({}); // State to track liked items
 
-  const toggleLike = (id) => {
-    setLikedItems((prevState) => ({
+  const toggleLike = id => {
+    setLikedItems(prevState => ({
       ...prevState,
       [id]: !prevState[id], // Toggle the liked state
     }));
   };
   return (
-    <View style={CaterSelectionStyles.MainPageLayout}>
-      <View style={CaterSelectionStyles.PageContent}>
-        <View style={CaterSelectionStyles.PageHeader}>
-          <MCIcons
-            name="chevron-left"
-            size={40}
-            color="#272727"
-            onPress={() => navigation.navigate('LoginScreen')}
-          />
-          <Text style={CaterSelectionStyles.PageName}>Cater Selection</Text>
-        </View>
-        <View style={CaterSelectionStyles.PageMainContent}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {CatersData.map(CaterItem => (
-              <View key={CaterItem.Id}>
-                <Card style={CaterSelectionStyles.CaterCard}>
-                  <View style={CaterSelectionStyles.CaterCardBody}>
-                    <View style={CaterSelectionStyles.RestroImgContent}>
-                      <Image
-                        source={CaterItem.Img}
-                        style={CaterSelectionStyles.RestroImg}
-                      />
-                    </View>
-                    <View
-                      style={CaterSelectionStyles.CaterRestroDetailsContainer}>
-                      <Text style={CaterSelectionStyles.CaterRestroName}>
-                        {CaterItem.Name}
-                      </Text>
-                      <TouchableOpacity
+    <View style={GlobalCss.pageLayout}>
+      <View style={GlobalCss.HeaderContainer}>
+        <TouchableOpacity style={CaterSelectionScreenStyles.HeaderContent}>
+          <MCIcons name="chevron-left" size={35} color="#000" />
+          <Text style={CaterSelectionScreenStyles.PageName}>
+            Cater Selection
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        style={GlobalCss.MainContainer}
+        showsVerticalScrollIndicator={false}>
+        {CatersData.map(CaterItem => (
+          <View key={CaterItem.Id}>
+            <Card style={CaterSelectionScreenStyles.CaterCard}>
+              <View style={CaterSelectionScreenStyles.CaterCardBody}>
+                <View style={CaterSelectionScreenStyles.RestroImgContent}>
+                  <Image
+                    source={CaterItem.Img}
+                    style={CaterSelectionScreenStyles.RestroImg}
+                  />
+                </View>
+                <View style={CaterSelectionScreenStyles.CaterRestroDetailsContainer}>
+                  <Text style={CaterSelectionScreenStyles.CaterRestroName}>
+                    {CaterItem.Name}
+                  </Text>
+                  <TouchableOpacity
                     onPress={() => toggleLike(CaterItem.Id)}
-                    style={CaterSelectionStyles.LikeUnLikeButton}>
+                    style={CaterSelectionScreenStyles.LikeUnLikeButton}>
                     <MCIcons
-                      name={likedItems[CaterItem.Id] ? "cards-heart" : "cards-heart-outline"}
+                      name={
+                        likedItems[CaterItem.Id]
+                          ? 'cards-heart'
+                          : 'cards-heart-outline'
+                      }
                       size={20}
-                      color={likedItems[CaterItem.Id] ? "#FFB20B" : "#FFB20B"}
+                      color={likedItems[CaterItem.Id] ? '#FA3B3D' : '#FA3B3D'}
                     />
                   </TouchableOpacity>
-                      <Text
-                        style={CaterSelectionStyles.CaterRestroDescription}
-                        numberOfLines={2}>
-                        {CaterItem.Description}
-                      </Text>
-                      <View style={CaterSelectionStyles.CaterPriceContainer}>
-                        <FaIcons name="rupee" size={15} color="#000" />
-                        <Text style={CaterSelectionStyles.CaterPrice}>
-                          {CaterItem.Price}
+                  <Text
+                    style={CaterSelectionScreenStyles.CaterRestroDescription}
+                    numberOfLines={2}>
+                    {CaterItem.Description}
+                  </Text>
+                  <View style={CaterSelectionScreenStyles.CaterPriceContainer}>
+                    <FaIcons name="rupee" size={15} color="#000" />
+                    <Text style={CaterSelectionScreenStyles.CaterPrice}>
+                      {CaterItem.Price}
+                    </Text>
+                  </View>
+                  <View
+                    style={CaterSelectionScreenStyles.CaterRatingTimeAddContainer}>
+                    <View
+                      style={CaterSelectionScreenStyles.CaterRatingTimeConatainer}>
+                      <View style={CaterSelectionScreenStyles.CaterRatingContainer}>
+                        <MCIcons name="star" size={15} color="#FA3B3D" />
+                        <Text style={CaterSelectionScreenStyles.CaterRating}>
+                          4.5
                         </Text>
                       </View>
-                      <View
-                        style={
-                          CaterSelectionStyles.CaterRatingTimeAddContainer
-                        }>
-                        <View
-                          style={
-                            CaterSelectionStyles.CaterRatingTimeConatainer
-                          }>
-                          <View
-                            style={CaterSelectionStyles.CaterRatingContainer}>
-                            <MCIcons name="star" size={15} color="#FFB20B" />
-                            <Text style={CaterSelectionStyles.CaterRating}>
-                              4.5
-                            </Text>
-                          </View>
-                          <View style={CaterSelectionStyles.CaterTimeContainer}>
-                            <MCIcons
-                              name="progress-clock"
-                              size={15}
-                              color="#FFB20B"
-                            />
-                            <Text style={CaterSelectionStyles.CaterTime}>
-                              {CaterItem.Time}
-                            </Text>
-                          </View>
-                        </View>
-                        <TouchableOpacity
-                          style={CaterSelectionStyles.CaterAddButtons}>
-                          <MCIcons
-                            name="plus-circle-outline"
-                            size={15}
-                            color="#FFB20B"
-                          />
-                        </TouchableOpacity>
+                      <View style={CaterSelectionScreenStyles.CaterTimeContainer}>
+                        <MCIcons
+                          name="progress-clock"
+                          size={15}
+                          color="#FA3B3D"
+                        />
+                        <Text style={CaterSelectionScreenStyles.CaterTime}>
+                          {CaterItem.Time}
+                        </Text>
                       </View>
                     </View>
+                    <TouchableOpacity
+                      style={CaterSelectionScreenStyles.CaterAddButtons}>
+                      <MCIcons
+                        name="plus-circle-outline"
+                        size={15}
+                        color="#FA3B3De"
+                      />
+                    </TouchableOpacity>
                   </View>
-                </Card>
+                </View>
               </View>
-            ))}
-          </ScrollView>
-        </View>
-      </View>
-      <View style={CaterSelectionStyles.PageFooter}>
-        <View style={CaterSelectionStyles.FooterButtonContainer}>
-          <TouchableOpacity style={CaterSelectionStyles.SaveButton} onPress={()=>navigation.navigate('')}>
-            <Text style={CaterSelectionStyles.SaveButtonText}>Next</Text>
+            </Card>
+          </View>
+        ))}
+      </ScrollView>
+      <View style={GlobalCss.FooterContainer}>
+        <View style={CaterSelectionScreenStyles.FooterButtonContainer}>
+          <TouchableOpacity
+            style={[
+              CaterSelectionScreenStyles.FooterButton,
+              GlobalCss.ThemeBackgroundColor,
+            ]} onPress={()=>navigation.navigate('MenuSelection')}>
+            <Text style={CaterSelectionScreenStyles.FooterButtonText}>Select Menus</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -242,4 +242,4 @@ const CaterSelection = () => {
   );
 };
 
-export default CaterSelection;
+export default CaterSelectionScreen;

@@ -19,6 +19,7 @@ import {BookCatererStyles} from './BookCater.styles';
 import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
 import {Card, Modal, Portal, Button, Switch} from 'react-native-paper';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import Slider from '@react-native-community/slider';
 
 import {
   Leaf,
@@ -28,6 +29,7 @@ import {
   DollarSign,
   MapPin,
   Star,
+  List,
 } from 'lucide-react-native';
 
 const Cater_Type = [
@@ -121,24 +123,17 @@ const Filters = [
   },
 ];
 
-const caterAllowcation = [
-  {
-    Id: 1,
-    Name: 'Auto Asign',
-  },
-  {
-    Id: 2,
-    Name: 'Let Me Do It My Self',
-  },
-];
-
 const menuType = [
   {
     Id: 1,
-    Name: 'Veg',
+    Name: 'All',
   },
   {
     Id: 2,
+    Name: 'Veg',
+  },
+  {
+    Id: 3,
     Name: 'Non-Veg',
   },
 ];
@@ -151,16 +146,24 @@ const BookCaterScreen = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [isFromDate, setIsFromDate] = useState(true);
-  const [menuType, setMenuType] = useState({veg: true, nonVeg: true});
+  const [minValue, setMinValue] = useState(10);
+  const [rating, setRating] = useState(null);
+  const [activeSortButton, setActiveSortButton] = useState('lowToHigh');
   const [selectedFilters, setSelectedFilters] = useState({
     1: 1, // Initially select 'All' for Price
     2: 1, // Initially select 'All' for Distance
     3: 1, // Initially select 'All' for Rating
   });
-  const [isSwitchOn, setIsSwitchOn] = React.useState(null);
+
   const [isMenuTypeOn, setIsMenuTypeOn] = React.useState(null);
 
   const [filterVeg, setFilterVeg] = useState(null);
+  const [menuType, setMenuType] = useState({
+    all: true,
+    veg: false,
+    nonVeg: false,
+  });
+
   const [activeSort, setActiveSort] = useState({});
 
   const SORT_OPTIONS = [
@@ -187,14 +190,6 @@ const BookCaterScreen = () => {
     },
   ];
 
-  const onToggleSwitch = id => {
-    if (isSwitchOn === id) {
-      setIsSwitchOn(null); // Deselect if clicked again
-    } else {
-      setIsSwitchOn(id); // Set the clicked switch as active
-    }
-  };
-
   const onToggleMenuTypes = id => {
     if (isMenuTypeOn === id) {
       setIsMenuTypeOn(null); // Deselect if clicked again
@@ -218,6 +213,19 @@ const BookCaterScreen = () => {
     setShowModal(true);
   };
 
+  const handleMenuSelection = type => {
+    if (type === 'all') {
+      setMenuType({all: true, veg: false, nonVeg: false});
+      setFilterVeg(null);
+    } else if (type === 'veg') {
+      setMenuType({all: false, veg: true, nonVeg: false});
+      setFilterVeg(true);
+    } else if (type === 'nonVeg') {
+      setMenuType({all: false, veg: false, nonVeg: true});
+      setFilterVeg(false);
+    }
+  };
+
   const selectTypes = typeId => {
     if (selectedTypeId.includes(typeId)) {
       // If the card is already selected, unselect it
@@ -237,17 +245,18 @@ const BookCaterScreen = () => {
       [categoryId]: filterId, // Update the selected filter for the category
     }));
   };
+
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={BookCatererStyles.HeaderContent}>
+        <TouchableOpacity
+          style={BookCatererStyles.HeaderContent}
+          onPress={() => navigation.navigate('EventsScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={BookCatererStyles.PageName}>Book Caterer</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={GlobalCss.MainContainer}
-        showsVerticalScrollIndicator={false}>
+      <ScrollView style={GlobalCss.MainContainer} showsVerticalScrollIndicator={false}>
         <View style={BookCatererStyles.BC_Date_Calendar_Container}>
           <View style={BookCatererStyles.BC_Dates_Content}>
             <Text style={[GlobalCss.g_SideHeaders]}>
@@ -288,36 +297,56 @@ const BookCaterScreen = () => {
           </View>
         </View>
         <View style={BookCatererStyles.BC_MenuType_Container}>
-          <Text style={[GlobalCss.g_SideHeaders]}>Select Menu Type</Text>
+          <Text style={[GlobalCss.g_SideHeaders]}>Menu Type</Text>
           <View style={BookCatererStyles.Veg_NonVeg_Btns}>
+            {/* All Button */}
             <TouchableOpacity
               style={[
                 BookCatererStyles.toggleButton,
-                filterVeg === true && BookCatererStyles.toggleButtonActiveVeg,
+                menuType.all && BookCatererStyles.toggleButtonActive,
               ]}
-              onPress={() => setFilterVeg(filterVeg === true ? null : true)}>
-              <Leaf size={16} color={filterVeg === true ? 'green' : 'gray'} />
+              onPress={() => handleMenuSelection('all')}>
+              <List size={16} color={menuType.all ? '#fff' : '#000'} />
               <Text
                 style={
-                  filterVeg === true
-                    ? BookCatererStyles.toggleTextActiveVeg
+                  menuType.all
+                    ? BookCatererStyles.toggleTextActive
+                    : BookCatererStyles.toggleText
+                }>
+                All
+              </Text>
+            </TouchableOpacity>
+
+            {/* Veg Button */}
+            <TouchableOpacity
+              style={[
+                BookCatererStyles.toggleButton,
+                menuType.veg && BookCatererStyles.toggleButtonActive,
+              ]}
+              onPress={() => handleMenuSelection('veg')}>
+              <Leaf size={16} color={menuType.veg ? '#fff' : '#000'} />
+              <Text
+                style={
+                  menuType.veg
+                    ? BookCatererStyles.toggleTextActive
                     : BookCatererStyles.toggleText
                 }>
                 Veg
               </Text>
             </TouchableOpacity>
+
+            {/* Non-Veg Button */}
             <TouchableOpacity
               style={[
                 BookCatererStyles.toggleButton,
-                filterVeg === false &&
-                  BookCatererStyles.toggleButtonActiveNonVeg,
+                menuType.nonVeg && BookCatererStyles.toggleButtonActive,
               ]}
-              onPress={() => setFilterVeg(filterVeg === false ? null : false)}>
-              <Beef size={16} color={filterVeg === false ? 'red' : 'gray'} />
+              onPress={() => handleMenuSelection('nonVeg')}>
+              <Beef size={16} color={menuType.nonVeg ? '#fff' : '#000'} />
               <Text
                 style={
-                  filterVeg === false
-                    ? BookCatererStyles.toggleTextActiveNonVeg
+                  menuType.nonVeg
+                    ? BookCatererStyles.toggleTextActive
                     : BookCatererStyles.toggleText
                 }>
                 Non-Veg
@@ -334,14 +363,14 @@ const BookCaterScreen = () => {
                 style={[
                   BookCatererStyles.BC_Type_Cards,
                   selectedTypeId.includes(ItemType.Id) &&
-                    BookCatererStyles.selectedCard, // Apply styles if selected
+                    BookCatererStyles.selectedCard,
                 ]}
                 onPress={() => selectTypes(ItemType.Id)}>
                 <MCIcons
                   name={ItemType.Icon}
                   size={20}
                   color={
-                    selectedTypeId.includes(ItemType.Id) ? '#FA3B3D' : '#FA3B3D'
+                    selectedTypeId.includes(ItemType.Id) ? '#FA3B3D' : '#000'
                   }
                 />
                 <Text
@@ -357,67 +386,79 @@ const BookCaterScreen = () => {
             ))}
           </View>
         </View>
-        <View style={BookCatererStyles.section}>
-          <Text style={[GlobalCss.g_SideHeaders]}>
-            Sort List Using Below Filters
+        <View style={BookCatererStyles.BC_Distance_Container}>
+          <Text style={[GlobalCss.g_SideHeaders]}>Distance</Text>
+          <View style={BookCatererStyles.SliderContainer}>
+            <Slider
+              style={{width: '100%', height: 40}}
+              minimumValue={10}
+              maximumValue={100}
+              step={1}
+              minimumTrackTintColor="green"
+              maximumTrackTintColor={GlobalCss.ThemeColor.color}
+              value={minValue}
+              onValueChange={value => setMinValue(value)}
+            />
+          </View>
+          <Text style={BookCatererStyles.Distance_Text}>
+            Selected Distance: {minValue} km
           </Text>
-          <View style={BookCatererStyles.sortContainer}>
-            {SORT_OPTIONS.map(sortOption => (
-              <View key={sortOption.id} style={BookCatererStyles.sortOption}>
-                <View style={BookCatererStyles.sortOptions}>
-                  {sortOption.options.map(option => (
-                    <TouchableOpacity
-                      key={option}
-                      style={[
-                        BookCatererStyles.sortButton,
-                        activeSort[sortOption.id] === option &&
-                          BookCatererStyles.sortButtonActive,
-                      ]}
-                      onPress={() =>
-                        setActiveSort(prev => ({
-                          ...prev,
-                          [sortOption.id]:
-                            prev[sortOption.id] === option ? undefined : option,
-                        }))
-                      }>
-                      <Text
-                        style={
-                          activeSort[sortOption.id] === option
-                            ? BookCatererStyles.sortButtonTextActive
-                            : BookCatererStyles.sortButtonText
-                        }>
-                        {option}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
+        </View>
+        <View style={BookCatererStyles.Bc_Rating_Container}>
+          <Text style={[GlobalCss.g_SideHeaders]}>Rating</Text>
+          <View style={BookCatererStyles.BC_Rating_Stars}>
+            {[1, 2, 3, 4, 5].map(star => (
+              <TouchableOpacity
+                key={star}
+                onPress={() =>
+                  setRating(prev => (prev === star ? null : star))
+                }>
+                <MCIcons
+                  name={rating >= star ? 'star' : 'star-outline'}
+                  size={25}
+                  color={rating >= star ? 'gold' : '#ddd'}
+                />
+              </TouchableOpacity>
             ))}
           </View>
         </View>
-        <View style={BookCatererStyles.BC_Cater_Allowcation_Container}>
-          <Text style={[GlobalCss.g_SideHeaders]}>Cater Allocation</Text>
-          {caterAllowcation.map(CA_Item => (
-            <View key={CA_Item.Id}>
-              <Card style={BookCatererStyles.BC_Cater_Allowcation_Card}>
-                <View
-                  style={BookCatererStyles.BC_Cater_Allowcation_Card_Content}>
-                  <Text
-                    style={[
-                      BookCatererStyles.BC_CA_Allocation_Text,
-                      GlobalCss.ThemeColor.color,
-                    ]}>
-                    {CA_Item.Name}
-                  </Text>
-                  <Switch
-                    value={isSwitchOn === CA_Item.Id} // Check if the switch is active
-                    onValueChange={() => onToggleSwitch(CA_Item.Id)}
-                    color={GlobalCss.ThemeColor.color}
-                  />
-                </View>
-              </Card>
-            </View>
-          ))}
+        <View style={BookCatererStyles.BC_Sorting_Container}>
+          <Text style={[GlobalCss.g_SideHeaders]}>Sort by </Text>
+          <View style={BookCatererStyles.BC_Sorting_Buttons}>
+            <TouchableOpacity
+              style={[
+                BookCatererStyles.Sort_Botton,
+                activeSortButton === 'lowToHigh' &&
+                  BookCatererStyles.Sort_Botton_Active,
+              ]}
+              onPress={() => setActiveSortButton('lowToHigh')}>
+              <Text
+                style={[
+                  BookCatererStyles.Sort_Botton_Text,
+                  activeSortButton === 'lowToHigh' &&
+                    BookCatererStyles.Sort_Botton_Active_Text,
+                ]}>
+                Price: Low To High
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                BookCatererStyles.Sort_Botton,
+                activeSortButton === 'highToLow' &&
+                  BookCatererStyles.Sort_Botton_Active,
+              ]}
+              onPress={() => setActiveSortButton('highToLow')}>
+              <Text
+                style={[
+                  BookCatererStyles.Sort_Botton_Text,
+                  activeSortButton === 'highToLow' &&
+                    BookCatererStyles.Sort_Botton_Active_Text,
+                ]}>
+                Price: High To Low
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
       {/* React Native Paper Modal */}
@@ -467,8 +508,11 @@ const BookCaterScreen = () => {
             style={[
               BookCatererStyles.FooterButton,
               GlobalCss.ThemeBackgroundColor,
-            ]}>
-            <Text style={BookCatererStyles.FooterButtonText}>Next</Text>
+            ]}
+            onPress={() => navigation.navigate('FoodSessionScreen')}>
+            <Text style={BookCatererStyles.FooterButtonText}>
+              Apply Filters
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

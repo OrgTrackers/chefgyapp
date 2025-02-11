@@ -108,7 +108,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="MenuSelection"
+          initialRouteName="HomeScreen"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -157,8 +157,8 @@ const App = () => {
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
-          {/* <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
-          <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} /> */}
+          <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
+          <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
           <Stack.Screen name="FooterComponent" component={FooterComponent} />
 
 

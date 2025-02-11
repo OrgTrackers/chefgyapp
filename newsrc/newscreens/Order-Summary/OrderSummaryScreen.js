@@ -202,7 +202,7 @@ const OrderSummaryScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={OrderSummaryStyles.HeaderContent}>
+        <TouchableOpacity style={OrderSummaryStyles.HeaderContent} onPress={()=>navigation.navigate('MenuSelection')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={OrderSummaryStyles.PageName}>Order Summary</Text>
         </TouchableOpacity>
@@ -973,7 +973,7 @@ const OrderSummaryScreen = () => {
             style={[
               OrderSummaryStyles.BookCaterButton,
               GlobalCss.ThemeBackgroundColor,
-            ]}>
+            ]} onPress={()=>navigation.navigate('FinalScreen')}>
             <Text style={OrderSummaryStyles.BookCaterText}>Submit</Text>
           </TouchableOpacity>
         </View>

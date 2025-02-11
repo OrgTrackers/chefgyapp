@@ -181,7 +181,7 @@ const EventsScreen = () => {
             style={[
               EventsScreenStyles.BookCaterButton,
               GlobalCss.ThemeBackgroundColor,
-            ]}>
+            ]} onPress={()=>navigation.navigate('BookCaterScreen')}>
             <Text style={EventsScreenStyles.BookCaterText}>Book Cater</Text>
           </TouchableOpacity>
         </View>

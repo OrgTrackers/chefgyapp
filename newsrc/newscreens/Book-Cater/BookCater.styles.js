@@ -60,27 +60,6 @@ export const BookCatererStyles = StyleSheet.create({
   selectedText: {
     color: '#FA3B3D',
   },
-  //cater alloctation
-  BC_Cater_Allowcation_Container: {
-    marginTop: 20,
-  },
-  BC_Cater_Allowcation_Card: {
-    backgroundColor: '#ffff',
-    margin: '2%',
-    borderRadius: 5,
-    marginLeft:1
-  },
-  BC_Cater_Allowcation_Card_Content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 5,
-    justifyContent: 'space-between',
-  },
-  BC_CA_Allocation_Text: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color:'#000'
-  },
 
   //Menu Type Selection
   BC_MenuType_Container: {
@@ -97,7 +76,6 @@ export const BookCatererStyles = StyleSheet.create({
     padding: 5,
     justifyContent: 'space-between',
   },
-
 
   //Filter
   BC_Filter_Container: {
@@ -134,19 +112,12 @@ export const BookCatererStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderRadius: 16,
     backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#DDD',
     gap: 5,
   },
-  toggleButtonActiveVeg: {
-    //backgroundColor: '#E5FFE5',
-    borderColor: '#A8E6A8',
-  },
-  toggleButtonActiveNonVeg: {
-    //backgroundColor: '#FFE5E5',
-    borderColor: '#F5A8A8',
+  toggleButtonActive: {
+    backgroundColor: '#FA3B3D',
+    borderRadius: 10,
   },
   toggleText: {
     marginLeft: 8,
@@ -154,16 +125,11 @@ export const BookCatererStyles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
   },
-  toggleTextActiveVeg: {
-    color: 'green',
-    fontWeight: 'bold',
-  },
-  toggleTextActiveNonVeg: {
-    color: 'red',
-    fontWeight: 'bold',
+  toggleTextActive: {
+    color: '#ffff',
   },
   section: {
-    marginTop:20,
+    marginTop: 20,
   },
   sectionTitle: {
     fontSize: 14,
@@ -222,23 +188,69 @@ export const BookCatererStyles = StyleSheet.create({
     height: 400,
   },
 
-    //Footer
-    FooterButtonContainer: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    FooterButton: {
-      padding: 10,
-      width: '80%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 10,
-      marginTop:15
-    },
-    FooterButtonText: {
-      color: '#ffff',
-      textAlign: 'center',
-    },
-  
+  //Footer
+  FooterButtonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  FooterButton: {
+    padding: 10,
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 15,
+  },
+  FooterButtonText: {
+    color: '#ffff',
+    textAlign: 'center',
+  },
+
+  //Distance Container
+
+  BC_Distance_Container: {
+    marginTop: 10,
+  },
+  Distance_Text: {
+    marginLeft: 10,
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+
+  //Rating Container
+  Bc_Rating_Container: {
+    marginTop: 20,
+  },
+  BC_Rating_Stars: {
+    flexDirection: 'row',
+    gap: 30,
+  },
+
+  //Sorting
+  BC_Sorting_Container: {
+    marginTop: 20,
+  },
+  BC_Sorting_Buttons: {
+    flexDirection: 'row',
+    gap: 30,
+    marginTop: 10,
+  },
+  Sort_Botton: {
+    backgroundColor: '#ffff',
+    padding: 10,
+    borderRadius: 10,
+  },
+  Sort_Botton_Active: {
+    backgroundColor: '#FA3B3D', 
+  },
+  Sort_Botton_Text: {
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  Sort_Botton_Active_Text:{
+    color:'#ffff'
+  },
 });

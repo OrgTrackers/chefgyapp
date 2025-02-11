@@ -43,4 +43,8 @@ export const GlobalCss = StyleSheet.create({
         marginBottom: 10,
     },
 
+
+    g_appTextBlack:{
+        color:'#000'
+    },
 })
