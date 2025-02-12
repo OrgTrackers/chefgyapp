@@ -97,7 +97,7 @@ const EventsScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={EventsScreenStyles.HeaderContent}>
+        <TouchableOpacity style={EventsScreenStyles.HeaderContent} onPress={()=>navigation.navigate('HomeScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={EventsScreenStyles.PageName}>Events</Text>
         </TouchableOpacity>

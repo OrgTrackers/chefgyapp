@@ -149,7 +149,9 @@ export const MenuSelectionStyles = StyleSheet.create({
     marginLeft: 2.5,
     marginRight: 2.5,
     backgroundColor:'#F8F9FA',
-    borderRadius:10
+    borderRadius:10,
+    borderWidth:0.5,
+    borderColor:'#ddd'
   },
   itemCategoryButton: {
     padding: 8,
@@ -162,7 +164,7 @@ export const MenuSelectionStyles = StyleSheet.create({
     gap: 5,
     paddingTop: 5,
     backgroundColor: '#FA3B3D',
-    width: '30%',
+    width: 250,
     borderRadius: 10,
   },
   Add_Menu_Button:{

@@ -143,7 +143,7 @@ const CaterSelectionScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={CaterSelectionScreenStyles.HeaderContent}>
+        <TouchableOpacity style={CaterSelectionScreenStyles.HeaderContent} onPress={()=>navigation.navigate('FoodSessionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={CaterSelectionScreenStyles.PageName}>
             Cater Selection

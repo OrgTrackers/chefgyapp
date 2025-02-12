@@ -328,7 +328,7 @@ const MenuSelection = () => {
       <View style={GlobalCss.HeaderContainer}>
         <TouchableOpacity style={MenuSelectionStyles.HeaderContent} onPress={()=>navigation.navigate('CaterSelectionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
-          {/* <Text style={MenuSelectionStyles.PageName}>Menu Selection</Text> */}
+          <Text style={MenuSelectionStyles.PageName}>Menu Selection</Text>
         </TouchableOpacity>
       </View>
       <ScrollView
