@@ -119,6 +119,14 @@ export const BookCatererStyles = StyleSheet.create({
     backgroundColor: '#FA3B3D',
     borderRadius: 10,
   },
+  toggleVegButtonActive: {
+    backgroundColor: '#48c9b0',
+    borderRadius: 10,
+  },
+  toggleNonVegButtonActive: {
+    backgroundColor: '#e74c3c',
+    borderRadius: 10,
+  },
   toggleText: {
     marginLeft: 8,
     fontSize: 14,
@@ -241,16 +249,20 @@ export const BookCatererStyles = StyleSheet.create({
     backgroundColor: '#ffff',
     padding: 10,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
   },
   Sort_Botton_Active: {
-    backgroundColor: '#FA3B3D', 
+    backgroundColor: '#FA3B3D',
+    borderWidth: 1,
+    borderColor: '#FA3B3D',
   },
   Sort_Botton_Text: {
     color: '#000',
     fontWeight: 'bold',
     fontSize: 15,
   },
-  Sort_Botton_Active_Text:{
-    color:'#ffff'
+  Sort_Botton_Active_Text: {
+    color: '#ffff',
   },
 });

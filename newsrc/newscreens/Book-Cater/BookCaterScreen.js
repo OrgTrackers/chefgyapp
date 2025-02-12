@@ -321,7 +321,7 @@ const BookCaterScreen = () => {
             <TouchableOpacity
               style={[
                 BookCatererStyles.toggleButton,
-                menuType.veg && BookCatererStyles.toggleButtonActive,
+                menuType.veg && BookCatererStyles.toggleVegButtonActive,
               ]}
               onPress={() => handleMenuSelection('veg')}>
               <Leaf size={16} color={menuType.veg ? '#fff' : '#000'} />
@@ -339,7 +339,7 @@ const BookCaterScreen = () => {
             <TouchableOpacity
               style={[
                 BookCatererStyles.toggleButton,
-                menuType.nonVeg && BookCatererStyles.toggleButtonActive,
+                menuType.nonVeg && BookCatererStyles.toggleNonVegButtonActive,
               ]}
               onPress={() => handleMenuSelection('nonVeg')}>
               <Beef size={16} color={menuType.nonVeg ? '#fff' : '#000'} />
