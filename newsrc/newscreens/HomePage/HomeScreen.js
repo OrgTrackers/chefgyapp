@@ -53,7 +53,7 @@ const HomeScreen = () => {
         navigation.navigate('EventsScreen');
         break;
       case 'Chef':
-        navigation.navigate('');
+        navigation.navigate('ChefEventsScreen');
         break;
       case 'Home Food':
         navigation.navigate('');

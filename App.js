@@ -62,6 +62,14 @@ import DayFoodSelectionScreen from './newsrc/newscreens/FoodSessions/DayFoodSele
 import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
 import FoodSessionScreen from './newsrc/newscreens/FoodSessions/FoodSessionScreen';
 
+//New Chef Screens
+import ChefEventsScreen from './newsrc/newscreens/Chef-Screens/ChefEvents/ChefEventsScreen';
+import BookChefScreen from './newsrc/newscreens/Chef-Screens/ChefBooking/BookChefScreen';
+import ChefFoodSessionScreen from './newsrc/newscreens/Chef-Screens/ChefFoodSession/ChefFoodSessionsScreen';
+import ChefSelectionScreen from './newsrc/newscreens/Chef-Screens/Chef-Selection/ChefSelectionScreen';
+import ChefMenuSelectionScreen from './newsrc/newscreens/Chef-Screens/ChefMenusSelections/ChefMenusSelectionScreen';
+import ChefOrderSummaryScreen from './newsrc/newscreens/Chef-Screens/ChefOrderSummary/ChefOrderSummaryScreen';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -108,7 +116,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="OrderSummaryScreen"
+          initialRouteName="HomeScreen"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -161,6 +169,13 @@ const App = () => {
           <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
           <Stack.Screen name="FooterComponent" component={FooterComponent} />
 
+          {/* chef New Screen */}
+          <Stack.Screen name="ChefEventsScreen" component={ChefEventsScreen} />
+          <Stack.Screen name="BookChefScreen" component={BookChefScreen} />
+          <Stack.Screen name="ChefFoodSessionScreen" component={ChefFoodSessionScreen} />
+          <Stack.Screen name="ChefSelectionScreen" component={ChefSelectionScreen} />
+          <Stack.Screen name="ChefMenuSelectionScreen" component={ChefMenuSelectionScreen} />
+          <Stack.Screen name="ChefOrderSummaryScreen" component={ChefOrderSummaryScreen} />
 
           <Stack.Screen name="Splash" component={Splash} />
 
