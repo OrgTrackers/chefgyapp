@@ -56,22 +56,17 @@ const OrderSummaryList = [
     Category: [
       {
         Id: 1,
-        CateName: 'Italian',
+        CateName: 'Royal Menu',
         CateCost: '2000',
       },
       {
         Id: 2,
-        CateName: 'Indian',
+        CateName: 'Standard Menu',
         CateCost: '2000',
       },
       {
         Id: 3,
-        CateName: 'Japanes',
-        CateCost: '2000',
-      },
-      {
-        Id: 4,
-        CateName: 'Korean',
+        CateName: 'Delux Menu',
         CateCost: '2000',
       },
     ],
@@ -85,22 +80,17 @@ const OrderSummaryList = [
     Category: [
       {
         Id: 1,
-        CateName: 'Italian',
+        CateName: 'Royal Menu',
         CateCost: '2000',
       },
       {
         Id: 2,
-        CateName: 'Indian',
+        CateName: 'Standard Menu',
         CateCost: '2000',
       },
       {
         Id: 3,
-        CateName: 'Japanes',
-        CateCost: '2000',
-      },
-      {
-        Id: 4,
-        CateName: 'Korean',
+        CateName: 'Delux Menu',
         CateCost: '2000',
       },
     ],
@@ -114,22 +104,17 @@ const OrderSummaryList = [
     Category: [
       {
         Id: 1,
-        CateName: 'Italian',
+        CateName: 'Royal Menu',
         CateCost: '2000',
       },
       {
         Id: 2,
-        CateName: 'Indian',
+        CateName: 'Standard Menu',
         CateCost: '2000',
       },
       {
         Id: 3,
-        CateName: 'Japanes',
-        CateCost: '2000',
-      },
-      {
-        Id: 4,
-        CateName: 'Korean',
+        CateName: 'Delux Menu',
         CateCost: '2000',
       },
     ],
@@ -202,7 +187,9 @@ const OrderSummaryScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={OrderSummaryStyles.HeaderContent} onPress={()=>navigation.navigate('MenuSelection')}>
+        <TouchableOpacity
+          style={OrderSummaryStyles.HeaderContent}
+          onPress={() => navigation.navigate('MenuSelection')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={OrderSummaryStyles.PageName}>Order Summary</Text>
         </TouchableOpacity>
@@ -973,7 +960,8 @@ const OrderSummaryScreen = () => {
             style={[
               OrderSummaryStyles.BookCaterButton,
               GlobalCss.ThemeBackgroundColor,
-            ]} onPress={()=>navigation.navigate('FinalScreen')}>
+            ]}
+            onPress={() => navigation.navigate('FinalScreen')}>
             <Text style={OrderSummaryStyles.BookCaterText}>Submit</Text>
           </TouchableOpacity>
         </View>
