@@ -70,6 +70,14 @@ import ChefSelectionScreen from './newsrc/newscreens/Chef-Screens/Chef-Selection
 import ChefMenuSelectionScreen from './newsrc/newscreens/Chef-Screens/ChefMenusSelections/ChefMenusSelectionScreen';
 import ChefOrderSummaryScreen from './newsrc/newscreens/Chef-Screens/ChefOrderSummary/ChefOrderSummaryScreen';
 
+//New Home Food screen
+import HomeFoodEventsScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodEvents/HomeFoodEventsScreen';
+import BookHomeFoodScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodBooking/BookHomeFoodScreen';
+import HomeFoodFoodSessionScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodFoodSession/HomeFoodFoodSessionScreen';
+import HomeFoodSelectionScreen from './newsrc/newscreens/HomeFood-Screens/HomeFood-Selection/HomeFoodSelectionScreen';
+import HomeFoodMenuSelectionScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodMenuSelection/HomeFoodMenuSelectionScreen';
+import HomeFoodOrderSummaryScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodOrderSummary/HomeFoodOrderSummaryScreen';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -169,13 +177,22 @@ const App = () => {
           <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
           <Stack.Screen name="FooterComponent" component={FooterComponent} />
 
-          {/* chef New Screen */}
+          {/* New chef Screen */}
           <Stack.Screen name="ChefEventsScreen" component={ChefEventsScreen} />
           <Stack.Screen name="BookChefScreen" component={BookChefScreen} />
           <Stack.Screen name="ChefFoodSessionScreen" component={ChefFoodSessionScreen} />
           <Stack.Screen name="ChefSelectionScreen" component={ChefSelectionScreen} />
           <Stack.Screen name="ChefMenuSelectionScreen" component={ChefMenuSelectionScreen} />
           <Stack.Screen name="ChefOrderSummaryScreen" component={ChefOrderSummaryScreen} />
+
+          {/* new Home food Screen */}
+          <Stack.Screen name="HomeFoodEventsScreen" component={HomeFoodEventsScreen} />
+          <Stack.Screen name="BookHomeFoodScreen" component={BookHomeFoodScreen} />
+          <Stack.Screen name="HomeFoodFoodSessionScreen" component={HomeFoodFoodSessionScreen} />
+          <Stack.Screen name="HomeFoodSelectionScreen" component={HomeFoodSelectionScreen} />
+          <Stack.Screen name="HomeFoodMenuSelectionScreen" component={HomeFoodMenuSelectionScreen} />
+          <Stack.Screen name="HomeFoodOrderSummaryScreen" component={HomeFoodOrderSummaryScreen} />
+
 
           <Stack.Screen name="Splash" component={Splash} />
 

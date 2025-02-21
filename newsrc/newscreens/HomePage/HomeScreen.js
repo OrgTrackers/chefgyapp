@@ -56,7 +56,7 @@ const HomeScreen = () => {
         navigation.navigate('ChefEventsScreen');
         break;
       case 'Home Food':
-        navigation.navigate('');
+        navigation.navigate('HomeFoodEventsScreen');
         break;
       case 'Food Truck':
         navigation.navigate('');
