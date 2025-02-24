@@ -188,7 +188,7 @@ const HomeFoodOrderSummaryScreen = () => {
       <View style={GlobalCss.HeaderContainer}>
         <TouchableOpacity
           style={HomeFoodOrderSummaryStyles.HeaderContent}
-          onPress={() => navigation.navigate('MenuSelection')}>
+          onPress={() => navigation.navigate('HomeFoodMenuSelectionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={HomeFoodOrderSummaryStyles.PageName}>Home Food Order Summary</Text>
         </TouchableOpacity>

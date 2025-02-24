@@ -250,7 +250,7 @@ const BookHomeFoodScreen = () => {
       <View style={GlobalCss.HeaderContainer}>
         <TouchableOpacity
           style={BookHomeFoodStyles.HeaderContent}
-          onPress={() => navigation.navigate('ChefEventsScreen')}>
+          onPress={() => navigation.navigate('HomeFoodEventsScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={BookHomeFoodStyles.PageName}>Book Home Food</Text>
         </TouchableOpacity>

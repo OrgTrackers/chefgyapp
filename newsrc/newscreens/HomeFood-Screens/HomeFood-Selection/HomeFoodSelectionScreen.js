@@ -134,7 +134,7 @@ const HomeFoodSelectionScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={HomeFoodSelectionScreenStyles.HeaderContent} onPress={()=>navigation.navigate('FoodSessionScreen')}>
+        <TouchableOpacity style={HomeFoodSelectionScreenStyles.HeaderContent} onPress={()=>navigation.navigate('HomeFoodFoodSessionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={HomeFoodSelectionScreenStyles.PageName}>
             Home Food Selection

@@ -50,7 +50,7 @@ const HomeFoodFoodSessionScreen = () => {
       <View style={GlobalCss.HeaderContainer}>
         <TouchableOpacity
           style={HomeFoodFoodSessionStyles.HeaderContent}
-          onPress={() => navigation.navigate('BookChefScreen')}>
+          onPress={() => navigation.navigate('BookHomeFoodScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={HomeFoodFoodSessionStyles.PageName}>Home Food Food Session</Text>
         </TouchableOpacity>
