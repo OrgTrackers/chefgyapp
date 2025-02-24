@@ -78,6 +78,14 @@ import HomeFoodSelectionScreen from './newsrc/newscreens/HomeFood-Screens/HomeFo
 import HomeFoodMenuSelectionScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodMenuSelection/HomeFoodMenuSelectionScreen';
 import HomeFoodOrderSummaryScreen from './newsrc/newscreens/HomeFood-Screens/HomeFoodOrderSummary/HomeFoodOrderSummaryScreen';
 
+//New Food Truck Screen
+import FoodTruckEventsScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckEvents/FoodTruckEventsScreen';
+import BookFoodTruckScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckBooking/BookFoodTruckScreen';
+import FoodTruckFoodSessionScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckFoodSession/FoodTruckFoodSessionScreen';
+import FoodTruckSelectionScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruck-Selection/FoodTruckSelectionScreen';
+import FoodTruckMenuSelectionScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckMenuSelections/FoodTruckMenuSelectionScreen';
+import FoodTruckOrderSummaryScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckOrderSummary/FoodTruckOrderSummaryScreen';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -192,6 +200,15 @@ const App = () => {
           <Stack.Screen name="HomeFoodSelectionScreen" component={HomeFoodSelectionScreen} />
           <Stack.Screen name="HomeFoodMenuSelectionScreen" component={HomeFoodMenuSelectionScreen} />
           <Stack.Screen name="HomeFoodOrderSummaryScreen" component={HomeFoodOrderSummaryScreen} />
+
+          
+          {/* new Home food Screen */}
+          <Stack.Screen name="FoodTruckEventsScreen" component={FoodTruckEventsScreen} />
+          <Stack.Screen name="BookFoodTruckScreen" component={BookFoodTruckScreen} />
+          <Stack.Screen name="FoodTruckFoodSessionScreen" component={FoodTruckFoodSessionScreen} />
+          <Stack.Screen name="FoodTruckSelectionScreen" component={FoodTruckSelectionScreen} />
+          <Stack.Screen name="FoodTruckMenuSelectionScreen" component={FoodTruckMenuSelectionScreen} />
+          <Stack.Screen name="FoodTruckOrderSummaryScreen" component={FoodTruckOrderSummaryScreen} />
 
 
           <Stack.Screen name="Splash" component={Splash} />

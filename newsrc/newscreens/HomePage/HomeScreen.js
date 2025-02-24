@@ -59,7 +59,7 @@ const HomeScreen = () => {
         navigation.navigate('HomeFoodEventsScreen');
         break;
       case 'Food Truck':
-        navigation.navigate('');
+        navigation.navigate('FoodTruckEventsScreen');
         break;
       default:
         console.warn('No screen found for this category!');
