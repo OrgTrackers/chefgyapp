@@ -17,6 +17,7 @@ import {OrderSummaryStyles} from './OrderSummary.style';
 import FooterComponent from '../../newcomponents/Footer/FooterComponent';
 import {Card} from 'react-native-paper';
 import {GlobalCss} from '../../newassets/GlobalStyles/GlobalCss.styles';
+import {MenuSelectionStyles} from '../Menu-Selection/MenuSelection.styles';
 
 const dayList = [
   {
@@ -123,9 +124,9 @@ const OrderSummaryList = [
 
 const DishesList = [
   {
-    Id:1,
-    MenuType:'Salads',
-    Items:[
+    Id: 1,
+    MenuType: 'Salads',
+    Items: [
       {
         Id: 1,
         Image: require('../../newassets/images/MenuItems/Item_1.png'),
@@ -161,7 +162,48 @@ const DishesList = [
         Description:
           'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
       },
-    ]
+    ],
+  },
+  {
+    Id: 2,
+    MenuType: 'Main Course',
+    Items: [
+      {
+        Id: 1,
+        Image: require('../../newassets/images/MenuItems/Item_1.png'),
+        Name: 'Biryani',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 2,
+        Image: require('../../newassets/images/MenuItems/Item_2.png'),
+        Name: 'Idly',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 3,
+        Image: require('../../newassets/images/MenuItems/Item_3.png'),
+        Name: 'Masala Dosa',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 4,
+        Image: require('../../newassets/images/MenuItems/Item_4.png'),
+        Name: 'Sambar rice',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 5,
+        Image: require('../../newassets/images/MenuItems/Item_5.png'),
+        Name: 'Noodles',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+    ],
   },
 ];
 
@@ -181,7 +223,6 @@ const OrderSummaryScreen = () => {
       [menuType]: !prev[menuType], // Toggle the specific menu type (e.g., 'Salads')
     }));
   };
-  
 
   const increaseCount = () => {
     setCount(prevCount => prevCount + 1);
@@ -307,91 +348,110 @@ const OrderSummaryScreen = () => {
                             </Card>
                             {showDishes[CategoryItem.Id] && (
                               <>
-                            {DishesList.map(MenutypeItem => (
-                              <View key={MenutypeItem.Id}>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    handleShowHideDishes(MenutypeItem.MenuType)
-                                  }>
-                                  <Text
-                                    style={{
-                                      fontWeight: 'bold',
-                                      fontSize: 16,
-                                      padding: 10,
-                                    }}>
-                                    {MenutypeItem.MenuType}
-                                  </Text>
-                                </TouchableOpacity>
+                                {DishesList.map(MenutypeItem => (
+                                  <View key={MenutypeItem.Id}>
+                                    <TouchableOpacity
+                                      onPress={() =>
+                                        handleShowHideDishes(
+                                          MenutypeItem.MenuType,
+                                        )
+                                      }
+                                      style={OrderSummaryStyles.MenuTypeButton}>
+                                      <Text
+                                        style={
+                                          OrderSummaryStyles.MenuTypeButtonText
+                                        }>
+                                        {MenutypeItem.MenuType}
+                                      </Text>
 
-                                {showDishes[MenutypeItem.MenuType] &&
-                                  MenutypeItem.Items.map(DishItem => (
-                                    <View key={DishItem.Id}>
-                                      <Card
-                                        style={OrderSummaryStyles.DishItemCard}>
-                                        <View
-                                          style={
-                                            OrderSummaryStyles.DishItemCardbody
-                                          }>
-                                          <View
+                                      <MCIcons
+                                        name={
+                                          showDishes[MenutypeItem.MenuType]
+                                            ? 'chevron-down'
+                                            : 'chevron-right'
+                                        }
+                                        size={15}
+                                        color="#ffff"
+                                      />
+                                    </TouchableOpacity>
+
+                                    {showDishes[MenutypeItem.MenuType] &&
+                                      MenutypeItem.Items.map(DishItem => (
+                                        <View key={DishItem.Id}>
+                                          <Card
                                             style={
-                                              OrderSummaryStyles.DishImageContent
+                                              OrderSummaryStyles.DishItemCard
                                             }>
-                                            <Image
-                                              source={DishItem.Image}
+                                            <View
                                               style={
-                                                OrderSummaryStyles.DishImage
-                                              }
-                                            />
-                                          </View>
-                                          <View
-                                            style={
-                                              OrderSummaryStyles.DishDetailsContent
-                                            }>
-                                            <Text
-                                              style={
-                                                OrderSummaryStyles.DishName
+                                                OrderSummaryStyles.DishItemCardbody
                                               }>
-                                              {DishItem.Name}
-                                            </Text>
-                                            <Text
+                                              <View
+                                                style={
+                                                  OrderSummaryStyles.DishImageContent
+                                                }>
+                                                <Image
+                                                  source={DishItem.Image}
+                                                  style={
+                                                    OrderSummaryStyles.DishImage
+                                                  }
+                                                />
+                                              </View>
+                                              <View
+                                                style={
+                                                  OrderSummaryStyles.DishDetailsContent
+                                                }>
+                                                <Text
+                                                  style={
+                                                    OrderSummaryStyles.DishName
+                                                  }>
+                                                  {DishItem.Name}
+                                                </Text>
+                                                <Text
+                                                  style={
+                                                    OrderSummaryStyles.DishDescription
+                                                  }
+                                                  numberOfLines={3}>
+                                                  {DishItem.Description}
+                                                </Text>
+                                              </View>
+                                            </View>
+                                            <View
                                               style={
-                                                OrderSummaryStyles.DishDescription
-                                              }
-                                              numberOfLines={3}>
-                                              {DishItem.Description}
-                                            </Text>
-                                          </View>
+                                                OrderSummaryStyles.AddRemoveButtons
+                                              }>
+                                              <TouchableOpacity
+                                                onPress={decreaseCount}>
+                                                <MCIcons
+                                                  name="minus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                              <Text
+                                                style={
+                                                  OrderSummaryStyles.Count
+                                                }>
+                                                {count}
+                                              </Text>
+                                              <TouchableOpacity
+                                                onPress={increaseCount}>
+                                                <MCIcons
+                                                  name="plus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                            </View>
+                                          </Card>
                                         </View>
-                                        <View
-                                          style={
-                                            OrderSummaryStyles.AddRemoveButtons
-                                          }>
-                                          <TouchableOpacity
-                                            onPress={decreaseCount}>
-                                            <MCIcons
-                                              name="minus-circle-outline"
-                                              size={15}
-                                              color={GlobalCss.ThemeColor.color}
-                                            />
-                                          </TouchableOpacity>
-                                          <Text
-                                            style={OrderSummaryStyles.Count}>
-                                            {count}
-                                          </Text>
-                                          <TouchableOpacity
-                                            onPress={increaseCount}>
-                                            <MCIcons
-                                              name="plus-circle-outline"
-                                              size={15}
-                                              color={GlobalCss.ThemeColor.color}
-                                            />
-                                          </TouchableOpacity>
-                                        </View>
-                                      </Card>
-                                    </View>
-                                  ))}
-                              </View>
-                            ))}
+                                      ))}
+                                  </View>
+                                ))}
                               </>
                             )}
                           </View>

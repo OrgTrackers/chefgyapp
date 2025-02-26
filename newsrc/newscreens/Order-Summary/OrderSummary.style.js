@@ -1,3 +1,4 @@
+
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const OrderSummaryStyles = StyleSheet.create({
@@ -153,6 +154,22 @@ export const OrderSummaryStyles = StyleSheet.create({
     color:'gray'
   },
 
+  MenuTypeButton:{
+    backgroundColor:'#FA3B3D',
+    width:'50%',
+    padding:5,
+    borderRadius:10,
+    marginBottom:5,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
+  MenuTypeButtonText:{
+    textAlign:'left',
+    color:'#fff',
+    fontSize:12,
+    fontWeight:'bold'
+  },
   // Add minus buttons
   AddRemoveButtons:{
     flexDirection:'row',
