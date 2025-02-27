@@ -134,7 +134,7 @@ const ChefSelectionScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={ChefSelectionScreenStyles.HeaderContent} onPress={()=>navigation.navigate('FoodSessionScreen')}>
+        <TouchableOpacity style={ChefSelectionScreenStyles.HeaderContent} onPress={()=>navigation.navigate('ChefFoodSessionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={ChefSelectionScreenStyles.PageName}>
             Chef Selection

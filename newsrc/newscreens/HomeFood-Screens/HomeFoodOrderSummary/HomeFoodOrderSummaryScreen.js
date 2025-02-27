@@ -123,38 +123,85 @@ const OrderSummaryList = [
 const DishesList = [
   {
     Id: 1,
-    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
-    Name: 'Biryani',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+    MenuType: 'Salads',
+    Items: [
+      {
+        Id: 1,
+        Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+        Name: 'Biryani',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 2,
+        Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+        Name: 'Idly',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 3,
+        Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+        Name: 'Masala Dosa',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 4,
+        Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+        Name: 'Sambar rice',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 5,
+        Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+        Name: 'Noodles',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+    ], 
   },
   {
     Id: 2,
-    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
-    Name: 'Idly',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 3,
-    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
-    Name: 'Masala Dosa',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 4,
-    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
-    Name: 'Sambar rice',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 5,
-    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
-    Name: 'Noodles',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+    MenuType: 'Main Course',
+    Items: [
+      {
+        Id: 1,
+        Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+        Name: 'Biryani',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 2,
+        Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+        Name: 'Idly',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 3,
+        Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+        Name: 'Masala Dosa',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 4,
+        Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+        Name: 'Sambar rice',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 5,
+        Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+        Name: 'Noodles',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+    ], 
   },
 ];
 
@@ -168,10 +215,10 @@ const HomeFoodOrderSummaryScreen = () => {
     setActiveDay(Day.Name);
   };
 
-  const handleShowHideDishes = id => {
+  const handleShowHideDishes = menuType => {
     setShowDishes(prev => ({
       ...prev,
-      [id]: !prev[id], // Toggle the specific category
+      [menuType]: !prev[menuType], // Toggle the specific menu type (e.g., 'Salads')
     }));
   };
 
@@ -273,18 +320,15 @@ const HomeFoodOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
+                              <View style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     HomeFoodOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryName}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryCost}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -302,72 +346,108 @@ const HomeFoodOrderSummaryScreen = () => {
                             </Card>
                             {showDishes[CategoryItem.Id] && (
                               <>
-                                {DishesList.map(DishItem => (
-                                  <View key={DishItem.Id}>
-                                    <Card
-                                      style={
-                                        HomeFoodOrderSummaryStyles.DishItemCard
-                                      }>
-                                      <View
+                                {DishesList.map(MenutypeItem => (
+                                  <View key={MenutypeItem.Id}>
+                                    <TouchableOpacity
+                                      onPress={() =>
+                                        handleShowHideDishes(
+                                          MenutypeItem.MenuType,
+                                        )
+                                      }
+                                      style={HomeFoodOrderSummaryStyles.MenuTypeButton}>
+                                      <Text
                                         style={
-                                          HomeFoodOrderSummaryStyles.DishItemCardbody
+                                          HomeFoodOrderSummaryStyles.MenuTypeButtonText
                                         }>
-                                        <View
-                                          style={
-                                            HomeFoodOrderSummaryStyles.DishImageContent
-                                          }>
-                                          <Image
-                                            source={DishItem.Image}
+                                        {MenutypeItem.MenuType}
+                                      </Text>
+
+                                      <MCIcons
+                                        name={
+                                          showDishes[MenutypeItem.MenuType]
+                                            ? 'chevron-down'
+                                            : 'chevron-right'
+                                        }
+                                        size={15}
+                                        color="#ffff"
+                                      />
+                                    </TouchableOpacity>
+
+                                    {showDishes[MenutypeItem.MenuType] &&
+                                      MenutypeItem.Items.map(DishItem => (
+                                        <View key={DishItem.Id}>
+                                          <Card
                                             style={
-                                              HomeFoodOrderSummaryStyles.DishImage
-                                            }
-                                          />
-                                        </View>
-                                        <View
-                                          style={
-                                            HomeFoodOrderSummaryStyles.DishDetailsContent
-                                          }>
-                                          <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishName
+                                              HomeFoodOrderSummaryStyles.DishItemCard
                                             }>
-                                            {DishItem.Name}
-                                          </Text>
-                                          <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishDescription
-                                            }
-                                            numberOfLines={3}>
-                                            {DishItem.Description}
-                                          </Text>
+                                            <View
+                                              style={
+                                                HomeFoodOrderSummaryStyles.DishItemCardbody
+                                              }>
+                                              <View
+                                                style={
+                                                  HomeFoodOrderSummaryStyles.DishImageContent
+                                                }>
+                                                <Image
+                                                  source={DishItem.Image}
+                                                  style={
+                                                    HomeFoodOrderSummaryStyles.DishImage
+                                                  }
+                                                />
+                                              </View>
+                                              <View
+                                                style={
+                                                  HomeFoodOrderSummaryStyles.DishDetailsContent
+                                                }>
+                                                <Text
+                                                  style={
+                                                    HomeFoodOrderSummaryStyles.DishName
+                                                  }>
+                                                  {DishItem.Name}
+                                                </Text>
+                                                <Text
+                                                  style={
+                                                    HomeFoodOrderSummaryStyles.DishDescription
+                                                  }
+                                                  numberOfLines={3}>
+                                                  {DishItem.Description}
+                                                </Text>
+                                              </View>
+                                            </View>
+                                            <View
+                                              style={
+                                                HomeFoodOrderSummaryStyles.AddRemoveButtons
+                                              }>
+                                              <TouchableOpacity
+                                                onPress={decreaseCount}>
+                                                <MCIcons
+                                                  name="minus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                              <Text
+                                                style={
+                                                  HomeFoodOrderSummaryStyles.Count
+                                                }>
+                                                {count}
+                                              </Text>
+                                              <TouchableOpacity
+                                                onPress={increaseCount}>
+                                                <MCIcons
+                                                  name="plus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                            </View>
+                                          </Card>
                                         </View>
-                                      </View>
-                                      <View
-                                        style={
-                                          HomeFoodOrderSummaryStyles.AddRemoveButtons
-                                        }>
-                                        <TouchableOpacity
-                                          onPress={decreaseCount}>
-                                          <MCIcons
-                                            name="minus-circle-outline"
-                                            size={15}
-                                            color={GlobalCss.ThemeColor.color}
-                                          />
-                                        </TouchableOpacity>
-                                        <Text
-                                          style={HomeFoodOrderSummaryStyles.Count}>
-                                          {count}
-                                        </Text>
-                                        <TouchableOpacity
-                                          onPress={increaseCount}>
-                                          <MCIcons
-                                            name="plus-circle-outline"
-                                            size={15}
-                                            color={GlobalCss.ThemeColor.color}
-                                          />
-                                        </TouchableOpacity>
-                                      </View>
-                                    </Card>
+                                      ))}
                                   </View>
                                 ))}
                               </>
@@ -428,18 +508,15 @@ const HomeFoodOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
+                              <View style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     HomeFoodOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryName}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryCost}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -460,9 +537,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        HomeFoodOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={HomeFoodOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           HomeFoodOrderSummaryStyles.DishItemCardbody
@@ -473,9 +548,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishImage
-                                            }
+                                            style={HomeFoodOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -483,9 +556,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             HomeFoodOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishName
-                                            }>
+                                            style={HomeFoodOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -509,8 +580,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={HomeFoodOrderSummaryStyles.Count}>
+                                        <Text style={HomeFoodOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -583,18 +653,15 @@ const HomeFoodOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
+                              <View style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     HomeFoodOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryName}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryCost}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -615,9 +682,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        HomeFoodOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={HomeFoodOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           HomeFoodOrderSummaryStyles.DishItemCardbody
@@ -628,9 +693,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishImage
-                                            }
+                                            style={HomeFoodOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -638,9 +701,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             HomeFoodOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishName
-                                            }>
+                                            style={HomeFoodOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -664,8 +725,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={HomeFoodOrderSummaryStyles.Count}>
+                                        <Text style={HomeFoodOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -738,18 +798,15 @@ const HomeFoodOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
+                              <View style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     HomeFoodOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryName}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryCost}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -770,9 +827,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        HomeFoodOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={HomeFoodOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           HomeFoodOrderSummaryStyles.DishItemCardbody
@@ -783,9 +838,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishImage
-                                            }
+                                            style={HomeFoodOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -793,9 +846,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             HomeFoodOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishName
-                                            }>
+                                            style={HomeFoodOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -819,8 +870,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={HomeFoodOrderSummaryStyles.Count}>
+                                        <Text style={HomeFoodOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -893,18 +943,15 @@ const HomeFoodOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
+                              <View style={HomeFoodOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     HomeFoodOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryName}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={HomeFoodOrderSummaryStyles.CategoryCost}>
+                                  <Text style={HomeFoodOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -925,9 +972,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        HomeFoodOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={HomeFoodOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           HomeFoodOrderSummaryStyles.DishItemCardbody
@@ -938,9 +983,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishImage
-                                            }
+                                            style={HomeFoodOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -948,9 +991,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             HomeFoodOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              HomeFoodOrderSummaryStyles.DishName
-                                            }>
+                                            style={HomeFoodOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -974,8 +1015,7 @@ const HomeFoodOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={HomeFoodOrderSummaryStyles.Count}>
+                                        <Text style={HomeFoodOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -1020,3 +1060,4 @@ const HomeFoodOrderSummaryScreen = () => {
 };
 
 export default HomeFoodOrderSummaryScreen;
+

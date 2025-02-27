@@ -123,38 +123,85 @@ const OrderSummaryList = [
 const DishesList = [
   {
     Id: 1,
-    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
-    Name: 'Biryani',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+    MenuType: 'Salads',
+    Items: [
+      {
+        Id: 1,
+        Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+        Name: 'Biryani',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 2,
+        Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+        Name: 'Idly',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 3,
+        Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+        Name: 'Masala Dosa',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 4,
+        Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+        Name: 'Sambar rice',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 5,
+        Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+        Name: 'Noodles',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+    ], 
   },
   {
     Id: 2,
-    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
-    Name: 'Idly',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 3,
-    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
-    Name: 'Masala Dosa',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 4,
-    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
-    Name: 'Sambar rice',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
-  },
-  {
-    Id: 5,
-    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
-    Name: 'Noodles',
-    Description:
-      'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+    MenuType: 'Main Course',
+    Items: [
+      {
+        Id: 1,
+        Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+        Name: 'Biryani',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 2,
+        Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+        Name: 'Idly',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 3,
+        Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+        Name: 'Masala Dosa',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 4,
+        Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+        Name: 'Sambar rice',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+      {
+        Id: 5,
+        Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+        Name: 'Noodles',
+        Description:
+          'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
+      },
+    ], 
   },
 ];
 
@@ -168,10 +215,10 @@ const ChefOrderSummaryScreen = () => {
     setActiveDay(Day.Name);
   };
 
-  const handleShowHideDishes = id => {
+  const handleShowHideDishes = menuType => {
     setShowDishes(prev => ({
       ...prev,
-      [id]: !prev[id], // Toggle the specific category
+      [menuType]: !prev[menuType], // Toggle the specific menu type (e.g., 'Salads')
     }));
   };
 
@@ -188,7 +235,7 @@ const ChefOrderSummaryScreen = () => {
       <View style={GlobalCss.HeaderContainer}>
         <TouchableOpacity
           style={ChefOrderSummaryStyles.HeaderContent}
-          onPress={() => navigation.navigate('MenuSelection')}>
+          onPress={() => navigation.navigate('ChefMenuSelectionScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={ChefOrderSummaryStyles.PageName}>Chef Order Summary</Text>
         </TouchableOpacity>
@@ -273,18 +320,15 @@ const ChefOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={ChefOrderSummaryStyles.CategoryCardBody}>
+                              <View style={ChefOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     ChefOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryName}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryCost}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -302,72 +346,108 @@ const ChefOrderSummaryScreen = () => {
                             </Card>
                             {showDishes[CategoryItem.Id] && (
                               <>
-                                {DishesList.map(DishItem => (
-                                  <View key={DishItem.Id}>
-                                    <Card
-                                      style={
-                                        ChefOrderSummaryStyles.DishItemCard
-                                      }>
-                                      <View
+                                {DishesList.map(MenutypeItem => (
+                                  <View key={MenutypeItem.Id}>
+                                    <TouchableOpacity
+                                      onPress={() =>
+                                        handleShowHideDishes(
+                                          MenutypeItem.MenuType,
+                                        )
+                                      }
+                                      style={ChefOrderSummaryStyles.MenuTypeButton}>
+                                      <Text
                                         style={
-                                          ChefOrderSummaryStyles.DishItemCardbody
+                                          ChefOrderSummaryStyles.MenuTypeButtonText
                                         }>
-                                        <View
-                                          style={
-                                            ChefOrderSummaryStyles.DishImageContent
-                                          }>
-                                          <Image
-                                            source={DishItem.Image}
+                                        {MenutypeItem.MenuType}
+                                      </Text>
+
+                                      <MCIcons
+                                        name={
+                                          showDishes[MenutypeItem.MenuType]
+                                            ? 'chevron-down'
+                                            : 'chevron-right'
+                                        }
+                                        size={15}
+                                        color="#ffff"
+                                      />
+                                    </TouchableOpacity>
+
+                                    {showDishes[MenutypeItem.MenuType] &&
+                                      MenutypeItem.Items.map(DishItem => (
+                                        <View key={DishItem.Id}>
+                                          <Card
                                             style={
-                                              ChefOrderSummaryStyles.DishImage
-                                            }
-                                          />
-                                        </View>
-                                        <View
-                                          style={
-                                            ChefOrderSummaryStyles.DishDetailsContent
-                                          }>
-                                          <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishName
+                                              ChefOrderSummaryStyles.DishItemCard
                                             }>
-                                            {DishItem.Name}
-                                          </Text>
-                                          <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishDescription
-                                            }
-                                            numberOfLines={3}>
-                                            {DishItem.Description}
-                                          </Text>
+                                            <View
+                                              style={
+                                                ChefOrderSummaryStyles.DishItemCardbody
+                                              }>
+                                              <View
+                                                style={
+                                                  ChefOrderSummaryStyles.DishImageContent
+                                                }>
+                                                <Image
+                                                  source={DishItem.Image}
+                                                  style={
+                                                    ChefOrderSummaryStyles.DishImage
+                                                  }
+                                                />
+                                              </View>
+                                              <View
+                                                style={
+                                                  ChefOrderSummaryStyles.DishDetailsContent
+                                                }>
+                                                <Text
+                                                  style={
+                                                    ChefOrderSummaryStyles.DishName
+                                                  }>
+                                                  {DishItem.Name}
+                                                </Text>
+                                                <Text
+                                                  style={
+                                                    ChefOrderSummaryStyles.DishDescription
+                                                  }
+                                                  numberOfLines={3}>
+                                                  {DishItem.Description}
+                                                </Text>
+                                              </View>
+                                            </View>
+                                            <View
+                                              style={
+                                                ChefOrderSummaryStyles.AddRemoveButtons
+                                              }>
+                                              <TouchableOpacity
+                                                onPress={decreaseCount}>
+                                                <MCIcons
+                                                  name="minus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                              <Text
+                                                style={
+                                                  ChefOrderSummaryStyles.Count
+                                                }>
+                                                {count}
+                                              </Text>
+                                              <TouchableOpacity
+                                                onPress={increaseCount}>
+                                                <MCIcons
+                                                  name="plus-circle-outline"
+                                                  size={15}
+                                                  color={
+                                                    GlobalCss.ThemeColor.color
+                                                  }
+                                                />
+                                              </TouchableOpacity>
+                                            </View>
+                                          </Card>
                                         </View>
-                                      </View>
-                                      <View
-                                        style={
-                                          ChefOrderSummaryStyles.AddRemoveButtons
-                                        }>
-                                        <TouchableOpacity
-                                          onPress={decreaseCount}>
-                                          <MCIcons
-                                            name="minus-circle-outline"
-                                            size={15}
-                                            color={GlobalCss.ThemeColor.color}
-                                          />
-                                        </TouchableOpacity>
-                                        <Text
-                                          style={ChefOrderSummaryStyles.Count}>
-                                          {count}
-                                        </Text>
-                                        <TouchableOpacity
-                                          onPress={increaseCount}>
-                                          <MCIcons
-                                            name="plus-circle-outline"
-                                            size={15}
-                                            color={GlobalCss.ThemeColor.color}
-                                          />
-                                        </TouchableOpacity>
-                                      </View>
-                                    </Card>
+                                      ))}
                                   </View>
                                 ))}
                               </>
@@ -428,18 +508,15 @@ const ChefOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={ChefOrderSummaryStyles.CategoryCardBody}>
+                              <View style={ChefOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     ChefOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryName}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryCost}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -460,9 +537,7 @@ const ChefOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        ChefOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={ChefOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           ChefOrderSummaryStyles.DishItemCardbody
@@ -473,9 +548,7 @@ const ChefOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              ChefOrderSummaryStyles.DishImage
-                                            }
+                                            style={ChefOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -483,9 +556,7 @@ const ChefOrderSummaryScreen = () => {
                                             ChefOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishName
-                                            }>
+                                            style={ChefOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -509,8 +580,7 @@ const ChefOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={ChefOrderSummaryStyles.Count}>
+                                        <Text style={ChefOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -583,18 +653,15 @@ const ChefOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={ChefOrderSummaryStyles.CategoryCardBody}>
+                              <View style={ChefOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     ChefOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryName}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryCost}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -615,9 +682,7 @@ const ChefOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        ChefOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={ChefOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           ChefOrderSummaryStyles.DishItemCardbody
@@ -628,9 +693,7 @@ const ChefOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              ChefOrderSummaryStyles.DishImage
-                                            }
+                                            style={ChefOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -638,9 +701,7 @@ const ChefOrderSummaryScreen = () => {
                                             ChefOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishName
-                                            }>
+                                            style={ChefOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -664,8 +725,7 @@ const ChefOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={ChefOrderSummaryStyles.Count}>
+                                        <Text style={ChefOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -738,18 +798,15 @@ const ChefOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={ChefOrderSummaryStyles.CategoryCardBody}>
+                              <View style={ChefOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     ChefOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryName}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryCost}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -770,9 +827,7 @@ const ChefOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        ChefOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={ChefOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           ChefOrderSummaryStyles.DishItemCardbody
@@ -783,9 +838,7 @@ const ChefOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              ChefOrderSummaryStyles.DishImage
-                                            }
+                                            style={ChefOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -793,9 +846,7 @@ const ChefOrderSummaryScreen = () => {
                                             ChefOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishName
-                                            }>
+                                            style={ChefOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -819,8 +870,7 @@ const ChefOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={ChefOrderSummaryStyles.Count}>
+                                        <Text style={ChefOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -893,18 +943,15 @@ const ChefOrderSummaryScreen = () => {
                               onPress={() =>
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
-                              <View
-                                style={ChefOrderSummaryStyles.CategoryCardBody}>
+                              <View style={ChefOrderSummaryStyles.CategoryCardBody}>
                                 <View
                                   style={
                                     ChefOrderSummaryStyles.CategoriesDetailsContainer
                                   }>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryName}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryName}>
                                     {CategoryItem.CateName}
                                   </Text>
-                                  <Text
-                                    style={ChefOrderSummaryStyles.CategoryCost}>
+                                  <Text style={ChefOrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>
                                 </View>
@@ -925,9 +972,7 @@ const ChefOrderSummaryScreen = () => {
                                 {DishesList.map(DishItem => (
                                   <View key={DishItem.Id}>
                                     <Card
-                                      style={
-                                        ChefOrderSummaryStyles.DishItemCard
-                                      }>
+                                      style={ChefOrderSummaryStyles.DishItemCard}>
                                       <View
                                         style={
                                           ChefOrderSummaryStyles.DishItemCardbody
@@ -938,9 +983,7 @@ const ChefOrderSummaryScreen = () => {
                                           }>
                                           <Image
                                             source={DishItem.Image}
-                                            style={
-                                              ChefOrderSummaryStyles.DishImage
-                                            }
+                                            style={ChefOrderSummaryStyles.DishImage}
                                           />
                                         </View>
                                         <View
@@ -948,9 +991,7 @@ const ChefOrderSummaryScreen = () => {
                                             ChefOrderSummaryStyles.DishDetailsContent
                                           }>
                                           <Text
-                                            style={
-                                              ChefOrderSummaryStyles.DishName
-                                            }>
+                                            style={ChefOrderSummaryStyles.DishName}>
                                             {DishItem.Name}
                                           </Text>
                                           <Text
@@ -974,8 +1015,7 @@ const ChefOrderSummaryScreen = () => {
                                             color={GlobalCss.ThemeColor.color}
                                           />
                                         </TouchableOpacity>
-                                        <Text
-                                          style={ChefOrderSummaryStyles.Count}>
+                                        <Text style={ChefOrderSummaryStyles.Count}>
                                           {count}
                                         </Text>
                                         <TouchableOpacity
@@ -1020,3 +1060,4 @@ const ChefOrderSummaryScreen = () => {
 };
 
 export default ChefOrderSummaryScreen;
+
