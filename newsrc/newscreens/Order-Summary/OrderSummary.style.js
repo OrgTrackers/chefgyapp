@@ -34,7 +34,7 @@ export const OrderSummaryStyles = StyleSheet.create({
     margin:10,
     borderRadius:5,
     borderWidth:2,
-    borderColor:'#FA3B3D',
+    borderColor:'#006701',
     padding:10,
     backgroundColor:'#fff'
   },
@@ -160,8 +160,8 @@ export const OrderSummaryStyles = StyleSheet.create({
   },
 
   MenuTypeButton:{
-    backgroundColor:'#FA3B3D',
-    width:'50%',
+    backgroundColor:'#006701',
+    width:'98%',
     padding:5,
     borderRadius:10,
     marginBottom:5,
