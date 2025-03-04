@@ -323,13 +323,21 @@ const OrderSummaryScreen = () => {
                                 handleShowHideDishes(CategoryItem.Id)
                               }>
                               <View style={OrderSummaryStyles.CategoryCardBody}>
-                                <View
-                                  style={
-                                    OrderSummaryStyles.CategoriesDetailsContainer
-                                  }>
-                                  <Text style={OrderSummaryStyles.CategoryName}>
-                                    {CategoryItem.CateName}
-                                  </Text>
+                                <View style={OrderSummaryStyles.CategoriesDetailsContainer}>
+                                  <View style={OrderSummaryStyles.CateNameIconContainer}>
+                                    <Text style={OrderSummaryStyles.CategoryName}>
+                                      {CategoryItem.CateName}
+                                    </Text>
+                                    <MCIcons
+                                        name={
+                                          showDishes[CategoryItem.Id]
+                                            ? 'chevron-down'
+                                            : 'chevron-right'
+                                        }
+                                        size={15}
+                                        color="#000"
+                                      />
+                                  </View>
                                   <Text style={OrderSummaryStyles.CategoryCost}>
                                     Rs.{CategoryItem.CateCost}.00 /-
                                   </Text>

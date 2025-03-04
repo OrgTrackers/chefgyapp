@@ -64,7 +64,8 @@ export const OrderSummaryStyles = StyleSheet.create({
     borderRadius:5,
     backgroundColor:'#ffff',
     borderWidth:1,
-    borderColor:'#ccc'
+    borderColor:'#ccc',
+    marginBottom:30
   },
   CateCardBody:{
     padding:10
@@ -106,6 +107,10 @@ export const OrderSummaryStyles = StyleSheet.create({
     justifyContent:'space-between',
     alignItems:'center',
     padding:10
+  },
+  CateNameIconContainer:{
+    flexDirection:'row',
+    alignItems:'center'
   },
   CategoriesDetailsContainer:{
     flexDirection:'row',
