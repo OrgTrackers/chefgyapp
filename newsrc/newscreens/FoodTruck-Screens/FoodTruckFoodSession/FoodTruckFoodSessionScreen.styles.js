@@ -40,6 +40,16 @@ export const FoodTruckFoodSessionStyles = StyleSheet.create({
   },
 
   //cater alloctation
+  FS_Image:{
+    width:Dimensions.get('screen'),
+    height:200
+  },
+  BC_Icon_Allocation_Name:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    gap:5
+  },
   BC_Cater_Allowcation_Container: {
     marginTop: 20,
   },

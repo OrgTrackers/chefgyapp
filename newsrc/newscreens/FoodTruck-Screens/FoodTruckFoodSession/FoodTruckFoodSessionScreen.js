@@ -58,20 +58,35 @@ const FoodTruckFoodSessionScreen = () => {
       <ScrollView
         style={GlobalCss.MainContainer}
         showsVerticalScrollIndicator={false}>
+        <View>
+          <Image
+            source={require('../../../newassets/images/FoodSessions/FS_Main.png')}
+            style={FoodTruckFoodSessionStyles.FS_Image}
+          />
+        </View>
         <View style={FoodTruckFoodSessionStyles.BC_Cater_Allowcation_Container}>
-          <Text style={[GlobalCss.g_SideHeaders]}>Chef Allocation</Text>
+          <Text style={[GlobalCss.g_SideHeaders]}>Cater Allocation</Text>
           {caterAllowcation.map(CA_Item => (
             <View key={CA_Item.Id}>
               <Card style={FoodTruckFoodSessionStyles.BC_Cater_Allowcation_Card}>
                 <View
                   style={FoodTruckFoodSessionStyles.BC_Cater_Allowcation_Card_Content}>
-                  <Text
-                    style={[
+                  <View style={FoodTruckFoodSessionStyles.BC_Icon_Allocation_Name}>
+                    <MCIcons
+                      name={
+                        CA_Item.Name === 'Auto Asign' ? 'cheese' : 'chili-mild'
+                      }
+                      size={20}
+                      color={CA_Item.Name === 'Auto Asign' ? '#FA3B3D' : '#2E770A'}
+                    />
+                    <Text
+                      style={[
                         FoodTruckFoodSessionStyles.BC_CA_Allocation_Text,
-                      GlobalCss.ThemeColor.color,
-                    ]}>
-                    {CA_Item.Name}
-                  </Text>
+                        GlobalCss.ThemeColor.color,
+                      ]}>
+                      {CA_Item.Name}
+                    </Text>
+                  </View>
                   <Switch
                     value={isSwitchOn === CA_Item.Id} // Check if the switch is active
                     onValueChange={() => onToggleSwitch(CA_Item.Id)}
@@ -150,7 +165,7 @@ const FoodTruckFoodSessionScreen = () => {
         <View style={FoodTruckFoodSessionStyles.FooterButtonContainer}>
           <TouchableOpacity
             style={[
-                FoodTruckFoodSessionStyles.FooterButton,
+              FoodTruckFoodSessionStyles.FooterButton,
               GlobalCss.ThemeBackgroundColor,
             ]}
             onPress={() => navigation.navigate('FoodTruckSelectionScreen')}>

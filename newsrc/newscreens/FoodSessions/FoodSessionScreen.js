@@ -59,6 +59,12 @@ const FoodSessionScreen = () => {
       <ScrollView
         style={GlobalCss.MainContainer}
         showsVerticalScrollIndicator={false}>
+        <View>
+          <Image
+            source={require('../../newassets/images/FoodSessions/FS_Main.png')}
+            style={FoodSessionStyles.FS_Image}
+          />
+        </View>
         <View style={FoodSessionStyles.BC_Cater_Allowcation_Container}>
           <Text style={[GlobalCss.g_SideHeaders]}>Cater Allocation</Text>
           {caterAllowcation.map(CA_Item => (
@@ -66,13 +72,22 @@ const FoodSessionScreen = () => {
               <Card style={FoodSessionStyles.BC_Cater_Allowcation_Card}>
                 <View
                   style={FoodSessionStyles.BC_Cater_Allowcation_Card_Content}>
-                  <Text
-                    style={[
-                      FoodSessionStyles.BC_CA_Allocation_Text,
-                      GlobalCss.ThemeColor.color,
-                    ]}>
-                    {CA_Item.Name}
-                  </Text>
+                  <View style={FoodSessionStyles.BC_Icon_Allocation_Name}>
+                    <MCIcons
+                      name={
+                        CA_Item.Name === 'Auto Asign' ? 'cheese' : 'chili-mild'
+                      }
+                      size={20}
+                      color={CA_Item.Name === 'Auto Asign' ? '#FA3B3D' : '#2E770A'}
+                    />
+                    <Text
+                      style={[
+                        FoodSessionStyles.BC_CA_Allocation_Text,
+                        GlobalCss.ThemeColor.color,
+                      ]}>
+                      {CA_Item.Name}
+                    </Text>
+                  </View>
                   <Switch
                     value={isSwitchOn === CA_Item.Id} // Check if the switch is active
                     onValueChange={() => onToggleSwitch(CA_Item.Id)}
