@@ -60,7 +60,7 @@ const ChefFoodSessionScreen = () => {
         showsVerticalScrollIndicator={false}>
         <View>
           <Image
-            source={require('../../../newassets/images/FoodSessions/FS_Main.png')}
+            source={require('../../../newassets/images/FoodSessions/FS_Main.jpg')}
             style={ChefFoodSessionStyles.FS_Image}
           />
         </View>

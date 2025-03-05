@@ -42,8 +42,9 @@ export const ChefFoodSessionStyles = StyleSheet.create({
   //cater alloctation
   FS_Image:{
     width:Dimensions.get('screen'),
-    height:200
-  },
+    height:200,
+    borderRadius:10
+   },
   BC_Icon_Allocation_Name:{
     flexDirection:'row',
     alignItems:'center',
