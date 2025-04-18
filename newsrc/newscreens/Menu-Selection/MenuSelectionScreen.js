@@ -2482,28 +2482,28 @@ const couponsData = [
   { 
     id: 1, 
     brand: 'AMEXFEST', 
-    Image: require('../../newassets/images/Home/HCate-1.jpg'),
+    Image: require('../../newassets/images/Home/HCate-1.webp'),
     discount: '10', 
     validTill: '31 Oct 2024' 
   },
   { 
     id: 2, 
     brand: 'HDFCMEX', 
-    Image: require('../../newassets/images/Home/HCate-1.jpg'),
+    Image: require('../../newassets/images/Home/HCate-1.webp'),
     discount: '20', 
     validTill: '31 Oct 2024' 
   },
   { 
     id: 3, 
     brand: 'ICICIFLO', 
-    Image: require('../../newassets/images/Home/HCate-1.jpg'),
+    Image: require('../../newassets/images/Home/HCate-1.webp'),
     discount: '25', 
     validTill: '31 Oct 2024' 
   },
   { 
     id: 4, 
     brand: 'CREDFEX', 
-    Image: require('../../newassets/images/Home/HCate-1.jpg'),
+    Image: require('../../newassets/images/Home/HCate-1.webp'),
     discount: '25', 
     validTill: '31 Oct 2024' 
   },
