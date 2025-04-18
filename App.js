@@ -86,6 +86,10 @@ import FoodTruckSelectionScreen from './newsrc/newscreens/FoodTruck-Screens/Food
 import FoodTruckMenuSelectionScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckMenuSelections/FoodTruckMenuSelectionScreen';
 import FoodTruckOrderSummaryScreen from './newsrc/newscreens/FoodTruck-Screens/FoodTruckOrderSummary/FoodTruckOrderSummaryScreen';
 
+//New Bidding Screen
+
+import BiddingScreen from './newsrc/newscreens/Bidding/BiddingScreen';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -132,7 +136,7 @@ const App = () => {
     <PaperProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
-          initialRouteName="HomeScreen"
+          initialRouteName="LoginScreen"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -211,6 +215,7 @@ const App = () => {
           <Stack.Screen name="FoodTruckOrderSummaryScreen" component={FoodTruckOrderSummaryScreen} />
 
 
+          <Stack.Screen name="BiddingScreen" component={BiddingScreen} />
           <Stack.Screen name="Splash" component={Splash} />
 
         </Stack.Navigator>

@@ -12,7 +12,7 @@ const FinalScreen = () => {
   const navigation = useNavigation();
   return (
     <ImageBackground
-      source={require('../../newassets/images/login_banner.jpg')}
+      source={require('../../newassets/images/login_banner.webp')}
       style={FinalScreenStyles.MainPageLayout}>
       <View style={FinalScreenStyles.BlurOverlay} />
       <TouchableOpacity style={FinalScreenStyles.PageHeader} onPress={() => navigation.navigate('OrderSummaryScreen')}>

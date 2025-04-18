@@ -22,25 +22,25 @@ const HomeCategory = [
   {
     Id: 1,
     Name: 'Cater',
-    Image: require('../../newassets/images/Home/HCate-1.jpg'),
+    Image: require('../../newassets/images/Home/HCate-1.webp'),
     Rating: 4,
   },
   {
     Id: 2,
     Name: 'Chef',
-    Image: require('../../newassets/images/Home/HCate-2.jpg'),
+    Image: require('../../newassets/images/Home/HCate-2.webp'),
     Rating: 5,
   },
   {
     Id: 3,
     Name: 'Home Food',
-    Image: require('../../newassets/images/Home/HCate-3.jpg'),
+    Image: require('../../newassets/images/Home/HCate-3.webp'),
     Rating: 3,
   },
   {
     Id: 4,
     Name: 'Food Truck',
-    Image: require('../../newassets/images/Home/HCate-4.jpg'),
+    Image: require('../../newassets/images/Home/HCate-4.webp'),
     Rating: 5,
   },
 ];
@@ -93,7 +93,7 @@ const HomeScreen = () => {
         <TouchableOpacity style={HomeScreenStyles.UserDetailsCotainer}>
           <View style={HomeScreenStyles.UserImgNameContainer}>
             <Image
-              source={require('../../newassets/images/user.jpg')}
+              source={require('../../newassets/images/user.webp')}
               style={HomeScreenStyles.UserImg}
             />
             <View>
@@ -117,7 +117,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <View style={HomeScreenStyles.HomeUpdatesContainer}>
           <Image
-            source={require('../../newassets/images/Home/HomeMiddle.jpg')}
+            source={require('../../newassets/images/Home/HomeMiddle.webp')}
             style={HomeScreenStyles.HomeUpdateImage}
           />
           <TouchableOpacity

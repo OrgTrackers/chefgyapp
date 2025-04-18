@@ -60,7 +60,7 @@ const FoodTruckFoodSessionScreen = () => {
         showsVerticalScrollIndicator={false}>
         <View>
           <Image
-            source={require('../../../newassets/images/FoodSessions/FS_Main.jpg')}
+            source={require('../../../newassets/images/FoodSessions/FS_Main.webp')}
             style={FoodTruckFoodSessionStyles.FS_Image}
           />
         </View>

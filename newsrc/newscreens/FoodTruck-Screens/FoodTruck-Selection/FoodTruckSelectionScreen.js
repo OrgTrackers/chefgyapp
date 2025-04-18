@@ -21,7 +21,7 @@ const ChefData = [
     {
       Id: 1,
       Name: 'Andrew Doraz',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Vegan',
       Time: '45 min',
@@ -31,7 +31,7 @@ const ChefData = [
     {
       Id: 2,
       Name: 'Bella Martinez',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Italian',
       Time: '30 min',
@@ -41,7 +41,7 @@ const ChefData = [
     {
       Id: 3,
       Name: 'Carlos Vance',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Mexican',
       Time: '50 min',
@@ -51,7 +51,7 @@ const ChefData = [
     {
       Id: 4,
       Name: 'Diana Lee',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Chinese',
       Time: '40 min',
@@ -61,7 +61,7 @@ const ChefData = [
     {
       Id: 5,
       Name: 'Ethan Cooper',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Indian',
       Time: '55 min',
@@ -71,7 +71,7 @@ const ChefData = [
     {
       Id: 6,
       Name: 'Fiona Bell',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'French',
       Time: '35 min',
@@ -81,7 +81,7 @@ const ChefData = [
     {
       Id: 7,
       Name: 'George Hill',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Mediterranean',
       Time: '25 min',
@@ -91,7 +91,7 @@ const ChefData = [
     {
       Id: 8,
       Name: 'Hannah Singh',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Thai',
       Time: '45 min',
@@ -101,7 +101,7 @@ const ChefData = [
     {
       Id: 9,
       Name: 'Ian Torres',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Japanese',
       Time: '60 min',
@@ -111,7 +111,7 @@ const ChefData = [
     {
       Id: 10,
       Name: 'Julia Kim',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Korean',
       Time: '50 min',

@@ -23,44 +23,44 @@ const Food_SpecData = [
   {
     Id: 1,
     Name: 'Chicken Biryani',
-    Img: require('../../newassets/images/Events/FoodSpec/FS1.jpeg'),
+    Img: require('../../newassets/images/Events/FoodSpec/FS1.webp'),
   },
   {
     Id: 2,
     Name: 'Veg Noodles',
-    Img: require('../../newassets/images/Events/FoodSpec/FS2.jpeg'),
+    Img: require('../../newassets/images/Events/FoodSpec/FS2.webp'),
   },
   {
     Id: 3,
     Name: 'Korean Crab',
-    Img: require('../../newassets/images/Events/FoodSpec/FS3.jpeg'),
+    Img: require('../../newassets/images/Events/FoodSpec/FS3.webp'),
   },
   {
     Id: 4,
     Name: 'Special Chicken Biryani',
-    Img: require('../../newassets/images/Events/FoodSpec/FS4.jpeg'),
+    Img: require('../../newassets/images/Events/FoodSpec/FS4.webp'),
   },
 ];
 
 const Best_CatersData = [
   {
     Id: 1,
-    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.webp'),
     Name: 'Venkateswara Mess',
   },
   {
     Id: 2,
-    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.webp'),
     Name: 'Sri Ragavendra Caters',
   },
   {
     Id: 3,
-    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.webp'),
     Name: 'New Brown Hotel',
   },
   {
     Id: 4,
-    Img: require('../../newassets/images/Events/Best_Cater/Restro.jpg'),
+    Img: require('../../newassets/images/Events/Best_Cater/Restro.webp'),
     Name: 'Sairam Hotel And Mess',
   },
 ];
@@ -72,10 +72,10 @@ const EventsScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    require('../../newassets/images/Events/EV1.jpg'),
-    require('../../newassets/images/Events/EV2.jpg'),
-    require('../../newassets/images/Events/EV3.jpg'),
-    require('../../newassets/images/Events/EV4.jpg'),
+    require('../../newassets/images/Events/EV1.webp'),
+    require('../../newassets/images/Events/EV2.webp'),
+    require('../../newassets/images/Events/EV3.webp'),
+    require('../../newassets/images/Events/EV4.webp'),
   ];
   useEffect(() => {
     const interval = setInterval(() => {

@@ -21,7 +21,7 @@ const CatersData = [
   {
     Id: 1,
     Name: 'Hotel Guntur Subhani',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Vegan',
     Time: '45 min',
@@ -32,7 +32,7 @@ const CatersData = [
   {
     Id: 2,
     Name: 'Royal Spice Diner',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Indian',
     Time: '30 min',
@@ -43,7 +43,7 @@ const CatersData = [
   {
     Id: 3,
     Name: 'The Green Plate',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Organic',
     Time: '40 min',
@@ -54,7 +54,7 @@ const CatersData = [
   {
     Id: 4,
     Name: 'Sunrise Bakery & Cafe',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Bakery',
     Time: '25 min',
@@ -65,7 +65,7 @@ const CatersData = [
   {
     Id: 5,
     Name: 'Mediterranean Feast',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Mediterranean',
     Time: '35 min',
@@ -76,7 +76,7 @@ const CatersData = [
   {
     Id: 6,
     Name: 'Fusion Delight',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Fusion',
     Time: '50 min',
@@ -87,7 +87,7 @@ const CatersData = [
   {
     Id: 7,
     Name: 'Classic Comfort Foods',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'American',
     Time: '20 min',
@@ -98,7 +98,7 @@ const CatersData = [
   {
     Id: 8,
     Name: 'Spice Garden',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Asian',
     Time: '30 min',
@@ -109,7 +109,7 @@ const CatersData = [
   {
     Id: 9,
     Name: 'Tropical Treats',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Tropical',
     Time: '45 min',
@@ -120,7 +120,7 @@ const CatersData = [
   {
     Id: 10,
     Name: 'Urban Eats',
-    Img: require('../../newassets/images/CaterSelection.jpg'),
+    Img: require('../../newassets/images/CaterSelection.webp'),
     RatingIcon: 'star',
     Type: 'Contemporary',
     Time: '50 min',

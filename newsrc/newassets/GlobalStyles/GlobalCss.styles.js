@@ -21,6 +21,7 @@ export const GlobalCss = StyleSheet.create({
         flex:1,
         backgroundColor:'#ffff',
         padding:15
+        
     },
     FooterContainer:{
        flex:0.1,
@@ -47,4 +48,5 @@ export const GlobalCss = StyleSheet.create({
     g_appTextBlack:{
         color:'#000'
     },
+
 })
