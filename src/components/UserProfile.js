@@ -80,7 +80,7 @@ const UserProfile = () => {
     <View style={[globalStyle.g_appDefaultBackground]}>
       <View style={[globalStyle.g_appPageHeaderContainer]}>
         <View style={[globalStyle.g_appPageHeaderIconsContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('FoodSession')}>
+          <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
             <Ionicons
               name="chevron-back"
               size={globalStyle.g_appPageHeaderIconsSize.fontSize}
@@ -102,8 +102,8 @@ const UserProfile = () => {
           />
         </View>
         <View style={styles.User_Pro_Data}>
-          <Text style={styles.User_Pro_Name}>Saicharan Vadlamanu</Text>
-          <Text style={styles.User_Pro_Mail}>Charan.vadlamanu@gmail.com</Text>
+          <Text style={styles.User_Pro_Name}>Virat Kohili</Text>
+          <Text style={styles.User_Pro_Mail}>Virat.Kohili@gmail.com</Text>
           <TouchableOpacity
             style={styles.Edit_Button}
             onPress={() => navigation.navigate('EditUserProfile')}>

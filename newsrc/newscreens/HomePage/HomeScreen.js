@@ -65,11 +65,19 @@ const HomeScreen = () => {
         console.warn('No screen found for this category!');
     }
   };
+  const handleAddressPress = () => {
+  navigation.navigate('SelectLocationScreen');   //AddAddressScreen
+};
+
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
         <View style={HomeScreenStyles.HeaderContent}>
-          <TouchableOpacity style={HomeScreenStyles.AddressContainer}>
+         <TouchableOpacity 
+            style={HomeScreenStyles.AddressContainer}
+            onPress={handleAddressPress}
+            activeOpacity={0.7}
+          >
             <Text style={HomeScreenStyles.AddressHeader}>Your Location</Text>
             <View style={HomeScreenStyles.AddressLine}>
               <MTIcons
@@ -82,6 +90,7 @@ const HomeScreen = () => {
               </Text>
             </View>
           </TouchableOpacity>
+          
           <TouchableOpacity style={HomeScreenStyles.UserContainer}>
             <FaIcons name="bell" size={20} color="#000" />
           </TouchableOpacity>
@@ -92,12 +101,14 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}>
         <TouchableOpacity style={HomeScreenStyles.UserDetailsCotainer}>
           <View style={HomeScreenStyles.UserImgNameContainer}>
-            <Image
-              source={require('../../newassets/images/user.webp')}
-              style={HomeScreenStyles.UserImg}
-            />
+            <TouchableOpacity onPress={()=>navigation.navigate('UserProfile')}>
+                      <Image
+                        source={require('../../newassets/images/user.webp')}
+                         style={HomeScreenStyles.UserImg}
+                      />
+                    </TouchableOpacity>
             <View>
-              <Text style={HomeScreenStyles.UserName}>Charan Vadlamanu</Text>
+              <Text style={HomeScreenStyles.UserName}>Virat Kohili</Text>
               <Text style={HomeScreenStyles.UserTagLine}>Rated New Outlet</Text>
             </View>
           </View>

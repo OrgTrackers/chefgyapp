@@ -90,6 +90,31 @@ import FoodTruckOrderSummaryScreen from './newsrc/newscreens/FoodTruck-Screens/F
 
 import BiddingScreen from './newsrc/newscreens/Bidding/BiddingScreen';
 
+
+import MenuScreen from './newsrc/newscreens/Cloud/Menuscreen';
+import CustomizeScreen from './newsrc/newscreens/Cloud/CustomizeScreen';
+import { CartProvider } from './newsrc/newscreens/Cloud/Usecart';
+
+import CartScreen from './newsrc/newscreens/Cloud/CartScreen';
+import BillSummaryScreen from './newsrc/newscreens/Cloud/BillSummaryScreen';
+import PaymentScreen from './newsrc/newscreens/Cloud/PaymentScreen';
+import OrderSuccessScreen from './newsrc/newscreens/Cloud/OrderSuccessScreen';
+
+
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+// Import all screens
+
+
+
+import EditProfileScreen from './newsrc/newscreens/Address/EditProfileScreen';
+import SelectLocationScreen from './newsrc/newscreens/Address/SelectLocationScreen';
+import AddAddressScreen from './newsrc/newscreens/Address/AddAddressScreen';
+
+
+
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -134,10 +159,11 @@ const App = () => {
 
   return (
     <PaperProvider>
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator
-          initialRouteName="LoginScreen"
-          screenOptions={{ headerShown: false }}>
+      <CartProvider>
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator
+            initialRouteName="HomeScreen"
+            screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="UserProfile" component={UserProfile} />
@@ -217,9 +243,26 @@ const App = () => {
 
           <Stack.Screen name="BiddingScreen" component={BiddingScreen} />
           <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="MenuScreen" component={MenuScreen} />
+
+
+          <Stack.Screen name="CustomizeScreen" component={CustomizeScreen} />
+          <Stack.Screen name="CartScreen" component={CartScreen} />
+          <Stack.Screen name="BillSummaryScreen" component={BillSummaryScreen} />
+          <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+          <Stack.Screen name="OrderSuccessScreen" component={OrderSuccessScreen} />
+
+          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+
+            
+        <Stack.Screen name ="AddAddressScreen"component={AddAddressScreen} />
+         <Stack.Screen name ="SelectLocationScreen"component={SelectLocationScreen} />
+
+
 
         </Stack.Navigator>
       </NavigationContainer>
+      </CartProvider>
     </PaperProvider>
   );
 };
