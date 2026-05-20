@@ -39,6 +39,12 @@ const HomeCategory = [
   },
   {
     Id: 4,
+    Name: 'Cloud Kitchen',
+    Image: require('../../newassets/images/Home/HCate-4.webp'),
+    Rating: 5,
+  },
+  {
+    Id: 5,
     Name: 'Food Truck',
     Image: require('../../newassets/images/Home/HCate-4.webp'),
     Rating: 5,
@@ -57,6 +63,9 @@ const HomeScreen = () => {
         break;
       case 'Home Food':
         navigation.navigate('HomeFoodEventsScreen');
+        break;
+      case 'Cloud Kitchen':
+        navigation.navigate('MenuScreen');
         break;
       case 'Food Truck':
         navigation.navigate('FoodTruckEventsScreen');

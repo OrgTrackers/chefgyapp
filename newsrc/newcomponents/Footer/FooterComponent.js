@@ -35,6 +35,12 @@ const FooterItems = [
   },
   {
     Id: 5,
+    Name: 'Cloud Kitchen',
+     InActiveIcon: 'chef-hat',
+    ActiveIcon: 'chef-hat',
+  },
+  {
+    Id: 6,
     Name: 'Food Truck',
     InActiveIcon: 'truck-fast-outline',
     ActiveIcon: 'truck-fast',
