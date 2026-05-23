@@ -13,10 +13,11 @@ const Signup = () => {
     const handleSignUp = async () => {
         const objUser =
         {
-            "username": fullName,
-            "mobileNumber": phoneNumber,
+            "name": fullName,
+            "fullname": fullName,
+            "mobilenumber": phoneNumber,
             "email": email,
-            "type": 18
+            "usertypeid": 1
         }
         console.log(objUser)
         try {

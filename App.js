@@ -162,7 +162,7 @@ const App = () => {
       <CartProvider>
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
-            initialRouteName="HomeScreen"
+            initialRouteName="Signup"
             screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
