@@ -8,7 +8,7 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleSignIn = async () => {
-    const userObj = { mobileNumber: phoneNumber };
+    const userObj = { mobilenumber: phoneNumber };
     try {
       const response = await userService.LoginUserOTP(userObj);
       console.log(response)

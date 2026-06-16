@@ -170,7 +170,9 @@ const App = () => {
       <CartProvider>
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
-            initialRouteName="VendorListScreen"
+
+            initialRouteName="Splash"
+
             screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
