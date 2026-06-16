@@ -17,12 +17,17 @@ export function CartProvider({ children }) {
   // Use ref to avoid stale closures in callbacks
   const cartRef = useRef({});
   const [cartVersion, setCartVersion] = useState(0); // Force re-renders
-  
+
   // Derive cart items array from the ref (always fresh)
   const cart = cartRef.current;
   const cartItems = Object.values(cart).filter(item => item && item.qty > 0);
   const itemCount = cartItems.reduce((sum, item) => sum + (item.qty || 0), 0);
+
   const cartTotal = cartItems.reduce((sum, item) => {
+    // Handle custom doughnut box pricing
+    if (item.isCustomBox && item.finalPrice) {
+      return sum + item.finalPrice;
+    }
     const addonsTotal = (item.selectedAddons || []).reduce((a, add) => a + (add.p || 0), 0);
     return sum + ((item.price || 0) + addonsTotal) * (item.qty || 0);
   }, 0);
@@ -42,14 +47,22 @@ export function CartProvider({ children }) {
     const delta = Math.max(1, qty);
 
     if (existing) {
-      cartRef.current = {
-        ...current,
-        [item.id]: {
-          ...existing,
-          qty: (existing.qty || 0) + delta,
-          selectedAddons: addons.length > 0 ? addons : (existing.selectedAddons || []),
-        },
-      };
+      // For custom boxes, replace; for normal items, increment
+      if (item.isCustomBox) {
+        cartRef.current = {
+          ...current,
+          [item.id]: { ...item, qty: delta },
+        };
+      } else {
+        cartRef.current = {
+          ...current,
+          [item.id]: {
+            ...existing,
+            qty: (existing.qty || 0) + delta,
+            selectedAddons: addons.length > 0 ? addons : (existing.selectedAddons || []),
+          },
+        };
+      }
     } else {
       cartRef.current = {
         ...current,
@@ -62,7 +75,7 @@ export function CartProvider({ children }) {
     }
 
     triggerUpdate();
-    console.log('Added to cart:', item.name, 'qty:', delta, 'Cart now:', cartRef.current);
+    console.log('Added to cart:', item.name, 'qty:', delta);
   }, [triggerUpdate]);
 
   const updateItem = useCallback((item, addons = [], qty = 1) => {
@@ -89,7 +102,6 @@ export function CartProvider({ children }) {
     }
 
     triggerUpdate();
-    console.log('Updated cart item:', item.name, 'qty:', normalizedQty, 'Cart now:', cartRef.current);
   }, [triggerUpdate]);
 
   const changeQty = useCallback((itemId, delta) => {
@@ -115,7 +127,6 @@ export function CartProvider({ children }) {
     }
 
     triggerUpdate();
-    console.log('Changed qty:', itemId, 'to', newQty, 'Cart:', cartRef.current);
   }, [triggerUpdate]);
 
   const removeItem = useCallback((itemId) => {
@@ -154,7 +165,7 @@ export function CartProvider({ children }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  
+
   if (!context) {
     console.error('useCart must be used inside CartProvider!');
     return {
@@ -169,6 +180,6 @@ export function useCart() {
       getQty: () => 0,
     };
   }
-  
+
   return context;
 }

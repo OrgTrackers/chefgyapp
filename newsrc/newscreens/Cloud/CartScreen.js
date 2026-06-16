@@ -15,9 +15,8 @@ const GST_RATE = 0.05;
 const PLATFORM_FEE = 5;
 
 export default function CartScreen({ navigation }) {
-  // CRITICAL FIX: Use cartItems directly from context instead of Object.values(cart)
   const { cartItems, itemCount, clearCart, changeQty } = useCart();
-  
+
   const [isDelivery, setIsDelivery] = useState(true);
   const [promoCode, setPromoCode] = useState('');
   const [promoApplied, setPromoApplied] = useState(false);
@@ -25,6 +24,10 @@ export default function CartScreen({ navigation }) {
 
   const calculations = useMemo(() => {
     const subtotal = cartItems.reduce((sum, item) => {
+      // Handle custom doughnut box
+      if (item.isCustomBox && item.finalPrice) {
+        return sum + item.finalPrice;
+      }
       const itemPrice = item?.price || 0;
       const itemQty = item?.qty || 0;
       const addons = item?.selectedAddons || [];
@@ -73,7 +76,7 @@ export default function CartScreen({ navigation }) {
           <Text style={styles.headerTitle}>Your Cart</Text>
           <View style={{ width: 40 }} />
         </View>
-        
+
         <View style={styles.emptyState}>
           <Text style={styles.emptyEmoji}>🛒</Text>
           <Text style={styles.emptyTitle}>Your cart is empty</Text>
@@ -124,7 +127,7 @@ export default function CartScreen({ navigation }) {
               🛵 Delivery
             </Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             onPress={() => setIsDelivery(false)}
             style={[styles.pill, !isDelivery && styles.pillActive]}
@@ -142,30 +145,86 @@ export default function CartScreen({ navigation }) {
         <Text style={[styles.pillText, !isDelivery && styles.pillTextActive]}>
         🎁 Add More Items
         </Text>
-        
+
         </TouchableOpacity>
-
-
-
         </View>
 
-        {/* Cart Items - Use cartItems directly from context */}
+        {/* Cart Items */}
         <View style={styles.itemsSection}>
           {cartItems.map((item) => {
             if (!item || !item.id) return null;
-            
+
+            // Handle Doughnut Box display
+            if (item.isCustomBox) {
+              const doughnutNames = Object.values(item.selectedDoughnuts || {})
+                .map(d => d.name)
+                .join(', ');
+              const dipNames = (item.selectedDips || [])
+                .map(d => d.name)
+                .join(', ');
+
+              return (
+                <View key={item.id} style={styles.itemCard}>
+                  <View style={styles.itemRow}>
+                    <View style={[styles.itemImage, { backgroundColor: '#FFE4E1' }]}>
+                      <Text style={styles.itemEmoji}>🍩</Text>
+                    </View>
+
+                    <View style={styles.itemBody}>
+                      <Text style={styles.itemName} numberOfLines={1}>
+                        {item.name || 'Custom Doughnut Box'}
+                      </Text>
+                      <View style={styles.itemTags}>
+                        <View style={[styles.tag, styles.tagVeg]}>
+                          <Text style={[styles.tagText, styles.tagVegText]}>VEG</Text>
+                        </View>
+                        <Text style={styles.saveBadge}>Custom Box</Text>
+                      </View>
+
+                      <Text style={styles.addonText} numberOfLines={2}>
+                        🍩 {doughnutNames}
+                      </Text>
+                      {dipNames ? (
+                        <Text style={styles.addonText}>🫗 Dips: {dipNames}</Text>
+                      ) : null}
+
+                      <View style={styles.itemFooter}>
+                        <Text style={styles.itemPrice}>₹{item.finalPrice || item.price}</Text>
+                        <View style={styles.qtyRow}>
+                          <TouchableOpacity 
+                            style={[styles.qtyBtn, styles.qtyMinus]}
+                            onPress={() => changeQty(item.id, -1)}
+                          >
+                            <Text style={styles.qtyBtnText}>−</Text>
+                          </TouchableOpacity>
+                          <Text style={styles.qtyNum}>{item.qty || 0}</Text>
+                          <TouchableOpacity 
+                            style={[styles.qtyBtn, styles.qtyPlus]}
+                            onPress={() => changeQty(item.id, 1)}
+                          >
+                            <Text style={styles.qtyBtnText}>+</Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              );
+            }
+
+            // Normal items
             const addonNames = (item.selectedAddons || [])
               .filter(a => a && a.n)
               .map(a => a.n)
               .join(', ');
-            
+
             return (
               <View key={item.id} style={styles.itemCard}>
                 <View style={styles.itemRow}>
                   <View style={styles.itemImage}>
                     <Text style={styles.itemEmoji}>{item.emoji || '🍽️'}</Text>
                   </View>
-                  
+
                   <View style={styles.itemBody}>
                     <Text style={styles.itemName} numberOfLines={1}>
                       {item.name || 'Unknown Item'}
@@ -183,7 +242,7 @@ export default function CartScreen({ navigation }) {
                     {addonNames ? (
                       <Text style={styles.addonText}>+ {addonNames}</Text>
                     ) : null}
-                    
+
                     <View style={styles.itemFooter}>
                       <Text style={styles.itemPrice}>₹{item.price || 0}</Text>
                       <View style={styles.qtyRow}>
@@ -218,7 +277,7 @@ export default function CartScreen({ navigation }) {
               <Text style={styles.offerSub}>Use RASA20 to save 20% on first order</Text>
             </View>
           </View>
-          
+
           {!promoApplied ? (
             <View style={styles.promoInputRow}>
               <TextInput
@@ -354,7 +413,7 @@ const styles = StyleSheet.create({
   qtyBtnText: { fontSize: 14, fontFamily: Fonts.bodyBold, color: '#fff' },
   qtyNum: { fontSize: 14, fontFamily: Fonts.bodyXB, color: Colors.gold, minWidth: 20, textAlign: 'center' },
   promoSection: { paddingHorizontal: Spacing.lg, paddingBottom: 12 },
-  offerStrip: { backgroundColor: 'rgba(255,76,41,0.1)', borderWidth: 1, borderColor: 'rgba(255,76,41,0.2)', borderRadius: 12, padding: 10, flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
+  offerStrip: { backgroundColor: 'rgba(255,76,41,0.1)', borderWidth: 1, borderColor: 'rgba(255,140,60,0.2)', borderRadius: 12, padding: 10, flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
   offerIcon: { fontSize: 14 },
   offerTitle: { fontSize: 12, fontFamily: Fonts.bodyBold, color: Colors.text },
   offerSub: { fontSize: 11, color: Colors.muted },

@@ -1,11 +1,13 @@
 // ─── Rasa Kitchen — Menu Data ─────────────────────────────────────────────────
 
 export const CATEGORIES = [
+  { id: 'dnb', label: 'Customize',  icon: '🍩', gradientKey: 'dnb', dot: '#FF6B00' },
   { id: 'sc',  label: 'South Curries', icon: '🍛', gradientKey: 'sc',  dot: '#FF8C42' },
   { id: 'fry', label: 'Fry Curries',   icon: '🥘', gradientKey: 'fry', dot: '#B86FFF' },
   { id: 'hp',  label: 'Hand Picked',   icon: '⭐', gradientKey: 'hp',  dot: '#F5C84A' },
   { id: 'bir', label: 'Rice & Biryani',icon: '🍚', gradientKey: 'bir', dot: '#42B883' },
   { id: 'cmb', label: 'Combo Deals',   icon: '🎁', gradientKey: 'cmb', dot: '#4A9FFF' },
+  
 ];
 
 export const MENU_ITEMS = {
@@ -193,6 +195,134 @@ export const MENU_ITEMS = {
       addons: [{ n: 'Buttermilk', p: 30 }],
       cal: 1020, savings: 91, combo: true,
     },
+  ],
+  // ─── Doughnut Box Category ───────────────────────────────────────────────
+  dnb: [
+    {
+      id: 'dn1',
+      name: 'Premium Mix Doughnuts (Box of 6)',
+      emoji: '🍩',
+      price: 596,
+      veg: true,
+      spice: 0,
+      desc: 'Choose any 6 premium doughnuts from our selection. Includes dips!',
+      addons: [],
+      cal: 1800,
+      pop: true,
+      special: true,
+      isDoughnutBox: true,  // ← Flag to trigger DoughnutBoxScreen
+      boxSize: 6,
+      basePrice: 596,
+    },
+    {
+      id: 'dn2',
+      name: 'Chocolate Glazed Doughnuts - Box of 3',
+      emoji: '🍫',
+      price: 249,
+      veg: true,
+      spice: 0,
+      desc: 'Classic chocolate glazed doughnuts, freshly made daily',
+      addons: [],
+      cal: 850,
+      pop: false,
+    },
+    {
+      id: 'dn3',
+      name: 'Hersheys Chocomania Doughnut (6)',
+      emoji: '🍩',
+      price: 599,
+      veg: true,
+      spice: 0,
+      desc: 'Hersheys chocolate craving special edition box',
+      addons: [],
+      cal: 1950,
+      pop: true,
+      special: true,
+    },
+  ],
+};
+
+// ─── Doughnut Box Configuration Data ──────────────────────────────────────────
+export const DOUGHNUT_BOX_CONFIG = {
+  boxSize: 6,
+  basePrice: 596,
+  dipPrice: 40,
+  maxDips: 3,
+  sections: [
+    {
+      step: 1,
+      title: 'Choose your 1st Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd1_1', name: 'Chocolate Iced Glazed Sprinkle Doughnut', emoji: '🍩' },
+        { id: 'd1_2', name: 'Double Chocolate Cake', emoji: '🍫' },
+        { id: 'd1_3', name: 'Chocolate Iced Glazed Doughnut', emoji: '🍩' },
+        { id: 'd1_4', name: 'Tiramisu', emoji: '☕' },
+        { id: 'd1_5', name: 'Mango Masti Doughnut', emoji: '🥭' },
+      ],
+    },
+    {
+      step: 2,
+      title: 'Choose your 2nd Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd2_1', name: 'CHOCOLATE CHEESECAKE DOUGHNUT', emoji: '🧀' },
+        { id: 'd2_2', name: 'Chocolate Iced Glazed Sprinkle Doughnut', emoji: '🍩' },
+        { id: 'd2_3', name: 'Mango Masti Doughnut', emoji: '🥭' },
+        { id: 'd2_4', name: 'Double Chocolate Cake', emoji: '🍫' },
+        { id: 'd2_5', name: 'Powdered Strawberry Doughnut', emoji: '🍓' },
+      ],
+    },
+    {
+      step: 3,
+      title: 'Choose your 3rd Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd3_1', name: 'Tiramisu', emoji: '☕' },
+        { id: 'd3_2', name: 'Mango Masti Doughnut', emoji: '🥭' },
+        { id: 'd3_3', name: 'CHOCOLATE COOKIE AND CREAM DOUGHNUT', emoji: '🍪' },
+        { id: 'd3_4', name: 'Chocolate Dream Cake', emoji: '🍰' },
+        { id: 'd3_5', name: 'Chocolate Iced Glazed Doughnut', emoji: '🍩' },
+      ],
+    },
+    {
+      step: 4,
+      title: 'Choose your 4th Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd4_1', name: 'Candy Krumbs', emoji: '🍬' },
+        { id: 'd4_2', name: 'Powdered Strawberry Doughnut', emoji: '🍓' },
+        { id: 'd4_3', name: 'Chocolate Dream Cake', emoji: '🍰' },
+        { id: 'd4_4', name: 'Choco Krunch Made with KitKat', emoji: '🍫' },
+        { id: 'd4_5', name: 'CHOCOLATE CHEESECAKE DOUGHNUT', emoji: '🧀' },
+      ],
+    },
+    {
+      step: 5,
+      title: 'Choose your 5th Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd5_1', name: 'Double Chocolate Cake', emoji: '🍫' },
+        { id: 'd5_2', name: 'Chocolate Iced Glazed Doughnut', emoji: '🍩' },
+        { id: 'd5_3', name: 'CHOCOLATE COOKIE AND CREAM DOUGHNUT', emoji: '🍪' },
+        { id: 'd5_4', name: 'Powdered Strawberry Doughnut', emoji: '🍓' },
+        { id: 'd5_5', name: 'Choco Krunch Made with KitKat', emoji: '🍫' },
+      ],
+    },
+    {
+      step: 6,
+      title: 'Choose your 6th Doughnut',
+      subtitle: 'Select any 1',
+      choices: [
+        { id: 'd6_1', name: 'Surprise Me!', emoji: '🎁', available: false, unavailableText: 'Unavailable at the moment' },
+        { id: 'd6_2', name: 'Original Glazed Doughnut', emoji: '🍩' },
+      ],
+    },
+  ],
+  dips: [
+    { id: 'dip_1', name: 'Chocolate Dip', price: 40 },
+    { id: 'dip_2', name: 'Caramel Dip', price: 40 },
+    { id: 'dip_3', name: 'Strawberry Dip', price: 40 },
   ],
 };
 

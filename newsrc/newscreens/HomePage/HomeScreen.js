@@ -39,7 +39,7 @@ const HomeCategory = [
   },
   {
     Id: 4,
-    Name: 'Cloud Kitchen',
+    Name: 'Cloud',
     Image: require('../../newassets/images/Home/HCate-4.webp'),
     Rating: 5,
   },

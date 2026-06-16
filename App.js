@@ -95,10 +95,12 @@ import MenuScreen from './newsrc/newscreens/Cloud/Menuscreen';
 import CustomizeScreen from './newsrc/newscreens/Cloud/CustomizeScreen';
 import { CartProvider } from './newsrc/newscreens/Cloud/Usecart';
 
-import CartScreen from './newsrc/newscreens/Cloud/CartScreen';
+//import CartScreen from './newsrc/newscreens/Cloud/CartScreen';
 import BillSummaryScreen from './newsrc/newscreens/Cloud/BillSummaryScreen';
 import PaymentScreen from './newsrc/newscreens/Cloud/PaymentScreen';
 import OrderSuccessScreen from './newsrc/newscreens/Cloud/OrderSuccessScreen';
+import DoughnutBoxScreen from './newsrc/newscreens/Cloud/DoughnutBoxScreen';
+
 
 
 
@@ -113,6 +115,11 @@ import SelectLocationScreen from './newsrc/newscreens/Address/SelectLocationScre
 import AddAddressScreen from './newsrc/newscreens/Address/AddAddressScreen';
 
 
+import VendorListScreen from './newsrc/newscreens/CgCloud/VendorListScreen';
+import VendorMenuScreen from './newsrc/newscreens/CgCloud/VendorMenuScreen';
+import CartScreen from './newsrc/newscreens/CgCloud/CartScreen';
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -120,6 +127,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const [backPressed, setBackPressed] = useState(0);
   const navigationRef = useRef(null); // Use a ref for the navigation container
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     let update = true;
@@ -162,7 +170,7 @@ const App = () => {
       <CartProvider>
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
-            initialRouteName="HomeScreen"
+            initialRouteName="VendorListScreen"
             screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
@@ -247,16 +255,46 @@ const App = () => {
 
 
           <Stack.Screen name="CustomizeScreen" component={CustomizeScreen} />
-          <Stack.Screen name="CartScreen" component={CartScreen} />
+          {/* <Stack.Screen name="CartScreen" component={CartScreen} /> */}
           <Stack.Screen name="BillSummaryScreen" component={BillSummaryScreen} />
           <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
           <Stack.Screen name="OrderSuccessScreen" component={OrderSuccessScreen} />
 
           <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
 
+           <Stack.Screen name="DoughnutBoxScreen" component={DoughnutBoxScreen} />
             
         <Stack.Screen name ="AddAddressScreen"component={AddAddressScreen} />
          <Stack.Screen name ="SelectLocationScreen"component={SelectLocationScreen} />
+
+           <Stack.Screen name="VendorListScreen">
+             {(props) => (
+               <VendorListScreen
+                 {...props}
+                 cart={cart}
+                 onViewCart={() => props.navigation.navigate('CartScreen')}
+               />
+             )}
+           </Stack.Screen>
+           <Stack.Screen name="VendorMenuScreen">
+             {(props) => (
+               <VendorMenuScreen
+                 {...props}
+                 cart={cart}
+                 setCart={setCart}
+                 onViewCart={() => props.navigation.navigate('CartScreen')}
+               />
+             )}
+           </Stack.Screen>
+           <Stack.Screen name="CartScreen">
+             {(props) => (
+               <CartScreen
+                 {...props}
+                 cart={cart}
+                 setCart={setCart}
+               />
+             )}
+           </Stack.Screen>
 
 
 

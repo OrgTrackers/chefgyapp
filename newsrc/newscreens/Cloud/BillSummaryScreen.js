@@ -27,6 +27,55 @@ export default function BillSummaryScreen({ navigation, route }) {
     });
   }, [finalTotal, calculations.saved, navigation]);
 
+  // Helper to render item details
+  const renderItemDetails = (item) => {
+    if (item.isCustomBox) {
+      const doughnutNames = Object.values(item.selectedDoughnuts || {})
+        .map(d => d.name)
+        .join(', ');
+      const dipNames = (item.selectedDips || [])
+        .map(d => d.name)
+        .join(', ');
+
+      return (
+        <View>
+          <Text style={styles.billItemName}>{item.name}</Text>
+          <Text style={styles.billItemAddon} numberOfLines={2}>
+            🍩 {doughnutNames}
+          </Text>
+          {dipNames ? (
+            <Text style={styles.billItemAddon}>🫗 Dips: {dipNames}</Text>
+          ) : null}
+          <Text style={styles.billItemQty}>Qty: {item.qty}</Text>
+        </View>
+      );
+    }
+
+    const addonNames = (item.selectedAddons || [])
+      .filter(a => a && a.n)
+      .map(a => a.n)
+      .join(', ');
+
+    return (
+      <View>
+        <Text style={styles.billItemName}>{item.name}</Text>
+        {addonNames ? (
+          <Text style={styles.billItemAddon}>+ {addonNames}</Text>
+        ) : null}
+        <Text style={styles.billItemQty}>Qty: {item.qty}</Text>
+      </View>
+    );
+  };
+
+  // Helper to get item total price
+  const getItemTotal = (item) => {
+    if (item.isCustomBox && item.finalPrice) {
+      return item.finalPrice;
+    }
+    const addonTotal = (item.selectedAddons || []).reduce((a, add) => a + (add.p || 0), 0);
+    return (item.price + addonTotal) * item.qty;
+  };
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -54,7 +103,7 @@ export default function BillSummaryScreen({ navigation, route }) {
               <Text style={styles.stepSub}>Items added</Text>
             </View>
           </View>
-          
+
           <View style={styles.stepLast}>
             <View style={styles.stepIconActive}>
               <Text style={styles.stepIconTextActive}>2</Text>
@@ -71,9 +120,8 @@ export default function BillSummaryScreen({ navigation, route }) {
           <Text style={styles.sectionTitle}>Order Items</Text>
           <View style={styles.card}>
             {cartItems.map((item, index) => {
-              const addonTotal = (item.selectedAddons || []).reduce((a, add) => a + add.p, 0);
-              const itemTotal = (item.price + addonTotal) * item.qty;
-              
+              const itemTotal = getItemTotal(item);
+
               return (
                 <View 
                   key={item.id} 
@@ -83,15 +131,11 @@ export default function BillSummaryScreen({ navigation, route }) {
                   ]}
                 >
                   <View style={styles.billItemLeft}>
-                    <Text style={styles.billItemEmoji}>{item.emoji}</Text>
-                    <View>
-                      <Text style={styles.billItemName}>{item.name}</Text>
-                      {item.selectedAddons?.length > 0 && (
-                        <Text style={styles.billItemAddon}>
-                          + {(item.selectedAddons || []).map(a => a.n).join(', ')}
-                        </Text>
-                      )}
-                      <Text style={styles.billItemQty}>Qty: {item.qty}</Text>
+                    <Text style={styles.billItemEmoji}>
+                      {item.isCustomBox ? '🍩' : (item.emoji || '🍽️')}
+                    </Text>
+                    <View style={{ flex: 1 }}>
+                      {renderItemDetails(item)}
                     </View>
                   </View>
                   <Text style={styles.billItemPrice}>₹{itemTotal}</Text>
@@ -110,7 +154,7 @@ export default function BillSummaryScreen({ navigation, route }) {
               <View style={styles.addressBody}>
                 <Text style={styles.addressTitle}>Home</Text>
                 <Text style={styles.addressText}>
-                  42, Jubilee Hills Road No. 36{'\n'}
+                  42, Jubilee Hills Road No. 36{''}
                   Hyderabad, Telangana 500033
                 </Text>
               </View>
@@ -129,45 +173,45 @@ export default function BillSummaryScreen({ navigation, route }) {
               <Text style={styles.billLabel}>Item Total</Text>
               <Text style={styles.billValue}>₹{calculations.subtotal}</Text>
             </View>
-            
+
             {calculations.promoDiscount > 0 && (
               <View style={styles.billRow}>
                 <Text style={styles.billLabelGreen}>Promo (RASA20)</Text>
                 <Text style={styles.billValueGreen}>−₹{calculations.promoDiscount}</Text>
               </View>
             )}
-            
+
             {calculations.comboSavings > 0 && (
               <View style={styles.billRow}>
                 <Text style={styles.billLabelGreen}>Combo Savings</Text>
                 <Text style={styles.billValueGreen}>−₹{calculations.comboSavings}</Text>
               </View>
             )}
-            
+
             <View style={styles.billRow}>
               <Text style={styles.billLabel}>Delivery Fee</Text>
               <Text style={calculations.deliveryFee === 0 ? styles.billValueGreen : styles.billValue}>
                 {calculations.deliveryFee === 0 ? 'FREE' : `₹${calculations.deliveryFee}`}
               </Text>
             </View>
-            
+
             <View style={styles.billRow}>
               <Text style={styles.billLabel}>GST (5%)</Text>
               <Text style={styles.billValue}>₹{calculations.gst}</Text>
             </View>
-            
+
             <View style={styles.billRow}>
               <Text style={styles.billLabel}>Platform Fee</Text>
               <Text style={styles.billValue}>₹5</Text>
             </View>
-            
+
             <View style={styles.divider} />
-            
+
             <View style={styles.totalRow}>
               <Text style={styles.totalLabel}>To Pay</Text>
               <Text style={styles.totalValue}>₹{calculations.total}</Text>
             </View>
-            
+
             {calculations.saved > 0 && (
               <Text style={styles.savedText}>
                 You saved ₹{calculations.saved} on this order!
@@ -340,12 +384,13 @@ const styles = StyleSheet.create({
   },
   billItemLeft: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 10,
     flex: 1,
   },
   billItemEmoji: {
     fontSize: 22,
+    marginTop: 2,
   },
   billItemName: {
     fontSize: 13,
@@ -356,6 +401,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.muted,
     marginTop: 2,
+    lineHeight: 16,
   },
   billItemQty: {
     fontSize: 11,
@@ -366,6 +412,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Fonts.bodyBold,
     color: Colors.gold,
+    marginLeft: 8,
   },
 
   // Address

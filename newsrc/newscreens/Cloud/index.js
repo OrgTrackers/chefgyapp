@@ -46,6 +46,48 @@ export const Colors = {
   heroOverlay:'rgba(0,0,0,0.12)',
 };
 
+// ─── Light Theme Colors (for DoughnutBox, etc.) ──────────────────────────────
+export const LightColors = {
+  // Brand
+  primary:      '#3D9B6D',       // Swiggy green (veg icon, ADD button border, rating)
+  primaryDark:  '#2E7D56',
+  accent:       '#FC8019',       // Swiggy orange (ADD button text, bestseller, offers)
+  accentLight:  'rgba(252,128,25,0.1)',
+
+  // Backgrounds
+  bg:           '#FFFFFF',       // pure white page bg
+  surface:      '#FFFFFF',
+  surface2:     '#F8F8F8',
+  divider:      '#E9E9EB',
+  border:       'rgba(0,0,0,0.08)',
+
+  // Text
+  text:         '#1C1C1C',       // section headers, item names
+  textSecondary:'#686B78',       // muted body copy, serves/description
+  textMuted:    '#93959F',       // strikethrough price, hints
+  textDisabled: '#BABABF',
+
+  // Semantic
+  veg:          '#3D9B6D',       // green square veg dot
+  vegBg:        'rgba(61,155,109,0.08)',
+  vegBorder:    'rgba(61,155,109,0.25)',
+
+  unavailable:  '#FC8019',
+  unavailableBg:'rgba(252,128,25,0.08)',
+
+  // Offer pill (e.g. ₹539 | Order above ₹900)
+  offerBg:      '#FFF3EA',
+  offerText:    '#FC8019',
+
+  // Rating
+  ratingBg:     '#3D9B6D',
+  ratingText:   '#FFFFFF',
+
+  // Overlays
+  overlay:      'rgba(0,0,0,0.5)',
+  backdrop:     'rgba(0,0,0,0.4)',
+};
+
 export const Fonts = {
   // Use react-native-google-fonts or expo-font to load these
   display:  'PlayfairDisplay-Bold',       // Playfair Display 700
@@ -94,8 +136,8 @@ export const Shadow = {
 };
 
 export const GradientColors = {
-  spice:     ['#FF4C29', '#FF8C42'],
-  spiceDeep: ['#C93E0A', '#FF4C29'],
+  spice:     ['#FF8C42', '#FF8C42'],
+  spiceDeep: ['#FF8C42', '#FF8C42'],
   heroVeg:   ['#0A1A0A', '#0F2D0F'],
   heroNveg:  ['#1A0A00', '#2D1200'],
   hero:      ['#1A0A00', '#2D1200', '#1A0A18'],

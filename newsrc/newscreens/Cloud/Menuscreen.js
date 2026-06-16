@@ -1,71 +1,79 @@
-// ─── MenuScreen ───────────────────────────────────────────────────────────────
+
+
+
 import React, { useState, useMemo, useRef, useCallback } from 'react';
 import {
   View, Text, FlatList, TouchableOpacity, TextInput, StyleSheet, Animated,
   Modal, Alert, KeyboardAvoidingView, Platform,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { Colors, Fonts, Spacing, Radius, Shadow } from '../../newscreens/Cloud/index';
+import { LightColors, Fonts, Spacing, Radius, Shadow } from '../../newscreens/Cloud/index';
 import { CATEGORIES, MENU_ITEMS } from '../../newscreens/Cloud/Menudata';
 import { Tag, SpiceDots, QtyControl, AddButton, BackButton } from '../../newscreens/Cloud/Shared';
 import { useCart } from './Usecart';
 
+// Use LightColors (Swiggy-style) as the active palette
+const C = LightColors;
+
 const FILTERS = [
-  { key: 'all', label: 'All' },
-  { key: 'veg', label: '🌿 Veg' },
+  { key: 'all',  label: 'All' },
+  { key: 'veg',  label: '🌿 Veg' },
   { key: 'nveg', label: '🍗 Non-Veg' },
-  { key: 'pop', label: '⭐ Popular' },
+  { key: 'pop',  label: '⭐ Popular' },
 ];
 
 // ─── Category Tab ─────────────────────────────────────────────────────────────
 function CategoryTab({ category, active, onPress, style }) {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={style}>
-      {active ? (
-        <LinearGradient
-          colors={[Colors.spice, '#FF8C42']}
-          start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-          style={tabStyles.wrap}
-        >
-          <Text style={[tabStyles.label, { color: '#fff' }]}>
-            {category.icon} {category.label}
-          </Text>
-        </LinearGradient>
-      ) : (
-        <View style={[tabStyles.wrap, tabStyles.inactive]}>
-          <Text style={[tabStyles.label, { color: Colors.muted }]}>
-            {category.icon} {category.label}
-          </Text>
-        </View>
-      )}
+    <TouchableOpacity onPress={onPress} activeOpacity={0.75} style={style}>
+      <View style={[
+        tabStyles.wrap,
+        active ? tabStyles.wrapActive : tabStyles.wrapInactive,
+      ]}>
+        <Text style={[
+          tabStyles.label,
+          active ? tabStyles.labelActive : tabStyles.labelInactive,
+        ]}>
+          {category.icon} {category.label}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 }
+
 const tabStyles = StyleSheet.create({
   wrap: {
-    height: 42,
-    paddingHorizontal: 16,
-    borderRadius: 24,
+    height: 36,
+    paddingHorizontal: 14,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  inactive: {
-    backgroundColor: Colors.card,
     borderWidth: 1,
-    borderColor: Colors.cardBorder,
+  },
+  wrapActive: {
+    backgroundColor: '#FFF3EA',
+    borderColor: C.accent,
+  },
+  wrapInactive: {
+    backgroundColor: C.bg,
+    borderColor: C.divider,
   },
   label: {
     fontSize: 13,
-    fontFamily: Fonts.bodyBold,
-    color: Colors.text,
+    fontFamily: Fonts.bodySemi,
+  },
+  labelActive: {
+    color: C.accent,
+  },
+  labelInactive: {
+    color: C.textSecondary,
   },
 });
 
 // ─── Menu Item Card ───────────────────────────────────────────────────────────
 function MenuItemCard({ item, qty, onAdd, onIncrement, onDecrement, onPress, onEdit, onDelete }) {
   const scale = useRef(new Animated.Value(1)).current;
-  const pressIn  = () => Animated.spring(scale, { toValue: 0.98, useNativeDriver: true }).start();
-  const pressOut = () => Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
+  const pressIn  = () => Animated.spring(scale, { toValue: 0.99, useNativeDriver: true }).start();
+  const pressOut = () => Animated.spring(scale, { toValue: 1,    useNativeDriver: true }).start();
 
   return (
     <Animated.View style={[micStyles.card, { transform: [{ scale }] }]}>
@@ -73,54 +81,94 @@ function MenuItemCard({ item, qty, onAdd, onIncrement, onDecrement, onPress, onE
         onPress={onPress} onPressIn={pressIn} onPressOut={pressOut}
         activeOpacity={1}
       >
-        <View style={micStyles.inner}>
-          {/* Food image placeholder */}
-          <View style={micStyles.imgWrap}>
-            <Text style={micStyles.emoji}>{item.emoji}</Text>
-            {item.special && (
-              <View style={micStyles.specialBadge}>
-                <Tag type="special" />
-              </View>
-            )}
+        {/* ── Bestseller / Popular badge ── */}
+        {item.pop && (
+          <View style={micStyles.bestsellerBadge}>
+            <Text style={micStyles.bestsellerText}>⚡ Bestseller</Text>
           </View>
+        )}
 
+        <View style={micStyles.inner}>
+          {/* Left: info */}
           <View style={micStyles.body}>
-            <Text style={micStyles.name} numberOfLines={2}>{item.name}</Text>
-
-            {/* Tags row */}
-            <View style={{ flexDirection: 'row', marginBottom: 5, flexWrap: 'wrap' }}>
-              <Tag type={item.veg ? 'veg' : 'nveg'} style={{ marginRight: 6, marginBottom: 4 }} />
-              {item.pop   && <Tag type="hot"   style={{ marginRight: 6, marginBottom: 4 }} />}
-              {item.combo && <Tag type="combo" style={{ marginRight: 6, marginBottom: 4 }} />}
-            </View>
-
-            <Text style={micStyles.desc} numberOfLines={2}>{item.desc}</Text>
-
-            {/* Spice + cal row */}
-            <View style={micStyles.meta}>
-              <SpiceDots level={item.spice} />
-              <Text style={[micStyles.cal, { marginLeft: 6 }]}>{item.cal} kcal</Text>
-              {item.savings && (
-                <Text style={[micStyles.save, { marginLeft: 6 }]}>· Save ₹{item.savings}</Text>
+            {/* Veg / Non-veg indicator */}
+            <View style={micStyles.vegRow}>
+              <View style={[
+                micStyles.vegBox,
+                item.veg ? micStyles.vegBoxGreen : micStyles.vegBoxRed,
+              ]}>
+                <View style={[
+                  micStyles.vegDot,
+                  item.veg ? micStyles.vegDotGreen : micStyles.vegDotRed,
+                ]} />
+              </View>
+              {item.combo && (
+                <View style={micStyles.comboBadge}>
+                  <Text style={micStyles.comboText}>Combo</Text>
+                </View>
               )}
             </View>
 
-            {/* Footer: price + qty control + edit/delete */}
-            <View style={micStyles.footer}>
-              <Text style={micStyles.price}>₹{item.price}</Text>
-              <View style={micStyles.actions}>
-                {qty === 0 ? (
-                  <AddButton onPress={onAdd} />
-                ) : (
-                  <QtyControl qty={qty} onDecrement={onDecrement} onIncrement={onIncrement} size="sm" />
-                )}
-                <TouchableOpacity onPress={onEdit} style={micStyles.editBtn}>
-                  <Text style={micStyles.editText}>✏️</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onDelete} style={micStyles.deleteBtn}>
-                  <Text style={micStyles.deleteText}>🗑️</Text>
-                </TouchableOpacity>
+            <Text style={micStyles.name} numberOfLines={2}>{item.name}</Text>
+
+            {/* Rating row */}
+            {item.pop && (
+              <View style={micStyles.ratingRow}>
+                <View style={micStyles.ratingPill}>
+                  <Text style={micStyles.ratingText}>★ 4.6</Text>
+                </View>
+                <Text style={micStyles.ratingCount}> (17)</Text>
               </View>
+            )}
+
+            {/* Serves / desc */}
+            <Text style={micStyles.desc} numberOfLines={2}>
+              {item.cal ? `Serves 1 | ` : ''}{item.desc}
+            </Text>
+
+            {/* Savings offer pill */}
+            {item.savings > 0 && (
+              <View style={micStyles.offerPill}>
+                <Text style={micStyles.offerText}>🔒 ₹{Math.round(item.price * 0.9)} | Order above ₹900</Text>
+              </View>
+            )}
+
+            {/* Price row */}
+            <View style={micStyles.priceRow}>
+              <Text style={micStyles.price}>₹{item.price}</Text>
+              {item.savings > 0 && (
+                <Text style={micStyles.strikePrice}>₹{item.price + item.savings}</Text>
+              )}
+            </View>
+          </View>
+
+          {/* Right: image + ADD button */}
+          <View style={micStyles.rightCol}>
+            <View style={micStyles.imgWrap}>
+              <Text style={micStyles.emoji}>{item.emoji}</Text>
+            </View>
+
+            {/* ADD / Qty control */}
+            <View style={micStyles.addWrap}>
+              {qty === 0 ? (
+                <TouchableOpacity
+                  onPress={onAdd}
+                  style={micStyles.addBtn}
+                  activeOpacity={0.8}
+                >
+                  <Text style={micStyles.addBtnText}>ADD</Text>
+                </TouchableOpacity>
+              ) : (
+                <View style={micStyles.qtyRow}>
+                  <TouchableOpacity onPress={onDecrement} style={micStyles.qtyBtn}>
+                    <Text style={micStyles.qtyBtnText}>−</Text>
+                  </TouchableOpacity>
+                  <Text style={micStyles.qtyNum}>{qty}</Text>
+                  <TouchableOpacity onPress={onIncrement} style={micStyles.qtyBtn}>
+                    <Text style={micStyles.qtyBtnText}>+</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           </View>
         </View>
@@ -136,61 +184,288 @@ function MenuItemCard({ item, qty, onAdd, onIncrement, onDecrement, onPress, onE
             ))}
           </View>
         )}
+
+        {/* Edit / Delete row */}
+        <View style={micStyles.actionRow}>
+          <TouchableOpacity onPress={onEdit} style={micStyles.editBtn}>
+            <Text style={micStyles.editText}>✏️ Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onDelete} style={micStyles.deleteBtn}>
+            <Text style={micStyles.deleteText}>🗑️ Delete</Text>
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     </Animated.View>
   );
 }
+
 const micStyles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.card,
-    borderRadius: 20, marginHorizontal: Spacing.lg, marginBottom: 12,
-    borderWidth: 1, borderColor: Colors.cardBorder, overflow: 'hidden',
-    ...Shadow.card,
+    backgroundColor: C.bg,
+    marginHorizontal: Spacing.lg,
+    marginBottom: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: C.divider,
+    paddingVertical: 16,
   },
-  inner:  { flexDirection: 'row', padding: 14 },
-  imgWrap:{
-    width: 90, height: 90, borderRadius: 14,
-    backgroundColor: '#FFD8B8',
-    alignItems: 'center', justifyContent: 'center',
+  bestsellerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    paddingHorizontal: 2,
+  },
+  bestsellerText: {
+    fontSize: 12,
+    fontFamily: Fonts.bodySemi,
+    color: C.accent,
+  },
+  inner: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  body: {
+    flex: 1,
+    paddingRight: 12,
+  },
+  vegRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    gap: 6,
+  },
+  vegBox: {
+    width: 18,
+    height: 18,
+    borderRadius: 3,
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  vegBoxGreen: {
+    borderColor: C.veg,
+  },
+  vegBoxRed: {
+    borderColor: '#E53935',
+  },
+  vegDot: {
+    width: 9,
+    height: 9,
+    borderRadius: 5,
+  },
+  vegDotGreen: {
+    backgroundColor: C.veg,
+  },
+  vegDotRed: {
+    backgroundColor: '#E53935',
+  },
+  comboBadge: {
+    backgroundColor: '#FFF3EA',
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  comboText: {
+    fontSize: 10,
+    fontFamily: Fonts.bodySemi,
+    color: C.accent,
+  },
+  name: {
+    fontSize: 15,
+    fontFamily: Fonts.bodyBold,
+    color: C.text,
+    marginBottom: 4,
+    lineHeight: 20,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  ratingPill: {
+    backgroundColor: C.veg,
+    borderRadius: 4,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+  },
+  ratingText: {
+    fontSize: 11,
+    fontFamily: Fonts.bodySemi,
+    color: '#fff',
+  },
+  ratingCount: {
+    fontSize: 11,
+    color: C.textSecondary,
+    fontFamily: Fonts.body,
+  },
+  desc: {
+    fontSize: 12,
+    color: C.textSecondary,
+    lineHeight: 17,
+    marginBottom: 6,
+  },
+  offerPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: C.offerBg,
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    alignSelf: 'flex-start',
+    marginBottom: 6,
+  },
+  offerText: {
+    fontSize: 11,
+    fontFamily: Fonts.bodySemi,
+    color: C.offerText,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 2,
+  },
+  price: {
+    fontSize: 15,
+    fontFamily: Fonts.bodyBold,
+    color: C.text,
+  },
+  strikePrice: {
+    fontSize: 13,
+    fontFamily: Fonts.body,
+    color: C.textMuted,
+    textDecorationLine: 'line-through',
+  },
+  rightCol: {
+    alignItems: 'center',
+    width: 110,
     flexShrink: 0,
-    marginRight: 12,
   },
-  emoji:  { fontSize: 48 },
-  specialBadge: { position: 'absolute', bottom: 4, left: 4 },
-  body:   { flex: 1 },
-  name:   { fontSize: 14, fontFamily: Fonts.bodyBold, color: Colors.text, marginBottom: 4 },
-  desc:   { fontSize: 11, color: Colors.muted, lineHeight: 15, marginBottom: 5 },
-  meta:   { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
-  cal:    { fontSize: 10, color: Colors.muted, fontFamily: Fonts.body },
-  save:   { fontSize: 10, color: Colors.save, fontFamily: Fonts.bodySemi },
-  footer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  price:  { fontSize: 18, fontFamily: Fonts.bodyXB, color: Colors.gold },
-  actions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  editBtn: {
-    width: 32, height: 32, borderRadius: 10,
-    backgroundColor: 'rgba(245,166,35,0.15)',
-    alignItems: 'center', justifyContent: 'center',
-    borderWidth: 1, borderColor: 'rgba(245,166,35,0.3)',
+  imgWrap: {
+    width: 110,
+    height: 100,
+    borderRadius: 12,
+    backgroundColor: '#F5F5F5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    marginBottom: 0,
   },
-  editText: { fontSize: 14 },
-  deleteBtn: {
-    width: 32, height: 32, borderRadius: 10,
-    backgroundColor: 'rgba(255,76,41,0.15)',
-    alignItems: 'center', justifyContent: 'center',
-    borderWidth: 1, borderColor: 'rgba(255,76,41,0.3)',
+  emoji: {
+    fontSize: 52,
   },
-  deleteText: { fontSize: 14 },
+  addWrap: {
+    marginTop: -14,
+    alignItems: 'center',
+    width: '100%',
+  },
+  addBtn: {
+    backgroundColor: C.bg,
+    borderWidth: 1.5,
+    borderColor: C.primary,
+    borderRadius: 8,
+    paddingHorizontal: 26,
+    paddingVertical: 7,
+    alignItems: 'center',
+    // subtle shadow under the ADD button like Swiggy
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  addBtnText: {
+    color: C.accent,
+    fontSize: 13,
+    fontFamily: Fonts.bodyBold,
+    letterSpacing: 0.5,
+  },
+  qtyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: C.bg,
+    borderWidth: 1.5,
+    borderColor: C.primary,
+    borderRadius: 8,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  qtyBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  qtyBtnText: {
+    color: C.accent,
+    fontSize: 16,
+    fontFamily: Fonts.bodyBold,
+    lineHeight: 18,
+  },
+  qtyNum: {
+    color: C.accent,
+    fontSize: 13,
+    fontFamily: Fonts.bodyBold,
+    minWidth: 20,
+    textAlign: 'center',
+  },
   addonsRow: {
-    flexDirection: 'row', flexWrap: 'wrap',
-    paddingHorizontal: 14, paddingBottom: 12,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 8,
+    gap: 6,
   },
   addonChip: {
-    flexDirection: 'row', backgroundColor: Colors.card2,
-    borderRadius: Radius.sm, paddingHorizontal: 8, paddingVertical: 4,
-    marginRight: 6, marginBottom: 6,
+    flexDirection: 'row',
+    backgroundColor: C.surface2,
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
   },
-  addonText:  { fontSize: 10, color: Colors.muted, fontFamily: Fonts.body },
-  addonPrice: { fontSize: 10, color: Colors.gold, fontFamily: Fonts.bodySemi },
+  addonText: {
+    fontSize: 11,
+    color: C.textSecondary,
+    fontFamily: Fonts.body,
+  },
+  addonPrice: {
+    fontSize: 11,
+    color: C.accent,
+    fontFamily: Fonts.bodySemi,
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 10,
+  },
+  editBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+    backgroundColor: C.surface2,
+    borderWidth: 1,
+    borderColor: C.divider,
+  },
+  editText: {
+    fontSize: 11,
+    color: C.textSecondary,
+    fontFamily: Fonts.bodySemi,
+  },
+  deleteBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+    backgroundColor: '#FFF0F0',
+    borderWidth: 1,
+    borderColor: 'rgba(229,57,53,0.2)',
+  },
+  deleteText: {
+    fontSize: 11,
+    color: '#E53935',
+    fontFamily: Fonts.bodySemi,
+  },
 });
 
 // ─── Add/Edit Item Modal ──────────────────────────────────────────────────────
@@ -241,15 +516,16 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
 
   return (
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={modalStyles.overlay}
       >
         <View style={modalStyles.container}>
+          <View style={modalStyles.handle} />
           <View style={modalStyles.header}>
             <Text style={modalStyles.title}>{isEdit ? 'Edit Item' : 'Add New Item'}</Text>
             <TouchableOpacity onPress={onClose} style={modalStyles.closeBtn}>
-              <Text style={{ color: Colors.muted, fontSize: 20 }}>✕</Text>
+              <Text style={{ color: C.textSecondary, fontSize: 18 }}>✕</Text>
             </TouchableOpacity>
           </View>
 
@@ -265,7 +541,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                   value={form.name}
                   onChangeText={(t) => updateField('name', t)}
                   placeholder="e.g. Chicken Dum Biryani"
-                  placeholderTextColor={Colors.muted}
+                  placeholderTextColor={C.textMuted}
                 />
 
                 <View style={{ flexDirection: 'row', gap: 12 }}>
@@ -277,7 +553,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                       onChangeText={(t) => updateField('price', t.replace(/[^0-9]/g, ''))}
                       placeholder="200"
                       keyboardType="numeric"
-                      placeholderTextColor={Colors.muted}
+                      placeholderTextColor={C.textMuted}
                     />
                   </View>
                   <View style={{ flex: 1 }}>
@@ -288,7 +564,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                       onChangeText={(t) => updateField('cal', t.replace(/[^0-9]/g, ''))}
                       placeholder="500"
                       keyboardType="numeric"
-                      placeholderTextColor={Colors.muted}
+                      placeholderTextColor={C.textMuted}
                     />
                   </View>
                 </View>
@@ -300,7 +576,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                   onChangeText={(t) => updateField('desc', t)}
                   placeholder="Brief description..."
                   multiline
-                  placeholderTextColor={Colors.muted}
+                  placeholderTextColor={C.textMuted}
                 />
 
                 <View style={{ flexDirection: 'row', gap: 12 }}>
@@ -311,7 +587,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                       value={form.emoji}
                       onChangeText={(t) => updateField('emoji', t)}
                       placeholder="🍽️"
-                      placeholderTextColor={Colors.muted}
+                      placeholderTextColor={C.textMuted}
                     />
                   </View>
                   <View style={{ flex: 1 }}>
@@ -321,7 +597,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                       value={form.spice.toString()}
                       onChangeText={(t) => updateField('spice', Math.min(5, Math.max(1, parseInt(t) || 1)))}
                       keyboardType="numeric"
-                      placeholderTextColor={Colors.muted}
+                      placeholderTextColor={C.textMuted}
                     />
                   </View>
                 </View>
@@ -334,7 +610,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                       value={form.savings}
                       onChangeText={(t) => updateField('savings', t.replace(/[^0-9]/g, ''))}
                       keyboardType="numeric"
-                      placeholderTextColor={Colors.muted}
+                      placeholderTextColor={C.textMuted}
                     />
                   </View>
                 </View>
@@ -342,25 +618,25 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
                 {/* Toggles */}
                 <View style={modalStyles.toggles}>
                   {[
-                    { key: 'veg', label: '🌿 Vegetarian', activeColor: '#6fcf7a' },
-                    { key: 'pop', label: '⭐ Popular', activeColor: Colors.spice },
-                    { key: 'combo', label: '💪 Combo', activeColor: Colors.gold },
-                    { key: 'special', label: '🔥 Special', activeColor: '#FF4C29' },
+                    { key: 'veg',     label: '🌿 Vegetarian', activeColor: C.veg },
+                    { key: 'pop',     label: '⭐ Popular',    activeColor: C.accent },
+                    { key: 'combo',   label: '💪 Combo',      activeColor: C.accent },
+                    { key: 'special', label: '🔥 Special',    activeColor: '#E53935' },
                   ].map(toggle => (
                     <TouchableOpacity
                       key={toggle.key}
                       onPress={() => updateField(toggle.key, !form[toggle.key])}
                       style={[
                         modalStyles.toggle,
-                        form[toggle.key] && { 
-                          borderColor: toggle.activeColor, 
-                          backgroundColor: toggle.activeColor + '20' 
-                        }
+                        form[toggle.key] && {
+                          borderColor: toggle.activeColor,
+                          backgroundColor: toggle.activeColor + '18',
+                        },
                       ]}
                     >
                       <Text style={[
                         modalStyles.toggleText,
-                        form[toggle.key] && { color: toggle.activeColor }
+                        form[toggle.key] && { color: toggle.activeColor },
                       ]}>
                         {toggle.label}
                       </Text>
@@ -378,13 +654,7 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
               </TouchableOpacity>
             )}
             <TouchableOpacity onPress={handleSave} style={[modalStyles.btn, modalStyles.saveBtn]}>
-              <LinearGradient
-                colors={[Colors.spice, '#FF8C42']}
-                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-                style={modalStyles.grad}
-              >
-                <Text style={modalStyles.saveText}>{isEdit ? 'Update Item' : 'Add Item'}</Text>
-              </LinearGradient>
+              <Text style={modalStyles.saveText}>{isEdit ? 'Update Item' : 'Add Item'}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -396,51 +666,62 @@ function ItemModal({ visible, onClose, onSave, onDelete, item, categoryId }) {
 const modalStyles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: C.overlay,
     justifyContent: 'flex-end',
   },
   container: {
-    backgroundColor: Colors.dark,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    backgroundColor: C.bg,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     maxHeight: '85%',
     paddingHorizontal: Spacing.lg,
-    paddingTop: 16,
+    paddingTop: 12,
+  },
+  handle: {
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: C.divider,
+    alignSelf: 'center',
+    marginBottom: 12,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: C.divider,
   },
   title: {
-    fontSize: 18,
+    fontSize: 17,
     fontFamily: Fonts.bodyBold,
-    color: Colors.text,
+    color: C.text,
   },
   closeBtn: {
-    width: 32, height: 32,
-    borderRadius: 16,
-    backgroundColor: Colors.card,
+    width: 30, height: 30,
+    borderRadius: 15,
+    backgroundColor: C.surface2,
     alignItems: 'center', justifyContent: 'center',
   },
   label: {
     fontSize: 12,
     fontFamily: Fonts.bodySemi,
-    color: Colors.muted,
+    color: C.textSecondary,
     marginBottom: 6,
     marginTop: 12,
   },
   input: {
-    backgroundColor: Colors.card,
-    borderRadius: 12,
+    backgroundColor: C.surface2,
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: Colors.cardBorder,
+    borderColor: C.divider,
     paddingHorizontal: 14,
     paddingVertical: 10,
-    color: Colors.text,
+    color: C.text,
     fontFamily: Fonts.body,
-    fontSize: 13,
+    fontSize: 14,
   },
   toggles: {
     flexDirection: 'row',
@@ -453,43 +734,83 @@ const modalStyles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1.5,
-    borderColor: Colors.cardBorder,
+    borderColor: C.divider,
     backgroundColor: 'transparent',
   },
   toggleText: {
     fontSize: 12,
     fontFamily: Fonts.bodySemi,
-    color: Colors.muted,
+    color: C.textSecondary,
   },
   footer: {
     flexDirection: 'row',
     gap: 12,
     paddingVertical: 16,
     borderTopWidth: 1,
-    borderTopColor: Colors.cardBorder,
+    borderTopColor: C.divider,
   },
-  btn: { flex: 1, borderRadius: 14, overflow: 'hidden' },
+  btn: { flex: 1, borderRadius: 10, overflow: 'hidden' },
   deleteBtnModal: {
-    backgroundColor: 'rgba(255,76,41,0.15)',
+    backgroundColor: '#FFF0F0',
     borderWidth: 1,
-    borderColor: 'rgba(255,76,41,0.3)',
+    borderColor: 'rgba(229,57,53,0.25)',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 13,
   },
   deleteBtnText: {
-    color: '#FF4C29',
+    color: '#E53935',
     fontFamily: Fonts.bodyBold,
     fontSize: 14,
   },
-  saveBtn: { flex: 2 },
-  grad: {
-    paddingVertical: 14,
+  saveBtn: {
+    flex: 2,
+    backgroundColor: C.accent,
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 13,
+    borderRadius: 10,
   },
   saveText: {
     color: '#fff',
     fontFamily: Fonts.bodyBold,
     fontSize: 14,
+  },
+});
+
+// ─── Section Header (collapsible, like Swiggy) ───────────────────────────────
+function SectionHeader({ label, count, expanded, onToggle }) {
+  return (
+    <TouchableOpacity
+      onPress={onToggle}
+      activeOpacity={0.8}
+      style={sectionStyles.row}
+    >
+      <Text style={sectionStyles.title}>{label} ({count})</Text>
+      <Text style={sectionStyles.chevron}>{expanded ? '∧' : '∨'}</Text>
+    </TouchableOpacity>
+  );
+}
+const sectionStyles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: 14,
+    backgroundColor: C.bg,
+    borderBottomWidth: 1,
+    borderBottomColor: C.divider,
+  },
+  title: {
+    fontSize: 16,
+    fontFamily: Fonts.bodyBold,
+    color: C.text,
+  },
+  chevron: {
+    fontSize: 14,
+    color: C.textSecondary,
+    fontFamily: Fonts.bodyBold,
   },
 });
 
@@ -499,7 +820,7 @@ export default function MenuScreen({ navigation, route }) {
   const [activeCategory, setActiveCategory] = useState(initCat);
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
-  
+
   // Local menu state for CRUD operations
   const [menuData, setMenuData] = useState(MENU_ITEMS);
   const [modalVisible, setModalVisible] = useState(false);
@@ -519,7 +840,7 @@ export default function MenuScreen({ navigation, route }) {
   }, [activeCategory, filter, search, menuData]);
 
   // ─── CRUD Operations ────────────────────────────────────────────────────────
-  
+
   const handleAddItem = useCallback((newItem) => {
     setMenuData(prev => ({
       ...prev,
@@ -530,7 +851,7 @@ export default function MenuScreen({ navigation, route }) {
   const handleUpdateItem = useCallback((updatedItem) => {
     setMenuData(prev => ({
       ...prev,
-      [activeCategory]: prev[activeCategory].map(i => 
+      [activeCategory]: prev[activeCategory].map(i =>
         i.id === updatedItem.id ? updatedItem : i
       ),
     }));
@@ -561,13 +882,34 @@ export default function MenuScreen({ navigation, route }) {
     }
   };
 
-  const handleAddToCart = (item) => {
+  // ─── Handle Add to Cart / Doughnut Box ──────────────────────────────────────
+  const handleAddToCart = useCallback((item) => {
+    if (item.isDoughnutBox) {
+      navigation.navigate('DoughnutBoxScreen', {
+        item,
+        onAddToCart: (boxData) => {
+          const cartItem = {
+            ...item,
+            selectedDoughnuts: boxData.selections,
+            selectedDips: boxData.selectedDips,
+            boxQuantity: boxData.quantity,
+            finalPrice: boxData.totalPrice,
+            isCustomBox: true,
+          };
+          addItem(cartItem, [], boxData.quantity);
+        }
+      });
+      return;
+    }
+
     if (item.addons && item.addons.length > 0) {
-    navigation.navigate('CustomizeScreen', { item });
-  } else {
-    addItem(item, []); // This must call the context's addItem
-  }
-  };
+      navigation.navigate('CustomizeScreen', { item });
+    } else {
+      addItem(item, []);
+    }
+  }, [navigation, addItem]);
+
+  const activeLabel = CATEGORIES.find(c => c.id === activeCategory)?.label || '';
 
   return (
     <View style={styles.container}>
@@ -578,22 +920,46 @@ export default function MenuScreen({ navigation, route }) {
           <Text style={styles.searchIcon}>🔍</Text>
           <TextInput
             style={styles.searchInput}
-            placeholder="Search dishes..."
-            placeholderTextColor={Colors.muted}
+            placeholder={`Search in ${activeLabel || 'menu'}...`}
+            placeholderTextColor={C.textMuted}
             value={search}
             onChangeText={setSearch}
           />
+          {search.length > 0 && (
+            <TouchableOpacity onPress={() => setSearch('')} style={{ paddingRight: 10 }}>
+              <Text style={{ color: C.textMuted, fontSize: 14 }}>✕</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        <TouchableOpacity onPress={openAddModal} style={styles.addBtn}>
-          <LinearGradient
-            colors={[Colors.spice, '#FF8C42']}
-            start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-            style={styles.addBtnGrad}
-          >
-            <Text style={styles.addBtnText}>+</Text>
-          </LinearGradient>
+        <TouchableOpacity onPress={openAddModal} style={styles.addBtn} activeOpacity={0.8}>
+          <Text style={styles.addBtnText}>+</Text>
         </TouchableOpacity>
       </View>
+
+      {/* ── Filter Pills (Pure Veg / Ratings / Popular) ── */}
+      <FlatList
+        data={FILTERS}
+        keyExtractor={f => f.key}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.filterBar}
+        renderItem={({ item: f }) => (
+          <TouchableOpacity
+            onPress={() => setFilter(f.key)}
+            style={[filterStyles.chip, filter === f.key && filterStyles.chipActive]}
+            activeOpacity={0.75}
+          >
+            {f.key === 'veg' && filter === f.key && (
+              <View style={filterStyles.vegIcon}>
+                <View style={filterStyles.vegDot} />
+              </View>
+            )}
+            <Text style={[filterStyles.label, filter === f.key && filterStyles.labelActive]}>
+              {f.label}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
 
       {/* ── Category Tabs ── */}
       <FlatList
@@ -601,71 +967,36 @@ export default function MenuScreen({ navigation, route }) {
         keyExtractor={c => c.id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ marginBottom: 12 }}
-        contentContainerStyle={{
-          paddingHorizontal: Spacing.lg,
-          paddingVertical: 12,
-          alignItems: 'center',
-        }}
-        ListHeaderComponent={() => <View style={{ width: Spacing.lg }} />}
-        ListFooterComponent={() => <View style={{ width: Spacing.lg }} />}
-        ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+        style={styles.tabStrip}
+        contentContainerStyle={styles.tabContent}
+        ItemSeparatorComponent={() => <View style={{ width: 8 }} />}
         renderItem={({ item }) => (
           <CategoryTab
             category={item}
             active={activeCategory === item.id}
             onPress={() => { setActiveCategory(item.id); setSearch(''); }}
-            style={{ marginRight: 2 }}
           />
         )}
       />
 
-      {/* ── Filter Chips ── */}
-      <FlatList
-       data={FILTERS}
-  keyExtractor={f => f.key}
-  horizontal
-  showsHorizontalScrollIndicator={false}
-  style={{ marginBottom: 10 }}
-  contentContainerStyle={{
-    paddingLeft: Spacing.lg,      // ← use explicit paddingLeft
-    paddingRight: Spacing.lg,     // ← and paddingRight
-    paddingBottom: 8,
-    alignItems: 'center',
-  }}
-        
-        
-        renderItem={({ item: f }) => (
-          <TouchableOpacity
-            onPress={() => setFilter(f.key)}
-            style={[filterStyles.chip, filter === f.key && filterStyles.chipActive, { marginRight: 2 }]}
-            activeOpacity={0.75}
-          >
-            <Text style={[filterStyles.label, filter === f.key && { color: Colors.spice }]}>
-              {f.label}
-            </Text>
-          </TouchableOpacity>
-        )}
+      {/* ── Section header ── */}
+      <SectionHeader
+        label={`${CATEGORIES.find(c => c.id === activeCategory)?.icon || ''} ${activeLabel}`}
+        count={items.length}
+        expanded={true}
+        onToggle={() => {}}
       />
-
-      {/* ── Section info bar ── */}
-      <View style={styles.sectionBar}>
-        <Text style={styles.sectionTitle}>
-          {CATEGORIES.find(c => c.id === activeCategory)?.icon}{' '}
-          {CATEGORIES.find(c => c.id === activeCategory)?.label}
-        </Text>
-        <Text style={styles.itemCount}>{items.length} dishes</Text>
-      </View>
 
       {/* ── Item List ── */}
       <FlatList
         data={items}
         keyExtractor={i => i.id}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 100, backgroundColor: C.bg }}
+        style={{ backgroundColor: C.bg }}
         ListEmptyComponent={
           <View style={styles.emptyWrap}>
-            <Text style={{ fontSize: 48 }}>😶</Text>
+            <Text style={{ fontSize: 44 }}>😶</Text>
             <Text style={styles.emptyText}>No items found</Text>
             <TouchableOpacity onPress={openAddModal} style={styles.emptyAddBtn}>
               <Text style={styles.emptyAddText}>+ Add First Item</Text>
@@ -678,7 +1009,13 @@ export default function MenuScreen({ navigation, route }) {
             <MenuItemCard
               item={item}
               qty={qty}
-              onPress={() => navigation.navigate('Customize', { item })}
+              onPress={() => {
+                if (item.isDoughnutBox) {
+                  navigation.navigate('DoughnutBoxScreen', { item });
+                } else {
+                  navigation.navigate('CustomizeScreen', { item });
+                }
+              }}
               onAdd={() => handleAddToCart(item)}
               onIncrement={() => changeQty(item.id, 1)}
               onDecrement={() => changeQty(item.id, -1)}
@@ -704,46 +1041,89 @@ export default function MenuScreen({ navigation, route }) {
 
 const filterStyles = StyleSheet.create({
   chip: {
-    height: 36,
-    marginTop:8,
-    paddingHorizontal: 14,
-    borderRadius: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 34,
+    paddingHorizontal: 12,
+    borderRadius: 20,
     borderWidth: 1,
-    borderColor: Colors.cardBorder,
-    backgroundColor: 'transparent',
+    borderColor: C.divider,
+    backgroundColor: C.bg,
+    marginRight: 8,
+    gap: 4,
+  },
+  chipActive: {
+    borderColor: C.primary,
+    backgroundColor: C.vegBg,
+  },
+  vegIcon: {
+    width: 14,
+    height: 14,
+    borderRadius: 2,
+    borderWidth: 1.5,
+    borderColor: C.veg,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  chipActive: { borderColor: Colors.spice, backgroundColor: 'rgba(255,199,44,0.18)' },
-  label: { fontSize: 12, fontFamily: Fonts.bodySemi, color: Colors.text },
+  vegDot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: C.veg,
+  },
+  label: {
+    fontSize: 12,
+    fontFamily: Fonts.bodySemi,
+    color: C.textSecondary,
+  },
+  labelActive: {
+    color: C.primary,
+  },
 });
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.dark },
+  container: {
+    flex: 1,
+    backgroundColor: C.bg,
+  },
   header: {
-    flexDirection: 'row', alignItems: 'center',
-    padding: Spacing.lg, paddingTop: 52,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: Spacing.lg,
+    paddingTop: 52,
+    paddingBottom: 12,
+    backgroundColor: C.bg,
+    borderBottomWidth: 1,
+    borderBottomColor: C.divider,
   },
   searchWrap: {
-    flex: 1, position: 'relative',
-    backgroundColor: Colors.card,
-    borderRadius: 14, flexDirection: 'row',
-    alignItems: 'center', paddingLeft: 36,
-    borderWidth: 1, borderColor: Colors.cardBorder,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: C.surface2,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: C.divider,
+    paddingLeft: 10,
   },
-  searchIcon:  { position: 'absolute', left: 12, fontSize: 13, zIndex: 1 },
+  searchIcon: {
+    fontSize: 13,
+    marginRight: 6,
+  },
   searchInput: {
-    flex: 1, paddingVertical: 10, paddingRight: 14,
-    color: Colors.text, fontFamily: Fonts.body, fontSize: 13,
+    flex: 1,
+    paddingVertical: 9,
+    paddingRight: 4,
+    color: C.text,
+    fontFamily: Fonts.body,
+    fontSize: 13,
   },
   addBtn: {
-    width: 40, height: 40,
-    borderRadius: 14,
+    width: 36,
+    height: 36,
+    borderRadius: 10,
     marginLeft: 10,
-    overflow: 'hidden',
-  },
-  addBtnGrad: {
-    flex: 1,
+    backgroundColor: C.accent,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -751,30 +1131,48 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 22,
     fontFamily: Fonts.bodyBold,
+    lineHeight: 26,
   },
-  sectionBar:  { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    justifyContent: 'space-between', 
-    paddingHorizontal: Spacing.lg, 
-    marginBottom: 10 
+  filterBar: {
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: 10,
+    backgroundColor: C.bg,
   },
-  sectionTitle:{ fontSize: 15, fontFamily: Fonts.bodyBold, color: Colors.text },
-  itemCount:   { fontSize: 12, color: Colors.muted },
-  emptyWrap:   { alignItems: 'center', paddingTop: 80 },
-  emptyText:   { fontSize: 14, color: Colors.muted, fontFamily: Fonts.body, marginTop: 10 },
+  tabStrip: {
+    backgroundColor: C.bg,
+    borderBottomWidth: 1,
+    borderBottomColor: C.divider,
+  },
+  tabContent: {
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  emptyWrap: {
+    alignItems: 'center',
+    paddingTop: 80,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: C.textSecondary,
+    fontFamily: Fonts.body,
+    marginTop: 10,
+  },
   emptyAddBtn: {
     marginTop: 20,
-    backgroundColor: Colors.card,
-    borderWidth: 1,
-    borderColor: Colors.spice,
+    backgroundColor: C.bg,
+    borderWidth: 1.5,
+    borderColor: C.accent,
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   emptyAddText: {
-    color: Colors.spice,
+    color: C.accent,
     fontFamily: Fonts.bodyBold,
     fontSize: 13,
   },
 });
+
+
+
