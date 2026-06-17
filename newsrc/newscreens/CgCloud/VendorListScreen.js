@@ -4,7 +4,7 @@
 import React from 'react';
 import {
   View, Text, TextInput, FlatList,
-  RefreshControl, ActivityIndicator, StyleSheet,
+  RefreshControl, ActivityIndicator, StyleSheet,TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -30,6 +30,9 @@ export default function VendorListScreen({ cart = [], onViewCart }) {
     <View style={styles.root}>
       {/* Header */}
       <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
+                  <Icon name="arrow-back" size={22} color="#111827" />
+                </TouchableOpacity>
         <Text style={styles.heading}>Order Your Food</Text>
         <Text style={styles.subheading}>Choose a vendor to browse their menu</Text>
 

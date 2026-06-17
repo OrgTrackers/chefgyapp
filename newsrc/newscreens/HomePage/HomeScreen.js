@@ -121,7 +121,7 @@ const HomeScreen = () => {
               <Text style={HomeScreenStyles.UserTagLine}>Rated New Outlet</Text>
             </View>
           </View>
-          <View style={HomeScreenStyles.UserRatingContainer}>
+          {/* <View style={HomeScreenStyles.UserRatingContainer}>
             <View style={HomeScreenStyles.UserRatingTextContainer}>
               <Text style={HomeScreenStyles.UserRatingText}>5</Text>
               <MCIcons
@@ -133,7 +133,7 @@ const HomeScreen = () => {
             <Text style={HomeScreenStyles.UserRatingTagLine}>
               Outstanding !
             </Text>
-          </View>
+          </View> */}
         </TouchableOpacity>
         <View style={HomeScreenStyles.HomeUpdatesContainer}>
           <Image
@@ -157,7 +157,7 @@ const HomeScreen = () => {
                     source={HomeCateItem.Image}
                     style={HomeScreenStyles.HomeCateImg}
                   />
-                  <View style={[HomeScreenStyles.HomeCateRatingContainer]}>
+                  {/* <View style={[HomeScreenStyles.HomeCateRatingContainer]}>
                     <Text style={[HomeScreenStyles.RatingText]}>
                       {HomeCateItem.Rating}
                     </Text>
@@ -166,7 +166,7 @@ const HomeScreen = () => {
                       size={12}
                       color={GlobalCss.ThemeColor.color}
                     />
-                  </View>
+                  </View> */}
                 </View>
                 <Text style={HomeScreenStyles.HomeCateName}>
                   {HomeCateItem.Name}

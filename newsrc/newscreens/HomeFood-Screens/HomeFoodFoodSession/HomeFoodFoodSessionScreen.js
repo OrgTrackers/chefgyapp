@@ -52,7 +52,7 @@ const HomeFoodFoodSessionScreen = () => {
           style={HomeFoodFoodSessionStyles.HeaderContent}
           onPress={() => navigation.navigate('BookHomeFoodScreen')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
-          <Text style={HomeFoodFoodSessionStyles.PageName}>Home Food Food Session</Text>
+          <Text style={HomeFoodFoodSessionStyles.PageName}>Home Food, Food Session</Text>
         </TouchableOpacity>
       </View>
       <ScrollView
@@ -168,7 +168,7 @@ const HomeFoodFoodSessionScreen = () => {
               HomeFoodFoodSessionStyles.FooterButton,
               GlobalCss.ThemeBackgroundColor,
             ]}
-            onPress={() => navigation.navigate('HomeFoodSelectionScreen')}>
+            onPress={() => navigation.navigate('VendorListScreen')}>
             <Text style={HomeFoodFoodSessionStyles.FooterButtonText}>Select Home Food</Text>
           </TouchableOpacity>
         </View>

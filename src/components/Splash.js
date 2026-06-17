@@ -7,7 +7,7 @@ const Splash = ({navigation}) => {
   useEffect(() => {
     const zoomIn = Animated.timing(scaleAnim, {
       toValue: 2, // Zoom in to twice the original size
-      duration: 1500, // Duration of the zoom-in animation (1.5 seconds)
+      duration: 1500, // Duration of the zoom-in animation (1.5 seconds)f
       useNativeDriver: true,
     });
 
@@ -21,7 +21,7 @@ const Splash = ({navigation}) => {
       zoomIn,
       zoomOut,
     ]).start(() => {
-      navigation.navigate('Home',{
+      navigation.navigate('HomeScreen',{
         transition: 'topToBottom',
       });
     });

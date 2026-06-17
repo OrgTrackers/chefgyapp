@@ -353,7 +353,7 @@ const BookHomeFoodScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={BookHomeFoodStyles.BC_Types_Container}>
+        {/* <View style={BookHomeFoodStyles.BC_Types_Container}>
           <Text style={[GlobalCss.g_SideHeaders]}>Type of Meals</Text>
           <View style={BookHomeFoodStyles.BC_Type_Cards_Container}>
             {Cater_Type.map(ItemType => (
@@ -384,7 +384,7 @@ const BookHomeFoodScreen = () => {
               </Card>
             ))}
           </View>
-        </View>
+        </View> */}
         <View style={BookHomeFoodStyles.BC_Distance_Container}>
           <Text style={[GlobalCss.g_SideHeaders]}>Distance</Text>
           <View style={BookHomeFoodStyles.SliderContainer}>
