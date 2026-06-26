@@ -149,7 +149,7 @@ const ProfileHeader = ({ onMenuPress }) => {
     <View style={styles.header}>
       <TouchableOpacity 
         style={styles.backButton}
-        onPress={() => navigation.navigate('HomeScreen')}
+        onPress={() => navigation.navigate('Home')}
         activeOpacity={0.7}
       >
         <MaterialIcons name="arrow-back" size={24}  color="#333" />

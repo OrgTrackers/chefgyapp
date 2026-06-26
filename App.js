@@ -56,7 +56,7 @@ import CaterSelectionScreen from './newsrc/newscreens/Cater-Selection/CaterSelec
 import MenuSelection from './newsrc/newscreens/Menu-Selection/MenuSelectionScreen';
 import OrderSummaryScreen from './newsrc/newscreens/Order-Summary/OrderSummaryScreen';
 import FinalScreen from './newsrc/newscreens/FinalPage/FinalScreen';
-import HomeScreen from './newsrc/newscreens/HomePage/HomeScreen';
+
 import BookCaterScreen from './newsrc/newscreens/Book-Cater/BookCaterScreen';
 import DayFoodSelectionScreen from './newsrc/newscreens/FoodSessions/DayFoodSelectionScreen';
 import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
@@ -171,7 +171,7 @@ const App = () => {
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
 
-            initialRouteName="Splash"
+            initialRouteName="Home"
 
             screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
@@ -219,7 +219,7 @@ const App = () => {
           <Stack.Screen name="MenuSelection" component={MenuSelection} />
           <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+         
           <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
           <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
           <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />

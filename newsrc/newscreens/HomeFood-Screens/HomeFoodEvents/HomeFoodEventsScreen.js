@@ -97,7 +97,7 @@ const HomeFoodEventsScreen = () => {
   return (
     <View style={GlobalCss.pageLayout}>
       <View style={GlobalCss.HeaderContainer}>
-        <TouchableOpacity style={HomeFoodEventsScreenStyles.HeaderContent} onPress={()=>navigation.navigate('HomeScreen')}>
+        <TouchableOpacity style={HomeFoodEventsScreenStyles.HeaderContent} onPress={()=>navigation.navigate('Home')}>
           <MCIcons name="chevron-left" size={35} color="#000" />
           <Text style={HomeFoodEventsScreenStyles.PageName}>Home Food Events</Text>
         </TouchableOpacity>
