@@ -532,15 +532,16 @@ function RecommendedSheet({ visible, onClose }) {
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeCatTab, setActiveCatTab] = useState("all");
-  const slideAnim = useRef(new Animated.Value(600)).current;
+  const WINDOW_H = Dimensions.get("window").height;
+  const slideAnim = useRef(new Animated.Value(WINDOW_H)).current;
 
   useEffect(() => {
     if (visible) {
       Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true, tension: 65, friction: 11 }).start();
     } else {
-      Animated.timing(slideAnim, { toValue: 600, duration: 280, useNativeDriver: true }).start();
+      Animated.timing(slideAnim, { toValue: WINDOW_H, duration: 280, useNativeDriver: true }).start();
     }
-  }, [visible]);
+  }, [visible, WINDOW_H]);
 
   const filteredCats = productCategories.filter(cat => {
     const matchesSearch = search === "" ||
@@ -1316,7 +1317,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FAFAFA",
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
-    maxHeight: "92%",
+    height: Dimensions.get("window").height * 0.90,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -8 },
     shadowOpacity: 0.22,
