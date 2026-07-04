@@ -17,7 +17,9 @@ import Geolocation from '@react-native-community/geolocation';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 import { mapDatabaseToUI, formatAddressDisplay } from './addressMapper';
-import {AddAddressScreen} from './AddAddressScreen'
+import { AddAddressScreen } from './AddAddressScreen'
+import services from '../../../src/services/api/services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // ==================== API CONFIGURATION ====================
 // Set to true when you have a Google Maps API key
@@ -69,14 +71,14 @@ const SimpleSearchInput = ({ placeholder, onSelect, containerStyle }) => {
 const SelectLocationScreen = ({ navigation, route }) => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [loading, setLoading] = useState(false);
-  const userId = route.params?.userId || 1;
+  const [resolvedUserId, setResolvedUserId] = useState(route.params?.userId || null);
   const newAddressFromSave = route.params?.newAddress;
 
   // Refresh addresses when screen comes into focus
   useFocusEffect(
     React.useCallback(() => {
       loadSavedAddresses();
-    }, [])
+    }, [resolvedUserId])
   );
 
   useEffect(() => {
@@ -89,34 +91,55 @@ const SelectLocationScreen = ({ navigation, route }) => {
   }, [newAddressFromSave]);
 
   const loadSavedAddresses = async () => {
-    // Mock data for demonstration
-    const mockAddresses = [
-      {
-        id: 1,
-        label: 'Home',
-        address_line1: 'Flat #101',
-        address_line2: 'Vishwa block B, VR colony, Gokul plots',
-        city: 'Hyderabad',
-        state: 'Telangana',
-        pincode: '500072',
-        latitude: 17.4065,
-        longitude: 78.4772,
-        is_primary: true,
-      },
-      {
-        id: 2,
-        label: 'Work',
-        address_line1: 'Phoenix Hitec City',
-        address_line2: 'Kondapur, Hitec City',
-        city: 'Hyderabad',
-        state: 'Telangana',
-        pincode: '500084',
-        latitude: 17.4504,
-        longitude: 78.3810,
-        is_primary: false,
-      },
-    ];
-    setSavedAddresses(mockAddresses);
+    try {
+      let uid = resolvedUserId;
+      if (!uid) {
+        const stored = await AsyncStorage.getItem('userId');
+        if (stored) {
+          uid = parseInt(stored, 10);
+          setResolvedUserId(uid);
+        }
+      }
+
+      if (!uid) {
+        console.warn('No user id available to load addresses');
+        setSavedAddresses([]);
+        return;
+      }
+
+      const response = await services.GetAllAddressesById(uid);
+      console.log('GetAllAddressesById response:', response);
+
+      // Support multiple response shapes: array, { data: [...] }, { data: { data: [...] } }
+      let apiAddresses = [];
+      if (Array.isArray(response)) apiAddresses = response;
+      else if (Array.isArray(response?.data)) apiAddresses = response.data;
+      else if (Array.isArray(response?.data?.data)) apiAddresses = response.data.data;
+      else if (Array.isArray(response?.addresses)) apiAddresses = response.addresses;
+
+      const normalizedAddresses = apiAddresses
+        .filter((address) => !address.is_deleted)
+        .map((address) => ({
+          ...address,
+          id: address.id,
+          label: address.label || address.custom_label || address.address_type_name || 'Address',
+          address_line1: address.address_line1 || '',
+          address_line2: [address.address_line2, address.landmark].filter(Boolean).join(', '),
+          city: address.city || '',
+          state: address.state || '',
+          pincode: address.pincode || '',
+          latitude: address.latitude,
+          longitude: address.longitude,
+          is_primary: Boolean(address.is_primary),
+          distance: address.distance || null,
+        }));
+
+      setSavedAddresses(normalizedAddresses);
+    } catch (error) {
+      console.error('Failed to fetch addresses', error);
+      setSavedAddresses([]);
+      Alert.alert('Error', 'Unable to load saved addresses right now.');
+    }
   };
 
   const requestLocationPermission = async () => {
@@ -126,7 +149,7 @@ const SelectLocationScreen = ({ navigation, route }) => {
     });
 
     const result = await request(permission);
-    
+
     if (result === RESULTS.GRANTED) {
       getCurrentLocation();
     } else {
@@ -158,7 +181,7 @@ const SelectLocationScreen = ({ navigation, route }) => {
             areaName: 'Current Location',
             pincode: '',
           },
-          userId,
+          userId: resolvedUserId,
         });
         setLoading(false);
       },
@@ -177,62 +200,114 @@ const SelectLocationScreen = ({ navigation, route }) => {
 
   const handleEditAddress = (address) => {
     const uiData = mapDatabaseToUI(address);
-    navigation.navigate('AddAddressScreen', { 
-      editData: uiData, 
-      userId,
-      addressId: address.id 
+    navigation.navigate('AddAddressScreen', {
+      editData: uiData,
+      userId: resolvedUserId,
+      addressId: address.id
     });
   };
 
-  const renderSavedAddress = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.addressCard}
-      onPress={() => handleAddressSelect(item)}
-    >
-      <View style={styles.addressIconContainer}>
-        <Text style={styles.addressIcon}>
-          {item.label === 'Home' ? '🏠' : item.label === 'Work' ? '🏢' : '📍'}
-        </Text>
-        {item.distance && (
-          <Text style={styles.distance}>{item.distance}</Text>
-        )}
-      </View>
-      
-      <View style={styles.addressContent}>
-        <View style={styles.addressHeader}>
-          <Text style={styles.addressLabel}>{item.label}</Text>
-          {item.is_primary && (
-            <View style={styles.selectedBadge}>
-              <Text style={styles.selectedText}>Selected</Text>
-            </View>
+  const deleteAddress = async (address) => {
+    if (!address?.id) {
+      Alert.alert('Error', 'Address id is missing');
+      return;
+    }
+
+    if (address.is_primary) {
+      Alert.alert('Action not allowed', 'Primary address cannot be deleted.');
+      return;
+    }
+
+    Alert.alert(
+      'Delete Address',
+      'Are you sure you want to delete this address?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await services.DeleteAddress(address.id);
+              setSavedAddresses((prev) => prev.filter((item) => item.id !== address.id));
+              Alert.alert('Success', 'Address deleted successfully');
+            } catch (error) {
+              console.error('Delete address failed:', error);
+              Alert.alert('Error', 'Unable to delete address right now.');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const renderSavedAddress = ({ item }) => {
+    const displayLabel = item.label || item.custom_label || item.address_type_name || 'Address';
+    const addressLines = [
+      item.address_line1,
+      item.address_line2,
+      item.landmark,
+      [item.city, item.state, item.pincode].filter(Boolean).join(' '),
+    ].filter(Boolean);
+
+    return (
+      <TouchableOpacity
+        style={styles.addressCard}
+        onPress={() => handleAddressSelect(item)}
+      >
+        <View style={styles.addressIconContainer}>
+          <Text style={styles.addressIcon}>
+            {displayLabel === 'Home' ? '🏠' : displayLabel === 'Work' ? '🏢' : '📍'}
+          </Text>
+          {item.distance && (
+            <Text style={styles.distance}>{item.distance}</Text>
           )}
         </View>
-        <Text style={styles.addressText} numberOfLines={2}>
-          {formatAddressDisplay(item)}
-        </Text>
-      </View>
 
-      <View style={styles.addressActions}>
-        <TouchableOpacity 
-          style={styles.actionButton}
-          onPress={() => handleEditAddress(item)}
-        >
-          <Text style={styles.actionIcon}>✏️</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionIcon}>⋮</Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
-  );
+        <View style={styles.addressContent}>
+          <View style={styles.addressHeader}>
+            <Text style={styles.addressLabel}>{displayLabel}</Text>
+            {item.is_primary && (
+              <View style={styles.selectedBadge}>
+                <Text style={styles.selectedText}>Selected</Text>
+              </View>
+            )}
+          </View>
+          <Text style={styles.addressText} numberOfLines={3}>
+            {addressLines.join(', ')}
+          </Text>
+        </View>
+
+        <View style={styles.addressActions}>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => handleEditAddress(item)}
+          >
+            <Text style={styles.actionIcon}>✏️</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              item.is_primary ? styles.actionButtonDisabled : null,
+            ]}
+            onPress={() => deleteAddress(item)}
+            disabled={item.is_primary}
+          >
+            <Text style={styles.actionIcon}>🗑️</Text>
+            <Text style={styles.deleteText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
+
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
@@ -245,9 +320,9 @@ const SelectLocationScreen = ({ navigation, route }) => {
       <View style={styles.searchWrapper}>
         <SimpleSearchInput
           placeholder="Search an area or address"
-          onSelect={(data) => navigation.navigate('AddAddressScreen', { 
-            locationData: data, 
-            userId 
+          onSelect={(data) => navigation.navigate('AddAddressScreen', {
+            locationData: data,
+            userId: resolvedUserId
           })}
           containerStyle={{ marginBottom: 16 }}
         />
@@ -255,7 +330,7 @@ const SelectLocationScreen = ({ navigation, route }) => {
 
       {/* Quick Actions */}
       <View style={styles.quickActions}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.actionCard}
           onPress={requestLocationPermission}
         >
@@ -265,9 +340,9 @@ const SelectLocationScreen = ({ navigation, route }) => {
           <Text style={styles.actionText}>Use Current{'\n'}Location</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.actionCard}
-          onPress={() => navigation.navigate('AddAddressScreen', { userId })}
+          onPress={() => navigation.navigate('AddAddressScreen', { userId: resolvedUserId })}
         >
           <View style={[styles.actionIcon, { backgroundColor: '#FFF5F0' }]}>
             <Text style={{ fontSize: 24 }}>➕</Text>
@@ -286,14 +361,26 @@ const SelectLocationScreen = ({ navigation, route }) => {
       {/* Saved Addresses */}
       <View style={styles.savedSection}>
         <Text style={styles.sectionTitle}>SAVED ADDRESSES</Text>
-        
-        <FlatList
-          data={savedAddresses}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderSavedAddress}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.listContainer}
-        />
+
+        {savedAddresses.length === 0 ? (
+          <View style={{ padding: 24, alignItems: 'center' }}>
+            <Text style={{ color: '#999' }}>No saved addresses found.</Text>
+            <TouchableOpacity
+              style={{ marginTop: 12 }}
+              onPress={() => navigation.navigate('AddAddressScreen', { userId: resolvedUserId })}
+            >
+              <Text style={{ color: '#FF6B00', fontWeight: '600' }}>Add an address</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <FlatList
+            data={savedAddresses}
+            keyExtractor={(item) => (item.id ? item.id.toString() : Math.random().toString())}
+            renderItem={renderSavedAddress}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContainer}
+          />
+        )}
       </View>
 
       {savedAddresses.length > 2 && (
@@ -471,11 +558,22 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   actionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 4,
+  },
+  actionButtonDisabled: {
+    opacity: 0.4,
   },
   actionIcon: {
     fontSize: 18,
     color: '#999',
+  },
+  deleteText: {
+    marginLeft: 4,
+    color: '#D32F2F',
+    fontSize: 13,
+    fontWeight: '600',
   },
   viewAllButton: {
     flexDirection: 'row',

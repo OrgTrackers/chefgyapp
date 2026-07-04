@@ -1,6 +1,6 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Provider as PaperProvider} from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider as PaperProvider } from 'react-native-paper';
 import React, { useState, useEffect, useRef } from 'react';
 import { BackHandler, ToastAndroid } from 'react-native';
 import Home from './src/components/Home';
@@ -171,137 +171,137 @@ const App = () => {
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
 
-            initialRouteName="Home"
+            initialRouteName="Splash"
 
             screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="UserProfile" component={UserProfile} />
-          <Stack.Screen name="EditUserProfile" component={EditUserProfile} />
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="OtpContent" component={OtpContent} />
-          <Stack.Screen name="CaterMenu" component={CaterMenu} />
-          <Stack.Screen name="VegIngredients" component={VegIngredients} />
-          <Stack.Screen name="EventPage" component={EventPage} />
-          <Stack.Screen name="Ingredients" component={Ingredients} />
-          <Stack.Screen name="Location" component={Location} />
-          <Stack.Screen name="BookCateres" component={BookCateres} />
-          <Stack.Screen name="FoodSession" component={FoodSession} />
-          <Stack.Screen name="Menus" component={Menus} />
-          <Stack.Screen name="OrderSummary" component={OrderSummary} />
-          <Stack.Screen name="CaterSelection" component={CaterSelection} />
-          <Stack.Screen name="Invoice" component={Invoice} />
-          <Stack.Screen name="Rating" component={Rating} />
-          <Stack.Screen name="Coupons" component={Coupons} />
-          <Stack.Screen name="Bidding" component={Bidding} />
-          <Stack.Screen name="OrderAccepted" component={OrderAccepted} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="UserProfile" component={UserProfile} />
+            <Stack.Screen name="EditUserProfile" component={EditUserProfile} />
+            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="OtpContent" component={OtpContent} />
+            <Stack.Screen name="CaterMenu" component={CaterMenu} />
+            <Stack.Screen name="VegIngredients" component={VegIngredients} />
+            <Stack.Screen name="EventPage" component={EventPage} />
+            <Stack.Screen name="Ingredients" component={Ingredients} />
+            <Stack.Screen name="Location" component={Location} />
+            <Stack.Screen name="BookCateres" component={BookCateres} />
+            <Stack.Screen name="FoodSession" component={FoodSession} />
+            <Stack.Screen name="Menus" component={Menus} />
+            <Stack.Screen name="OrderSummary" component={OrderSummary} />
+            <Stack.Screen name="CaterSelection" component={CaterSelection} />
+            <Stack.Screen name="Invoice" component={Invoice} />
+            <Stack.Screen name="Rating" component={Rating} />
+            <Stack.Screen name="Coupons" component={Coupons} />
+            <Stack.Screen name="Bidding" component={Bidding} />
+            <Stack.Screen name="OrderAccepted" component={OrderAccepted} />
 
-          <Stack.Screen name="ChefFilters" component={ChefFilters} />
-          <Stack.Screen name="ChefList" component={ChefList} />
-          <Stack.Screen name="ChefConformation" component={ChefConformation} />
-          <Stack.Screen name="ChefPickDish" component={ChefPickDish} />
+            <Stack.Screen name="ChefFilters" component={ChefFilters} />
+            <Stack.Screen name="ChefList" component={ChefList} />
+            <Stack.Screen name="ChefConformation" component={ChefConformation} />
+            <Stack.Screen name="ChefPickDish" component={ChefPickDish} />
 
-          <Stack.Screen name="HomeFoodFilters" component={HomeFoodFilters} />
-          <Stack.Screen name="HomeFoodList" component={HomeFoodList} />
-          <Stack.Screen name="HomeFoodConformation" component={HomeFoodConformation} />
-          <Stack.Screen name="HomeFoodPickDish" component={HomeFoodPickDish} />
+            <Stack.Screen name="HomeFoodFilters" component={HomeFoodFilters} />
+            <Stack.Screen name="HomeFoodList" component={HomeFoodList} />
+            <Stack.Screen name="HomeFoodConformation" component={HomeFoodConformation} />
+            <Stack.Screen name="HomeFoodPickDish" component={HomeFoodPickDish} />
 
-          <Stack.Screen name="FoodTruckFilters" component={FoodTruckFilters} />
-          <Stack.Screen name="FoodTruckList" component={FoodTruckList} />
-          <Stack.Screen name="FoodTruckConformation" component={FoodTruckConformation} />
-          <Stack.Screen name="FoodTruckPickDish" component={FoodTruckPickDish} />
-
-
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="OtpScreen" component={OtpScreen} />
-          <Stack.Screen name="EventsScreen" component={EventsScreen} />
-          <Stack.Screen name="CaterSelectionScreen" component={CaterSelectionScreen} />
-          <Stack.Screen name="MenuSelection" component={MenuSelection} />
-          <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
-          <Stack.Screen name="FinalScreen" component={FinalScreen} />
-         
-          <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
-          <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
-          <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
-          <Stack.Screen name="FooterComponent" component={FooterComponent} />
-
-          {/* New chef Screen */}
-          <Stack.Screen name="ChefEventsScreen" component={ChefEventsScreen} />
-          <Stack.Screen name="BookChefScreen" component={BookChefScreen} />
-          <Stack.Screen name="ChefFoodSessionScreen" component={ChefFoodSessionScreen} />
-          <Stack.Screen name="ChefSelectionScreen" component={ChefSelectionScreen} />
-          <Stack.Screen name="ChefMenuSelectionScreen" component={ChefMenuSelectionScreen} />
-          <Stack.Screen name="ChefOrderSummaryScreen" component={ChefOrderSummaryScreen} />
-
-          {/* new Home food Screen */}
-          <Stack.Screen name="HomeFoodEventsScreen" component={HomeFoodEventsScreen} />
-          <Stack.Screen name="BookHomeFoodScreen" component={BookHomeFoodScreen} />
-          <Stack.Screen name="HomeFoodFoodSessionScreen" component={HomeFoodFoodSessionScreen} />
-          <Stack.Screen name="HomeFoodSelectionScreen" component={HomeFoodSelectionScreen} />
-          <Stack.Screen name="HomeFoodMenuSelectionScreen" component={HomeFoodMenuSelectionScreen} />
-          <Stack.Screen name="HomeFoodOrderSummaryScreen" component={HomeFoodOrderSummaryScreen} />
-
-          
-          {/* new Home food Screen */}
-          <Stack.Screen name="FoodTruckEventsScreen" component={FoodTruckEventsScreen} />
-          <Stack.Screen name="BookFoodTruckScreen" component={BookFoodTruckScreen} />
-          <Stack.Screen name="FoodTruckFoodSessionScreen" component={FoodTruckFoodSessionScreen} />
-          <Stack.Screen name="FoodTruckSelectionScreen" component={FoodTruckSelectionScreen} />
-          <Stack.Screen name="FoodTruckMenuSelectionScreen" component={FoodTruckMenuSelectionScreen} />
-          <Stack.Screen name="FoodTruckOrderSummaryScreen" component={FoodTruckOrderSummaryScreen} />
+            <Stack.Screen name="FoodTruckFilters" component={FoodTruckFilters} />
+            <Stack.Screen name="FoodTruckList" component={FoodTruckList} />
+            <Stack.Screen name="FoodTruckConformation" component={FoodTruckConformation} />
+            <Stack.Screen name="FoodTruckPickDish" component={FoodTruckPickDish} />
 
 
-          <Stack.Screen name="BiddingScreen" component={BiddingScreen} />
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="MenuScreen" component={MenuScreen} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="OtpScreen" component={OtpScreen} />
+            <Stack.Screen name="EventsScreen" component={EventsScreen} />
+            <Stack.Screen name="CaterSelectionScreen" component={CaterSelectionScreen} />
+            <Stack.Screen name="MenuSelection" component={MenuSelection} />
+            <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
+            <Stack.Screen name="FinalScreen" component={FinalScreen} />
+
+            <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
+            <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
+            <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
+            <Stack.Screen name="FooterComponent" component={FooterComponent} />
+
+            {/* New chef Screen */}
+            <Stack.Screen name="ChefEventsScreen" component={ChefEventsScreen} />
+            <Stack.Screen name="BookChefScreen" component={BookChefScreen} />
+            <Stack.Screen name="ChefFoodSessionScreen" component={ChefFoodSessionScreen} />
+            <Stack.Screen name="ChefSelectionScreen" component={ChefSelectionScreen} />
+            <Stack.Screen name="ChefMenuSelectionScreen" component={ChefMenuSelectionScreen} />
+            <Stack.Screen name="ChefOrderSummaryScreen" component={ChefOrderSummaryScreen} />
+
+            {/* new Home food Screen */}
+            <Stack.Screen name="HomeFoodEventsScreen" component={HomeFoodEventsScreen} />
+            <Stack.Screen name="BookHomeFoodScreen" component={BookHomeFoodScreen} />
+            <Stack.Screen name="HomeFoodFoodSessionScreen" component={HomeFoodFoodSessionScreen} />
+            <Stack.Screen name="HomeFoodSelectionScreen" component={HomeFoodSelectionScreen} />
+            <Stack.Screen name="HomeFoodMenuSelectionScreen" component={HomeFoodMenuSelectionScreen} />
+            <Stack.Screen name="HomeFoodOrderSummaryScreen" component={HomeFoodOrderSummaryScreen} />
 
 
-          <Stack.Screen name="CustomizeScreen" component={CustomizeScreen} />
-          {/* <Stack.Screen name="CartScreen" component={CartScreen} /> */}
-          <Stack.Screen name="BillSummaryScreen" component={BillSummaryScreen} />
-          <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
-          <Stack.Screen name="OrderSuccessScreen" component={OrderSuccessScreen} />
-
-          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
-
-           <Stack.Screen name="DoughnutBoxScreen" component={DoughnutBoxScreen} />
-            
-        <Stack.Screen name ="AddAddressScreen"component={AddAddressScreen} />
-         <Stack.Screen name ="SelectLocationScreen"component={SelectLocationScreen} />
-
-           <Stack.Screen name="VendorListScreen">
-             {(props) => (
-               <VendorListScreen
-                 {...props}
-                 cart={cart}
-                 onViewCart={() => props.navigation.navigate('CartScreen')}
-               />
-             )}
-           </Stack.Screen>
-           <Stack.Screen name="VendorMenuScreen">
-             {(props) => (
-               <VendorMenuScreen
-                 {...props}
-                 cart={cart}
-                 setCart={setCart}
-                 onViewCart={() => props.navigation.navigate('CartScreen')}
-               />
-             )}
-           </Stack.Screen>
-           <Stack.Screen name="CartScreen">
-             {(props) => (
-               <CartScreen
-                 {...props}
-                 cart={cart}
-                 setCart={setCart}
-               />
-             )}
-           </Stack.Screen>
+            {/* new Home food Screen */}
+            <Stack.Screen name="FoodTruckEventsScreen" component={FoodTruckEventsScreen} />
+            <Stack.Screen name="BookFoodTruckScreen" component={BookFoodTruckScreen} />
+            <Stack.Screen name="FoodTruckFoodSessionScreen" component={FoodTruckFoodSessionScreen} />
+            <Stack.Screen name="FoodTruckSelectionScreen" component={FoodTruckSelectionScreen} />
+            <Stack.Screen name="FoodTruckMenuSelectionScreen" component={FoodTruckMenuSelectionScreen} />
+            <Stack.Screen name="FoodTruckOrderSummaryScreen" component={FoodTruckOrderSummaryScreen} />
 
 
+            <Stack.Screen name="BiddingScreen" component={BiddingScreen} />
+            <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="MenuScreen" component={MenuScreen} />
 
-        </Stack.Navigator>
-      </NavigationContainer>
+
+            <Stack.Screen name="CustomizeScreen" component={CustomizeScreen} />
+            {/* <Stack.Screen name="CartScreen" component={CartScreen} /> */}
+            <Stack.Screen name="BillSummaryScreen" component={BillSummaryScreen} />
+            <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+            <Stack.Screen name="OrderSuccessScreen" component={OrderSuccessScreen} />
+
+            <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+
+            <Stack.Screen name="DoughnutBoxScreen" component={DoughnutBoxScreen} />
+
+            <Stack.Screen name="AddAddressScreen" component={AddAddressScreen} />
+            <Stack.Screen name="SelectLocationScreen" component={SelectLocationScreen} />
+
+            <Stack.Screen name="VendorListScreen">
+              {(props) => (
+                <VendorListScreen
+                  {...props}
+                  cart={cart}
+                  onViewCart={() => props.navigation.navigate('CartScreen')}
+                />
+              )}
+            </Stack.Screen>
+            <Stack.Screen name="VendorMenuScreen">
+              {(props) => (
+                <VendorMenuScreen
+                  {...props}
+                  cart={cart}
+                  setCart={setCart}
+                  onViewCart={() => props.navigation.navigate('CartScreen')}
+                />
+              )}
+            </Stack.Screen>
+            <Stack.Screen name="CartScreen">
+              {(props) => (
+                <CartScreen
+                  {...props}
+                  cart={cart}
+                  setCart={setCart}
+                />
+              )}
+            </Stack.Screen>
+
+
+
+          </Stack.Navigator>
+        </NavigationContainer>
       </CartProvider>
     </PaperProvider>
   );

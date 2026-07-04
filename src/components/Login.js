@@ -14,7 +14,7 @@ const Login = () => {
       console.log(response)
       const { data } = response;
       if (data && data.token) {
-        navigation.navigate('OtpContent', { userId: data.user.userid, token: data.token });
+        navigation.navigate('OtpContent', { userId: data.user.userid, token: data.token, fullName: data.user.fullname });
       } else {
         console.error('Login failed: Unexpected response structure');
         Alert.alert('Login Failed', 'Unexpected response from server. Please try again later.');
