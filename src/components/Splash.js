@@ -1,7 +1,8 @@
 import { Animated, Image, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useRef } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Splash = ({navigation}) => {
+const Splash = ({ navigation }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -17,35 +18,43 @@ const Splash = ({navigation}) => {
       useNativeDriver: true,
     });
 
+    const redirectBasedOnToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem('userToken');
+        navigation.replace(token ? 'Home' : 'Login');
+      } catch (error) {
+        console.error('Splash token check failed:', error);
+        navigation.replace('Login');
+      }
+    };
+
     Animated.sequence([
       zoomIn,
       zoomOut,
     ]).start(() => {
-      navigation.navigate('HomeScreen',{
-        transition: 'topToBottom',
-      });
+      redirectBasedOnToken();
     });
   }, [scaleAnim, navigation]);
 
 
   return (
     <View style={styles.container}>
-      <Animated.Image source={require('../assets/images/logo-2.png')} 
-      style={[styles.logoImg,{transform:[{scale:scaleAnim}] }] }/>
+      <Animated.Image source={require('../assets/images/logo-2.png')}
+        style={[styles.logoImg, { transform: [{ scale: scaleAnim }] }]} />
     </View>
   )
 }
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
+  container: {
+    flex: 1,
     backgroundColor: '#FFF0C8',
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  logoImg:{
-    width:200,
-    height:200,
-    resizeMode:'contain'
+  logoImg: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain'
   }
 })
 

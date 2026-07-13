@@ -9,7 +9,7 @@ import userService from '../services/api/userService';
 const OtpContent = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { userId, token } = route.params;
+  const { userId, token, fullName } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
   const otpInputs = useRef([]);
 
@@ -38,6 +38,7 @@ const OtpContent = () => {
       if (response.status == 200) {
         await AsyncStorage.setItem('userToken', token.toString());
         await AsyncStorage.setItem('userId', userId.toString());
+        await AsyncStorage.setItem('fullName', fullName.toString());
         navigation.navigate('Home');
       } else {
         Alert.alert('Verification Failed', 'Invalid OTP. Please try again.');
