@@ -7,6 +7,9 @@ import {
   Modal, FlatList,
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
+
+import SearchServicesScreen from "../../newsrc/newscreens/SearchServicesScreen";
+import ServiceVendorsScreen from "../../newsrc/newscreens/ServiceVendorsScreen";
 import {
   MapPin, Bell, Search, Mic, SlidersHorizontal, ChevronRight,
   Star, Clock, Heart, Home, Compass, BookOpen, User,
@@ -900,16 +903,17 @@ export default function App() {
     setWishlistedOffers(p => p.includes(index) ? p.filter(x => x !== index) : [...p, index]);
   };
 
-  const handleServiceNavigation = (label) => {
-    switch (label) {
-      case "Caterer": return navigation.navigate("EventsScreen");
-      case "Chef": return navigation.navigate("ChefEventsScreen");
-      case "Home Food": return navigation.navigate("HomeFoodEventsScreen");
-      case "Cloud Kitchen": return navigation.navigate("MenuScreen");
-      case "Food Truck": return navigation.navigate("FoodTruckEventsScreen");
-      default: console.warn("No screen mapped for service:", label);
-    }
+  const handleServiceNavigation = (svc) => {
+    navigation.navigate("ServiceVendorsScreen", { service: svc });
   };
+
+  // Tapping the search bar opens SearchServicesScreen as an overlay (a card
+  // hanging from the top, blurring Home behind it) rather than navigating to
+  // a separate full-screen route. It expands to full screen once the user
+  // types 3+ characters, and collapses back down when the search box is
+  // cleared — see SearchServicesScreen.js for that animation logic.
+  const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
+  const openSearch = () => setSearchOverlayOpen(true);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -950,22 +954,26 @@ export default function App() {
         {/* Scrollable Content */}
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
 
-          {/* Search */}
+          {/* Search — tapping anywhere on this bar opens SearchServicesScreen */}
           <View style={styles.searchWrap}>
-            <View style={[styles.searchBox, searchFocused && styles.searchBoxFocused]}>
+            <TouchableOpacity
+              style={styles.searchBox}
+              activeOpacity={0.85}
+              onPress={openSearch}
+            >
               <Search size={18} color={MUTED} />
-              <TextInput
-                style={styles.searchInput}
-                placeholder="Search chefs, caterers, home food..."
-                placeholderTextColor={MUTED}
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
-              />
+              <Text style={styles.searchPlaceholder} numberOfLines={1}>
+                Search chefs, caterers, home food...
+              </Text>
               <View style={styles.searchActions}>
-                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7}><Mic size={15} color={PRIMARY} /></TouchableOpacity>
-                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7}><SlidersHorizontal size={14} color="#fff" /></TouchableOpacity>
+                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7} onPress={openSearch}>
+                  <Mic size={15} color={PRIMARY} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7} onPress={openSearch}>
+                  <SlidersHorizontal size={14} color="#fff" />
+                </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Banner */}
@@ -1218,6 +1226,11 @@ export default function App() {
         </View>
 
       </View>
+       <SearchServicesScreen
+        visible={searchOverlayOpen}
+        onClose={() => setSearchOverlayOpen(false)}
+        navigation={navigation}
+      />
     </SafeAreaView>
   );
 }
