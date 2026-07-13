@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   View, Text, Image, TextInput, TouchableOpacity, ScrollView,
   StyleSheet, Dimensions, Animated, Platform, StatusBar, SafeAreaView,
   Modal, FlatList,
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
-
-import SearchServicesScreen from "../../newsrc/newscreens/SearchServicesScreen";
-import ServiceVendorsScreen from "../../newsrc/newscreens/ServiceVendorsScreen";
 import {
   MapPin, Bell, Search, Mic, SlidersHorizontal, ChevronRight,
   Star, Clock, Heart, Home, Compass, BookOpen, User,
@@ -17,6 +15,9 @@ import {
   ShieldCheck, Leaf, ChevronDown, ChevronUp, X, Bookmark, Share2,
   CheckCircle2, Sparkles, Filter,
 } from "lucide-react-native";
+import services from "../services/api/services";
+import ServiceConstants, { ServiceApi } from "../services/api/ServiceConstants";
+
 
 const { width: SCREEN_W } = Dimensions.get("window");
 const PRIMARY = "#FF4D4D";
@@ -29,37 +30,63 @@ const GOLD = "#C9A84C";
 const GOLD_LIGHT = "#FFF8E7";
 const GREEN_TRUST = "#2D7A4F";
 const GREEN_LIGHT = "#E8F5EE";
+const DEFAULT_GRADIENT_COLORS = ["#F5E6D3", "#E8C8A2"];
+
+const normalizeGradientColors = (colors) => {
+  if (Array.isArray(colors) && colors.length > 0) {
+    const normalized = colors.filter(Boolean);
+    if (normalized.length === 0) return DEFAULT_GRADIENT_COLORS;
+    if (normalized.length === 1) return [normalized[0], normalized[0]];
+    return normalized;
+  }
+
+  if (typeof colors === "string" && colors.trim()) {
+    return [colors, colors];
+  }
+
+  return DEFAULT_GRADIENT_COLORS;
+};
 
 // ─── DATA ───────────────────────────────────────────────────────────────────
 
 const bannerSlides = [
-  { title: "Royal Wedding Catering", sub: "Make your big day unforgettable", cta: "Book Now",
+  {
+    title: "Royal Wedding Catering", sub: "Make your big day unforgettable", cta: "Book Now",
     img: "https://images.unsplash.com/photo-1719786625035-71f46082e385?w=800&h=500&fit=crop&auto=format",
-    badge: "Top Rated", colors: ["rgba(136,19,55,0.85)", "rgba(136,19,55,0.3)"] },
-  { title: "Live BBQ Chef Experience", sub: "Sizzling flavors at your doorstep", cta: "Hire Chef",
+    badge: "Top Rated", colors: ["rgba(136,19,55,0.85)", "rgba(136,19,55,0.3)"]
+  },
+  {
+    title: "Live BBQ Chef Experience", sub: "Sizzling flavors at your doorstep", cta: "Hire Chef",
     img: "https://images.unsplash.com/photo-1503453776591-b4548af666a2?w=800&h=500&fit=crop&auto=format",
-    badge: "Trending", colors: ["rgba(154,52,18,0.85)", "rgba(154,52,18,0.3)"] },
-  { title: "Home Cooked Goodness", sub: "Wholesome meals from home kitchens", cta: "Order Now",
+    badge: "Trending", colors: ["rgba(154,52,18,0.85)", "rgba(154,52,18,0.3)"]
+  },
+  {
+    title: "Home Cooked Goodness", sub: "Wholesome meals from home kitchens", cta: "Order Now",
     img: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=800&h=500&fit=crop&auto=format",
-    badge: "Healthy", colors: ["rgba(20,83,45,0.85)", "rgba(20,83,45,0.3)"] },
-  { title: "Corporate Catering", sub: "Impress your team every meeting", cta: "Get Quote",
+    badge: "Healthy", colors: ["rgba(20,83,45,0.85)", "rgba(20,83,45,0.3)"]
+  },
+  {
+    title: "Corporate Catering", sub: "Impress your team every meeting", cta: "Get Quote",
     img: "https://images.unsplash.com/photo-1576842546422-60562b9242ae?w=800&h=500&fit=crop&auto=format",
-    badge: "Corporate", colors: ["rgba(30,41,59,0.85)", "rgba(30,41,59,0.3)"] },
-  { title: "Cloud Kitchen Specials", sub: "Restaurant quality, delivered fast", cta: "Order Now",
+    badge: "Corporate", colors: ["rgba(30,41,59,0.85)", "rgba(30,41,59,0.3)"]
+  },
+  {
+    title: "Cloud Kitchen Specials", sub: "Restaurant quality, delivered fast", cta: "Order Now",
     img: "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&h=500&fit=crop&auto=format",
-    badge: "Fast", colors: ["rgba(88,28,135,0.85)", "rgba(88,28,135,0.3)"] },
+    badge: "Fast", colors: ["rgba(88,28,135,0.85)", "rgba(88,28,135,0.3)"]
+  },
 ];
 
-const services = [
-  { label: "Chef", img: "https://images.unsplash.com/photo-1572715376701-98568319fd0b?w=200&h=200&fit=crop&auto=format", accent: PRIMARY },
-  { label: "Caterer", img: "https://images.unsplash.com/photo-1660120447916-123439b05c40?w=200&h=200&fit=crop&auto=format", accent: "#FF9F43" },
-  { label: "Home Food", img: "https://images.unsplash.com/photo-1671970922492-4d2a4c7a2ffe?w=200&h=200&fit=crop&auto=format", accent: SUCCESS },
-  { label: "Cloud Kitchen", img: "https://images.unsplash.com/photo-1652862729869-2f4e80c1849d?w=200&h=200&fit=crop&auto=format", accent: "#2196F3" },
-  { label: "Food Truck", img: "https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=200&h=200&fit=crop&auto=format", accent: ACCENT },
-  { label: "Bakery", img: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=200&h=200&fit=crop&auto=format", accent: "#E91E63" },
-  { label: "Live Counter", img: "https://images.unsplash.com/photo-1778687192857-9178a574d49f?w=200&h=200&fit=crop&auto=format", accent: "#9C27B0" },
-  { label: "Event Food", img: "https://images.unsplash.com/photo-1555244162-803834f70033?w=200&h=200&fit=crop&auto=format", accent: "#00BCD4" },
-];
+// const services = [
+//   { label: "Chef", img: "https://images.unsplash.com/photo-1572715376701-98568319fd0b?w=200&h=200&fit=crop&auto=format", accent: PRIMARY },
+//   { label: "Caterer", img: "https://images.unsplash.com/photo-1660120447916-123439b05c40?w=200&h=200&fit=crop&auto=format", accent: "#FF9F43" },
+//   { label: "Home Food", img: "https://images.unsplash.com/photo-1671970922492-4d2a4c7a2ffe?w=200&h=200&fit=crop&auto=format", accent: SUCCESS },
+//   { label: "Cloud Kitchen", img: "https://images.unsplash.com/photo-1652862729869-2f4e80c1849d?w=200&h=200&fit=crop&auto=format", accent: "#2196F3" },
+//   { label: "Food Truck", img: "https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=200&h=200&fit=crop&auto=format", accent: ACCENT },
+//   { label: "Bakery", img: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=200&h=200&fit=crop&auto=format", accent: "#E91E63" },
+//   { label: "Live Counter", img: "https://images.unsplash.com/photo-1778687192857-9178a574d49f?w=200&h=200&fit=crop&auto=format", accent: "#9C27B0" },
+//   { label: "Event Food", img: "https://images.unsplash.com/photo-1555244162-803834f70033?w=200&h=200&fit=crop&auto=format", accent: "#00BCD4" },
+// ];
 
 const occasions = [
   { label: "Birthday", img: "https://images.unsplash.com/photo-1545696563-af8f6ec2295a?w=200&h=200&fit=crop&auto=format", tint: "rgba(251,113,133,0.65)" },
@@ -73,39 +100,63 @@ const occasions = [
 ];
 
 const vendors = [
-  { name: "Royal Caterers", tag: "Premium Catering", rating: 4.9, events: "500+ Events", dist: "2.1 km", price: "₹₹₹",
-    img: "https://images.unsplash.com/photo-1680342630889-b475e612a058?w=400&h=260&fit=crop&auto=format", logo: "👑", verified: true, badge: "Top Choice" },
-  { name: "Chef Arjun", tag: "Italian • BBQ • North Indian", rating: 4.8, events: "320+ Bookings", dist: "3.4 km", price: "₹₹",
-    img: "https://images.unsplash.com/photo-1622021142947-da7dedc7c39a?w=400&h=260&fit=crop&auto=format", logo: "🧑‍🍳", verified: true, badge: "Chef's Pick" },
-  { name: "Cloud Bowl Kitchen", tag: "Fast Delivery • Multi-cuisine", rating: 4.9, events: "1200+ Orders", dist: "1.2 km", price: "₹₹",
-    img: "https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=260&fit=crop&auto=format", logo: "☁️", verified: true, badge: "Fast Delivery" },
-  { name: "Spice Street Truck", tag: "Street Food • Live Counters", rating: 4.7, events: "200+ Events", dist: "4.0 km", price: "₹",
-    img: "https://images.unsplash.com/photo-1765478006672-463264014e78?w=400&h=260&fit=crop&auto=format", logo: "🚚", verified: true, badge: "Trending" },
+  {
+    name: "Royal Caterers", tag: "Premium Catering", rating: 4.9, events: "500+ Events", dist: "2.1 km", price: "₹₹₹",
+    img: "https://images.unsplash.com/photo-1680342630889-b475e612a058?w=400&h=260&fit=crop&auto=format", logo: "👑", verified: true, badge: "Top Choice"
+  },
+  {
+    name: "Chef Arjun", tag: "Italian • BBQ • North Indian", rating: 4.8, events: "320+ Bookings", dist: "3.4 km", price: "₹₹",
+    img: "https://images.unsplash.com/photo-1622021142947-da7dedc7c39a?w=400&h=260&fit=crop&auto=format", logo: "🧑‍🍳", verified: true, badge: "Chef's Pick"
+  },
+  {
+    name: "Cloud Bowl Kitchen", tag: "Fast Delivery • Multi-cuisine", rating: 4.9, events: "1200+ Orders", dist: "1.2 km", price: "₹₹",
+    img: "https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=260&fit=crop&auto=format", logo: "☁️", verified: true, badge: "Fast Delivery"
+  },
+  {
+    name: "Spice Street Truck", tag: "Street Food • Live Counters", rating: 4.7, events: "200+ Events", dist: "4.0 km", price: "₹",
+    img: "https://images.unsplash.com/photo-1765478006672-463264014e78?w=400&h=260&fit=crop&auto=format", logo: "🚚", verified: true, badge: "Trending"
+  },
 ];
 
 const chefs = [
-  { name: "Chef Priya Sharma", cuisine: "South Indian • Continental", exp: "12 yrs", rating: 4.9, avail: "Available Today",
-    img: "https://images.unsplash.com/photo-1640583342012-4622f31b650d?w=300&h=300&fit=crop&auto=format", speciality: "Wedding Specialist" },
-  { name: "Chef Rahul Mehra", cuisine: "Mughlai • Tandoor", exp: "8 yrs", rating: 4.8, avail: "Booked Till Fri",
-    img: "https://images.unsplash.com/photo-1503453776591-b4548af666a2?w=300&h=300&fit=crop&auto=format", speciality: "Kebab Master" },
-  { name: "Chef Anjali Nair", cuisine: "Kerala • Fusion", exp: "6 yrs", rating: 4.7, avail: "Available Tomorrow",
-    img: "https://images.unsplash.com/photo-1731156679850-e73fbc21564c?w=300&h=300&fit=crop&auto=format", speciality: "Seafood Expert" },
+  {
+    name: "Chef Priya Sharma", cuisine: "South Indian • Continental", exp: "12 yrs", rating: 4.9, avail: "Available Today",
+    img: "https://images.unsplash.com/photo-1640583342012-4622f31b650d?w=300&h=300&fit=crop&auto=format", speciality: "Wedding Specialist"
+  },
+  {
+    name: "Chef Rahul Mehra", cuisine: "Mughlai • Tandoor", exp: "8 yrs", rating: 4.8, avail: "Booked Till Fri",
+    img: "https://images.unsplash.com/photo-1503453776591-b4548af666a2?w=300&h=300&fit=crop&auto=format", speciality: "Kebab Master"
+  },
+  {
+    name: "Chef Anjali Nair", cuisine: "Kerala • Fusion", exp: "6 yrs", rating: 4.7, avail: "Available Tomorrow",
+    img: "https://images.unsplash.com/photo-1731156679850-e73fbc21564c?w=300&h=300&fit=crop&auto=format", speciality: "Seafood Expert"
+  },
 ];
 
 const homeFoodProviders = [
-  { name: "Amma's Kitchen", tag: "Veg • South Indian", items: ["Sambar Rice", "Rasam", "Curd Rice"], rating: 4.9,
-    img: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=400&h=240&fit=crop&auto=format", badge: "Home Chef", price: "₹120/meal" },
-  { name: "Nani's Tiffin", tag: "Non-Veg • North Indian", items: ["Dal Makhani", "Butter Chicken", "Roti"], rating: 4.8,
-    img: "https://images.unsplash.com/photo-1543352632-5a4b24e4d2a6?w=400&h=240&fit=crop&auto=format", badge: "Diet Friendly", price: "₹180/meal" },
+  {
+    name: "Amma's Kitchen", tag: "Veg • South Indian", items: ["Sambar Rice", "Rasam", "Curd Rice"], rating: 4.9,
+    img: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=400&h=240&fit=crop&auto=format", badge: "Home Chef", price: "₹120/meal"
+  },
+  {
+    name: "Nani's Tiffin", tag: "Non-Veg • North Indian", items: ["Dal Makhani", "Butter Chicken", "Roti"], rating: 4.8,
+    img: "https://images.unsplash.com/photo-1543352632-5a4b24e4d2a6?w=400&h=240&fit=crop&auto=format", badge: "Diet Friendly", price: "₹180/meal"
+  },
 ];
 
 const cloudKitchens = [
-  { name: "Biryani Bros", dish: "Hyderabadi Dum Biryani", time: "25 min", offer: "20% OFF", rating: 4.9,
-    img: "https://images.unsplash.com/photo-1676826579382-2ab5b56a5dc1?w=360&h=240&fit=crop&auto=format", tag: "Bestseller" },
-  { name: "Bowl & Co.", dish: "Superfood Buddha Bowl", time: "20 min", offer: "Free Delivery", rating: 4.7,
-    img: "https://images.unsplash.com/photo-1644704170910-a0cdf183649b?w=360&h=240&fit=crop&auto=format", tag: "Healthy" },
-  { name: "Pizza Republic", dish: "Wood-fired Truffle Pizza", time: "30 min", offer: "Buy 2 Get 1", rating: 4.6,
-    img: "https://images.unsplash.com/photo-1661163081367-d4c17da3e259?w=360&h=240&fit=crop&auto=format", tag: "Trending" },
+  {
+    name: "Biryani Bros", dish: "Hyderabadi Dum Biryani", time: "25 min", offer: "20% OFF", rating: 4.9,
+    img: "https://images.unsplash.com/photo-1676826579382-2ab5b56a5dc1?w=360&h=240&fit=crop&auto=format", tag: "Bestseller"
+  },
+  {
+    name: "Bowl & Co.", dish: "Superfood Buddha Bowl", time: "20 min", offer: "Free Delivery", rating: 4.7,
+    img: "https://images.unsplash.com/photo-1644704170910-a0cdf183649b?w=360&h=240&fit=crop&auto=format", tag: "Healthy"
+  },
+  {
+    name: "Pizza Republic", dish: "Wood-fired Truffle Pizza", time: "30 min", offer: "Buy 2 Get 1", rating: 4.6,
+    img: "https://images.unsplash.com/photo-1661163081367-d4c17da3e259?w=360&h=240&fit=crop&auto=format", tag: "Trending"
+  },
 ];
 
 const offers = [
@@ -805,32 +856,60 @@ function RecommendedSection() {
 
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 
-export default function HomeScreen() {
+export default function App() {
   const navigation = useNavigation();
   const [activeNav, setActiveNav] = useState(0);
+  const [searchFocused, setSearchFocused] = useState(false);
   const [wishlistedOffers, setWishlistedOffers] = useState([]);
+  const [userServices, setUserServices] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [fullName, setFullName] = useState("Guest");
+
+  useEffect(() => {
+    const loadHomeData = async () => {
+      try {
+        const name = await AsyncStorage.getItem('fullName');
+        setFullName(name || "Guest");
+      } catch (error) {
+        console.error("Failed to fetch user name", error);
+      }
+
+      services.GetUserServices(26)
+        .then((response) => {
+          setUserServices(response?.data || []);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user services", error);
+        });
+
+      services.GetAllEventTypes()
+        .then((response) => {
+          console.log("Fetched event types:", response);
+          console.log("Fetched events:", response?.data);
+          setEvents(response?.data || []);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch events", error);
+        });
+    };
+
+    loadHomeData();
+  }, []);
 
   const toggleWishlist = (index) => {
     setWishlistedOffers(p => p.includes(index) ? p.filter(x => x !== index) : [...p, index]);
   };
 
-  // Tapping any card in "Explore Services" opens ServiceVendorsScreen as a
-  // separate, full-screen page listing vendors for that specific service
-  // (e.g. tapping "Chef" shows a list of chefs, tapping "Bakery" shows a
-  // list of bakeries, etc). The whole service object (label/img/accent) is
-  // passed along so the vendor screen can theme itself and look up the
-  // right sample vendor list.
-  const handleServiceNavigation = (svc) => {
-    navigation.navigate("ServiceVendorsScreen", { service: svc });
+  const handleServiceNavigation = (label) => {
+    switch (label) {
+      case "Caterer": return navigation.navigate("EventsScreen");
+      case "Chef": return navigation.navigate("ChefEventsScreen");
+      case "Home Food": return navigation.navigate("HomeFoodEventsScreen");
+      case "Cloud Kitchen": return navigation.navigate("MenuScreen");
+      case "Food Truck": return navigation.navigate("FoodTruckEventsScreen");
+      default: console.warn("No screen mapped for service:", label);
+    }
   };
-
-  // Tapping the search bar opens SearchServicesScreen as an overlay (a card
-  // hanging from the top, blurring Home behind it) rather than navigating to
-  // a separate full-screen route. It expands to full screen once the user
-  // types 3+ characters, and collapses back down when the search box is
-  // cleared — see SearchServicesScreen.js for that animation logic.
-  const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
-  const openSearch = () => setSearchOverlayOpen(true);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -862,7 +941,7 @@ export default function HomeScreen() {
             </View>
           </View>
           <View style={styles.headerGreeting}>
-            <Text style={styles.greetingText}>Good Morning, Pavan 👋</Text>
+            <Text style={styles.greetingText}>Welcome, {fullName} 👋</Text>
             <Text style={styles.greetingTitle}>Book Amazing Food{"\n"}Experiences</Text>
             <Text style={styles.greetingSub}>Find chefs, caterers & home food near you</Text>
           </View>
@@ -871,26 +950,22 @@ export default function HomeScreen() {
         {/* Scrollable Content */}
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
 
-          {/* Search — tapping anywhere on this bar opens SearchServicesScreen */}
+          {/* Search */}
           <View style={styles.searchWrap}>
-            <TouchableOpacity
-              style={styles.searchBox}
-              activeOpacity={0.85}
-              onPress={openSearch}
-            >
+            <View style={[styles.searchBox, searchFocused && styles.searchBoxFocused]}>
               <Search size={18} color={MUTED} />
-              <Text style={styles.searchPlaceholder} numberOfLines={1}>
-                Search chefs, caterers, home food...
-              </Text>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search chefs, caterers, home food..."
+                placeholderTextColor={MUTED}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+              />
               <View style={styles.searchActions}>
-                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7} onPress={openSearch}>
-                  <Mic size={15} color={PRIMARY} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7} onPress={openSearch}>
-                  <SlidersHorizontal size={14} color="#fff" />
-                </TouchableOpacity>
+                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7}><Mic size={15} color={PRIMARY} /></TouchableOpacity>
+                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7}><SlidersHorizontal size={14} color="#fff" /></TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            </View>
           </View>
 
           {/* Banner */}
@@ -900,19 +975,19 @@ export default function HomeScreen() {
           <View style={styles.section}>
             <SectionHeader title="Explore Services" sub="Find the right food service" action="See all" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hScroll}>
-              {services.map((svc) => (
+              {userServices.map((svc) => (
                 <TouchableOpacity
-                  key={svc.label}
+                  key={svc.icon}
                   style={styles.svcCard}
                   activeOpacity={0.88}
-                  onPress={() => handleServiceNavigation(svc)}
+                  onPress={() => handleServiceNavigation(svc.icon)}
                 >
-                  <Image source={{ uri: svc.img }} style={styles.svcImage} resizeMode="cover" />
-                  <LinearGradient colors={["transparent", `${svc.accent}E6`]} style={styles.svcGradient} />
+                  <Image source={{ uri: ServiceApi + svc.image }} style={styles.svcImage} resizeMode="cover" />
+                  <LinearGradient colors={["transparent", `${svc.backgroundcolor}E6`]} style={styles.svcGradient} />
                   <View style={styles.svcLabelWrap}>
-                    <Text style={styles.svcLabel}>{svc.label}</Text>
+                    <Text style={styles.svcLabel}>{svc.name}</Text>
                   </View>
-                  <View style={[styles.svcAccentDot, { backgroundColor: svc.accent }]} />
+                  <View style={[styles.svcAccentDot, { backgroundColor: svc.backgroundcolor }]} />
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -922,17 +997,21 @@ export default function HomeScreen() {
           <View style={styles.section}>
             <SectionHeader title="Book by Occasion" sub="Every moment deserves great food" action="See all" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hScroll}>
-              {occasions.map((o) => (
-                <TouchableOpacity key={o.label} style={styles.occasionCard} activeOpacity={0.88}>
-                  <Image source={{ uri: o.img }} style={styles.occasionImage} resizeMode="cover" />
-                  <LinearGradient
-                    colors={[o.tint, "rgba(0,0,0,0.55)"]}
-                    start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
-                    style={styles.occasionGradient}
-                  />
-                  <Text style={styles.occasionLabel}>{o.label}</Text>
-                </TouchableOpacity>
-              ))}
+              {events.map((o) => {
+                const gradientColors = normalizeGradientColors(o?.backgroundcolor);
+
+                return (
+                  <TouchableOpacity key={o.type_name} style={styles.occasionCard} activeOpacity={0.88}>
+                    <Image source={{ uri: ServiceApi + o.image }} style={styles.occasionImage} resizeMode="cover" />
+                    <LinearGradient
+                      colors={gradientColors}
+                      start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
+                      style={styles.occasionGradient}
+                    />
+                    <Text style={styles.occasionLabel}>{o.type_name}</Text>
+                  </TouchableOpacity>
+                );
+              })}
             </ScrollView>
           </View>
 
@@ -1124,9 +1203,9 @@ export default function HomeScreen() {
                 key={item.label}
                 onPress={() => {
                   setActiveNav(i);
-                  if (item.label === "Profile")  navigation.navigate("UserProfile");
+                  if (item.label === "Profile") navigation.navigate("UserProfile");
                   if (item.label === "Bookings") navigation.navigate("BookingsScreen");
-                  if (item.label === "Explore")  navigation.navigate("EventsScreen");
+                  if (item.label === "Explore") navigation.navigate("EventsScreen");
                 }}
                 style={[styles.navItem, activeNav === i && styles.navItemActive]}
                 activeOpacity={0.7}
@@ -1139,14 +1218,6 @@ export default function HomeScreen() {
         </View>
 
       </View>
-
-      {/* Search overlay: half-hanging card that expands to full screen once
-          the user types 3+ characters, blurring/dimming Home behind it. */}
-      <SearchServicesScreen
-        visible={searchOverlayOpen}
-        onClose={() => setSearchOverlayOpen(false)}
-        navigation={navigation}
-      />
     </SafeAreaView>
   );
 }
@@ -1174,7 +1245,8 @@ const styles = StyleSheet.create({
 
   searchWrap: { paddingHorizontal: 16, paddingVertical: 16 },
   searchBox: { flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: "#fff", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 12, elevation: 3 },
-  searchPlaceholder: { flex: 1, fontSize: 14, color: MUTED },
+  searchBoxFocused: { shadowColor: PRIMARY, shadowOpacity: 0.15, shadowRadius: 24, elevation: 5, borderWidth: 2, borderColor: PRIMARY },
+  searchInput: { flex: 1, fontSize: 14, color: DARK, paddingVertical: 0 },
   searchActions: { flexDirection: "row", alignItems: "center", gap: 8 },
   searchMic: { width: 32, height: 32, borderRadius: 16, backgroundColor: "#FFF5F2", alignItems: "center", justifyContent: "center" },
   searchFilter: { width: 32, height: 32, borderRadius: 16, backgroundColor: PRIMARY, alignItems: "center", justifyContent: "center" },
