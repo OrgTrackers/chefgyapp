@@ -6,6 +6,9 @@ import {
   Modal, FlatList,
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
+
+import SearchServicesScreen from "../../newsrc/newscreens/SearchServicesScreen";
+import ServiceVendorsScreen from "../../newsrc/newscreens/ServiceVendorsScreen";
 import {
   MapPin, Bell, Search, Mic, SlidersHorizontal, ChevronRight,
   Star, Clock, Heart, Home, Compass, BookOpen, User,
@@ -802,26 +805,32 @@ function RecommendedSection() {
 
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 
-export default function App() {
+export default function HomeScreen() {
   const navigation = useNavigation();
   const [activeNav, setActiveNav] = useState(0);
-  const [searchFocused, setSearchFocused] = useState(false);
   const [wishlistedOffers, setWishlistedOffers] = useState([]);
 
   const toggleWishlist = (index) => {
     setWishlistedOffers(p => p.includes(index) ? p.filter(x => x !== index) : [...p, index]);
   };
 
-  const handleServiceNavigation = (label) => {
-    switch (label) {
-      case "Caterer":       return navigation.navigate("EventsScreen");
-      case "Chef":          return navigation.navigate("ChefEventsScreen");
-      case "Home Food":     return navigation.navigate("HomeFoodEventsScreen");
-      case "Cloud Kitchen": return navigation.navigate("MenuScreen");
-      case "Food Truck":    return navigation.navigate("FoodTruckEventsScreen");
-      default: console.warn("No screen mapped for service:", label);
-    }
+  // Tapping any card in "Explore Services" opens ServiceVendorsScreen as a
+  // separate, full-screen page listing vendors for that specific service
+  // (e.g. tapping "Chef" shows a list of chefs, tapping "Bakery" shows a
+  // list of bakeries, etc). The whole service object (label/img/accent) is
+  // passed along so the vendor screen can theme itself and look up the
+  // right sample vendor list.
+  const handleServiceNavigation = (svc) => {
+    navigation.navigate("ServiceVendorsScreen", { service: svc });
   };
+
+  // Tapping the search bar opens SearchServicesScreen as an overlay (a card
+  // hanging from the top, blurring Home behind it) rather than navigating to
+  // a separate full-screen route. It expands to full screen once the user
+  // types 3+ characters, and collapses back down when the search box is
+  // cleared — see SearchServicesScreen.js for that animation logic.
+  const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
+  const openSearch = () => setSearchOverlayOpen(true);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -862,22 +871,26 @@ export default function App() {
         {/* Scrollable Content */}
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
 
-          {/* Search */}
+          {/* Search — tapping anywhere on this bar opens SearchServicesScreen */}
           <View style={styles.searchWrap}>
-            <View style={[styles.searchBox, searchFocused && styles.searchBoxFocused]}>
+            <TouchableOpacity
+              style={styles.searchBox}
+              activeOpacity={0.85}
+              onPress={openSearch}
+            >
               <Search size={18} color={MUTED} />
-              <TextInput
-                style={styles.searchInput}
-                placeholder="Search chefs, caterers, home food..."
-                placeholderTextColor={MUTED}
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
-              />
+              <Text style={styles.searchPlaceholder} numberOfLines={1}>
+                Search chefs, caterers, home food...
+              </Text>
               <View style={styles.searchActions}>
-                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7}><Mic size={15} color={PRIMARY} /></TouchableOpacity>
-                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7}><SlidersHorizontal size={14} color="#fff" /></TouchableOpacity>
+                <TouchableOpacity style={styles.searchMic} activeOpacity={0.7} onPress={openSearch}>
+                  <Mic size={15} color={PRIMARY} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.searchFilter} activeOpacity={0.7} onPress={openSearch}>
+                  <SlidersHorizontal size={14} color="#fff" />
+                </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Banner */}
@@ -892,7 +905,7 @@ export default function App() {
                   key={svc.label}
                   style={styles.svcCard}
                   activeOpacity={0.88}
-                  onPress={() => handleServiceNavigation(svc.label)}
+                  onPress={() => handleServiceNavigation(svc)}
                 >
                   <Image source={{ uri: svc.img }} style={styles.svcImage} resizeMode="cover" />
                   <LinearGradient colors={["transparent", `${svc.accent}E6`]} style={styles.svcGradient} />
@@ -1126,6 +1139,14 @@ export default function App() {
         </View>
 
       </View>
+
+      {/* Search overlay: half-hanging card that expands to full screen once
+          the user types 3+ characters, blurring/dimming Home behind it. */}
+      <SearchServicesScreen
+        visible={searchOverlayOpen}
+        onClose={() => setSearchOverlayOpen(false)}
+        navigation={navigation}
+      />
     </SafeAreaView>
   );
 }
@@ -1153,8 +1174,7 @@ const styles = StyleSheet.create({
 
   searchWrap: { paddingHorizontal: 16, paddingVertical: 16 },
   searchBox: { flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: "#fff", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 12, elevation: 3 },
-  searchBoxFocused: { shadowColor: PRIMARY, shadowOpacity: 0.15, shadowRadius: 24, elevation: 5, borderWidth: 2, borderColor: PRIMARY },
-  searchInput: { flex: 1, fontSize: 14, color: DARK, paddingVertical: 0 },
+  searchPlaceholder: { flex: 1, fontSize: 14, color: MUTED },
   searchActions: { flexDirection: "row", alignItems: "center", gap: 8 },
   searchMic: { width: 32, height: 32, borderRadius: 16, backgroundColor: "#FFF5F2", alignItems: "center", justifyContent: "center" },
   searchFilter: { width: 32, height: 32, borderRadius: 16, backgroundColor: PRIMARY, alignItems: "center", justifyContent: "center" },

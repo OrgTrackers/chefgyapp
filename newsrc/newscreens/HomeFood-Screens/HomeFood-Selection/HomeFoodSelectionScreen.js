@@ -21,7 +21,7 @@ const ChefData = [
     {
       Id: 1,
       Name: 'Andrew Doraz',
-      Img: require('../../../newassets/images/CaterSelection.jpg'),
+      Img: require('../../../newassets/images/CaterSelection.webp'),
       RatingIcon: 'star',
       Type: 'Vegan',
       Time: '45 min',

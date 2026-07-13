@@ -56,7 +56,7 @@ import CaterSelectionScreen from './newsrc/newscreens/Cater-Selection/CaterSelec
 import MenuSelection from './newsrc/newscreens/Menu-Selection/MenuSelectionScreen';
 import OrderSummaryScreen from './newsrc/newscreens/Order-Summary/OrderSummaryScreen';
 import FinalScreen from './newsrc/newscreens/FinalPage/FinalScreen';
-
+import HomeScreen from './newsrc/newscreens/HomePage/HomeScreen';
 import BookCaterScreen from './newsrc/newscreens/Book-Cater/BookCaterScreen';
 import DayFoodSelectionScreen from './newsrc/newscreens/FoodSessions/DayFoodSelectionScreen';
 import FooterComponent from './newsrc/newcomponents/Footer/FooterComponent';
@@ -118,8 +118,8 @@ import AddAddressScreen from './newsrc/newscreens/Address/AddAddressScreen';
 import VendorListScreen from './newsrc/newscreens/CgCloud/VendorListScreen';
 import VendorMenuScreen from './newsrc/newscreens/CgCloud/VendorMenuScreen';
 import CartScreen from './newsrc/newscreens/CgCloud/CartScreen';
-
-
+import SearchServicesScreen from './newsrc/newscreens/SearchServicesScreen';
+import ServiceVendorsScreen from './newsrc/newscreens/ServiceVendorsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -219,7 +219,7 @@ const App = () => {
           <Stack.Screen name="MenuSelection" component={MenuSelection} />
           <Stack.Screen name="OrderSummaryScreen" component={OrderSummaryScreen} />
           <Stack.Screen name="FinalScreen" component={FinalScreen} />
-         
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="BookCaterScreen" component={BookCaterScreen} />
           <Stack.Screen name="FoodSessionScreen" component={FoodSessionScreen} />
           <Stack.Screen name="DayFoodSelectionScreen" component={DayFoodSelectionScreen} />
@@ -268,6 +268,10 @@ const App = () => {
             
         <Stack.Screen name ="AddAddressScreen"component={AddAddressScreen} />
          <Stack.Screen name ="SelectLocationScreen"component={SelectLocationScreen} />
+          <Stack.Screen name ="SearchServicesScreen"component={SearchServicesScreen} />
+            <Stack.Screen name ="ServiceVendorsScreen"component={ServiceVendorsScreen} />
+
+
 
            <Stack.Screen name="VendorListScreen">
              {(props) => (

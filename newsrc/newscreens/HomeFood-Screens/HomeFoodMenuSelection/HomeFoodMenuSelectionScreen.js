@@ -69,35 +69,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -110,35 +110,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -151,35 +151,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -198,35 +198,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -239,35 +239,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -280,35 +280,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -333,35 +333,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -374,35 +374,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -415,35 +415,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -462,35 +462,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -503,35 +503,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -544,35 +544,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -597,35 +597,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -638,35 +638,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -679,35 +679,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -726,35 +726,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -767,35 +767,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -808,35 +808,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -867,35 +867,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -908,35 +908,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -949,35 +949,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -996,35 +996,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1037,35 +1037,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1078,35 +1078,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1131,35 +1131,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1172,35 +1172,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1213,35 +1213,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1260,35 +1260,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1301,35 +1301,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1342,35 +1342,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1395,35 +1395,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1436,35 +1436,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1477,35 +1477,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1524,35 +1524,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1565,35 +1565,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1606,35 +1606,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1665,35 +1665,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1706,35 +1706,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1747,35 +1747,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1794,35 +1794,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1835,35 +1835,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1876,35 +1876,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1929,35 +1929,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -1970,35 +1970,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2011,35 +2011,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2058,35 +2058,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2099,35 +2099,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2140,35 +2140,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2193,35 +2193,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2234,35 +2234,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2275,35 +2275,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2322,35 +2322,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2363,35 +2363,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
@@ -2404,35 +2404,35 @@ const MenusData = [
                 Items: [
                   {
                     Id: 1,
-                    Image: require('../../../newassets/images/MenuItems/Item_1.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_1.webp'),
                     Name: 'Biryani',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 2,
-                    Image: require('../../../newassets/images/MenuItems/Item_2.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_2.webp'),
                     Name: 'Idly',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 3,
-                    Image: require('../../../newassets/images/MenuItems/Item_3.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_3.webp'),
                     Name: 'Masala Dosa',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 4,
-                    Image: require('../../../newassets/images/MenuItems/Item_4.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_4.webp'),
                     Name: 'Sambar rice',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
                   },
                   {
                     Id: 5,
-                    Image: require('../../../newassets/images/MenuItems/Item_5.png'),
+                    Image: require('../../../newassets/images/MenuItems/Item_5.webp'),
                     Name: 'Noodles',
                     Description:
                       'Food items bring flavor, nutrition, and joy to every meal, from fresh fruits to savory dishes',
