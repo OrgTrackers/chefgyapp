@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   View, Text, Image, TextInput, TouchableOpacity, ScrollView,
@@ -867,6 +867,8 @@ export default function App() {
   const [userServices, setUserServices] = useState([]);
   const [events, setEvents] = useState([]);
   const [fullName, setFullName] = useState("Guest");
+  const [currentAddress, setCurrentAddress] = useState(null);
+  const route = useRoute();
 
   useEffect(() => {
     const loadHomeData = async () => {
@@ -899,6 +901,34 @@ export default function App() {
     loadHomeData();
   }, []);
 
+  // Listen for selected address from SelectLocationScreen
+  useEffect(() => {
+    if (route.params?.selectedAddress) {
+      setCurrentAddress(route.params.selectedAddress);
+      navigation.setParams({ selectedAddress: undefined });
+    }
+  }, [route.params?.selectedAddress]);
+
+  // Helper to format address display
+  const getAddressDisplay = () => {
+    const addr = currentAddress;
+    if (!addr) return "Madhapur, Hyderabad";
+
+    const parts = [
+      addr.areaName,
+      addr.address_line1,
+      addr.city,
+    ].filter(Boolean);
+
+    if (parts.length > 0) {
+      const main = parts[0];
+      const city = addr.city;
+      return city && main !== city ? `${main}, ${city}` : main;
+    }
+
+    return addr.formattedAddress || "Select Location";
+  };
+
   const toggleWishlist = (index) => {
     setWishlistedOffers(p => p.includes(index) ? p.filter(x => x !== index) : [...p, index]);
   };
@@ -929,7 +959,7 @@ export default function App() {
               onPress={() => navigation.navigate("SelectLocationScreen")}
             >
               <MapPin size={14} color={PRIMARY} />
-              <Text style={styles.locationText}>Madhapur, Hyderabad</Text>
+              <Text style={styles.locationText} numberOfLines={1}>{getAddressDisplay()}</Text>
               <ChevronRight size={12} color={MUTED} />
             </TouchableOpacity>
             <View style={styles.headerRight}>

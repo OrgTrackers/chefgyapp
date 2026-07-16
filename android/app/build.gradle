@@ -130,6 +130,18 @@ dependencies {
     }
 }
 
+afterEvaluate {
+    tasks.named("generateDebugLintReportModel") {
+        dependsOn("copyReactNativeVectorIconFonts")
+    }
+    tasks.named("generateReleaseLintReportModel") {
+        dependsOn("copyReactNativeVectorIconFonts")
+    }
+    tasks.matching { it.name.contains("lint") && !it.name.contains("copyReactNativeVectorIconFonts") }.all { lintTask ->
+        lintTask.dependsOn("copyReactNativeVectorIconFonts")
+    }
+}
+
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle");

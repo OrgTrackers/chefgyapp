@@ -195,7 +195,7 @@ const SelectLocationScreen = ({ navigation, route }) => {
   };
 
   const handleAddressSelect = (address) => {
-    navigation.navigate('EditProfile', { selectedAddress: address });
+    navigation.navigate('Home', { selectedAddress: address });
   };
 
   const handleEditAddress = (address) => {

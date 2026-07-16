@@ -171,7 +171,7 @@ const App = () => {
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
 
-            initialRouteName="Home"
+            initialRouteName="Splash"
 
             screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
