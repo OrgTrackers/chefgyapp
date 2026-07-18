@@ -29,8 +29,11 @@ import {
 // ── Colors (matches SearchServicesScreen / Chefgy brand) ────────────────────
 
 const COLORS = {
-  orange: "#FF4D4D",
-  orangeDark: "#E63946",
+  // orange: "#FF4D4D",
+  // orangeDark: "#E63946",
+    primary: "#FA5726",
+  orange: "#FA5726",
+  orangeDark: "#E84A1A",
   gray900: "#111111",
   gray800: "#1f2937",
   gray500: "#6b7280",
@@ -49,7 +52,7 @@ const COLORS = {
 const SERVICE_META = {
   Chef: {
     subtitle: "Personal chefs for every occasion",
-    accent: "#FF4D4D",
+    accent: "#FA5726",
     searchPlaceholder: "Search chefs by name or cuisine",
   },
   Caterer: {
@@ -194,12 +197,17 @@ const DISTANCE_MAX = 20;
 const PRICE_MIN = 70;
 const PRICE_MAX = 125;
 
+const PAX_MIN = 1;
+const PAX_MAX = 1000;
+
 function getDefaultFilters() {
   return {
     categories: ["Italian"],
     distance: 2,
     ratings: [3, 4],
-    priceFraction: 0.55, // 0..1 position along the price track
+    minPax: 10,
+    maxPax: 100,
+    priceFraction: 0.55,
   };
 }
 
@@ -366,6 +374,25 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
     onChange({ ...filters, distance: next });
   };
 
+const adjustMinPax = (delta) => {
+  const next = Math.max(PAX_MIN, Math.min(filters.minPax + delta, filters.maxPax));
+  onChange({
+    ...filters,
+    minPax: next,
+  });
+};
+
+const adjustMaxPax = (delta) => {
+  const next = Math.min(PAX_MAX, Math.max(filters.maxPax + delta, filters.minPax));
+  onChange({
+    ...filters,
+    maxPax: next,
+  });
+};
+
+
+
+
   const priceValue = Math.round(PRICE_MIN + filters.priceFraction * (PRICE_MAX - PRICE_MIN));
 
   return (
@@ -381,7 +408,7 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
           {/* Header */}
           <View style={modalStyles.headerRow}>
             <Text style={modalStyles.title}>Filter</Text>
-            <TouchableOpacity onPress={onReset} hitSlop={8}>
+            <TouchableOpacity onPress={onReset} hitSlop={8} style={modalStyles.resetButton}>
               <Text style={[modalStyles.resetText, { color: accent }]}>Reset</Text>
             </TouchableOpacity>
           </View>
@@ -408,6 +435,8 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
             })}
           </View>
 
+          <View style={modalStyles.sectionDivider} />
+
           {/* Distance */}
           <Text style={modalStyles.sectionLabel}>Distance to me</Text>
           <View style={modalStyles.distanceRow}>
@@ -418,7 +447,7 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
             >
               <Minus size={16} color={COLORS.gray700 || COLORS.gray800} />
             </TouchableOpacity>
-            <Text style={modalStyles.distanceValue}>{filters.distance} km</Text>
+            <Text style={[modalStyles.distanceValue, { color: accent }]}>{filters.distance} km</Text>
             <TouchableOpacity
               onPress={() => adjustDistance(1)}
               style={modalStyles.stepperButton}
@@ -427,6 +456,63 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
               <Plus size={16} color={COLORS.gray700 || COLORS.gray800} />
             </TouchableOpacity>
           </View>
+
+          <View style={modalStyles.sectionDivider} />
+
+          <Text style={modalStyles.sectionLabel}>Number of Pax</Text>
+
+              <View style={modalStyles.paxContainer}>
+
+            <View style={modalStyles.paxBox}>
+              <Text style={modalStyles.paxLabel}>Min</Text>
+
+          <View style={modalStyles.distanceRow}>
+            <TouchableOpacity
+              onPress={() => adjustMinPax(-1)}
+              style={modalStyles.stepperButton}
+            >
+              <Minus size={16} color={COLORS.gray800} />
+            </TouchableOpacity>
+
+            <Text style={[modalStyles.distanceValue, { color: accent }]}>
+              {filters.minPax}
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => adjustMinPax(1)}
+              style={modalStyles.stepperButton}
+            >
+              <Plus size={16} color={COLORS.gray800} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+                  <View style={modalStyles.paxBox}>
+                    <Text style={modalStyles.paxLabel}>Max</Text>
+              <View style={modalStyles.distanceRow}>
+                <TouchableOpacity
+                  onPress={() => adjustMaxPax(-1)}
+                  style={modalStyles.stepperButton}
+                >
+                  <Minus size={16} color={COLORS.gray800} />
+                </TouchableOpacity>
+
+                <Text style={[modalStyles.distanceValue, { color: accent }]}>
+                  {filters.maxPax}
+                </Text>
+
+                <TouchableOpacity
+                  onPress={() => adjustMaxPax(1)}
+                  style={modalStyles.stepperButton}
+                >
+                  <Plus size={16} color={COLORS.gray800} />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+          </View>
+
+          <View style={modalStyles.sectionDivider} />
 
           {/* Rating */}
           <Text style={modalStyles.sectionLabel}>Rating</Text>
@@ -450,6 +536,8 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
             })}
           </View>
 
+          <View style={modalStyles.sectionDivider} />
+
           {/* Price */}
           <Text style={modalStyles.sectionLabel}>Price</Text>
           <View style={modalStyles.priceRow}>
@@ -471,7 +559,7 @@ function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onS
                 ]}
               />
             </View>
-            <Text style={modalStyles.priceLabel}>₹{PRICE_MIN}-₹{priceValue}</Text>
+            <Text style={[modalStyles.priceLabel, { color: accent }]}>₹{PRICE_MIN}-₹{priceValue}</Text>
           </View>
 
           {/* Show results */}
@@ -1024,15 +1112,22 @@ const modalStyles = StyleSheet.create({
     backgroundColor: COLORS.gray200,
   },
   headerRow: {
-    flexDirection: "row",
+    position: "relative",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginBottom: 18,
+    minHeight: 24,
   },
   title: {
     fontSize: 18,
     fontWeight: "700",
     color: COLORS.gray900,
+    textAlign: "center",
+  },
+  resetButton: {
+    position: "absolute",
+    right: 0,
+    top: 2,
   },
   resetText: {
     fontSize: 14,
@@ -1043,7 +1138,12 @@ const modalStyles = StyleSheet.create({
     fontWeight: "700",
     color: COLORS.gray900,
     marginBottom: 10,
-    marginTop: 6,
+    marginTop: 2,
+  },
+  sectionDivider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: COLORS.gray200,
+    marginVertical: 14,
   },
 
   // Categories
@@ -1051,7 +1151,6 @@ const modalStyles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
-    marginBottom: 8,
   },
   categoryChip: {
     width: "47%",
@@ -1077,7 +1176,6 @@ const modalStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
-    marginBottom: 8,
   },
   stepperButton: {
     width: 32,
@@ -1090,7 +1188,7 @@ const modalStyles = StyleSheet.create({
   },
   distanceValue: {
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "700",
     color: COLORS.gray900,
     minWidth: 48,
     textAlign: "center",
@@ -1100,7 +1198,6 @@ const modalStyles = StyleSheet.create({
   ratingRow: {
     flexDirection: "row",
     gap: 8,
-    marginBottom: 8,
   },
   ratingChip: {
     flex: 1,
@@ -1159,7 +1256,7 @@ const modalStyles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 13,
-    color: COLORS.gray500,
+    fontWeight: "700",
     marginTop: 4,
   },
 
@@ -1176,4 +1273,23 @@ const modalStyles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 14,
   },
+
+
+  paxContainer: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  gap: 16,
+},
+
+paxBox: {
+  flex: 1,
+},
+
+paxLabel: {
+  fontSize: 13,
+  fontWeight: "600",
+  color: COLORS.gray500,
+  marginBottom: 8,
+  textAlign: "center",
+},
 });

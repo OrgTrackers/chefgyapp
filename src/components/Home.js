@@ -857,6 +857,72 @@ function RecommendedSection() {
   );
 }
 
+// ─── LOCATION PROMPT: FIRST-LOGIN BOTTOM SHEET ───────────────────────────────
+// Shown once, right after login, only if the user hasn't picked a delivery
+// address yet. See the `hasPromptedLocation` flag in App() for the "only
+// once" logic — this component itself is purely presentational.
+
+function LocationPromptModal({ visible, onClose, onUseCurrentLocation, onEnterManually }) {
+  const WINDOW_H = Dimensions.get("window").height;
+  const slideAnim = useRef(new Animated.Value(WINDOW_H)).current;
+
+  useEffect(() => {
+    if (visible) {
+      Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true, tension: 65, friction: 11 }).start();
+    } else {
+      Animated.timing(slideAnim, { toValue: WINDOW_H, duration: 280, useNativeDriver: true }).start();
+    }
+  }, [visible, WINDOW_H]);
+
+  return (
+    <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
+      <View style={styles.sheetBackdrop}>
+        <TouchableOpacity style={StyleSheet.absoluteFill} onPress={onClose} activeOpacity={1} />
+        <Animated.View style={[styles.locPromptContainer, { transform: [{ translateY: slideAnim }] }]}>
+          <View style={styles.sheetDragHandle} />
+
+          <View style={styles.locPromptIconWrap}>
+            <View style={styles.locPromptIconCircle}>
+              <MapPin size={30} color="#fff" fill="#fff" />
+            </View>
+          </View>
+
+          <Text style={styles.locPromptTitle}>Set your delivery location</Text>
+          <Text style={styles.locPromptSub}>
+            Sharing your location helps us show the right chefs, caterers & kitchens near you
+          </Text>
+
+          <View style={styles.locPromptCard}>
+            <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onUseCurrentLocation}>
+              <View style={styles.locPromptRowLeft}>
+                <Navigation2 size={16} color={PRIMARY} />
+                <Text style={styles.locPromptRowText}>Use my Current Location</Text>
+              </View>
+              <View style={styles.locPromptEnableBtn}>
+                <Text style={styles.locPromptEnableBtnText}>Enable</Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.locPromptDivider} />
+
+            <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onEnterManually}>
+              <View style={styles.locPromptRowLeft}>
+                <Search size={16} color={GREEN_TRUST} />
+                <Text style={styles.locPromptRowText}>Enter address manually</Text>
+              </View>
+              <ChevronRight size={16} color={MUTED} />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={styles.locPromptSkip} onPress={onClose} activeOpacity={0.7}>
+            <Text style={styles.locPromptSkipText}>Maybe later</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+}
+
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -868,6 +934,7 @@ export default function App() {
   const [events, setEvents] = useState([]);
   const [fullName, setFullName] = useState("Guest");
   const [currentAddress, setCurrentAddress] = useState(null);
+  const [showLocationPrompt, setShowLocationPrompt] = useState(false);
   const route = useRoute();
 
   useEffect(() => {
@@ -875,6 +942,16 @@ export default function App() {
       try {
         const name = await AsyncStorage.getItem('fullName');
         setFullName(name || "Guest");
+
+        // Show the location prompt only once per login, and only if the
+        // user hasn't picked a delivery address yet. `hasPromptedLocation`
+        // is set the first time this runs; clear it from AsyncStorage in
+        // your logout flow so returning/newly logged-in users see it again.
+        const alreadyPrompted = await AsyncStorage.getItem('hasPromptedLocation');
+        if (!alreadyPrompted && !currentAddress) {
+          setShowLocationPrompt(true);
+          await AsyncStorage.setItem('hasPromptedLocation', 'true');
+        }
       } catch (error) {
         console.error("Failed to fetch user name", error);
       }
@@ -940,7 +1017,8 @@ export default function App() {
     navigation.navigate("ServiceVendorsScreen", {
       service: {
         label: svc?.name ?? "Chef",
-        accent: svc?.backgroundcolor,
+        //accent: svc?.backgroundcolor,
+        accent:'#FF4D4D',
         img: svc?.image ? `${ServiceApi}${svc.image}` : undefined,
       },
     });
@@ -953,6 +1031,18 @@ export default function App() {
   // cleared — see SearchServicesScreen.js for that animation logic.
   const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
   const openSearch = () => setSearchOverlayOpen(true);
+
+  const handleUseCurrentLocation = () => {
+    setShowLocationPrompt(false);
+    // Hand off to SelectLocationScreen with a flag so it can kick off the
+    // device geolocation flow as soon as it mounts.
+    navigation.navigate("SelectLocationScreen", { useCurrentLocation: true });
+  };
+
+  const handleEnterLocationManually = () => {
+    setShowLocationPrompt(false);
+    navigation.navigate("SelectLocationScreen");
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -1270,6 +1360,12 @@ export default function App() {
         onClose={() => setSearchOverlayOpen(false)}
         navigation={navigation}
       />
+      <LocationPromptModal
+        visible={showLocationPrompt}
+        onClose={() => setShowLocationPrompt(false)}
+        onUseCurrentLocation={handleUseCurrentLocation}
+        onEnterManually={handleEnterLocationManually}
+      />
     </SafeAreaView>
   );
 }
@@ -1473,6 +1569,45 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   sheetDragHandle: { width: 40, height: 4, borderRadius: 2, backgroundColor: "#D0C8C4", alignSelf: "center", marginTop: 12, marginBottom: 4 },
+
+  // Location prompt sheet
+  locPromptContainer: {
+    backgroundColor: "#FAFAFA",
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingHorizontal: 20,
+    paddingTop: 4,
+    paddingBottom: Platform.OS === "ios" ? 36 : 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -8 },
+    shadowOpacity: 0.22,
+    shadowRadius: 48,
+    elevation: 20,
+  },
+  locPromptIconWrap: { alignItems: "center", marginTop: 8, marginBottom: 16 },
+  locPromptIconCircle: {
+    width: 64, height: 64, borderRadius: 32, backgroundColor: PRIMARY,
+    alignItems: "center", justifyContent: "center",
+    shadowColor: PRIMARY, shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.35, shadowRadius: 12, elevation: 6,
+  },
+  locPromptTitle: { fontSize: 18, fontWeight: "800", color: DARK, textAlign: "center" },
+  locPromptSub: { fontSize: 12, color: MUTED, textAlign: "center", marginTop: 8, lineHeight: 18, paddingHorizontal: 12 },
+  locPromptCard: {
+    backgroundColor: "#fff", borderRadius: 18, marginTop: 20,
+    shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 12, elevation: 2,
+  },
+  locPromptRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 16, paddingVertical: 16 },
+  locPromptRowLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
+  locPromptRowText: { fontSize: 13, fontWeight: "700", color: DARK, flexShrink: 1 },
+  locPromptEnableBtn: { backgroundColor: PRIMARY, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 8 },
+  locPromptEnableBtnText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  locPromptDivider: { height: StyleSheet.hairlineWidth, backgroundColor: "rgba(0,0,0,0.08)", marginLeft: 16 },
+  locPromptSkip: { alignItems: "center", marginTop: 18 },
+  locPromptSkipText: { fontSize: 12, fontWeight: "700", color: MUTED },
 
   sheetHeaderGrad: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: "rgba(0,0,0,0.07)" },
   sheetHeaderRow: { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 12 },

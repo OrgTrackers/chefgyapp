@@ -711,9 +711,62 @@ export default function UserProfile() {
     alert(`Reordering from order #${orderId}`);
   };
 
-  const handleMenuSelect = (option) => {
-    alert(`${option} selected`);
-  };
+  // const handleMenuSelect = (option) => {
+  //   alert(`${option} selected`);
+  // };
+  const handleMenuSelect = async (option) => {
+  switch (option) {
+    case 'Logout':
+      Alert.alert(
+        'Logout',
+        'Are you sure you want to logout?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Logout',
+            style: 'destructive',
+            onPress: async () => {
+              try {
+                // Clear saved login/session
+                await AsyncStorage.multiRemove([
+                  'token',
+                  'user',
+                  'userData',
+                  'authToken',
+                ]);
+
+                // If you store everything:
+                // await AsyncStorage.clear();
+
+                // Navigate to Login screen
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Login' }],
+                });
+              } catch (error) {
+                Alert.alert('Error', 'Unable to logout. Please try again.');
+              }
+            },
+          },
+        ],
+      );
+      break;
+
+    case 'Edit Profile':
+      // Navigate to Edit Profile if needed
+      break;
+
+    case 'Settings':
+      // Navigate to Settings if needed
+      break;
+
+    default:
+      break;
+  }
+};
 
    const getPickedImageSizeBytes = async (image) => {
     if (typeof image.size === 'number' && image.size > 0) return image.size;
