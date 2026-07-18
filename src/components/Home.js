@@ -934,7 +934,16 @@ export default function App() {
   };
 
   const handleServiceNavigation = (svc) => {
-    navigation.navigate("ServiceVendorsScreen", { service: svc });
+    // `svc` comes from the API (userServices) and has fields like
+    // name / backgroundcolor / image — normalize it into the
+    // { label, accent, img } shape ServiceVendorsScreen expects.
+    navigation.navigate("ServiceVendorsScreen", {
+      service: {
+        label: svc?.name ?? "Chef",
+        accent: svc?.backgroundcolor,
+        img: svc?.image ? `${ServiceApi}${svc.image}` : undefined,
+      },
+    });
   };
 
   // Tapping the search bar opens SearchServicesScreen as an overlay (a card
@@ -1018,7 +1027,7 @@ export default function App() {
                   key={svc.icon}
                   style={styles.svcCard}
                   activeOpacity={0.88}
-                  onPress={() => handleServiceNavigation(svc.icon)}
+                  onPress={() => handleServiceNavigation(svc)}
                 >
                   <Image source={{ uri: ServiceApi + svc.image }} style={styles.svcImage} resizeMode="cover" />
                   <LinearGradient colors={["transparent", `${svc.backgroundcolor}E6`]} style={styles.svcGradient} />

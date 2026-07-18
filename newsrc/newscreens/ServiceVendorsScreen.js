@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,21 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  Modal,
+  PanResponder,
 } from "react-native";
-import { ArrowLeft, Search, X, Star, ChevronRight, MapPin, BadgeCheck } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Search,
+  X,
+  Star,
+  ChevronRight,
+  MapPin,
+  BadgeCheck,
+  SlidersHorizontal,
+  Minus,
+  Plus,
+} from "lucide-react-native";
 
 // ── Colors (matches SearchServicesScreen / Chefgy brand) ────────────────────
 
@@ -169,6 +182,27 @@ const VENDORS_BY_SERVICE = {
   ],
 };
 
+// ── Filter modal config ──────────────────────────────────────────────────────
+// Note: this filter UI is purely presentational/local state for now — it does
+// not change which vendors are shown, so the existing list/search behaviour
+// stays exactly as it was.
+
+const FILTER_CATEGORIES = ["Fast food", "European", "Italian", "Mexican", "Japanese", "French"];
+const RATING_OPTIONS = [1, 2, 3, 4, 5];
+const DISTANCE_MIN = 1;
+const DISTANCE_MAX = 20;
+const PRICE_MIN = 70;
+const PRICE_MAX = 125;
+
+function getDefaultFilters() {
+  return {
+    categories: ["Italian"],
+    distance: 2,
+    ratings: [3, 4],
+    priceFraction: 0.55, // 0..1 position along the price track
+  };
+}
+
 function getMeta(label) {
   return SERVICE_META[label] ?? DEFAULT_META;
 }
@@ -286,17 +320,190 @@ function VendorRow({ vendor, accent, onPress }) {
   );
 }
 
+// ── Filter modal ──────────────────────────────────────────────────────────────
+
+function FilterModal({ visible, accent, filters, onChange, onReset, onClose, onShowResults, resultCount }) {
+  const trackWidthRef = useRef(0);
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  // Keep a ref to the latest filters/onChange so the PanResponder (created once)
+  // never reads a stale value from an earlier render.
+  const latestRef = useRef({ filters, onChange });
+  latestRef.current = { filters, onChange };
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (evt) => {
+        const width = trackWidthRef.current;
+        if (!width) return;
+        const localX = Math.max(0, Math.min(width, evt.nativeEvent.locationX));
+        const { filters: f, onChange: change } = latestRef.current;
+        change({ ...f, priceFraction: localX / width });
+      },
+    })
+  ).current;
+
+  const toggleCategory = (cat) => {
+    const has = filters.categories.includes(cat);
+    onChange({
+      ...filters,
+      categories: has ? filters.categories.filter((c) => c !== cat) : [...filters.categories, cat],
+    });
+  };
+
+  const toggleRating = (r) => {
+    const has = filters.ratings.includes(r);
+    onChange({
+      ...filters,
+      ratings: has ? filters.ratings.filter((x) => x !== r) : [...filters.ratings, r],
+    });
+  };
+
+  const adjustDistance = (delta) => {
+    const next = Math.min(DISTANCE_MAX, Math.max(DISTANCE_MIN, filters.distance + delta));
+    onChange({ ...filters, distance: next });
+  };
+
+  const priceValue = Math.round(PRICE_MIN + filters.priceFraction * (PRICE_MAX - PRICE_MIN));
+
+  return (
+    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
+      <View style={modalStyles.overlay}>
+        <TouchableOpacity style={modalStyles.overlayTouchable} activeOpacity={1} onPress={onClose} />
+
+        <View style={modalStyles.sheet}>
+          <View style={modalStyles.grabberWrap}>
+            <View style={modalStyles.grabber} />
+          </View>
+
+          {/* Header */}
+          <View style={modalStyles.headerRow}>
+            <Text style={modalStyles.title}>Filter</Text>
+            <TouchableOpacity onPress={onReset} hitSlop={8}>
+              <Text style={[modalStyles.resetText, { color: accent }]}>Reset</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Categories */}
+          <Text style={modalStyles.sectionLabel}>Categories</Text>
+          <View style={modalStyles.categoryGrid}>
+            {FILTER_CATEGORIES.map((cat) => {
+              const selected = filters.categories.includes(cat);
+              return (
+                <TouchableOpacity
+                  key={cat}
+                  onPress={() => toggleCategory(cat)}
+                  style={[
+                    modalStyles.categoryChip,
+                    selected && { backgroundColor: accent, borderColor: accent },
+                  ]}
+                >
+                  <Text style={[modalStyles.categoryChipText, selected && modalStyles.categoryChipTextSelected]}>
+                    {cat}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Distance */}
+          <Text style={modalStyles.sectionLabel}>Distance to me</Text>
+          <View style={modalStyles.distanceRow}>
+            <TouchableOpacity
+              onPress={() => adjustDistance(-1)}
+              style={modalStyles.stepperButton}
+              hitSlop={8}
+            >
+              <Minus size={16} color={COLORS.gray700 || COLORS.gray800} />
+            </TouchableOpacity>
+            <Text style={modalStyles.distanceValue}>{filters.distance} km</Text>
+            <TouchableOpacity
+              onPress={() => adjustDistance(1)}
+              style={modalStyles.stepperButton}
+              hitSlop={8}
+            >
+              <Plus size={16} color={COLORS.gray700 || COLORS.gray800} />
+            </TouchableOpacity>
+          </View>
+
+          {/* Rating */}
+          <Text style={modalStyles.sectionLabel}>Rating</Text>
+          <View style={modalStyles.ratingRow}>
+            {RATING_OPTIONS.map((r) => {
+              const selected = filters.ratings.includes(r);
+              return (
+                <TouchableOpacity
+                  key={r}
+                  onPress={() => toggleRating(r)}
+                  style={[
+                    modalStyles.ratingChip,
+                    selected && { backgroundColor: accent, borderColor: accent },
+                  ]}
+                >
+                  <Text style={[modalStyles.ratingChipText, selected && modalStyles.ratingChipTextSelected]}>
+                    {r}★
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Price */}
+          <Text style={modalStyles.sectionLabel}>Price</Text>
+          <View style={modalStyles.priceRow}>
+            <View
+              style={modalStyles.priceTrack}
+              onLayout={(e) => {
+                const w = e.nativeEvent.layout.width;
+                trackWidthRef.current = w;
+                setTrackWidth(w);
+              }}
+              {...panResponder.panHandlers}
+            >
+              <View style={modalStyles.priceTrackBase} />
+              <View style={[modalStyles.priceTrackFill, { width: `${filters.priceFraction * 100}%`, backgroundColor: accent }]} />
+              <View
+                style={[
+                  modalStyles.priceHandle,
+                  { left: Math.max(0, filters.priceFraction * trackWidth - 9), backgroundColor: accent },
+                ]}
+              />
+            </View>
+            <Text style={modalStyles.priceLabel}>₹{PRICE_MIN}-₹{priceValue}</Text>
+          </View>
+
+          {/* Show results */}
+          <TouchableOpacity
+            style={[modalStyles.showResultsButton, { backgroundColor: accent }]}
+            onPress={onShowResults}
+          >
+            <Text style={modalStyles.showResultsText}>Show results</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
 // ── Main component ───────────────────────────────────────────────────────────
 
 export default function ServiceVendorsScreen({ navigation, route }) {
   // `service` is expected to be the object from Home.js's `services` array,
   // e.g. { label: "Chef", img: "...", accent: "#FF4D4D" }
-  const service = route?.params?.service ?? { label: "Chef" };
+  const rawService = route?.params?.service;
+  const service =
+    rawService && typeof rawService === "object" && rawService.label
+      ? rawService
+      : { label: "Chef" };
   const meta = getMeta(service.label);
   const accent = service.accent || meta.accent;
 
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [filters, setFilters] = useState(getDefaultFilters());
 
   const vendors = getVendors(service.label);
 
@@ -341,20 +548,30 @@ export default function ServiceVendorsScreen({ navigation, route }) {
 
       {/* Search / filter bar */}
       <View style={styles.searchBarWrap}>
-        <View style={styles.searchBar}>
-          <Search size={18} color={COLORS.gray400} />
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            placeholder={meta.searchPlaceholder}
-            placeholderTextColor={COLORS.gray400}
-            style={styles.searchInput}
-          />
-          {query.length > 0 && (
-            <TouchableOpacity onPress={() => setQuery("")} hitSlop={6}>
-              <X size={16} color={COLORS.gray500} />
-            </TouchableOpacity>
-          )}
+        <View style={styles.searchFilterRow}>
+          <View style={styles.searchBar}>
+            <Search size={18} color={COLORS.gray400} />
+            <TextInput
+              value={query}
+              onChangeText={setQuery}
+              placeholder={meta.searchPlaceholder}
+              placeholderTextColor={COLORS.gray400}
+              style={styles.searchInput}
+            />
+            {query.length > 0 && (
+              <TouchableOpacity onPress={() => setQuery("")} hitSlop={6}>
+                <X size={16} color={COLORS.gray500} />
+              </TouchableOpacity>
+            )}
+          </View>
+
+          <TouchableOpacity
+            style={[styles.filterButton, { backgroundColor: accent }]}
+            onPress={() => setFilterVisible(true)}
+            hitSlop={6}
+          >
+            <SlidersHorizontal size={18} color={COLORS.white} />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -390,6 +607,17 @@ export default function ServiceVendorsScreen({ navigation, route }) {
         <Text style={styles.footerText}>Powered by</Text>
         <Text style={styles.footerBrand}>Chefgy</Text>
       </View>
+
+      <FilterModal
+        visible={filterVisible}
+        accent={accent}
+        filters={filters}
+        onChange={setFilters}
+        onReset={() => setFilters(getDefaultFilters())}
+        onClose={() => setFilterVisible(false)}
+        onShowResults={() => setFilterVisible(false)}
+        resultCount={filtered.length}
+      />
     </SafeAreaView>
   );
 }
@@ -438,7 +666,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 12,
   },
+  searchFilterRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
   searchBar: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
@@ -453,6 +687,18 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 2 },
     elevation: 2,
+  },
+  filterButton: {
+    width: 46,
+    height: 46,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
   },
   searchInput: {
     flex: 1,
@@ -740,5 +986,194 @@ const styles = StyleSheet.create({
     color: COLORS.gray500,
     fontWeight: "600",
     fontSize: 13,
+  },
+});
+
+// ── Filter modal styles ─────────────────────────────────────────────────────
+
+const modalStyles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(17, 17, 17, 0.45)",
+  },
+  overlayTouchable: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  sheet: {
+    backgroundColor: COLORS.white,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingHorizontal: 20,
+    paddingBottom: Platform.OS === "ios" ? 32 : 24,
+    paddingTop: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: -4 },
+    elevation: 8,
+  },
+  grabberWrap: {
+    alignItems: "center",
+    paddingVertical: 8,
+  },
+  grabber: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: COLORS.gray200,
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: COLORS.gray900,
+  },
+  resetText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  sectionLabel: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: COLORS.gray900,
+    marginBottom: 10,
+    marginTop: 6,
+  },
+
+  // Categories
+  categoryGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+    marginBottom: 8,
+  },
+  categoryChip: {
+    width: "47%",
+    borderWidth: 1,
+    borderColor: COLORS.gray200,
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
+  categoryChipText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: COLORS.gray800,
+  },
+  categoryChipTextSelected: {
+    color: COLORS.white,
+  },
+
+  // Distance
+  distanceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    marginBottom: 8,
+  },
+  stepperButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: COLORS.gray200,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  distanceValue: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: COLORS.gray900,
+    minWidth: 48,
+    textAlign: "center",
+  },
+
+  // Rating
+  ratingRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 8,
+  },
+  ratingChip: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: COLORS.gray200,
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
+  ratingChipText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.gray800,
+  },
+  ratingChipTextSelected: {
+    color: COLORS.white,
+  },
+
+  // Price
+  priceRow: {
+    marginBottom: 20,
+  },
+  priceTrack: {
+    height: 32,
+    justifyContent: "center",
+  },
+  priceTrackBase: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: COLORS.gray200,
+  },
+  priceTrackFill: {
+    position: "absolute",
+    left: 0,
+    height: 4,
+    borderRadius: 2,
+  },
+  priceHandle: {
+    position: "absolute",
+    top: 7,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    borderWidth: 2,
+    borderColor: COLORS.white,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 2,
+  },
+  priceLabel: {
+    fontSize: 13,
+    color: COLORS.gray500,
+    marginTop: 4,
+  },
+
+  // Show results button
+  showResultsButton: {
+    borderRadius: 16,
+    paddingVertical: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 4,
+  },
+  showResultsText: {
+    color: COLORS.white,
+    fontWeight: "700",
+    fontSize: 14,
   },
 });
