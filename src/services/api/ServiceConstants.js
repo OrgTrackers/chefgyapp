@@ -12,3 +12,5 @@ export const GetAllAddressesById = ServiceApi + "customer-address/get-all/";
 export const UpdateAddressApi = ServiceApi + "customer-address/update/";
 export const AddAddressApi = ServiceApi + "customer-address/add/";
 export const DeleteAddressApi = ServiceApi + "customer-address/delete/";
+export const SearchVendorsApi = ServiceApi + "vendors/search";
+export const UploadsBaseUrl = "http://103.212.120.38:5001/";

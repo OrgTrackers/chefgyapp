@@ -47,12 +47,24 @@ const DeleteAddress = (id) => {
     });
 }
 
+const SearchVendors = (latitude, longitude) => {
+    return axios
+        .get(ServiceConstants.SearchVendorsApi, {
+            params: { latitude, longitude },
+        })
+        .catch(err => {
+            console.error('SearchVendors failed:', err?.response || err.message || err);
+            throw err;
+        });
+}
+
 export default {
     GetUserServices,
     GetAllEventTypes,
     GetAllAddressesById,
     UpdateAddress,
     CreateAddress,
-    DeleteAddress
+    DeleteAddress,
+    SearchVendors,
 };
 

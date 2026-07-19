@@ -33,7 +33,19 @@ const GOLD = "#C9A84C";
 const GOLD_LIGHT = "#FFF8E7";
 const GREEN_TRUST = "#2D7A4F";
 const GREEN_LIGHT = "#E8F5EE";
-const DEFAULT_GRADIENT_COLORS = ["#F5E6D3", "#E8C8A2"];
+// Overlaid on top of occasion images — must stay translucent so the
+// photo shows through (records with backgroundcolor: null fall back to this).
+const DEFAULT_GRADIENT_COLORS = ["transparent", "rgba(0,0,0,0.55)"];
+
+// Fallback for API records whose `image` is null/empty, so <Image> never
+// receives a null uri (avoids "Image source 'null' doesn't exist" warnings).
+const FALLBACK_IMAGE_URL =
+  "https://images.unsplash.com/photo-1555244162-803834f70033?w=200&h=200&fit=crop&auto=format";
+
+const imageUri = (path) => {
+  const cleaned = typeof path === "string" ? path.trim() : "";
+  return cleaned || FALLBACK_IMAGE_URL;
+};
 
 const normalizeGradientColors = (colors) => {
   if (Array.isArray(colors) && colors.length > 0) {
@@ -1016,10 +1028,10 @@ export default function App() {
     // { label, accent, img } shape ServiceVendorsScreen expects.
     navigation.navigate("ServiceVendorsScreen", {
       service: {
-        label: svc?.name ?? "Chef",
+        label: svc?.name ?? "No Name",
         //accent: svc?.backgroundcolor,
         accent:'#FF4D4D',
-        img: svc?.image ? `${ServiceApi}${svc.image}` : undefined,
+        img: svc?.image?.trim() || undefined,
       },
     });
   };
@@ -1119,7 +1131,7 @@ export default function App() {
                   activeOpacity={0.88}
                   onPress={() => handleServiceNavigation(svc)}
                 >
-                  <Image source={{ uri: ServiceApi + svc.image }} style={styles.svcImage} resizeMode="cover" />
+                  <Image source={{ uri: imageUri(svc.image) }} style={styles.svcImage} resizeMode="cover" />
                   <LinearGradient colors={["transparent", `${svc.backgroundcolor}E6`]} style={styles.svcGradient} />
                   <View style={styles.svcLabelWrap}>
                     <Text style={styles.svcLabel}>{svc.name}</Text>
@@ -1139,7 +1151,7 @@ export default function App() {
 
                 return (
                   <TouchableOpacity key={o.type_name} style={styles.occasionCard} activeOpacity={0.88}>
-                    <Image source={{ uri: ServiceApi + o.image }} style={styles.occasionImage} resizeMode="cover" />
+                    <Image source={{ uri: imageUri(o?.image) }} style={styles.occasionImage} resizeMode="cover" />
                     <LinearGradient
                       colors={gradientColors}
                       start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}

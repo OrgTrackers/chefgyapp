@@ -16,7 +16,9 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
-import { ArrowLeft, Search, X, Mic, Star, ChevronRight, Clock } from "lucide-react-native";
+import { ArrowLeft, Search, X, Mic, Star, ChevronRight } from "lucide-react-native";
+import services from "../../src/services/api/services";
+import { UploadsBaseUrl } from "../../src/services/api/ServiceConstants";
 
 // NOTE on blur: a real native blur (e.g. @react-native-community/blur) needs
 // its own native module linked at build time, so it can't be required
@@ -31,182 +33,12 @@ const { height: SCREEN_H } = Dimensions.get("window");
 // enough characters to trigger a real search.
 const HALF_CARD_HEIGHT = Math.round(SCREEN_H * 0.6);
 
-// ── Data ────────────────────────────────────────────────────────────────────
+// Hardcoded for now — later swap for the user's selected delivery location.
+const SEARCH_LATITUDE = 17.385044;
+const SEARCH_LONGITUDE = 78.486671;
 
-const ALL_SUGGESTIONS = [
-  {
-    id: 1,
-    kind: "dish",
-    name: "Chef's Special Thali",
-    serviceTag: "Dish",
-    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=160&h=160&fit=crop&auto=format",
-    alt: "Indian thali platter",
-  },
-  {
-    id: 2,
-    kind: "vendor",
-    name: "Chefmate Personal Chef",
-    serviceTag: "Personal Chef",
-    image: "https://images.unsplash.com/photo-1572715376701-98568319fd0b?w=160&h=160&fit=crop&auto=format",
-    alt: "Personal chef standing with plate",
-    rating: 4.8,
-    reviews: "2.1K",
-    distance: "1.2 km",
-    available: true,
-  },
-  {
-    id: 3,
-    kind: "vendor",
-    name: "Chef Ramesh's Home Kitchen",
-    serviceTag: "Home Food",
-    image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=160&h=160&fit=crop&auto=format",
-    alt: "Home cooked Indian food",
-    rating: 4.5,
-    reviews: "843",
-    distance: "2.4 km",
-    available: true,
-  },
-  {
-    id: 4,
-    kind: "vendor",
-    name: "Cheers Catering Co.",
-    serviceTag: "Caterer",
-    image: "https://images.unsplash.com/photo-1576842546422-60562b9242ae?w=160&h=160&fit=crop&auto=format",
-    alt: "Catering buffet spread",
-    rating: 4.3,
-    reviews: "1.5K",
-    distance: "3.8 km",
-    available: true,
-  },
-  {
-    id: 5,
-    kind: "vendor",
-    name: "Chef's Cloud Kitchen",
-    serviceTag: "Cloud Kitchen",
-    image: "https://images.unsplash.com/photo-1555244162-803834f70033?w=160&h=160&fit=crop&auto=format",
-    alt: "Cloud kitchen plated food",
-    rating: 4.1,
-    reviews: "512",
-    distance: "0.9 km",
-    available: true,
-  },
-  {
-    id: 6,
-    kind: "vendor",
-    name: "Chefette Tiffin Service",
-    serviceTag: "Tiffin Service",
-    image: "https://images.unsplash.com/photo-1542367592-8849eb950fd8?w=160&h=160&fit=crop&auto=format",
-    alt: "Tiffin meal with flatbread and rice",
-    rating: 4.6,
-    reviews: "388",
-    distance: "1.7 km",
-    available: false,
-  },
-  {
-    id: 7,
-    kind: "vendor",
-    name: "Cheeni Bake Studio",
-    serviceTag: "Bakery",
-    image: "https://images.unsplash.com/photo-1583338917451-face2751d8d5?w=160&h=160&fit=crop&auto=format",
-    alt: "Bakery pastry display counter",
-    rating: 4.7,
-    reviews: "920",
-    distance: "2.1 km",
-    available: true,
-  },
-  {
-    id: 8,
-    kind: "vendor",
-    name: "Cheerful Food Truck",
-    serviceTag: "Food Truck",
-    image: "https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=160&h=160&fit=crop&auto=format",
-    alt: "Street food truck",
-    rating: 4.0,
-    reviews: "214",
-    distance: "4.5 km",
-    available: true,
-  },
-  {
-    id: 9,
-    kind: "vendor",
-    name: "Chef Priya's Meal Prep",
-    serviceTag: "Meal Prep",
-    image: "https://images.unsplash.com/photo-1667499745120-f9bcef8f584e?w=160&h=160&fit=crop&auto=format",
-    alt: "Healthy meal prep trays",
-    rating: 4.9,
-    reviews: "675",
-    distance: "1.5 km",
-    available: true,
-  },
-  {
-    id: 10,
-    kind: "vendor",
-    name: "Chefs for Events",
-    serviceTag: "Event Catering",
-    image: "https://images.unsplash.com/photo-1536392706976-e486e2ba97af?w=160&h=160&fit=crop&auto=format",
-    alt: "Elegant event dinner table setting",
-    rating: 4.4,
-    reviews: "1.2K",
-    distance: "5.2 km",
-    available: false,
-  },
-  {
-    id: 11,
-    kind: "vendor",
-    name: "Chef's Healthy Bites",
-    serviceTag: "Healthy Food",
-    image: "https://images.unsplash.com/photo-1543352632-5a4b24e4d2a6?w=160&h=160&fit=crop&auto=format",
-    alt: "Healthy fruit salad bowls",
-    rating: 4.7,
-    reviews: "459",
-    distance: "2.9 km",
-    available: true,
-  },
-  {
-    id: 12,
-    kind: "vendor",
-    name: "Chef Arjun — BBQ Master",
-    serviceTag: "BBQ Chef",
-    image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=160&h=160&fit=crop&auto=format",
-    alt: "Professional chef preparing food",
-    rating: 4.8,
-    reviews: "736",
-    distance: "3.3 km",
-    available: true,
-  },
-  {
-    id: 13,
-    kind: "vendor",
-    name: "Chef's Wedding Catering",
-    serviceTag: "Wedding Catering",
-    image: "https://images.unsplash.com/photo-1583338917496-7ea264c374ce?w=160&h=160&fit=crop&auto=format",
-    alt: "Catering fork and serving setup",
-    rating: 4.6,
-    reviews: "301",
-    distance: "6.1 km",
-    available: true,
-  },
-  {
-    id: 14,
-    kind: "vendor",
-    name: "Chefgy Corporate Meals",
-    serviceTag: "Corporate Catering",
-    image: "https://images.unsplash.com/photo-1653233797467-1a528819fd4f?w=160&h=160&fit=crop&auto=format",
-    alt: "Chef preparing vegetables",
-    rating: 4.4,
-    reviews: "189",
-    distance: "2.8 km",
-    available: true,
-  },
-];
-
-// Chips shown in the collapsed "hanging" card, before the user types.
-const RECENT_SEARCHES = [
-  "Chef Ramesh's Home Kitchen",
-  "Cheers Catering Co.",
-  "Chef's Cloud Kitchen",
-  "Chefette Tiffin Service",
-];
+const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=160&h=160&fit=crop&auto=format";
 
 // ── Colors ───────────────────────────────────────────────────────────────────
 
@@ -229,24 +61,88 @@ const COLORS = {
 // ── Badge colour map ─────────────────────────────────────────────────────────
 
 const BADGE_COLORS = {
-  "Personal Chef": { border: "#fdba74", text: "#ea580c" },
+  Chef: { border: "#5eead4", text: "#0d9488" },
   Caterer: { border: "#93c5fd", text: "#2563eb" },
   "Home Food": { border: "#86efac", text: "#16a34a" },
-  "Cloud Kitchen": { border: "#d8b4fe", text: "#9333ea" },
-  "Tiffin Service": { border: "#fcd34d", text: "#b45309" },
-  Bakery: { border: "#f9a8d4", text: "#db2777" },
   "Food Truck": { border: "#fca5a5", text: "#dc2626" },
-  "Meal Prep": { border: "#5eead4", text: "#0d9488" },
-  "Event Catering": { border: "#a5b4fc", text: "#4f46e5" },
-  "Healthy Food": { border: "#bef264", text: "#4d7c0f" },
-  "BBQ Chef": { border: "#f87171", text: "#b91c1c" },
-  "Wedding Catering": { border: "#fda4af", text: "#e11d48" },
-  "Corporate Catering": { border: "#cbd5e1", text: "#475569" },
-  Dish: { border: COLORS.gray300, text: COLORS.gray500 },
+  "Cloud Kitchen": { border: "#d8b4fe", text: "#9333ea" },
+  Vendor: { border: COLORS.gray300, text: COLORS.gray500 },
 };
 
 function badgeColors(tag) {
   return BADGE_COLORS[tag] ?? { border: COLORS.gray300, text: COLORS.gray500 };
+}
+
+function resolveImageUrl(path) {
+  if (!path || typeof path !== "string") return PLACEHOLDER_IMAGE;
+  const cleaned = path.trim();
+  if (!cleaned) return PLACEHOLDER_IMAGE;
+  if (/^https?:\/\//i.test(cleaned)) return cleaned;
+  return `${UploadsBaseUrl}${cleaned.replace(/^\//, "")}`;
+}
+
+function formatReviews(count) {
+  const n = Number(count) || 0;
+  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, "")}K`;
+  return String(n);
+}
+
+/**
+ * Expand each vendor into one suggestion per service.
+ * Typing "Uda" matches vendor "Uday" and yields:
+ *   Uday Caterer, Uday Home Food, Uday Food Truck, Uday Chef
+ */
+function flattenVendorsToSuggestions(vendors = []) {
+  const suggestions = [];
+
+  vendors.forEach((vendor) => {
+    const vendorName = vendor.vendor_name || vendor.business_title || "Vendor";
+    const vendorImage = resolveImageUrl(vendor.profile_image_path);
+    const rating = Number(vendor.rating) || 0;
+    const reviews = formatReviews(vendor.review_count);
+    const distance = vendor.distance_km != null ? `${vendor.distance_km} km` : "";
+    const available = !!vendor.is_open;
+    const services = Array.isArray(vendor.services) ? vendor.services : [];
+
+    if (services.length === 0) {
+      suggestions.push({
+        id: `v-${vendor.vendor_id}`,
+        kind: "vendor",
+        name: vendorName,
+        vendorName,
+        serviceTag: vendor.business_title || "Vendor",
+        image: vendorImage,
+        rating,
+        reviews,
+        distance,
+        available,
+        vendorId: vendor.vendor_id,
+        serviceId: null,
+      });
+      return;
+    }
+
+    services.forEach((service) => {
+      const serviceName = service.service_name || "Service";
+      suggestions.push({
+        id: `v-${vendor.vendor_id}-s-${service.service_id}`,
+        kind: "vendor",
+        name: `${vendorName} ${serviceName}`,
+        vendorName,
+        serviceTag: serviceName,
+        image: resolveImageUrl(service.image) || vendorImage,
+        rating,
+        reviews,
+        distance,
+        available,
+        vendorId: vendor.vendor_id,
+        serviceId: service.service_id,
+        offerText: service.offer_text || null,
+      });
+    });
+  });
+
+  return suggestions;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -413,10 +309,40 @@ export default function SearchServicesScreen({ visible, onClose, navigation, rou
   const initialQuery = route?.params?.initialQuery ?? "";
   const [query, setQuery] = useState(initialQuery);
   const [selectedId, setSelectedId] = useState(null);
+  const [allSuggestions, setAllSuggestions] = useState([]);
+  const [loadingVendors, setLoadingVendors] = useState(false);
   const inputRef = useRef(null);
   const expandAnim = useRef(new Animated.Value(0)).current;
 
   const isExpanded = query.trim().length >= 3 || selectedId !== null;
+
+  // Fetch vendors once when the overlay opens.
+  useEffect(() => {
+    if (!visible) return;
+
+    let cancelled = false;
+    setLoadingVendors(true);
+
+    services
+      .SearchVendors(SEARCH_LATITUDE, SEARCH_LONGITUDE)
+      .then((response) => {
+        if (cancelled) return;
+        const vendors = response?.data?.data || [];
+        setAllSuggestions(flattenVendorsToSuggestions(vendors));
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        console.error("Failed to fetch vendors for search", error);
+        setAllSuggestions([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingVendors(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [visible]);
 
   // Animate the card between the half-hanging and full-screen states any
   // time the "expanded" condition flips.
@@ -441,10 +367,22 @@ export default function SearchServicesScreen({ visible, onClose, navigation, rou
 
   const filtered =
     query.trim().length >= 3
-      ? ALL_SUGGESTIONS.filter((s) =>
-          s.name.toLowerCase().includes(query.trim().toLowerCase())
-        )
+      ? allSuggestions.filter((s) => {
+          const q = query.trim().toLowerCase();
+          // Match vendor name first (e.g. "Uda" → all of Uday's services),
+          // then also allow matching the combined label / service tag.
+          return (
+            (s.vendorName || "").toLowerCase().includes(q) ||
+            (s.name || "").toLowerCase().includes(q) ||
+            (s.serviceTag || "").toLowerCase().includes(q)
+          );
+        })
       : [];
+
+  const selectedVendor =
+    selectedId != null
+      ? allSuggestions.find((s) => s.id === selectedId)
+      : null;
 
   const handleClear = useCallback(() => {
     setQuery("");
@@ -494,9 +432,9 @@ export default function SearchServicesScreen({ visible, onClose, navigation, rou
         >
           <StatusBar barStyle="dark-content" />
 
-          {selectedId !== null ? (
+          {selectedVendor ? (
             <VendorDetailScreen
-              vendor={ALL_SUGGESTIONS.find((s) => s.id === selectedId)}
+              vendor={selectedVendor}
               onBack={() => setSelectedId(null)}
             />
           ) : (
@@ -555,7 +493,11 @@ export default function SearchServicesScreen({ visible, onClose, navigation, rou
                     />
                   )}
                   ListEmptyComponent={
-                    query.trim().length < 3 ? (
+                    loadingVendors ? (
+                      <View style={styles.emptyState}>
+                        <Text style={styles.emptyStateText}>Searching nearby vendors...</Text>
+                      </View>
+                    ) : query.trim().length < 3 ? (
                       <View style={styles.emptyState}>
                         <Search size={56} color={COLORS.gray300} style={{ opacity: 0.5 }} />
                         <Text style={styles.emptyStateText}>
@@ -573,27 +515,11 @@ export default function SearchServicesScreen({ visible, onClose, navigation, rou
                   }
                 />
               ) : (
-                // ── Collapsed: recently searched chips, half-hanging card ──
-                <View style={styles.recentWrap}>
-                  <View style={styles.recentHeaderRow}>
-                    <Text style={styles.recentHeaderText}>Recently Searched Restaurants</Text>
-                    <View style={styles.recentHeaderLine} />
-                  </View>
-                  <View style={styles.chipWrap}>
-                    {RECENT_SEARCHES.map((label) => (
-                      <TouchableOpacity
-                        key={label}
-                        style={styles.chip}
-                        activeOpacity={0.7}
-                        onPress={() => setQuery(label)}
-                      >
-                        <Clock size={15} color={COLORS.gray400} />
-                        <Text style={styles.chipText} numberOfLines={1}>
-                          {label}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
+                <View style={styles.emptyState}>
+                  <Search size={56} color={COLORS.gray300} style={{ opacity: 0.5 }} />
+                  <Text style={styles.emptyStateText}>
+                    Type at least 3 characters to see suggestions
+                  </Text>
                 </View>
               )}
 
@@ -640,52 +566,6 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOffset: { width: 0, height: 10 },
     elevation: 16,
-  },
-
-  // Collapsed "recently searched" section
-  recentWrap: {
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    flex: 1,
-  },
-  recentHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  recentHeaderText: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: COLORS.gray900,
-    letterSpacing: 1,
-    textTransform: "uppercase",
-  },
-  recentHeaderLine: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: COLORS.gray200,
-    marginLeft: 10,
-  },
-  chipWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-  },
-  chip: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    maxWidth: "70%",
-    borderWidth: 1,
-    borderColor: COLORS.gray200,
-    borderRadius: 24,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-  },
-  chipText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: COLORS.gray800,
   },
 
   // Header
