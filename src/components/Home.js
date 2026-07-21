@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { AppState } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   View, Text, Image, TextInput, TouchableOpacity, ScrollView,
   StyleSheet, Dimensions, Animated, Platform, StatusBar, SafeAreaView,
-  Modal, FlatList,
+  Modal, FlatList, ActivityIndicator,
 } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -874,7 +876,15 @@ function RecommendedSection() {
 // address yet. See the `hasPromptedLocation` flag in App() for the "only
 // once" logic — this component itself is purely presentational.
 
-function LocationPromptModal({ visible, onClose, onUseCurrentLocation, onEnterManually }) {
+function LocationPromptModal({
+  visible,
+  onClose,
+  onUseCurrentLocation,
+  onEnterManually,
+  savedAddresses = [],
+  loadingAddresses = false,
+  onSelectAddress,
+}) {
   const WINDOW_H = Dimensions.get("window").height;
   const slideAnim = useRef(new Animated.Value(WINDOW_H)).current;
 
@@ -885,6 +895,8 @@ function LocationPromptModal({ visible, onClose, onUseCurrentLocation, onEnterMa
       Animated.timing(slideAnim, { toValue: WINDOW_H, duration: 280, useNativeDriver: true }).start();
     }
   }, [visible, WINDOW_H]);
+
+  const hasSavedAddresses = savedAddresses.length > 0;
 
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
@@ -904,27 +916,85 @@ function LocationPromptModal({ visible, onClose, onUseCurrentLocation, onEnterMa
             Sharing your location helps us show the right chefs, caterers & kitchens near you
           </Text>
 
-          <View style={styles.locPromptCard}>
-            <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onUseCurrentLocation}>
-              <View style={styles.locPromptRowLeft}>
-                <Navigation2 size={16} color={PRIMARY} />
-                <Text style={styles.locPromptRowText}>Use my Current Location</Text>
-              </View>
-              <View style={styles.locPromptEnableBtn}>
-                <Text style={styles.locPromptEnableBtnText}>Enable</Text>
-              </View>
-            </TouchableOpacity>
+          <ScrollView
+            style={styles.locPromptScroll}
+            contentContainerStyle={styles.locPromptScrollContent}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.locPromptCard}>
+              <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onUseCurrentLocation}>
+                <View style={styles.locPromptRowLeft}>
+                  <Navigation2 size={16} color={PRIMARY} />
+                  <Text style={styles.locPromptRowText}>Use my Current Location</Text>
+                </View>
+                <View style={styles.locPromptEnableBtn}>
+                  <Text style={styles.locPromptEnableBtnText}>Enable</Text>
+                </View>
+              </TouchableOpacity>
 
-            <View style={styles.locPromptDivider} />
+              <View style={styles.locPromptDivider} />
 
-            <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onEnterManually}>
-              <View style={styles.locPromptRowLeft}>
-                <Search size={16} color={GREEN_TRUST} />
-                <Text style={styles.locPromptRowText}>Enter address manually</Text>
+              <TouchableOpacity style={styles.locPromptRow} activeOpacity={0.8} onPress={onEnterManually}>
+                <View style={styles.locPromptRowLeft}>
+                  <Search size={16} color={GREEN_TRUST} />
+                  <Text style={styles.locPromptRowText}>Enter address manually</Text>
+                </View>
+                <ChevronRight size={16} color={MUTED} />
+              </TouchableOpacity>
+            </View>
+
+            {loadingAddresses ? (
+              <View style={styles.savedAddrLoading}>
+                <ActivityIndicator size="small" color={PRIMARY} />
               </View>
-              <ChevronRight size={16} color={MUTED} />
-            </TouchableOpacity>
-          </View>
+            ) : hasSavedAddresses ? (
+              <View style={styles.savedAddrSection}>
+                <Text style={styles.savedAddrSectionTitle}>SAVED ADDRESSES</Text>
+                <View style={styles.locPromptCard}>
+                  {savedAddresses.map((address, index) => {
+                    const displayLabel =
+                      address.label || address.custom_label || address.address_type_name || "Address";
+                    const addressLines = [
+                      address.address_line1,
+                      address.address_line2,
+                      [address.city, address.state, address.pincode].filter(Boolean).join(" "),
+                    ].filter(Boolean);
+
+                    return (
+                      <View key={address.id ?? index}>
+                        <TouchableOpacity
+                          style={styles.savedAddrRow}
+                          activeOpacity={0.8}
+                          onPress={() => onSelectAddress?.(address)}
+                        >
+                          <Text style={styles.savedAddrIcon}>
+                            {displayLabel === "Home" ? "🏠" : displayLabel === "Work" ? "🏢" : "📍"}
+                          </Text>
+                          <View style={styles.savedAddrTextWrap}>
+                            <View style={styles.savedAddrLabelRow}>
+                              <Text style={styles.savedAddrLabel}>{displayLabel}</Text>
+                              {(address.is_primary || address.isPrimary) && (
+                                <View style={styles.savedAddrBadge}>
+                                  <Text style={styles.savedAddrBadgeText}>Selected</Text>
+                                </View>
+                              )}
+                            </View>
+                            {addressLines.length > 0 && (
+                              <Text style={styles.savedAddrText} numberOfLines={2}>
+                                {addressLines.join(", ")}
+                              </Text>
+                            )}
+                          </View>
+                          <ChevronRight size={16} color={MUTED} />
+                        </TouchableOpacity>
+                        {index < savedAddresses.length - 1 && <View style={styles.locPromptDivider} />}
+                      </View>
+                    );
+                  })}
+                </View>
+              </View>
+            ) : null}
+          </ScrollView>
 
           <TouchableOpacity style={styles.locPromptSkip} onPress={onClose} activeOpacity={0.7}>
             <Text style={styles.locPromptSkipText}>Maybe later</Text>
@@ -947,23 +1017,211 @@ export default function App() {
   const [fullName, setFullName] = useState("Guest");
   const [currentAddress, setCurrentAddress] = useState(null);
   const [showLocationPrompt, setShowLocationPrompt] = useState(false);
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [loadingAddresses, setLoadingAddresses] = useState(false);
   const route = useRoute();
+  const hasPromptedLocationRef = useRef(false);
+  const shouldShowPromptOnLogin = route.params?.showLocationPrompt === true;
+
+  // Fetch the logged-in user's saved addresses, same shape/normalization as
+  // SelectLocationScreen.js, so they can be listed inside the
+  // "Set your delivery location" prompt on login.
+
+
+// const checkLocationPrompt = async () => {
+//   try {
+//     await loadSavedAddresses();
+
+//     if (!currentAddress) {
+//       setShowLocationPrompt(true);
+//     } else {
+//       setShowLocationPrompt(false);
+//     }
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+const checkLocationPrompt = async () => {
+    if (hasPromptedLocationRef.current || currentAddress) {
+      return;
+    }
+
+    const address = await loadSavedAddresses(false);
+    if (!address) {
+      hasPromptedLocationRef.current = true;
+      setShowLocationPrompt(true);
+      return;
+    }
+
+    hasPromptedLocationRef.current = true;
+    setShowLocationPrompt(false);
+};
+
+  // const loadSavedAddresses = useCallback(async () => {
+  //   setLoadingAddresses(true);
+  //   try {
+  //     const stored = await AsyncStorage.getItem('userId');
+  //     const uid = stored ? parseInt(stored, 10) : null;
+
+  //     if (!uid) {
+  //       setSavedAddresses([]);
+  //       if (!currentAddress) setShowLocationPrompt(true);
+  //       return;
+  //     }
+
+  //     const response = await services.GetAllAddressesById(uid);
+
+  //     let apiAddresses = [];
+  //     if (Array.isArray(response)) apiAddresses = response;
+  //     else if (Array.isArray(response?.data)) apiAddresses = response.data;
+  //     else if (Array.isArray(response?.data?.data)) apiAddresses = response.data.data;
+  //     else if (Array.isArray(response?.addresses)) apiAddresses = response.addresses;
+
+  //     const normalizedAddresses = apiAddresses
+  //       .filter((address) => !address.is_deleted)
+  //       .map((address) => ({
+  //         ...address,
+  //         id: address.id,
+  //         label: address.label || address.custom_label || address.address_type_name || 'Address',
+  //         address_line1: address.address_line1 || '',
+  //         address_line2: [address.address_line2, address.landmark].filter(Boolean).join(', '),
+  //         city: address.city || '',
+  //         state: address.state || '',
+  //         pincode: address.pincode || '',
+  //         latitude: address.latitude,
+  //         longitude: address.longitude,
+  //         is_primary: Boolean(address.is_primary),
+  //       }));
+
+  //     setSavedAddresses(normalizedAddresses);
+
+  //     // If the user already has a primary address, use it as the current
+  //     // delivery address. Otherwise, since this account has no address on
+  //     // file yet, prompt them to set one. This is re-evaluated fresh on
+  //     // every mount (i.e. every login), so it correctly shows again after
+  //     // a logout/login even for the same account — no separate "already
+  //     // prompted" flag to remember to clear.
+  //     const primary = normalizedAddresses.find((a) => a.is_primary);
+  //     if (primary) {
+  //       setCurrentAddress((prev) => prev ?? primary);
+  //     } else if (!currentAddress) {
+  //       setShowLocationPrompt(true);
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to fetch saved addresses', error);
+  //     setSavedAddresses([]);
+  //     // Couldn't confirm whether the user has an address on file — err on
+  //     // the side of prompting rather than silently skipping it.
+  //     if (!currentAddress) setShowLocationPrompt(true);
+  //   } finally {
+  //     setLoadingAddresses(false);
+  //   }
+  // }, []);
+const loadSavedAddresses = async (shouldOpenPrompt = false) => {
+    setLoadingAddresses(true);
+    try {
+        const storedUserId = await AsyncStorage.getItem('userId');
+        const uid = storedUserId ? parseInt(storedUserId, 10) : null;
+
+        if (!uid) {
+            setSavedAddresses([]);
+            setCurrentAddress(null);
+            setShowLocationPrompt(true);
+            return null;
+        }
+
+        const response = await services.GetAllAddressesById(uid);
+
+        let apiAddresses = [];
+        if (Array.isArray(response)) apiAddresses = response;
+        else if (Array.isArray(response?.data)) apiAddresses = response.data;
+        else if (Array.isArray(response?.data?.data)) apiAddresses = response.data.data;
+        else if (Array.isArray(response?.addresses)) apiAddresses = response.addresses;
+
+        const normalizedAddresses = apiAddresses
+            .filter((address) => !address.is_deleted)
+            .map((address) => {
+                const isPrimary = Boolean(address.is_primary || address.isPrimary);
+                return {
+                    ...address,
+                    id: address.id,
+                    label: address.label || address.custom_label || address.address_type_name || 'Address',
+                    address_line1: address.address_line1 || '',
+                    address_line2: [address.address_line2, address.landmark].filter(Boolean).join(', '),
+                    city: address.city || '',
+                    state: address.state || '',
+                    pincode: address.pincode || '',
+                    latitude: address.latitude,
+                    longitude: address.longitude,
+                    is_primary: isPrimary,
+                    isPrimary,
+                    distance: address.distance || null,
+                };
+            });
+
+        setSavedAddresses(normalizedAddresses);
+
+        const primary = normalizedAddresses.find((address) => address.is_primary || address.isPrimary);
+        if (primary) {
+            setCurrentAddress(primary);
+            if (shouldOpenPrompt) {
+                setShowLocationPrompt(true);
+            }
+            return primary;
+        }
+
+        setCurrentAddress(null);
+        if (shouldOpenPrompt || !hasPromptedLocationRef.current) {
+            setShowLocationPrompt(true);
+        }
+        return null;
+    } catch (err) {
+        console.log(err);
+        setSavedAddresses([]);
+        setCurrentAddress(null);
+        if (!hasPromptedLocationRef.current) {
+            setShowLocationPrompt(true);
+        }
+        return null;
+    } finally {
+        setLoadingAddresses(false);
+    }
+};
+
+const markLocationPromptHandled = () => {
+    hasPromptedLocationRef.current = true;
+    setShowLocationPrompt(false);
+};
+
+const handlePromptDismiss = () => {
+    hasPromptedLocationRef.current = true;
+    setShowLocationPrompt(false);
+};
+
+const handlePromptOpen = () => {
+    hasPromptedLocationRef.current = false;
+    setShowLocationPrompt(true);
+};
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (!shouldShowPromptOnLogin && !hasPromptedLocationRef.current) {
+        checkLocationPrompt();
+      }
+    }, [currentAddress, shouldShowPromptOnLogin])
+  );
 
   useEffect(() => {
     const loadHomeData = async () => {
+      if (shouldShowPromptOnLogin) {
+        handlePromptOpen();
+        navigation.setParams({ showLocationPrompt: undefined });
+        loadSavedAddresses(false);
+        return;
+      }
       try {
         const name = await AsyncStorage.getItem('fullName');
         setFullName(name || "Guest");
-
-        // Show the location prompt only once per login, and only if the
-        // user hasn't picked a delivery address yet. `hasPromptedLocation`
-        // is set the first time this runs; clear it from AsyncStorage in
-        // your logout flow so returning/newly logged-in users see it again.
-        const alreadyPrompted = await AsyncStorage.getItem('hasPromptedLocation');
-        if (!alreadyPrompted && !currentAddress) {
-          setShowLocationPrompt(true);
-          await AsyncStorage.setItem('hasPromptedLocation', 'true');
-        }
       } catch (error) {
         console.error("Failed to fetch user name", error);
       }
@@ -985,10 +1243,14 @@ export default function App() {
         .catch((error) => {
           console.error("Failed to fetch events", error);
         });
+
+      if (!hasPromptedLocationRef.current && !currentAddress) {
+        checkLocationPrompt();
+      }
     };
 
     loadHomeData();
-  }, []);
+  }, [shouldShowPromptOnLogin]);
 
   // Listen for selected address from SelectLocationScreen
   useEffect(() => {
@@ -1045,15 +1307,20 @@ export default function App() {
   const openSearch = () => setSearchOverlayOpen(true);
 
   const handleUseCurrentLocation = () => {
-    setShowLocationPrompt(false);
+    handlePromptDismiss();
     // Hand off to SelectLocationScreen with a flag so it can kick off the
     // device geolocation flow as soon as it mounts.
     navigation.navigate("SelectLocationScreen", { useCurrentLocation: true });
   };
 
   const handleEnterLocationManually = () => {
-    setShowLocationPrompt(false);
+    handlePromptDismiss();
     navigation.navigate("SelectLocationScreen");
+  };
+
+  const handleSelectSavedAddress = (address) => {
+    setCurrentAddress(address);
+    handlePromptDismiss();
   };
 
   return (
@@ -1374,9 +1641,12 @@ export default function App() {
       />
       <LocationPromptModal
         visible={showLocationPrompt}
-        onClose={() => setShowLocationPrompt(false)}
+        onClose={handlePromptDismiss}
         onUseCurrentLocation={handleUseCurrentLocation}
         onEnterManually={handleEnterLocationManually}
+        savedAddresses={savedAddresses}
+        loadingAddresses={loadingAddresses}
+        onSelectAddress={handleSelectSavedAddress}
       />
     </SafeAreaView>
   );
@@ -1620,6 +1890,20 @@ const styles = StyleSheet.create({
   locPromptDivider: { height: StyleSheet.hairlineWidth, backgroundColor: "rgba(0,0,0,0.08)", marginLeft: 16 },
   locPromptSkip: { alignItems: "center", marginTop: 18 },
   locPromptSkipText: { fontSize: 12, fontWeight: "700", color: MUTED },
+  locPromptScroll: { maxHeight: Dimensions.get("window").height * 0.5 },
+  locPromptScrollContent: { paddingBottom: 4 },
+
+  savedAddrLoading: { paddingVertical: 24, alignItems: "center" },
+  savedAddrSection: { marginTop: 20 },
+  savedAddrSectionTitle: { fontSize: 11, fontWeight: "700", color: MUTED, letterSpacing: 0.5, marginBottom: 8 },
+  savedAddrRow: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 16, paddingVertical: 14 },
+  savedAddrIcon: { fontSize: 20 },
+  savedAddrTextWrap: { flex: 1 },
+  savedAddrLabelRow: { flexDirection: "row", alignItems: "center", gap: 8 },
+  savedAddrLabel: { fontSize: 13, fontWeight: "700", color: DARK },
+  savedAddrBadge: { backgroundColor: "#E8F5E9", borderRadius: 4, paddingHorizontal: 6, paddingVertical: 2 },
+  savedAddrBadgeText: { color: "#2E7D32", fontSize: 10, fontWeight: "600" },
+  savedAddrText: { fontSize: 11, color: MUTED, marginTop: 2, lineHeight: 15 },
 
   sheetHeaderGrad: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 16, borderBottomWidth: 1, borderBottomColor: "rgba(0,0,0,0.07)" },
   sheetHeaderRow: { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 12 },

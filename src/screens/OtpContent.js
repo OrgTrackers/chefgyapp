@@ -39,7 +39,7 @@ const OtpContent = () => {
         await AsyncStorage.setItem('userToken', token.toString());
         await AsyncStorage.setItem('userId', userId.toString());
         await AsyncStorage.setItem('fullName', fullName.toString());
-        navigation.navigate('Home');
+        navigation.navigate('Home', { showLocationPrompt: true });
       } else {
         Alert.alert('Verification Failed', 'Invalid OTP. Please try again.');
       }
