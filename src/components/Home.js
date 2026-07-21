@@ -1048,13 +1048,11 @@ const checkLocationPrompt = async () => {
 
     const address = await loadSavedAddresses(false);
     if (!address) {
-      hasPromptedLocationRef.current = true;
       setShowLocationPrompt(true);
       return;
     }
 
-    hasPromptedLocationRef.current = true;
-    setShowLocationPrompt(false);
+    setShowLocationPrompt(true);
 };
 
   // const loadSavedAddresses = useCallback(async () => {
@@ -1164,7 +1162,7 @@ const loadSavedAddresses = async (shouldOpenPrompt = false) => {
         const primary = normalizedAddresses.find((address) => address.is_primary || address.isPrimary);
         if (primary) {
             setCurrentAddress(primary);
-            if (shouldOpenPrompt) {
+            if (shouldOpenPrompt || !hasPromptedLocationRef.current) {
                 setShowLocationPrompt(true);
             }
             return primary;
@@ -1199,7 +1197,7 @@ const handlePromptDismiss = () => {
 };
 
 const handlePromptOpen = () => {
-    hasPromptedLocationRef.current = false;
+    hasPromptedLocationRef.current = true;
     setShowLocationPrompt(true);
 };
 
